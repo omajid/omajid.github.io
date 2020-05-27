@@ -1,4 +1,4 @@
-baseURL = "https://omajid.github.io"
+baseURL = "https://omajid.github.io/"
 languageCode = "en"
 title = "understanding is a three-edged sword"
 theme = "vitae"
