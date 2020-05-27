@@ -20,5 +20,3 @@ in the air. The OpenJDK folks might not accept the patch, though I am hopeful
 they will - it's very small and conservative.
 
 Fun times ahead!
-
-
