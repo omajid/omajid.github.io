@@ -17,13 +17,13 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 <meta name="twitter:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
 diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@ METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15; public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@ return &quot;LookingGlass&quot;; case CWM_WM: return &quot;CWM&quot;; &#43; case AWESOME_WM: &#43; return &quot;awesomewm&quot;; case UNDETERMINED_WM: default: return &quot;Undetermined WM&quot;; @@ -573,8 &#43;576,12 @@ // getIntProperty(XToolkit."/>
 
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.iocss/normalize.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.iocss/main.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.iocss/all.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/all.css" />
 <title>OpenJDK and Awesome | understanding is a three-edged sword</title></head>
 <body><header>
 
-  <div id="titletext"><h2 id="title"><a href="https://omajid.github.io">understanding is a three-edged sword</a></h2></div>
+  <div id="titletext"><h2 id="title"><a href="https://omajid.github.io/">understanding is a three-edged sword</a></h2></div>
   <div id="title-description"><div id=social>
     <nav>
       <ul></ul>
