@@ -66,20 +66,20 @@ Please note that these are not official Fedora (or RHEL) packages. Official Fedo
 Fedora packages will be proposed and added to Fedora closer to OpenJDK 9&rsquo;s
 release.</p>
 <p>To install on Fedora:</p>
-<pre><code># dnf copr enable omajid/openjdk9  
+<pre><code># dnf copr enable omajid/openjdk9
 # dnf install java-9-openjdk-devel
 </code></pre>
 <p>To install on RHEL (or CentOS) 7:</p>
-<pre><code>$ wget https://copr.fedorainfracloud.org/coprs/omajid/openjdk9/repo/epel-7/omajid-openjdk9-epel-7.repo  
-$ su -  
-# cp omajid-openjdk9-epel-7.repo /etc/yum.repos.d/  
+<pre><code>$ wget https://copr.fedorainfracloud.org/coprs/omajid/openjdk9/repo/epel-7/omajid-openjdk9-epel-7.repo
+$ su -
+# cp omajid-openjdk9-epel-7.repo /etc/yum.repos.d/
 # yum install java-9-openjdk-devel
 </code></pre>
 <p>Then use as follows:</p>
 <pre><code>$ /usr/lib/jvm/java-1.9.0-openjdk/bin/java -version
 </code></pre>
 <p>To make it the default Java version, use update-alternatives.</p>
-<pre><code># update-alternatives --config java  
+<pre><code># update-alternatives --config java
 # update-alternatives --config javac
 </code></pre>
 <p>If you are a user, making 9 the default may not be a great idea - OpenJDK 9 is

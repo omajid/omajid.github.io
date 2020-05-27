@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Omair Majid"><meta property="og:title" content="OpenJDK and Awesome" />
 <meta property="og:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
-diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@ METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15; public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@ return &quot;LookingGlass&quot;; case CWM_WM: return &quot;CWM&quot;; &#43; case AWESOME_WM: &#43; return &quot;awesomewm&quot;; case UNDETERMINED_WM: default: return &quot;Undetermined WM&quot;; @@ -573,8 &#43;576,12 @@ // getIntProperty(XToolkit." />
+diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://omajid.github.io/posts/2012-04-11-openjdk-and-awesome/" />
 <meta property="article:published_time" content="2012-04-11T23:08:41+00:00" />
@@ -15,7 +15,7 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="OpenJDK and Awesome"/>
 <meta name="twitter:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
-diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@ METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15; public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@ return &quot;LookingGlass&quot;; case CWM_WM: return &quot;CWM&quot;; &#43; case AWESOME_WM: &#43; return &quot;awesomewm&quot;; case UNDETERMINED_WM: default: return &quot;Undetermined WM&quot;; @@ -573,8 &#43;576,12 @@ // getIntProperty(XToolkit."/>
+diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit."/>
 
   <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/normalize.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/main.css" />
@@ -59,53 +59,52 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 </div>
 <div class="markdown">
 <p>I have been playing around with <a href="http://awesome.naquadah.org/" title="awesome">awesome</a> and ran into some issues with Java programs (apparently <a href="http://awesome.naquadah.org/wiki/Problems_with_Java">others users are running into those problems too</a>). I hacked together a patch against <a href="http://hg.openjdk.java.net/jdk7u/jdk7u-dev/jdk" title="jdk7u-dev/jdk">OpenJDK7</a> that seems to solve all my issues:</p>
-<pre><code>diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java  
---- a/src/solaris/classes/sun/awt/X11/XWM.java  
-+++ b/src/solaris/classes/sun/awt/X11/XWM.java  
-@@ -102,7 +102,8 @@  
-         METACITY_WM = 11,  
-         COMPIZ_WM = 12,  
-         LG3D_WM = 13,  
--        CWM_WM = 14;  
-+        CWM_WM = 14,  
-+        AWESOME_WM = 15;  
-     public String toString() {  
-         switch  (WMID) {  
-           case NO_WM:  
-@@ -131,6 +132,8 @@  
-               return &quot;LookingGlass&quot;;  
-           case CWM_WM:  
-               return &quot;CWM&quot;;  
-+          case AWESOME_WM:  
-+              return &quot;awesomewm&quot;;  
-           case UNDETERMINED_WM:  
-           default:  
-               return &quot;Undetermined WM&quot;;  
-@@ -573,8 +576,12 @@  
- //                            getIntProperty(XToolkit.getDefaultRootWindow(), XAtom.XA_CARDINAL)) == 0);  
-     }  
-   
-+    static boolean isAwesomeWM() {  
-+        return isNetWMName(&quot;awesome&quot;);  
-+    }  
-+  
-     static boolean isNonReparentingWM() {  
--        return (XWM.getWMID() == XWM.COMPIZ_WM || XWM.getWMID() == XWM.LG3D_WM || XWM.getWMID() == XWM.CWM_WM);  
-+        return (XWM.getWMID() == XWM.COMPIZ_WM || XWM.getWMID() == XWM.LG3D_WM || XWM.getWMID() == XWM.CWM_WM || XWM.getWMID() == XWM.AWESOME_WM);  
-     }  
-   
-     /*  
-@@ -754,6 +761,8 @@  
-                 awt_wmgr = CWM_WM;  
-             } else if (doIsIceWM &amp;&amp; isIceWM()) {  
-                 awt_wmgr = XWM.ICE_WM;  
-+            } else if (isAwesomeWM()) {  
-+                awt_wmgr = XWM.AWESOME_WM;  
-             }  
-             /*  
-              * We don't check for legacy WM when we already know that WM  
-</code></pre>
-<p>Given the <a href="http://thread.gmane.org/gmane.comp.java.openjdk.awt.devel/1698" title="path review thread">effort it&rsquo;s taking to push a fix for mutter</a> (the default gnome3 window manager), I wouldnt hold my breath waiting for this code to make it upstream.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java
+<span style="color:#f92672">--- a/src/solaris/classes/sun/awt/X11/XWM.java
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+++ b/src/solaris/classes/sun/awt/X11/XWM.java
+</span><span style="color:#a6e22e"></span><span style="color:#75715e">@@ -102,7 +102,8 @@
+</span><span style="color:#75715e"></span>         METACITY_WM = 11,
+         COMPIZ_WM = 12,
+         LG3D_WM = 13,
+<span style="color:#f92672">-        CWM_WM = 14;
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+        CWM_WM = 14,
+</span><span style="color:#a6e22e">+        AWESOME_WM = 15;
+</span><span style="color:#a6e22e"></span>     public String toString() {
+         switch  (WMID) {
+           case NO_WM:
+<span style="color:#75715e">@@ -131,6 +132,8 @@
+</span><span style="color:#75715e"></span>               return &#34;LookingGlass&#34;;
+           case CWM_WM:
+               return &#34;CWM&#34;;
+<span style="color:#a6e22e">+          case AWESOME_WM:
+</span><span style="color:#a6e22e">+              return &#34;awesomewm&#34;;
+</span><span style="color:#a6e22e"></span>           case UNDETERMINED_WM:
+           default:
+               return &#34;Undetermined WM&#34;;
+<span style="color:#75715e">@@ -573,8 +576,12 @@
+</span><span style="color:#75715e"></span> //                            getIntProperty(XToolkit.getDefaultRootWindow(), XAtom.XA_CARDINAL)) == 0);
+     }
+ 
+<span style="color:#a6e22e">+    static boolean isAwesomeWM() {
+</span><span style="color:#a6e22e">+        return isNetWMName(&#34;awesome&#34;);
+</span><span style="color:#a6e22e">+    }
+</span><span style="color:#a6e22e">+
+</span><span style="color:#a6e22e"></span>     static boolean isNonReparentingWM() {
+<span style="color:#f92672">-        return (XWM.getWMID() == XWM.COMPIZ_WM || XWM.getWMID() == XWM.LG3D_WM || XWM.getWMID() == XWM.CWM_WM);
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+        return (XWM.getWMID() == XWM.COMPIZ_WM || XWM.getWMID() == XWM.LG3D_WM || XWM.getWMID() == XWM.CWM_WM || XWM.getWMID() == XWM.AWESOME_WM);
+</span><span style="color:#a6e22e"></span>     }
+ 
+     /*
+<span style="color:#75715e">@@ -754,6 +761,8 @@
+</span><span style="color:#75715e"></span>                 awt_wmgr = CWM_WM;
+             } else if (doIsIceWM &amp;&amp; isIceWM()) {
+                 awt_wmgr = XWM.ICE_WM;
+<span style="color:#a6e22e">+            } else if (isAwesomeWM()) {
+</span><span style="color:#a6e22e">+                awt_wmgr = XWM.AWESOME_WM;
+</span><span style="color:#a6e22e"></span>             }
+             /*
+              * We don&#39;t check for legacy WM when we already know that WM
+</code></pre></div><p>Given the <a href="http://thread.gmane.org/gmane.comp.java.openjdk.awt.devel/1698" title="path review thread">effort it&rsquo;s taking to push a fix for mutter</a> (the default gnome3 window manager), I wouldnt hold my breath waiting for this code to make it upstream.</p>
 
 </div>
 <div class="tags">

@@ -66,21 +66,11 @@ is not clear.</p>
 <p>The OpenJDK <a href="http://openjdk.java.net/guide/" title="The OpenJDK Developer's Guide">Developer&rsquo;s Guide</a> covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.</p>
 <p>The overall process for submitting patches to OpenJDK is:</p>
 <ol>
-<li>
-<p>Identify what <em>group</em> or <em>project</em> the fix is for</p>
-</li>
-<li>
-<p>Generate a webrev</p>
-</li>
-<li>
-<p>Send it to the right mailing list for review</p>
-</li>
-<li>
-<p>Make changes as requested by upstream and update webrev</p>
-</li>
-<li>
-<p>A sponsor will push your fix for you</p>
-</li>
+<li>Identify what <em>group</em> or <em>project</em> the fix is for</li>
+<li>Generate a webrev</li>
+<li>Send it to the right mailing list for review</li>
+<li>Make changes as requested by upstream and update webrev</li>
+<li>A sponsor will push your fix for you</li>
 </ol>
 <p>As you can see, it&rsquo;s not a very complicated process. Most of the delays in
 patch acceptance have been when the patch is non-trivial or has unexpected
@@ -89,7 +79,7 @@ guessed by those of us outside) or someone sufficiently qualified to review
 the patch is not available.</p>
 <p>One thing to note: Oracle requires signing a Contributor License Agreement
 before they will accept non-trivial patches.</p>
-<h1 id="identify-the-group-or-poject">Identify the Group or Poject</h1>
+<h2 id="identify-the-group-or-poject">Identify the Group or Poject</h2>
 <p>The first thing to do if you want to send a fix upstream is to identify what
 <em>Group</em> or <em>Project</em> it is for. For this purpose, both groups and projects are
 more-or-less the same (groups are more general). They consist of a collection
@@ -108,43 +98,43 @@ Hotspot if it is a fix for hotspot.</p>
 <p>Don&rsquo;t worry if you can&rsquo;t find the ideal group, project or repository; someone
 will point you in the right direction in later on, but it may mean (slightly)
 more work later.</p>
-<h1 id="generate-a-webrev">Generate a webrev</h1>
+<h2 id="generate-a-webrev">Generate a webrev</h2>
 <p>Since you are trying to submit a patch upstream, I will assume you already
 have a fix for it. The first thing you need to do is to get the latest OpenJDK
 code using the most appropriate repository. And then make your fix. Once you
 have built and tested your fix, you can generate a patch for review. OpenJDK
 uses a custom tool called webrev to generate easier-to-reivew patches.</p>
 <p>Assuming you are making a fix to hotspot, use it like so:</p>
-<pre><code>cd jdk8/hotspot  
+<pre><code>cd jdk8/hotspot
 ksh ../make/scripts/webrev.ksh
 </code></pre>
 <p>This program will look for changes in the current repository and generate a
-bunch of files. You should see a new<br>
+bunch of files. You should see a new
 webrev.zip file and a webrev directory. The webrev directory should contain an
 index.html file that should look roughly like this existing one</p>
 <p>Upload the webrev directory somewhere publicly where anyone who wants to
 review the patch can see it. A public dropbox folder works just fine, as done
 any personal webspace that you may have. Regular contributors to OpenJDK
 generally use cr.openjdk.java.net.</p>
-<h1 id="send-mail-with-patch">Send mail with patch</h1>
+<h2 id="send-mail-with-patch">Send mail with patch</h2>
 <p>Now you need to send an email describing the patch and what it&rsquo;s fixing to the
 right OpenJDK mailing list. remember to subscribe to the mailing list first,
 though.</p>
 <p>Use a descriptive subject in the email, prefixing it with &ldquo;RFR&rdquo; (or Request
 for Review). Link to the public webrev in the email.</p>
-<h1 id="make-changes-and-update-webrev">Make changes and update webrev</h1>
+<h2 id="make-changes-and-update-webrev">Make changes and update webrev</h2>
 <p>Hopefully, someone will review the patch quickly (depending on the fix, you
 may get a response within the hour or it may take a few days).</p>
 <p>The reviewer may suggest improvements or additional fixes. They may also
 request additional cleanup or testing as well.</p>
-<h1 id="a-sponsor-will-push-the-fix">A Sponsor will push the fix</h1>
+<h2 id="a-sponsor-will-push-the-fix">A Sponsor will push the fix</h2>
 <p>Once upstream is happy with the patch, a sponsor will ask you for a changeset
 that they can push or perhaps they will generate one for you. The details of
 producing a changeset are available in the developer&rsquo;s guide. Since you don&rsquo;t
 have push access, a sponsor will push the fix on your behalf to the
 appropriate repository. It will probably take a few weeks until that change
 makes it from group repository to integration repository to the master
-repository (jdk8/jdk8).</p>
+repository (<code>jdk8/jdk8</code>).</p>
 <p>And that&rsquo;s it! So don&rsquo;t be afraid to propose patches for OpenJDK :)</p>
 <p>Complete details about all this process is available, of course, in the
 Developer&rsquo;s Guide.</p>

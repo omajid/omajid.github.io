@@ -7,10 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Omair Majid"><meta property="og:title" content="Components &amp; Versioning in .NET Core" />
 <meta property="og:description" content="This post covers the versions and components in .NET Core 1.x.
-Components .NET Core consists of multiple components that are each versioned
-independently and can often be mixed and matched.
-  The Shared Framework contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.
-  The current .NET Core Virtual Machine is called CoreCLR. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector." />
+Components .NET Core consists of multiple components that are each versioned independently and can often be mixed and matched.
+ The Shared Framework contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.  The current .NET Core Virtual Machine is called CoreCLR. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/" />
 <meta property="article:published_time" content="2017-03-30T22:14:31+00:00" />
@@ -18,10 +16,8 @@ independently and can often be mixed and matched.
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Components &amp; Versioning in .NET Core"/>
 <meta name="twitter:description" content="This post covers the versions and components in .NET Core 1.x.
-Components .NET Core consists of multiple components that are each versioned
-independently and can often be mixed and matched.
-  The Shared Framework contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.
-  The current .NET Core Virtual Machine is called CoreCLR. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector."/>
+Components .NET Core consists of multiple components that are each versioned independently and can often be mixed and matched.
+ The Shared Framework contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.  The current .NET Core Virtual Machine is called CoreCLR. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector."/>
 
   <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/normalize.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/main.css" />
@@ -66,53 +62,40 @@ independently and can often be mixed and matched.
 <div class="markdown">
 <p>This post covers the versions and components in .NET Core 1.x.</p>
 <h2 id="components">Components</h2>
-<p>.NET Core consists of multiple components that are each versioned<br>
+<p>.NET Core consists of multiple components that are each versioned
 independently and can often be mixed and matched.</p>
 <ul>
-<li>
-<p>The <strong>Shared Framework</strong> contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.</p>
+<li>The <strong>Shared Framework</strong> contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.
 <ul>
-<li>
-<p>The current .NET Core Virtual Machine is called <strong>CoreCLR</strong>. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector. The complete source code for CoreCLR is available at <a href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a>.</p>
-</li>
-<li>
-<p>The .NET Core standard APIs are implemented in <strong>CoreFX</strong>. This provides implementations of all your favourite APIs such as <code>System.Runtime</code>, <code>System.Theading</code> and so on. The source code for CoreFX is available at <a href="https://github.com/dotnet/corefx">https://github.com/dotnet/corefx</a>.</p>
-</li>
+<li>The current .NET Core Virtual Machine is called <strong>CoreCLR</strong>. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector. The complete source code for CoreCLR is available at <a href="https://github.com/dotnet/coreclr">https://github.com/dotnet/coreclr</a>.</li>
+<li>The .NET Core standard APIs are implemented in <strong>CoreFX</strong>. This provides implementations of all your favourite APIs such as <code>System.Runtime</code>, <code>System.Theading</code> and so on. The source code for CoreFX is available at <a href="https://github.com/dotnet/corefx">https://github.com/dotnet/corefx</a>.</li>
 </ul>
 </li>
-<li>
-<p>The <strong>Host</strong> is also sometimes called the <em>muxer</em> or <em>driver</em>. This components represents the <code>dotnet</code> command and is responsible for deciding what happens next. The source for this is available at <a href="https://github.com/dotnet/core-setup">https://github.com/dotnet/core-setup</a>.</p>
-</li>
-<li>
-<p>The <strong>SDK</strong> consists of the various tools (<code>dotnet</code> subcommands) and their implementations that deal with building code. This includes handling the restoring of dependencies, compiling code, building binaries, producing packages and publishing standalone or framework dependent packages. The SDK itself consists of the <em>CLI</em> , which handles command line operations (at <a href="https://github.com/dotnet/cli">https://github.com/dotnet/cli</a>) and various subprojects that implement the various operations the CLI needs to do.</p>
-</li>
+<li>The <strong>Host</strong> is also sometimes called the <em>muxer</em> or <em>driver</em>. This components represents the <code>dotnet</code> command and is responsible for deciding what happens next. The source for this is available at <a href="https://github.com/dotnet/core-setup">https://github.com/dotnet/core-setup</a>.</li>
+</ul>
+<ul>
+<li>The <strong>SDK</strong> consists of the various tools (<code>dotnet</code> subcommands) and their implementations that deal with building code. This includes handling the restoring of dependencies, compiling code, building binaries, producing packages and publishing standalone or framework dependent packages. The SDK itself consists of the <em>CLI</em> , which handles command line operations (at <a href="https://github.com/dotnet/cli">https://github.com/dotnet/cli</a>) and various subprojects that implement the various operations the CLI needs to do.</li>
 </ul>
 <h2 id="versions">Versions</h2>
 <p>Each of the components listed above are versioned separately. You can find out
 the version of each of those components.</p>
 <ul>
-<li>
-<p>For the <strong>SDK</strong> , you can use the <code>--version</code> option to <code>dotnet</code> to see the version. For example:</p>
-<pre><code>$ ~/dotnet-1.1.1/dotnet --version  
-</code></pre>
-<p>1.0.0-preview2-1-003176</p>
-</li>
-<li>
-<p>For the <strong>Host</strong> you can run <code>dotnet</code> by itself without any arguments or options to see the version.</p>
-<pre><code>$ ~/dotnet-1.1.1/dotnet  
-</code></pre>
-<p>Microsoft .NET Core Shared Framework Host</p>
-<p>Version : 1.1.0<br>
-Build : 362e48a95c86b40cd1f2ef3d08741f7fed897956</p>
-<p>Usage: dotnet [common-options] [[options] path-to-application]<br>
-&hellip;</p>
-</li>
-<li>
-<p>For the <strong>Shared Framework</strong> there no command currently to display the version(s). I use <code>ls /path/to/where/you/installed/dotnet/shared/Microsoft.NETCore.App</code> which relies on internal implementation details. For example:</p>
-<pre><code>$ ls ~/dotnet-1.1.1/shared/Microsoft.NETCore.App/  
-</code></pre>
-<p>1.1.1</p>
-</li>
+<li>For the <strong>SDK</strong> , you can use the <code>--version</code> option to <code>dotnet</code> to see the version. For example:
+<pre><code>$ ~/dotnet-1.1.1/dotnet --version
+1.0.0-preview2-1-003176
+</code></pre></li>
+<li>For the <strong>Host</strong> you can run <code>dotnet</code> by itself without any arguments or options to see the version.
+<pre><code>$ ~/dotnet-1.1.1/dotnet
+Microsoft .NET Core Shared Framework Host
+Version : 1.1.0
+Build : 362e48a95c86b40cd1f2ef3d08741f7fed897956
+Usage: dotnet [common-options] [[options] path-to-application]
+...
+</code></pre></li>
+<li>For the <strong>Shared Framework</strong> there no command currently to display the version(s). I use <code>ls /path/to/where/you/installed/dotnet/shared/Microsoft.NETCore.App</code> which relies on internal implementation details. For example:
+<pre><code>$ ls ~/dotnet-1.1.1/shared/Microsoft.NETCore.App/
+1.1.1
+</code></pre></li>
 </ul>
 <h2 id="components-in-net-core-installations">Components in .NET Core Installations</h2>
 <p>Various official and unoffical packages, tarballs, zips and installers for
@@ -122,29 +105,17 @@ Runtimes</strong>. Each .NET Core SDK or .NET Core Runtime distribution contains
 number (possibly 0) of hosts, sdk and shared framework components described
 above.</p>
 <ul>
-<li>
-<p><strong>.NET Core Runtime</strong> contains</p>
+<li><strong>.NET Core Runtime</strong> contains
 <ul>
-<li>
-<p>1 version of the <em>Host</em></p>
-</li>
-<li>
-<p>1 version of the <em>Shared Framework</em></p>
-</li>
+<li>1 version of the <em>Host</em></li>
+<li>1 version of the <em>Shared Framework</em></li>
 </ul>
 </li>
-<li>
-<p><strong>.NET Core SDK</strong> contains</p>
+<li><strong>.NET Core SDK</strong> contains
 <ul>
-<li>
-<p>1 or more versions of the <em>Shared Framework</em> (varies depending on the version of the version of the .NET Core SDK)</p>
-</li>
-<li>
-<p>1 version of the <em>Host</em></p>
-</li>
-<li>
-<p>1 version of the <em>SDK</em></p>
-</li>
+<li>1 or more versions of the <em>Shared Framework</em> (varies depending on the version of the version of the .NET Core SDK)</li>
+<li>1 version of the <em>Host</em></li>
+<li>1 version of the <em>SDK</em></li>
 </ul>
 </li>
 </ul>
