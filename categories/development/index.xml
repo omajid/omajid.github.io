@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>development on understanding is a three-edged sword</title>
+    <link>https://omajid.github.io/categories/development/</link>
+    <description>Recent content in development on omajid.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 30 Mar 2017 22:14:31 +0000</lastBuildDate>
+    
+    <atom:link href="https://omajid.github.io/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Components &amp; Versioning in .NET Core</title>
+      <link>https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/</link>
+      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/</guid>
+      <description>
+      
+      This post covers the versions and components in .NET Core 1.x.
+Components .NET Core consists of multiple components that...
+      
+      </description>
+    </item>
+    <item>
+      <title>-Wmisleading-indentation in OpenJDK</title>
+      <link>https://omajid.github.io/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
+      <pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
+      <description>
+      
+      Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. ...
+      
+      </description>
+    </item>
+    <item>
+      <title>SharedSecrets in OpenJDK</title>
+      <link>https://omajid.github.io/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
+      <pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
+      <description>
+      
+      I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
+      
+      </description>
+    </item>
+    <item>
+      <title>What IcedTea-Web 1.1 means for you</title>
+      <link>https://omajid.github.io/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+      <description>
+      
+      A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
+      
+      </description>
+    </item>
+    
+  </channel>
+</rss>

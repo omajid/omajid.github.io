@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+
+  <meta name="generator" content="Hugo 0.69.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Omair Majid"><meta property="og:title" content="Contributing Patches to OpenJDK" />
+<meta property="og:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
+The OpenJDK Developer&rsquo;s Guide covers most of this, but some of it is in too much detail and some of it is outdated." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://omajid.github.io/posts/2013-09-13-contributing-patches-to-openjdk/" />
+<meta property="article:published_time" content="2013-09-13T23:43:03+00:00" />
+<meta property="article:modified_time" content="2013-09-13T23:43:03+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Contributing Patches to OpenJDK"/>
+<meta name="twitter:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
+The OpenJDK Developer&rsquo;s Guide covers most of this, but some of it is in too much detail and some of it is outdated."/>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.iocss/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.iocss/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.iocss/all.css" />
+<title>Contributing Patches to OpenJDK | understanding is a three-edged sword</title></head>
+<body><header>
+
+  <div id="titletext"><h2 id="title"><a href="https://omajid.github.io">understanding is a three-edged sword</a></h2></div>
+  <div id="title-description"><div id=social>
+    <nav>
+      <ul></ul>
+    </nav>
+  </div>
+  </div>
+  <div id="mainmenu">
+    <nav>
+      <ul>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<main><div class="post">
+<div class="author">
+
+</div>
+<div class="post-header">
+
+<div class="meta">
+
+<div class="date">
+<span class="day">13</span>
+<span class="rest">Sep 2013</span>
+</div>
+
+</div>
+
+<div class="matter">
+<h1 class="title">Contributing Patches to OpenJDK</h1>
+</div>
+</div>
+<div class="markdown">
+<p>Someone asked me earlier today about how to contribute patches to OpenJDK.
+OpenJDK is probably not the easiest upstream to contribute patches to - their
+patch approval system is a little different from most other projects. I have
+tried to summarize the basic steps here. Let me know in comments if anything
+is not clear.</p>
+<p>The OpenJDK <a href="http://openjdk.java.net/guide/" title="The OpenJDK Developer's Guide">Developer&rsquo;s Guide</a> covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.</p>
+<p>The overall process for submitting patches to OpenJDK is:</p>
+<ol>
+<li>
+<p>Identify what <em>group</em> or <em>project</em> the fix is for</p>
+</li>
+<li>
+<p>Generate a webrev</p>
+</li>
+<li>
+<p>Send it to the right mailing list for review</p>
+</li>
+<li>
+<p>Make changes as requested by upstream and update webrev</p>
+</li>
+<li>
+<p>A sponsor will push your fix for you</p>
+</li>
+</ol>
+<p>As you can see, it&rsquo;s not a very complicated process. Most of the delays in
+patch acceptance have been when the patch is non-trivial or has unexpected
+issues (even if those issues are known only Oracle-internal and can only be
+guessed by those of us outside) or someone sufficiently qualified to review
+the patch is not available.</p>
+<p>One thing to note: Oracle requires signing a Contributor License Agreement
+before they will accept non-trivial patches.</p>
+<h1 id="identify-the-group-or-poject">Identify the Group or Poject</h1>
+<p>The first thing to do if you want to send a fix upstream is to identify what
+<em>Group</em> or <em>Project</em> it is for. For this purpose, both groups and projects are
+more-or-less the same (groups are more general). They consist of a collection
+of people who care about something. For example, some folks care about the
+<code>javac</code> compiler, some others cares about the build system and others that
+care about ports to different architectures. There is a list of these groups
+and projects available on the OpenJDK web page, on the left side.</p>
+<p>Simply look through them and try to pick what you think is the best project or
+group for your fix. Some groups and projects are obvious: if you are fixing
+something in swing, that&rsquo;s the Swing group. If you want to fix something in
+the ARMv8 port, that&rsquo;s the aarch64 project. If you can&rsquo;t find the best group,
+you can fall back to Core Libraries if it&rsquo;s a patch for the standard java
+library (that is, a fix for a java.* or javax.* class) or you can fall back to
+Hotspot if it is a fix for hotspot.</p>
+<p>Make a note of the mailing list(s) and repositories used by the group.</p>
+<p>Don&rsquo;t worry if you can&rsquo;t find the ideal group, project or repository; someone
+will point you in the right direction in later on, but it may mean (slightly)
+more work later.</p>
+<h1 id="generate-a-webrev">Generate a webrev</h1>
+<p>Since you are trying to submit a patch upstream, I will assume you already
+have a fix for it. The first thing you need to do is to get the latest OpenJDK
+code using the most appropriate repository. And then make your fix. Once you
+have built and tested your fix, you can generate a patch for review. OpenJDK
+uses a custom tool called webrev to generate easier-to-reivew patches.</p>
+<p>Assuming you are making a fix to hotspot, use it like so:</p>
+<pre><code>cd jdk8/hotspot  
+ksh ../make/scripts/webrev.ksh
+</code></pre>
+<p>This program will look for changes in the current repository and generate a
+bunch of files. You should see a new<br>
+webrev.zip file and a webrev directory. The webrev directory should contain an
+index.html file that should look roughly like this existing one</p>
+<p>Upload the webrev directory somewhere publicly where anyone who wants to
+review the patch can see it. A public dropbox folder works just fine, as done
+any personal webspace that you may have. Regular contributors to OpenJDK
+generally use cr.openjdk.java.net.</p>
+<h1 id="send-mail-with-patch">Send mail with patch</h1>
+<p>Now you need to send an email describing the patch and what it&rsquo;s fixing to the
+right OpenJDK mailing list. remember to subscribe to the mailing list first,
+though.</p>
+<p>Use a descriptive subject in the email, prefixing it with &ldquo;RFR&rdquo; (or Request
+for Review). Link to the public webrev in the email.</p>
+<h1 id="make-changes-and-update-webrev">Make changes and update webrev</h1>
+<p>Hopefully, someone will review the patch quickly (depending on the fix, you
+may get a response within the hour or it may take a few days).</p>
+<p>The reviewer may suggest improvements or additional fixes. They may also
+request additional cleanup or testing as well.</p>
+<h1 id="a-sponsor-will-push-the-fix">A Sponsor will push the fix</h1>
+<p>Once upstream is happy with the patch, a sponsor will ask you for a changeset
+that they can push or perhaps they will generate one for you. The details of
+producing a changeset are available in the developer&rsquo;s guide. Since you don&rsquo;t
+have push access, a sponsor will push the fix on your behalf to the
+appropriate repository. It will probably take a few weeks until that change
+makes it from group repository to integration repository to the master
+repository (jdk8/jdk8).</p>
+<p>And that&rsquo;s it! So don&rsquo;t be afraid to propose patches for OpenJDK :)</p>
+<p>Complete details about all this process is available, of course, in the
+Developer&rsquo;s Guide.</p>
+
+</div>
+<div class="tags">
+
+
+
+
+
+
+
+
+
+</div></div>
+
+</main><footer>
+
+
+
+    
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>icedtea-web-1.1 on understanding is a three-edged sword</title>
+    <link>https://omajid.github.io/tags/icedtea-web-1.1/</link>
+    <description>Recent content in icedtea-web-1.1 on omajid.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Aug 2011 18:34:41 +0000</lastBuildDate>
+    
+    <atom:link href="https://omajid.github.io/tags/icedtea-web-1.1/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What IcedTea-Web 1.1 means for you</title>
+      <link>https://omajid.github.io/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+      <description>
+      
+      A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
+      
+      </description>
+    </item>
+    
+  </channel>
+</rss>

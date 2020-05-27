@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>understanding is a three-edged sword</title>
+    <link>https://omajid.github.io/</link>
+    <description>Recent content on omajid.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 17 Feb 2009 21:06:33 +0000</lastBuildDate>
+    
+    <atom:link href="https://omajid.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Components &amp; Versioning in .NET Core</title>
+      <link>https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/</link>
+      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/</guid>
+      <description>
+      
+      This post covers the versions and components in .NET Core 1.x.
+Components .NET Core consists of multiple components that...
+      
+      </description>
+    </item>
+    <item>
+      <title>OpenJDK 9 for Fedora/EPEL</title>
+      <link>https://omajid.github.io/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
+      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
+      <description>
+      
+      Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
+      
+      </description>
+    </item>
+    <item>
+      <title>-Wmisleading-indentation in OpenJDK</title>
+      <link>https://omajid.github.io/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
+      <pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
+      <description>
+      
+      Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. ...
+      
+      </description>
+    </item>
+    <item>
+      <title>IcedTea-Web and OpenJDK</title>
+      <link>https://omajid.github.io/posts/2014-01-23-icedtea-web-and-openjdk/</link>
+      <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
+      <description>
+      
+      I posted 3 patches today
+The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementati...
+      
+      </description>
+    </item>
+    <item>
+      <title>OpenJDK6 B29 Released!</title>
+      <link>https://omajid.github.io/posts/2013-12-05-openjdk6-b29-released/</link>
+      <pubDate>Fri, 06 Dec 2013 02:50:16 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2013-12-05-openjdk6-b29-released/</guid>
+      <description>
+      
+      On December 5, 2013, the OpenJDK6 b29 source bundle was published at https://java.net/projects/openjdk6/downloads/.
+This...
+      
+      </description>
+    </item>
+    <item>
+      <title>OpenJDK6 B28 Released</title>
+      <link>https://omajid.github.io/posts/2013-10-04-openjdk6-b28-released/</link>
+      <pubDate>Fri, 04 Oct 2013 17:51:36 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2013-10-04-openjdk6-b28-released/</guid>
+      <description>
+      
+      On October 4, 2013, the OpenJDK6 b28 source bundle was published at https://java.net/projects/openjdk6/downloads/.
+This ...
+      
+      </description>
+    </item>
+    <item>
+      <title>Contributing Patches to OpenJDK</title>
+      <link>https://omajid.github.io/posts/2013-09-13-contributing-patches-to-openjdk/</link>
+      <pubDate>Fri, 13 Sep 2013 23:43:03 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2013-09-13-contributing-patches-to-openjdk/</guid>
+      <description>
+      
+      Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream ...
+      
+      </description>
+    </item>
+    <item>
+      <title>SharedSecrets in OpenJDK</title>
+      <link>https://omajid.github.io/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
+      <pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
+      <description>
+      
+      I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
+      
+      </description>
+    </item>
+    <item>
+      <title>OpenJDK and Awesome</title>
+      <link>https://omajid.github.io/posts/2012-04-11-openjdk-and-awesome/</link>
+      <pubDate>Wed, 11 Apr 2012 23:08:41 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2012-04-11-openjdk-and-awesome/</guid>
+      <description>
+      
+      I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running...
+      
+      </description>
+    </item>
+    <item>
+      <title>IcedTea6 1.11.1 Released!</title>
+      <link>https://omajid.github.io/posts/2012-02-14-icedtea6-1-11-1-released/</link>
+      <pubDate>Tue, 14 Feb 2012 21:46:43 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2012-02-14-icedtea6-1-11-1-released/</guid>
+      <description>
+      
+      A new release of IcedTea6 1.11 branch is now available: 1.11.1
+The update contains the following security fixes:
+- S7082...
+      
+      </description>
+    </item>
+    <item>
+      <title>IcedTea6 1.11 Released!</title>
+      <link>https://omajid.github.io/posts/2012-01-31-icedtea6-1-11-released/</link>
+      <pubDate>Tue, 31 Jan 2012 05:27:50 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2012-01-31-icedtea6-1-11-released/</guid>
+      <description>
+      
+      After quite a bit of delay, IcedTea6 1.11 has finally been released!
+Take a look at the release announcement, download i...
+      
+      </description>
+    </item>
+    <item>
+      <title>IcedTea6 1.11 Branched</title>
+      <link>https://omajid.github.io/posts/2012-01-06-icedtea6-1-11-branched/</link>
+      <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2012-01-06-icedtea6-1-11-branched/</guid>
+      <description>
+      
+      I have just branched IcedTea6 1.11. Please start subjecting this branch to the most vicious tests you have.
+I am plannin...
+      
+      </description>
+    </item>
+    <item>
+      <title>What IcedTea-Web 1.1 means for you</title>
+      <link>https://omajid.github.io/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+      <description>
+      
+      A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
+      
+      </description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>https://omajid.github.io/about/</link>
+      <pubDate>Tue, 17 Feb 2009 21:06:33 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/about/</guid>
+      <description>
+      
+      Hi, I am Omair. I am a Red Hat developer who spends most of his time contributing to IcedTea, OpenJDK and related open s...
+      
+      </description>
+    </item>
+    
+  </channel>
+</rss>
