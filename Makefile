@@ -2,17 +2,18 @@ COMMIT:=$(shell git rev-parse HEAD)
 AUTHOR:="$(shell git config user.name) <$(shell git config user.email)>"
 
 .PHONY: all
-all: publish-local
+all: serve-local
 
 public/:
 	git worktree prune
 	git worktree add -B master public/ origin/master
 
-publish-local:
+.PHONY: serve-local
+serve-local:
 	hugo server -D
 
-.PHONY: publish
-publish: public/
+.PHONY: publish-locally
+publish-locally: public/
 	# FIXME abort on dirty repo
 	rm -rf public/*
 	hugo
@@ -20,7 +21,7 @@ publish: public/
 	  git add --all && \
 	  git commit -m "Updated content based on $(COMMIT)" --author=$(AUTHOR)
 
-.PHONY: publish-live
-publish-live: publish
+.PHONY: publish-push-to-git
+publish-push-to-git: publish-locally
 	cd public && \
 	  git push --force-with-lease

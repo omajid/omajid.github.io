@@ -1,4 +1,55 @@
 baseURL = "https://omajid.github.io/"
 languageCode = "en"
-title = "understanding is a three-edged sword"
+title = "Omair Majid"
 theme = "vitae"
+copyright = "© Omair Majid | [License](/about/)"
+
+[frontmatter]
+  date = [":default", ":filename"]
+
+[params]
+  author = "Omair Majid"
+  subtitle = "Announcements, thoughts, code and fun"
+
+[taxonomies]
+  tags = "tags"
+  category = "categories"
+  series = "series"  # what is this??
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+
+[[params.social]]
+  name = "GitHub"
+  icon = "fab fa-github"
+  url = "https://github.com/omajid"
+
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fab fa-linkedin"
+  url = "/about/"  # FIXME
+
+[[params.social]]
+  name = "Reddit"
+  icon = "fab fa-reddit"
+  url = "https://www.reddit.com/user/omair-majid"
+
+[[params.social]]
+  name = "StackOverflow"
+  icon = "fab fa-stack-overflow"
+  url = "https://stackoverflow.com/story/omajid"
+
+[[params.social]]
+  name = "Twitter"
+  icon = "fab fa-twitter"
+  url = "/about/"  # FIXME
+
+[[params.social]]
+  name = "RSS"
+  icon = "fas fa-rss"
+  url = "/index.xml"
