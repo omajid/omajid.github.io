@@ -23,5 +23,6 @@ publish-locally: public/
 
 .PHONY: publish-push-to-git
 publish-push-to-git: publish-locally
+	git push --force-with-lease
 	cd public && \
 	  git push --force-with-lease

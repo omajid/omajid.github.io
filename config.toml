@@ -10,6 +10,7 @@ copyright = "© Omair Majid | [License](/about/)"
 [params]
   author = "Omair Majid"
   subtitle = "Announcements, thoughts, code and fun"
+  avatar = "https://github.com/omajid.png"
 
 [taxonomies]
   tags = "tags"
@@ -19,20 +20,32 @@ copyright = "© Omair Majid | [License](/about/)"
 [[menu.main]]
   name = "Home"
   url = "/"
+  weight = 1
 
 [[menu.main]]
   name = "Posts"
   url = "/posts/"
+  weight = 2
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 3
+
+[[params.social]]
+  name = "Email"
+  icon = "fas fa-envelope"
+  url = "mailto:omair.majid@gmail.com"
 
 [[params.social]]
   name = "GitHub"
   icon = "fab fa-github"
   url = "https://github.com/omajid"
 
-[[params.social]]
-  name = "LinkedIn"
-  icon = "fab fa-linkedin"
-  url = "/about/"  # FIXME
+# [[params.social]]
+#   name = "LinkedIn"
+#   icon = "fab fa-linkedin"
+#   url = "/about/"  # FIXME
 
 [[params.social]]
   name = "Reddit"
@@ -44,10 +57,10 @@ copyright = "© Omair Majid | [License](/about/)"
   icon = "fab fa-stack-overflow"
   url = "https://stackoverflow.com/story/omajid"
 
-[[params.social]]
-  name = "Twitter"
-  icon = "fab fa-twitter"
-  url = "/about/"  # FIXME
+# [[params.social]]
+#   name = "Twitter"
+#   icon = "fab fa-twitter"
+#   url = "/about/"  # FIXME
 
 [[params.social]]
   name = "RSS"

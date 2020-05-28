@@ -1,7 +1,6 @@
 +++
 title = "About"
 author = "Omair Majid"
-menu = "main"
 +++
 
 Hi, I am Omair Majid. I am a software engineer who spends most of his
@@ -20,6 +19,8 @@ am part of the [Fedora .NET Special Interest
 Group](https://fedoraproject.org/wiki/SIGs/DotNet). I am also the
 current maintainer of several packages in [Red Hat Enterprise
 Linux](http://www.redhat.com/rhel/).
+
+My GPG fingerprint is `9DB5 2F0B FD3E C239 E108  E7BD DF99 7AF8 B157 A9F0`.
   
 The contents of this website are licensed under [Creative Commons
 Attribution Share Alike 4.0
