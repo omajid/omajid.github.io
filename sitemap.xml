@@ -3,12 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://omajid.github.io/categories/</loc>
-    <lastmod>2017-03-30T22:14:31+00:00</lastmod>
+    <loc>https://omajid.github.io/posts/dotnet-in-fedora/</loc>
   </url>
   
   <url>
-    <loc>https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/</loc>
+    <loc>https://omajid.github.io/categories/</loc>
     <lastmod>2017-03-30T22:14:31+00:00</lastmod>
   </url>
   
@@ -18,12 +17,35 @@
   </url>
   
   <url>
-    <loc>https://omajid.github.io/categories/dotnet/</loc>
+    <loc>https://omajid.github.io/tags/dotnet/</loc>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/tags/fedora/</loc>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/</loc>
     <lastmod>2017-03-30T22:14:31+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://omajid.github.io/posts/</loc>
+    <lastmod>2017-03-30T22:14:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/tags/</loc>
+    <lastmod>2016-10-04T23:35:09+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/posts/2017-03-30-components-versioning-in-net-core/</loc>
+    <lastmod>2017-03-30T22:14:31+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/categories/dotnet/</loc>
     <lastmod>2017-03-30T22:14:31+00:00</lastmod>
   </url>
   
@@ -39,11 +61,6 @@
   
   <url>
     <loc>https://omajid.github.io/tags/openjdk9/</loc>
-    <lastmod>2016-10-04T23:35:09+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omajid.github.io/tags/</loc>
     <lastmod>2016-10-04T23:35:09+00:00</lastmod>
   </url>
   
@@ -124,12 +141,10 @@
   
   <url>
     <loc>https://omajid.github.io/about/</loc>
-    <lastmod>2009-02-17T21:06:33+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://omajid.github.io/</loc>
-    <lastmod>2009-02-17T21:06:33+00:00</lastmod>
+    <loc>https://omajid.github.io/series/</loc>
   </url>
   
 </urlset>

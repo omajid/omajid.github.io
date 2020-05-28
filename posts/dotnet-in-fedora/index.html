@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+
+  <meta name="generator" content="Hugo 0.69.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Omair Majid"><meta name="keywords" content="fedora,dotnet"><meta property="og:title" content=".NET Core is now available in Fedora" />
+<meta property="og:description" content="One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the first community Linux distribution with .NET Core available out of the box!
+In this post, lets take a quick look at using .NET Core on Fedora 32. We will cover installing .NET Core packages and building a container image!
+.NET Core is being maintained by the Fedora DotNet SIG: https://fedoraproject." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://omajid.github.io/posts/dotnet-in-fedora/" />
+<meta property="article:published_time" content="2020-05-28T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=".NET Core is now available in Fedora"/>
+<meta name="twitter:description" content="One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the first community Linux distribution with .NET Core available out of the box!
+In this post, lets take a quick look at using .NET Core on Fedora 32. We will cover installing .NET Core packages and building a container image!
+.NET Core is being maintained by the Fedora DotNet SIG: https://fedoraproject."/>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/all.css" />
+<title>.NET Core is now available in Fedora | Omair Majid</title></head>
+<body><header>
+
+  <div id="titletext"><h2 id="title"><a href="https://omajid.github.io/">Omair Majid</a></h2></div>
+  <div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+    <nav>
+      <ul><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="/about/"><i title="LinkedIn" class="icons fab fa-linkedin"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/about/"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+    </nav>
+  </div>
+  </div>
+  <div id="mainmenu">
+    <nav>
+      <ul>
+        
+        <li><a href="/about/">About</a></li>
+        
+        <li><a href="/">Home</a></li>
+        
+        <li><a href="/posts/">Posts</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<main><div class="post">
+<div class="author">
+
+</div>
+<div class="post-header">
+
+<div class="meta">
+
+<div class="date">
+<span class="day">28</span>
+<span class="rest">May 2020</span>
+</div>
+
+</div>
+
+<div class="matter">
+<h1 class="title">.NET Core is now available in Fedora</h1>
+</div>
+</div>
+<div class="markdown">
+<p>One exciting feature in the recent release of Fedora 32 is the
+inclusion of .NET Core in the default repositories. This makes Fedora
+32 the first community Linux distribution with .NET Core available out
+of the box!</p>
+<p>In this post, lets take a quick look at using .NET Core on Fedora 32.
+We will cover installing .NET Core packages and building a container
+image!</p>
+<p>.NET Core is being maintained by the Fedora DotNet SIG:
+<a href="https://fedoraproject.org/wiki/SIGs/DotNet">https://fedoraproject.org/wiki/SIGs/DotNet</a></p>
+<h2 id="installing-net-core-packages-on-fedora-32">Installing .NET Core packages on Fedora 32</h2>
+<p>With Fedora 32, .NET Core 3.1 is included in the default repositories.
+In the future, additional versions will be added as they are released.
+And older versions will be removed as they go End-of-Life.</p>
+<p>You can pick and choose which components of .NET Core (SDK, Runtime)
+you need and install just those. Installing a component will install
+all of its dependencies. For example, installing a .NET Core SDK will
+also install the corresponding .NET Core Runtime as well as any other
+additional SDK dependencies.</p>
+<p>You can install a the .NET Core SDK by using <code>dnf</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">dnf install dotnet-sdk-3.1
+</code></pre></div><p>If you are not interested in developing .NET Core applications, rather
+just running them, you can skip the SDK and only install the
+.NET Core Runtime. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">dnf install dotnet-runtime-3.1
+</code></pre></div><p>You also can install the ASP.NET Core Runtime, which lets you run
+framework-dependent ASP.NET Core applications:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">dnf install aspnetcore-runtime-3.1
+</code></pre></div><p>Future versions of .NET Core packages should follow the same
+convention:</p>
+<ul>
+<li><code>dotnet-sdk-X.Y</code></li>
+<li><code>dotnet-runtime-X.Y</code></li>
+<li><code>aspnetcore-runtime-X.Y</code></li>
+</ul>
+<p>(Aside: Maybe the last one will change when ASP.NET Core is renamed to
+ASP.NET?)</p>
+<h2 id="running-net-core">Running .NET Core</h2>
+<p>Once you have installed .NET Core on Fedora 32, you can simply start
+using the <code>dotnet</code> command. To make sure .NET Core is installed, try:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">dotnet --info
+</code></pre></div><p>That should show more information about .NET Core, including the specific components that are installed:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">.NET Core SDK <span style="color:#f92672">(</span>reflecting any global.json<span style="color:#f92672">)</span>:
+ Version:   3.1.103
+ Commit:    6f74c4a1dd
+
+Runtime Environment:
+ OS Name:     fedora
+ OS Version:  <span style="color:#ae81ff">32</span>
+ OS Platform: Linux
+ RID:         fedora.32-x64
+ Base Path:   /usr/lib64/dotnet/sdk/3.1.103/
+
+Host <span style="color:#f92672">(</span>useful <span style="color:#66d9ef">for</span> support<span style="color:#f92672">)</span>:
+  Version: 3.1.3
+  Commit:  4a9f85e9f8
+
+.NET Core SDKs installed:
+  3.1.103 <span style="color:#f92672">[</span>/usr/lib64/dotnet/sdk<span style="color:#f92672">]</span>
+
+.NET Core runtimes installed:
+  Microsoft.AspNetCore.App 3.1.3 <span style="color:#f92672">[</span>/usr/lib64/dotnet/shared/Microsoft.AspNetCore.App<span style="color:#f92672">]</span>
+  Microsoft.NETCore.App 3.1.3 <span style="color:#f92672">[</span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App<span style="color:#f92672">]</span>
+
+To install additional .NET Core runtimes or SDKs:
+  https://aka.ms/dotnet-download
+</code></pre></div><p>We can now use .NET Core SDK to create, build, publish, and run a simple Hello World application:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ mkdir HelloWorld
+$ cd HelloWorld/
+$ dotnet new console
+The template <span style="color:#e6db74">&#34;Console Application&#34;</span> was created successfully.
+
+Processing post-creation actions...
+Running <span style="color:#e6db74">&#39;dotnet restore&#39;</span> on /HelloWorld/HelloWorld.csproj...
+  Restore completed in 51.55 ms <span style="color:#66d9ef">for</span> /HelloWorld/HelloWorld.csproj.
+
+Restore succeeded.
+
+$ dotnet publish --configuration Release --runtime fedora.32-x64 --self-contained false
+Microsoft <span style="color:#f92672">(</span>R<span style="color:#f92672">)</span> Build Engine version 16.4.0+e901037fe <span style="color:#66d9ef">for</span> .NET Core
+Copyright <span style="color:#f92672">(</span>C<span style="color:#f92672">)</span> Microsoft Corporation. All rights reserved.
+
+  Restore completed in 64.74 ms <span style="color:#66d9ef">for</span> /HelloWorld/HelloWorld.csproj.
+  HelloWorld -&gt; /HelloWorld/bin/Release/netcoreapp3.1/fedora.32-x64/HelloWorld.dll
+  HelloWorld -&gt; /HelloWorld/bin/Release/netcoreapp3.1/fedora.32-x64/publish/
+
+$ dotnet bin/Release/netcoreapp3.1/fedora.32-x64/publish/HelloWorld.dll
+Hello World!
+
+</code></pre></div><p>See the .NET Core documentation for more information, including
+references, samples, and tutorials.</p>
+<p>If you run into any issues, please file bugs in the Fedora bugzilla
+against the <code>dotnet3.1</code> package.</p>
+<h2 id="using-net-core-in-fedora-based-container-images">Using .NET Core in Fedora-based container images</h2>
+<p>You can use these container images to develop and deploy your .NET
+Core applications in containerized environments, such as OpenShift and
+Kubernetes.</p>
+<h3 id="running-net-core-containers">Running .NET Core containers</h3>
+<p>You can use the Fedora-based containers in your container pipelines.
+You can use it for deployment to cloud environments.</p>
+<p>As an example, let’s create, build, and run a Hello World-style
+application in a container. Create a <code>Dockerfile</code> that contains the
+following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> fedora:32</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dnf install dotnet-sdk-3.1 -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    dotnet --info <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    dotnet new console -o HelloWorld <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    cd HelloWorld <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    dotnet publish --configuration Release<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> dotnet HelloWorld/bin/Release/netcoreapp3.1/publish/HelloWorld.dll<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>You can build and run this using <code>podman</code> or <code>docker</code> commands:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ podman build -t hello .
+TEP 1: FROM fedora:32
+STEP 2: RUN dnf install dotnet-sdk-3.1 -y <span style="color:#f92672">&amp;&amp;</span>     dotnet --info <span style="color:#f92672">&amp;&amp;</span>     dotnet new console -o HelloWorld <span style="color:#f92672">&amp;&amp;</span>     cd Hell$
+World <span style="color:#f92672">&amp;&amp;</span>     dotnet publish --configuration Release
+Fedora Modular <span style="color:#ae81ff">32</span> - x86_64                                                            <span style="color:#ae81ff">338</span> kB/s | 4.9 MB     00:14
+Fedora Modular <span style="color:#ae81ff">32</span> - x86_64 - Updates                                                  <span style="color:#ae81ff">313</span> kB/s | 1.3 MB     00:04
+Fedora Modular <span style="color:#ae81ff">32</span> - x86_64 - Test Updates                                             <span style="color:#ae81ff">157</span> kB/s | <span style="color:#ae81ff">196</span> kB     00:01
+Fedora <span style="color:#ae81ff">32</span> - x86_64 - Test Updates                                                     <span style="color:#ae81ff">367</span> kB/s |  <span style="color:#ae81ff">19</span> MB     00:53
+Fedora <span style="color:#ae81ff">32</span> - x86_64 - Updates                                                          <span style="color:#ae81ff">745</span> kB/s | 5.8 MB     00:07
+...
+...
+...
+Microsoft <span style="color:#f92672">(</span>R<span style="color:#f92672">)</span> Build Engine version 16.4.0+e901037fe <span style="color:#66d9ef">for</span> .NET Core
+Copyright <span style="color:#f92672">(</span>C<span style="color:#f92672">)</span> Microsoft Corporation. All rights reserved.
+
+  Restore completed in 14.63 ms <span style="color:#66d9ef">for</span> /HelloWorld/HelloWorld.csproj.
+  HelloWorld -&gt; /HelloWorld/bin/Release/netcoreapp3.1/HelloWorld.dll
+  HelloWorld -&gt; /HelloWorld/bin/Release/netcoreapp3.1/publish/
+--&gt; 9d475fd86ba
+STEP 3: ENTRYPOINT dotnet HelloWorld/bin/Release/netcoreapp3.1/publish/HelloWorld.dll
+STEP 4: COMMIT hello
+--&gt; ddafbd4fc68
+ddafbd4fc68b0d81c17da7c2b3bcf49ef2a9605d1181fd41f4811d3ff0ac4ae7
+
+$ podman run -it hello
+Hello World!
+</code></pre></div><p>Hello World, from the exciting land of containers!</p>
+
+</div>
+<div class="tags">
+
+
+
+
+
+
+
+<div class="taxosfloating_left">
+<p>Categories</p>
+</div>
+<div class="termsfloating_right">
+<p>
+
+
+
+<a href="/categories/development/"> development </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div class="clearit"></div>
+
+
+
+
+
+
+
+
+
+<div class="taxosfloating_left">
+<p>Tags</p>
+</div>
+<div class="termsfloating_right">
+<p>
+
+
+
+<a href="/tags/dotnet/"> dotnet </a>
+
+
+
+
+
+<a href="/tags/fedora/"> fedora </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div class="clearit"></div>
+
+
+
+
+
+</div></div>
+
+</main><footer>
+ © Omair Majid | <a href="/about/">License</a> 
+
+
+    
+
+</footer>
+</body>
+</html>

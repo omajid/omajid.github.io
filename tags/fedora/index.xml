@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>fedora on Omair Majid</title>
+    <link>https://omajid.github.io/tags/fedora/</link>
+    <description>Recent content in fedora on omajid.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© Omair Majid | License</copyright>
+    <lastBuildDate>Thu, 28 May 2020 00:00:00 +0000</lastBuildDate>
+    
+    <atom:link href="https://omajid.github.io/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>.NET Core is now available in Fedora</title>
+      <link>https://omajid.github.io/posts/dotnet-in-fedora/</link>
+      <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/dotnet-in-fedora/</guid>
+      <description>
+      
+      One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This ...
+      
+      </description>
+    </item>
+    
+  </channel>
+</rss>

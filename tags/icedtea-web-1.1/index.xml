@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>icedtea-web-1.1 on understanding is a three-edged sword</title>
+    <title>icedtea-web-1.1 on Omair Majid</title>
     <link>https://omajid.github.io/tags/icedtea-web-1.1/</link>
     <description>Recent content in icedtea-web-1.1 on omajid.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <copyright>© Omair Majid | License</copyright>
     <lastBuildDate>Tue, 23 Aug 2011 18:34:41 +0000</lastBuildDate>
     
     <atom:link href="https://omajid.github.io/tags/icedtea-web-1.1/index.xml" rel="self" type="application/rss+xml" />
