@@ -21,8 +21,8 @@ publish-locally: public/
 	  git add --all && \
 	  git commit -m "Updated content based on $(COMMIT)" --author=$(AUTHOR)
 
-.PHONY: publish-push-to-git
-publish-push-to-git: publish-locally
+.PHONY: publish-to-github
+publish-to-github:
 	git push --force-with-lease
 	cd public && \
 	  git push --force-with-lease
