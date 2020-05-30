@@ -2,7 +2,7 @@ baseURL = "https://omajid.github.io/"
 languageCode = "en"
 title = "Omair Majid"
 theme = "vitae"
-copyright = "© Omair Majid | [License](/about/)"
+copyright = "© Omair Majid 2011 - 2020 | [License](/about/)"
 
 [frontmatter]
   date = [":default", ":filename"]
