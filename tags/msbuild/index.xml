@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dotnet on Omair Majid</title>
-    <link>https://omajid.github.io/tags/dotnet/</link>
-    <description>Recent content in dotnet on omajid.github.io</description>
+    <title>msbuild on Omair Majid</title>
+    <link>https://omajid.github.io/tags/msbuild/</link>
+    <description>Recent content in msbuild on omajid.github.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© Omair Majid 2011 - 2020 | License</copyright>
     <lastBuildDate>Fri, 29 May 2020 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="https://omajid.github.io/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://omajid.github.io/tags/msbuild/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>What is nuget restore doing?</title>
@@ -21,18 +21,6 @@
       
       Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
 ...
-      
-      </description>
-    </item>
-    <item>
-      <title>.NET Core is now available in Fedora</title>
-      <link>https://omajid.github.io/posts/dotnet-in-fedora/</link>
-      <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://omajid.github.io/posts/dotnet-in-fedora/</guid>
-      <description>
-      
-      One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This ...
       
       </description>
     </item>

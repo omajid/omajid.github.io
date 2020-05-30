@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© Omair Majid 2011 - 2020 | License</copyright>
-    <lastBuildDate>Thu, 28 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 May 2020 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://omajid.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    <item>
+      <title>What is nuget restore doing?</title>
+      <link>https://omajid.github.io/posts/what-nuget-sources/</link>
+      <pubDate>Fri, 29 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/what-nuget-sources/</guid>
+      <description>
+      
+      Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
+...
+      
+      </description>
+    </item>
     <item>
       <title>.NET Core is now available in Fedora</title>
       <link>https://omajid.github.io/posts/dotnet-in-fedora/</link>

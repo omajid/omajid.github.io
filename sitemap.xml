@@ -3,10 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://omajid.github.io/posts/dotnet-in-fedora/</loc>
-  </url>
-  
-  <url>
     <loc>https://omajid.github.io/categories/</loc>
     <lastmod>2017-03-30T22:14:31+00:00</lastmod>
   </url>
@@ -21,7 +17,11 @@
   </url>
   
   <url>
-    <loc>https://omajid.github.io/tags/fedora/</loc>
+    <loc>https://omajid.github.io/tags/msbuild/</loc>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/tags/nuget/</loc>
   </url>
   
   <url>
@@ -37,6 +37,18 @@
   <url>
     <loc>https://omajid.github.io/tags/</loc>
     <lastmod>2016-10-04T23:35:09+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/posts/what-nuget-sources/</loc>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/posts/dotnet-in-fedora/</loc>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/tags/fedora/</loc>
   </url>
   
   <url>
