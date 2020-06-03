@@ -1,8 +1,12 @@
 +++
 title = ".NET Core is now available in Fedora"
 author = "Omair Majid"
+date = "Fri, 28 May 2020 18:34:41 +0000"
 categories = [ "development" ]
 tags = [ "fedora", "dotnet" ]
+aliases = [
+    "/posts/dotnet-in-fedora/",
+]
 +++
 
 One exciting feature in the recent release of Fedora 32 is the
