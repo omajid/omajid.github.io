@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+
+  <meta name="generator" content="Hugo 0.69.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Omair Majid"><meta name="keywords" content="unix,linux,tools"><meta property="og:title" content="The magic of file" />
+<meta property="og:description" content="Ever wonder how file(1)1 works?
+I did. Then I went digging into it.
+file Using the file tool is quite simple. It&rsquo;s just file file-name-1. You can call it with multiple arguments too. Here&rsquo;s a few examples of running it on my system.
+$ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg image.jpg: JPEG image data, Exif standard: [TIFF image data, big-endian, direntries=7 ...orientation=upper-left, datetime=2019:10:30 21:44:30, width=1740], baseline, precision 8, 2017x961, components 3 $ file video." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://omajid.github.io/posts/2020-06-10-magic-of-file/" />
+<meta property="article:published_time" content="2020-06-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-10T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The magic of file"/>
+<meta name="twitter:description" content="Ever wonder how file(1)1 works?
+I did. Then I went digging into it.
+file Using the file tool is quite simple. It&rsquo;s just file file-name-1. You can call it with multiple arguments too. Here&rsquo;s a few examples of running it on my system.
+$ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg image.jpg: JPEG image data, Exif standard: [TIFF image data, big-endian, direntries=7 ...orientation=upper-left, datetime=2019:10:30 21:44:30, width=1740], baseline, precision 8, 2017x961, components 3 $ file video."/>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/all.css" />
+<title>The magic of file | Omair Majid</title></head>
+<body><header>
+
+  <div id="avatar">
+    <a href="https://omajid.github.io/">
+      <img src="https://github.com/omajid.png" alt="Omair Majid">
+    </a>
+  </div>
+
+  <div id="titletext"><h2 id="title"><a href="https://omajid.github.io/">Omair Majid</a></h2></div>
+  <div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+    <nav>
+      <ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+    </nav>
+  </div>
+  </div>
+  <div id="mainmenu">
+    <nav>
+      <ul>
+        
+        <li><a href="/">Home</a></li>
+        
+        <li><a href="/posts/">Posts</a></li>
+        
+        <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</header>
+<main><div class="post">
+<div class="author">
+
+</div>
+<div class="post-header">
+
+<div class="meta">
+
+<div class="date">
+<span class="day">10</span>
+<span class="rest">Jun 2020</span>
+</div>
+
+</div>
+
+<div class="matter">
+<h1 class="title">The magic of file</h1>
+</div>
+</div>
+<div class="markdown">
+<p>Ever wonder how <code>file(1)</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> works?</p>
+<p>I did. Then I went digging into it.</p>
+<h2 id="file">file</h2>
+<p>Using the file tool is quite simple. It&rsquo;s just <code>file file-name-1</code>. You
+can call it with multiple arguments too. Here&rsquo;s a few examples of
+running it on my system.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ file document.pdf
+document.pdf: PDF document, version 1.4
+$ file image.jpg
+image.jpg: JPEG image data, Exif standard: <span style="color:#f92672">[</span>TIFF image data, big-endian, direntries<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span> ...orientation<span style="color:#f92672">=</span>upper-left, datetime<span style="color:#f92672">=</span>2019:10:30 21:44:30, width<span style="color:#f92672">=</span>1740<span style="color:#f92672">]</span>, baseline, precision 8, 2017x961, components <span style="color:#ae81ff">3</span>
+$ file video.mp4
+video.mp4: ISO Media, MP4 v2 <span style="color:#f92672">[</span>ISO 14496-14<span style="color:#f92672">]</span>
+$ file notes.org
+notes.org: UTF-8 Unicode text, with very long lines
+$ file /dev/video0
+/dev/video0: character special <span style="color:#f92672">(</span>81/0<span style="color:#f92672">)</span>
+</code></pre></div><p>You can already see a few things:</p>
+<ol>
+<li>
+<p>It works on any file.</p>
+</li>
+<li>
+<p>It tries to examine the contents of the file (not just the
+extensions) to figure out the file type.</p>
+</li>
+<li>
+<p>It understands and can extract extra information from the file, not
+just the file type. You can see that it understands versions for
+mp4 and jpeg files.</p>
+</li>
+<li>
+<p>It knows about special files like devices.</p>
+</li>
+</ol>
+<p>There&rsquo;s a few gotchas, though.</p>
+<ol>
+<li>
+<p><code>file</code> may not do what you want in shell scripts.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ file no-such-file
+no-such-file: cannot open <span style="color:#e6db74">`</span>no-such-file<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">(</span>No such file or directory<span style="color:#f92672">)</span>
+$ echo $?
+<span style="color:#ae81ff">0</span>
+</code></pre></div><p>This version of <code>file</code> always seems to exit with a code of 0. Even
+when <code>file</code> can&rsquo;t figure it out. Even if the file doesn&rsquo;t exist.</p>
+</li>
+<li>
+<p>For many formats that are not common on Unix/Linux, <code>file</code> is
+particularly fragile:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ file Vagrantfile
+Vagrantfile: HTML document, ASCII text
+$ file microsoft.netcore.app.2.1.19.nupkg
+microsoft.netcore.app.2.1.19.nupkg: Microsoft OOXML
+</code></pre></div><p>Yes, it really thinks a
+<a href="https://www.vagrantup.com/docs/vagrantfile"><code>Vagrantfile</code></a> is an
+HTML document and a <a href="https://www.nuget.org/packages/Microsoft.NETCore.App/2.1.19">NuGet package
+file</a>
+is an Office document!</p>
+</li>
+</ol>
+<p>But how does <code>file</code> actually figure out the file type?</p>
+<p>Like other classic Unix tools, <code>file</code> has excellent documentation.
+<a href="https://man7.org/linux/man-pages/man1/file.1.html"><code>man file</code></a> points
+out that <code>file</code> looks for things in this order.</p>
+<ol>
+<li>
+<p>It checks to see if a file is a special type of file, like devices.</p>
+</li>
+<li>
+<p>It checks if the <code>magic(5)</code> database contains a &ldquo;magic pattern&rdquo;
+that can identify this file type.</p>
+</li>
+<li>
+<p>It checks to see if it&rsquo;s a text-file. In this case, file will try
+and find out additional properties, such as language, encoding,
+line-length and the line terminator type (CR, LF, or CRLF).</p>
+</li>
+</ol>
+<p><code>file</code> uses the result from the first check that works. If none of
+these checks are successful, <code>file</code> simply reports the file type as
+&lsquo;data&rsquo;.</p>
+<p>The most interesting one of these is the <code>magic(5)</code> database option.
+While the other checks are fairly static, you can examine the <code>magic</code>
+database see how <code>file</code> works. You can even modify the database
+manually to fix bugs<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> in <code>file</code>!</p>
+<h2 id="magic">magic</h2>
+<p>The <code>magic</code> database (often at <code>/usr/share/magic</code>) is a plain text
+file. You can view it in your favourite editor.</p>
+<p><code>/usr/share/magic</code> contains a really series of &ldquo;(Test, Output)&rdquo; pairs.
+A &ldquo;Test&rdquo; describes something to look for. If the test matches, the
+&ldquo;Output&rdquo; is printed.</p>
+<p>Here&rsquo;s what a line might look like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">0   string      Draw        RISC OS Draw file data
+</code></pre></div><p>The first 3 columns are the &ldquo;Test&rdquo; and the final column is the
+&ldquo;Output&rdquo;. This line specifies that at if the <em>string</em> at position <em>0</em>
+in the file matches the constant string <em>Draw</em>, then show <em>RISC OS
+Draw file data</em> as the file type.</p>
+<p>To make things easier for the people maintaining the database, the
+database supports nesting tests. That is, a test can say that it only
+applies if the previous test matched.</p>
+<p>Here&rsquo;s an example of a test and a nested test:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">0   belong      0xcafebabe
+&gt;4  belong      &gt;30     compiled Java class data,
+</code></pre></div><p>The first line is a test that can always be performed. The second line
+contains a test that should only be performed if the first test is
+successful, indicated by a &ldquo;&gt;&rdquo; in the beginning of the line.</p>
+<p>The first test here says: does the <em>big-endian long</em> at file position <em>0</em>
+match the constant <code>0xcafebabe</code>. There&rsquo;s no output column, so it
+doesn&rsquo;t do anything directly if it&rsquo;s successful.</p>
+<p>However, if the test is successful, the nested test runs. The nested
+test in this example checks if the <em>big-endian long</em> at position <em>4</em> in
+the file is <em>greater than 30</em>. If that&rsquo;s true, print <em>compiled Java
+class data</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
+<p><code>man 5 magic</code> contains extensive documentation that covers all the
+syntax and options available if you want to learn about this in more
+detail.</p>
+<h2 id="a-real-life-bug">a real life bug</h2>
+<p>Now that you know all this background, see if you can follow along
+this real life &ldquo;bug&rdquo;.</p>
+<p>As part of releasing .NET Core this week, one of the tools in our
+release pipeline flagged an error saying the type of a particular file
+had changed. The error looked something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"> file type changed for Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt:
+<span style="color:#f92672">-ASCII text
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+Message Sequence Chart (chart)
+</span></code></pre></div><p>The error is telling us that the file type changed from <em>ASCII text</em>
+to <em>Message Sequence Chart (chart)</em>.</p>
+<p>That error looks bogus. It&rsquo;s a text file. The extension is <code>.txt</code>.</p>
+<p>The contents look like plain text too:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ head Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt
+mscorlib.dll|Microsoft.NETCore.App.Ref|4.0.0.0|4.700.19.56404
+System.IO.Compression.Native.a|Microsoft.NETCore.App.Ref||0.0.0.0
+System.IO.Compression.Native.so|Microsoft.NETCore.App.Ref||0.0.0.0
+</code></pre></div><p>So why is <code>file</code> saying this is a Message Sequence Chart? Let&rsquo;s see if
+we can find an answer.</p>
+<p>We know what algorithm <code>file</code> uses. So we will walk through it.</p>
+<p>First, <code>file</code> will check if it&rsquo;s a special file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ stat -c <span style="color:#e6db74">&#39;%F&#39;</span> Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt
+regular file
+</code></pre></div><p>That confirms that this is a normal file.</p>
+<p>Next, <code>file</code> will use <code>magic</code> to guess the file type. Does the <code>magic</code>
+database include this file type?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ grep <span style="color:#e6db74">&#39;Message Sequence Chart&#39;</span> /usr/share/magic
+<span style="color:#ae81ff">0</span>       string          mscdocument     Message Sequence Chart <span style="color:#f92672">(</span>document<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">0</span>       string          msc             Message Sequence Chart <span style="color:#f92672">(</span>chart<span style="color:#f92672">)</span>
+<span style="color:#ae81ff">0</span>       string          submsc          Message Sequence Chart <span style="color:#f92672">(</span>subchart<span style="color:#f92672">)</span>
+</code></pre></div><p>Aha! It does.</p>
+<p>For this set of tests, <code>magic</code> looks at the string at position 0 and
+if it matches with <code>msc</code> (or <code>mscdocument</code>, or <code>submsc</code>), it thinks
+this is a Message Sequence Chart.</p>
+<p>If you recall, the first line of the text file was:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ head Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt
+mscorlib.dll|Microsoft.NETCore.App.Ref|4.0.0.0|4.700.19.56404
+</code></pre></div><p>The first few bytes of the file incorrectly match with <em>msc</em>. <code>magic</code>
+and <code>file</code> see the match and think this file is a <em>Message Sequence
+Chart (chart)</em>.</p>
+<p>This was clearly a false alarm from <code>file</code> (and our tooling). We
+ignored it.</p>
+<h1 id="closing-thoughts">closing thoughts</h1>
+<p>Hopefully, you now have a good idea of how <code>file</code> and <code>magic</code> work.</p>
+<p>You now have a good starting point to use and debug these tools if you
+ever need to.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The <code>thing(number)</code> convention is pretty common in Unix/Linux
+documentation. The <code>thing</code> part indicates the name of the concept.
+The <code>number</code> indicates the type of the thing as well as the
+section number of man pages where this thing is documented. For
+example, someone can be talking about <code>exec(1p)</code> and <code>exec(3)</code>. By
+<code>exec(1p)</code> they mean the one that is documented in section 1:
+Executable programs. So <code>exec(1p)</code> is the <code>exec</code> program. By
+<code>exec(3)</code> they mean the one that is documented in section 3:
+Library calls. So <code>exec(3)</code> is a library call. You can read the
+manual pages of a particular version by running <code>man 1p exec</code> or
+<code>man 3 exec</code>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>If you do patch the database to fix a bug, please contribute the
+change back upstream. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>It turns out that Java class files and MACH executables use the
+same first sequence of bytes in the file (<code>0xcafebabe</code>). The next
+set of bytes can be used to guess whether this is Java class file
+or a MACH executable. Java class files have the class file version
+here, which is closer to 50. MACH executables use a much lower
+value. That&rsquo;s why the first test here for <code>0xcafebabe</code> doesn&rsquo;t
+print anything: at this point, <code>magic</code> doesn&rsquo;t have enough
+information to claim if this is Java or not. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+</div>
+<div class="tags">
+
+
+
+
+
+
+
+<div class="taxosfloating_left">
+<p>Categories</p>
+</div>
+<div class="termsfloating_right">
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="/categories/tools/"> tools </a>
+
+
+
+</div>
+<div class="clearit"></div>
+
+
+
+
+
+
+
+
+
+<div class="taxosfloating_left">
+<p>Tags</p>
+</div>
+<div class="termsfloating_right">
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="/tags/linux/"> linux </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="/tags/tools/"> tools </a>
+
+
+
+
+
+<a href="/tags/unix/"> unix </a>
+
+
+
+</div>
+<div class="clearit"></div>
+
+
+
+
+
+</div></div>
+
+</main><footer>
+ © Omair Majid 2011 - 2020 | <a href="/about/">License</a> 
+
+
+    
+
+</footer>
+</body>
+</html>

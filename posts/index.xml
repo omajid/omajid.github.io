@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© Omair Majid 2011 - 2020 | License</copyright>
-    <lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://omajid.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    <item>
+      <title>The magic of file</title>
+      <link>https://omajid.github.io/posts/2020-06-10-magic-of-file/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2020-06-10-magic-of-file/</guid>
+      <description>
+      
+      Ever wonder how file(1)1 works?
+I did. Then I went digging into it.
+file Using the file tool is quite simple. It’s...
+      
+      </description>
+    </item>
     <item>
       <title>What is nuget restore doing?</title>
       <link>https://omajid.github.io/posts/2020-05-29-what-nuget-sources/</link>

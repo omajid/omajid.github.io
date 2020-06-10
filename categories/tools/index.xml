@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tools on Omair Majid</title>
+    <link>https://omajid.github.io/categories/tools/</link>
+    <description>Recent content in tools on omajid.github.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© Omair Majid 2011 - 2020 | License</copyright>
+    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+    <atom:link href="https://omajid.github.io/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The magic of file</title>
+      <link>https://omajid.github.io/posts/2020-06-10-magic-of-file/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://omajid.github.io/posts/2020-06-10-magic-of-file/</guid>
+      <description>
+      
+      Ever wonder how file(1)1 works?
+I did. Then I went digging into it.
+file Using the file tool is quite simple. It’s...
+      
+      </description>
+    </item>
+    
+  </channel>
+</rss>
