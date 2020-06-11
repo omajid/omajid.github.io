@@ -7,9 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Omair Majid"><meta name="keywords" content="unix,linux,tools"><meta property="og:title" content="The magic of file" />
 <meta property="og:description" content="Ever wonder how file(1)1 works?
-I did. Then I went digging into it.
+After reading this post, you should understand all about file and it&rsquo;s underlying tool, magic.
 file Using the file tool is quite simple. It&rsquo;s just file file-name-1. You can call it with multiple arguments too. Here&rsquo;s a few examples of running it on my system.
-$ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg image.jpg: JPEG image data, Exif standard: [TIFF image data, big-endian, direntries=7 ...orientation=upper-left, datetime=2019:10:30 21:44:30, width=1740], baseline, precision 8, 2017x961, components 3 $ file video." />
+$ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg image.jpg: JPEG image data, Exif standard: [TIFF image data, big-endian, direntries=7 ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://omajid.github.io/posts/2020-06-10-magic-of-file/" />
 <meta property="article:published_time" content="2020-06-10T00:00:00+00:00" />
@@ -17,9 +17,9 @@ $ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg ima
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="The magic of file"/>
 <meta name="twitter:description" content="Ever wonder how file(1)1 works?
-I did. Then I went digging into it.
+After reading this post, you should understand all about file and it&rsquo;s underlying tool, magic.
 file Using the file tool is quite simple. It&rsquo;s just file file-name-1. You can call it with multiple arguments too. Here&rsquo;s a few examples of running it on my system.
-$ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg image.jpg: JPEG image data, Exif standard: [TIFF image data, big-endian, direntries=7 ...orientation=upper-left, datetime=2019:10:30 21:44:30, width=1740], baseline, precision 8, 2017x961, components 3 $ file video."/>
+$ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg image.jpg: JPEG image data, Exif standard: [TIFF image data, big-endian, direntries=7 ."/>
 
   <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/normalize.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="https://omajid.github.io/css/main.css" />
@@ -75,10 +75,11 @@ $ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg ima
 </div>
 <div class="markdown">
 <p>Ever wonder how <code>file(1)</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> works?</p>
-<p>I did. Then I went digging into it.</p>
+<p>After reading this post, you should understand all about <code>file</code> and
+it&rsquo;s underlying tool, <code>magic</code>.</p>
 <h2 id="file">file</h2>
-<p>Using the file tool is quite simple. It&rsquo;s just <code>file file-name-1</code>. You
-can call it with multiple arguments too. Here&rsquo;s a few examples of
+<p>Using the <code>file</code> tool is quite simple. It&rsquo;s just <code>file file-name-1</code>.
+You can call it with multiple arguments too. Here&rsquo;s a few examples of
 running it on my system.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ file document.pdf
 document.pdf: PDF document, version 1.4
@@ -100,9 +101,9 @@ $ file /dev/video0
 extensions) to figure out the file type.</p>
 </li>
 <li>
-<p>It understands and can extract extra information from the file, not
-just the file type. You can see that it understands versions for
-mp4 and jpeg files.</p>
+<p>It understands file formats in some detail. It can extract extra
+information from the file itself. You can see that it understands
+versions for mp4 and jpeg files.</p>
 </li>
 <li>
 <p>It knows about special files like devices.</p>
@@ -190,8 +191,8 @@ class data</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-
 syntax and options available if you want to learn about this in more
 detail.</p>
 <h2 id="a-real-life-bug">a real life bug</h2>
-<p>Now that you know all this background, see if you can follow along
-this real life &ldquo;bug&rdquo;.</p>
+<p>Now that you know have a good understanding of <code>file</code> and <code>magic</code>,
+lets see how you can use that to figure out a real life &ldquo;bug&rdquo;.</p>
 <p>As part of releasing .NET Core this week, one of the tools in our
 release pipeline flagged an error saying the type of a particular file
 had changed. The error looked something like this:</p>
@@ -209,20 +210,21 @@ System.IO.Compression.Native.so|Microsoft.NETCore.App.Ref||0.0.0.0
 </code></pre></div><p>So why is <code>file</code> saying this is a Message Sequence Chart? Let&rsquo;s see if
 we can find an answer.</p>
 <p>We know what algorithm <code>file</code> uses. So we will walk through it.</p>
-<p>First, <code>file</code> will check if it&rsquo;s a special file.</p>
+<p>First, <code>file</code> will check if it&rsquo;s a special file. We can use <code>stat</code> to
+find out what if that&rsquo;s true.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ stat -c <span style="color:#e6db74">&#39;%F&#39;</span> Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt
 regular file
-</code></pre></div><p>That confirms that this is a normal file.</p>
-<p>Next, <code>file</code> will use <code>magic</code> to guess the file type. Does the <code>magic</code>
-database include this file type?</p>
+</code></pre></div><p>Here, <code>stat</code> confirms that this is regular file.</p>
+<p>Next, <code>file</code> will use <code>magic</code> to guess the file type.</p>
+<p>Does the <code>magic</code> database know about this file type at all?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ grep <span style="color:#e6db74">&#39;Message Sequence Chart&#39;</span> /usr/share/magic
 <span style="color:#ae81ff">0</span>       string          mscdocument     Message Sequence Chart <span style="color:#f92672">(</span>document<span style="color:#f92672">)</span>
 <span style="color:#ae81ff">0</span>       string          msc             Message Sequence Chart <span style="color:#f92672">(</span>chart<span style="color:#f92672">)</span>
 <span style="color:#ae81ff">0</span>       string          submsc          Message Sequence Chart <span style="color:#f92672">(</span>subchart<span style="color:#f92672">)</span>
 </code></pre></div><p>Aha! It does.</p>
-<p>For this set of tests, <code>magic</code> looks at the string at position 0 and
-if it matches with <code>msc</code> (or <code>mscdocument</code>, or <code>submsc</code>), it thinks
-this is a Message Sequence Chart.</p>
+<p>For this set of tests, <code>magic</code> looks at the <em>string</em> at position <em>0</em>
+and if it matches with <em>msc</em> (or <em>mscdocument</em>, or <em>submsc</em>), it
+thinks this is a <em>Message Sequence Chart</em>.</p>
 <p>If you recall, the first line of the text file was:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ head Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt
 mscorlib.dll|Microsoft.NETCore.App.Ref|4.0.0.0|4.700.19.56404
@@ -232,9 +234,8 @@ Chart (chart)</em>.</p>
 <p>This was clearly a false alarm from <code>file</code> (and our tooling). We
 ignored it.</p>
 <h1 id="closing-thoughts">closing thoughts</h1>
-<p>Hopefully, you now have a good idea of how <code>file</code> and <code>magic</code> work.</p>
-<p>You now have a good starting point to use and debug these tools if you
-ever need to.</p>
+<p>Hopefully, you now have a good idea of how <code>file</code> and <code>magic</code> work.
+You also have a good starting point to use and debug these tools if</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
