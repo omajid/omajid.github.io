@@ -160,17 +160,17 @@ While the other checks are fairly static, you can examine the <code>magic</code>
 database see how <code>file</code> works. You can even modify the database
 manually to fix bugs<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> in <code>file</code>!</p>
 <h2 id="magic">magic</h2>
-<p>The <code>magic</code> database (often at <code>/usr/share/magic</code>) is a plain text
-file. You can view it in your favourite editor.</p>
-<p><code>/usr/share/magic</code> contains a really series of &ldquo;(Test, Output)&rdquo; pairs.
-A &ldquo;Test&rdquo; describes something to look for. If the test matches, the
-&ldquo;Output&rdquo; is printed.</p>
+<p>The <code>magic</code> database is a plain text file. It is often located at
+<code>/usr/share/magic</code>. You can view it in your favourite editor.</p>
+<p><code>/usr/share/magic</code> contains a series of test-and-output lines. A test
+describes something to look for. If the test matches, the output is
+printed.</p>
 <p>Here&rsquo;s what a line might look like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">0   string      Draw        RISC OS Draw file data
-</code></pre></div><p>The first 3 columns are the &ldquo;Test&rdquo; and the final column is the
-&ldquo;Output&rdquo;. This line specifies that at if the <em>string</em> at position <em>0</em>
-in the file matches the constant string <em>Draw</em>, then show <em>RISC OS
-Draw file data</em> as the file type.</p>
+</code></pre></div><p>The first 3 columns are the test and the final column is the output.</p>
+<p>This line specifies that at if the <em>string</em> at position <em>0</em> in the
+file matches the constant string <em>Draw</em>, then show <em>RISC OS Draw file
+data</em> as the file type.</p>
 <p>To make things easier for the people maintaining the database, the
 database supports nesting tests. That is, a test can say that it only
 applies if the previous test matched.</p>
