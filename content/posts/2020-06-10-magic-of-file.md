@@ -8,12 +8,13 @@ tags = ["unix", "linux", "tools"]
 
 Ever wonder how `file(1)`[^1] works?
 
-I did. Then I went digging into it.
+After reading this post, you should understand all about `file` and
+it's underlying tool, `magic`.
 
 ## file
 
-Using the file tool is quite simple. It's just `file file-name-1`. You
-can call it with multiple arguments too. Here's a few examples of
+Using the `file` tool is quite simple. It's just `file file-name-1`.
+You can call it with multiple arguments too. Here's a few examples of
 running it on my system.
 
 ```shell
@@ -36,9 +37,9 @@ You can already see a few things:
 2. It tries to examine the contents of the file (not just the
    extensions) to figure out the file type.
 
-3. It understands and can extract extra information from the file, not
-   just the file type. You can see that it understands versions for
-   mp4 and jpeg files.
+3. It understands file formats in some detail. It can extract extra
+   information from the file itself. You can see that it understands
+   versions for mp4 and jpeg files.
 
 4. It knows about special files like devices.
 
@@ -146,8 +147,8 @@ detail.
 
 ## a real life bug
 
-Now that you know all this background, see if you can follow along
-this real life "bug".
+Now that you know have a good understanding of `file` and `magic`,
+lets see how you can use that to figure out a real life "bug".
 
 As part of releasing .NET Core this week, one of the tools in our
 release pipeline flagged an error saying the type of a particular file
@@ -178,17 +179,19 @@ we can find an answer.
 
 We know what algorithm `file` uses. So we will walk through it.
 
-First, `file` will check if it's a special file.
+First, `file` will check if it's a special file. We can use `stat` to
+find out what if that's true.
 
 ```shell
 $ stat -c '%F' Microsoft.NETCore.App.Ref/3.1.0/data/PlatformManifest.txt
 regular file
 ```
 
-That confirms that this is a normal file.
+Here, `stat` confirms that this is regular file.
 
-Next, `file` will use `magic` to guess the file type. Does the `magic`
-database include this file type?
+Next, `file` will use `magic` to guess the file type.
+
+Does the `magic` database know about this file type at all?
 
 ```shell
 $ grep 'Message Sequence Chart' /usr/share/magic
@@ -199,9 +202,9 @@ $ grep 'Message Sequence Chart' /usr/share/magic
 
 Aha! It does.
 
-For this set of tests, `magic` looks at the string at position 0 and
-if it matches with `msc` (or `mscdocument`, or `submsc`), it thinks
-this is a Message Sequence Chart.
+For this set of tests, `magic` looks at the *string* at position *0*
+and if it matches with *msc* (or *mscdocument*, or *submsc*), it
+thinks this is a *Message Sequence Chart*.
 
 If you recall, the first line of the text file was:
 
@@ -220,9 +223,8 @@ ignored it.
 # closing thoughts
 
 Hopefully, you now have a good idea of how `file` and `magic` work.
+You also have a good starting point to use and debug these tools if
 
-You now have a good starting point to use and debug these tools if you
-ever need to.
 
 [^1]: The `thing(number)` convention is pretty common in Unix/Linux
     documentation. The `thing` part indicates the name of the concept.
