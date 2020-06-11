@@ -9,7 +9,7 @@ tags = ["unix", "linux", "tools"]
 Ever wonder how `file(1)`[^1] works?
 
 After reading this post, you should understand all about `file` and
-it's underlying tool, `magic`.
+its underpinnings.
 
 ## file
 
