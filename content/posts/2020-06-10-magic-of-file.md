@@ -99,12 +99,12 @@ manually to fix bugs[^2] in `file`!
 
 ## magic
 
-The `magic` database (often at `/usr/share/magic`) is a plain text
-file. You can view it in your favourite editor.
+The `magic` database is a plain text file. It is often located at
+`/usr/share/magic`. You can view it in your favourite editor.
 
-`/usr/share/magic` contains a really series of "(Test, Output)" pairs.
-A "Test" describes something to look for. If the test matches, the
-"Output" is printed.
+`/usr/share/magic` contains a series of test-and-output lines. A test
+describes something to look for. If the test matches, the output is
+printed.
 
 Here's what a line might look like:
 
@@ -112,10 +112,11 @@ Here's what a line might look like:
 0   string      Draw        RISC OS Draw file data
 ```
 
-The first 3 columns are the "Test" and the final column is the
-"Output". This line specifies that at if the *string* at position *0*
-in the file matches the constant string *Draw*, then show *RISC OS
-Draw file data* as the file type.
+The first 3 columns are the test and the final column is the output.
+
+This line specifies that at if the *string* at position *0* in the
+file matches the constant string *Draw*, then show *RISC OS Draw file
+data* as the file type.
 
 To make things easier for the people maintaining the database, the
 database supports nesting tests. That is, a test can say that it only
