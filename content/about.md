@@ -3,10 +3,13 @@ title = "About"
 author = "Omair Majid"
 +++
 
-Hi, I am Omair Majid. I am a software engineer who spends most of his
-time contributing to open source projects like [.NET
-Core](https://github.com/dotnet/core),
-[OpenJDK](http://openjdk.java.net/) and others.
+Hi, I am Omair Majid. I am a software engineer who works with open
+source languages, runtimes and projects like [.NET
+Core](https://github.com/dotnet/core) and
+[OpenJDK](http://openjdk.java.net/). I am passionate about making sure
+these runtimes are well-maintained, secure, perform well, and stay
+compatible with the rest of the ecosystem on Linux, whether it's
+bare-metal or in the form of containers.
 
 I am a package maintainer in [Fedora](http://www.fedoraproject.org). I
 am part of the [Fedora .NET Special Interest
@@ -14,17 +17,26 @@ Group](https://fedoraproject.org/wiki/SIGs/DotNet). I am also the
 current maintainer of several packages in [Red Hat Enterprise
 Linux](http://www.redhat.com/rhel/).
 
+All opinions are my own. They may or may not reflect the opinions of
+any employers (past, present or future).
+
 ### Contact
 
 - Email: [omair.majid@gmail.com](mailto:omair.majid@gmail.com)
-- Github: `@omajid`
-- Gitlab: `@omajid`
-- Gitter: `@omajid`
+- Github: [`@omajid`](https://github.com/omajid)
+- Gitlab: [`@omajid`](https://gitlab.com/omajid)
 - IRC: `omajid` on irc.freenode.net and OFTC
-- Reddit: `omair-majid`
-- StackOverflow: `omajid`
+- Reddit: [`omair-majid`](https://reddit.com/u/omair-majid)
+- StackOverflow: [`omajid`](https://stackoverflow.com/users/3561275/)
 
 My GPG fingerprint is `9DB5 2F0B FD3E C239 E108  E7BD DF99 7AF8 B157 A9F0`.
+
+### Projects
+
+I maintain some emacs packages:
+
+- [csproj-mode](https://github.com/omajid/csproj-mode): a major mode
+  for working with `.csproj` and other .NET project types.
 
 ### Talks
 

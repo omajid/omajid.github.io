@@ -10,7 +10,7 @@ public/:
 
 .PHONY: serve-local
 serve-local:
-	hugo server -D
+	hugo server --buildDrafts --buildFuture
 
 .PHONY: publish-locally
 publish-locally: public/
