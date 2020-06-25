@@ -14,7 +14,6 @@ serve-local:
 
 .PHONY: publish-locally
 publish-locally: public/
-	# FIXME abort on dirty repo
 	rm -rf public/*
 	hugo
 	cd public && \
