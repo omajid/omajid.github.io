@@ -9,10 +9,8 @@ tags = [ ]
 
 # Prep
 
-- What is my goal?
-
+- What is my goal? What does "success" here look like?
 - Who is the target audience?
-
 - What constitues a good post?
 
 # Outline

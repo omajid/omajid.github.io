@@ -88,7 +88,7 @@ this as a single variable named `filename_2020`. It would treat it as
 if you had written `cat ${filename_2020}.txt`.
 
 Using the `${name}` notation also lets us perform a number of actions,
-such as doing a regular expression replace. The [Bash Hackers's
+such as doing a regular expression replace. The [Bash Hackers
 Wiki](https://wiki.bash-hackers.org/) has [a great reference on what
 these difference types of these actions
 are](https://wiki.bash-hackers.org/syntax/pe)
@@ -123,7 +123,7 @@ declare variable
 # declare an array named days_of_week
 declare -a days_of_week
 
-# declare that the variable ten has the readonly value 10
+# declare that the variable ten has the read-only value 10
 declare -r ten=10
 ```
 
@@ -257,7 +257,7 @@ This is why you will often see shell configuration asking to add
 things to your `~/.profile` file and use snippets like this:
 
 ```bash
-# PATH is already a well known and already-initizized environment variable
+# PATH is already a well known and already-initialized environment variable
 # No need to export it
 PATH=$PATH:$HOME/path/where/you/installed/program
 
@@ -298,20 +298,20 @@ This runs `make` with the environment variable `CC` set to the value
 `gcc`. In turn, `make` understands this to mean that `make` should use
 `gcc` as the c compiler.
 
-Lets go back to the example we saw earlier in the section about
+Let's go back to the example we saw earlier in the section about
 defining variables (not environment variables) with extra spaces.
 
 ```bash
 var= value
 ```
 
-You can now see that this runs the program `value` with the
+You can now see that why this runs the program `value` with the
 *environment variable* `var` set to the empty value.
 
 ## Summary
 
 You should now have a really good idea about what bash variables and
-environment variables are, how the differ, and when you migt want to
+environment variables are, how they differ, and when you might want to
 use them.
 
 This post was inspired by [this StackOverflow
