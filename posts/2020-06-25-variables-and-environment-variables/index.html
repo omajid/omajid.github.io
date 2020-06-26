@@ -122,7 +122,7 @@ to write this as <code>cat $filename_2020.txt</code>, <code>bash</code> would un
 this as a single variable named <code>filename_2020</code>. It would treat it as
 if you had written <code>cat ${filename_2020}.txt</code>.</p>
 <p>Using the <code>${name}</code> notation also lets us perform a number of actions,
-such as doing a regular expression replace. The <a href="https://wiki.bash-hackers.org/">Bash Hackers&rsquo;s
+such as doing a regular expression replace. The <a href="https://wiki.bash-hackers.org/">Bash Hackers
 Wiki</a> has <a href="https://wiki.bash-hackers.org/syntax/pe">a great reference on what
 these difference types of these actions
 are</a></p>
@@ -146,7 +146,7 @@ declare variable
 <span style="color:#75715e"># declare an array named days_of_week</span>
 declare -a days_of_week
 
-<span style="color:#75715e"># declare that the variable ten has the readonly value 10</span>
+<span style="color:#75715e"># declare that the variable ten has the read-only value 10</span>
 declare -r ten<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
 </code></pre></div><p>However, <code>declare</code> is often optional. You can just define the value
 and <code>declare</code> is only needed if the value would normally be understood
@@ -246,7 +246,7 @@ export PATH<span style="color:#f92672">=</span>$PATH:$HOME/bin
 PATH<span style="color:#f92672">=</span>$PATH:$HOME/bin
 </code></pre></div><p>This is why you will often see shell configuration asking to add
 things to your <code>~/.profile</code> file and use snippets like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># PATH is already a well known and already-initizized environment variable</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># PATH is already a well known and already-initialized environment variable</span>
 <span style="color:#75715e"># No need to export it</span>
 PATH<span style="color:#f92672">=</span>$PATH:$HOME/path/where/you/installed/program
 
@@ -270,14 +270,14 @@ for the <code>program</code>.</p>
 </code></pre></div><p>This runs <code>make</code> with the environment variable <code>CC</code> set to the value
 <code>gcc</code>. In turn, <code>make</code> understands this to mean that <code>make</code> should use
 <code>gcc</code> as the c compiler.</p>
-<p>Lets go back to the example we saw earlier in the section about
+<p>Let&rsquo;s go back to the example we saw earlier in the section about
 defining variables (not environment variables) with extra spaces.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">var<span style="color:#f92672">=</span> value
-</code></pre></div><p>You can now see that this runs the program <code>value</code> with the
+</code></pre></div><p>You can now see that why this runs the program <code>value</code> with the
 <em>environment variable</em> <code>var</code> set to the empty value.</p>
 <h2 id="summary">Summary</h2>
 <p>You should now have a really good idea about what bash variables and
-environment variables are, how the differ, and when you migt want to
+environment variables are, how they differ, and when you might want to
 use them.</p>
 <p>This post was inspired by <a href="https://stackoverflow.com/q/62502977/3561275">this StackOverflow
 question</a></p>
