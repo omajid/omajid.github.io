@@ -202,7 +202,11 @@
   </url>
   
   <url>
-    <loc>https://omajid.github.io/series/</loc>
+    <loc>https://omajid.github.io/projects/</loc>
+  </url>
+  
+  <url>
+    <loc>https://omajid.github.io/talks/</loc>
   </url>
   
 </urlset>
