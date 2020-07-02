@@ -3,18 +3,23 @@ title = "About"
 author = "Omair Majid"
 +++
 
-Hi, I am Omair Majid. I am a software engineer who works with open
+Hi, I am Omair Majid.
+
+I am a Principal Software Engineer at Red Hat who works with open
 source languages, runtimes and projects like [.NET
 Core](https://github.com/dotnet/core) and
-[OpenJDK](http://openjdk.java.net/). I am passionate about making sure
-these runtimes are well-maintained, secure, perform well, and stay
-compatible with the rest of the ecosystem on Linux, whether it's
-bare-metal or in the form of containers.
+[OpenJDK](http://openjdk.java.net/).
+
+I am passionate about making sure these runtimes are well-maintained,
+secure, perform well, and stay compatible with the rest of the
+ecosystem on Linux, whether it's in the context of a containers
+running in the cloud (such as Kubernetes) or bare-metal.
 
 I am a package maintainer in [Fedora](http://www.fedoraproject.org). I
-am part of the [Fedora .NET Special Interest
-Group](https://fedoraproject.org/wiki/SIGs/DotNet). I am also the
-current maintainer of several packages in [Red Hat Enterprise
+am a member of the [Fedora .NET Special Interest Group
+(SIG)](https://fedoraproject.org/wiki/SIGs/DotNet); I maintain .NET
+Core packages in Fedora as part of the SIG. I am also the current
+maintainer of some packages in [Red Hat Enterprise
 Linux](http://www.redhat.com/rhel/).
 
 All opinions are my own. They may or may not reflect the opinions of
@@ -30,37 +35,6 @@ any employers (past, present or future).
 - StackOverflow: [`omajid`](https://stackoverflow.com/users/3561275/)
 
 My GPG fingerprint is `9DB5 2F0B FD3E C239 E108  E7BD DF99 7AF8 B157 A9F0`.
-
-### Projects
-
-I maintain some emacs packages:
-
-- [csproj-mode](https://github.com/omajid/csproj-mode): a major mode
-  for working with `.csproj` and other .NET project types.
-
-### Talks
-
-- [.NET Core: Versions and
-  Components](https://www.youtube.com/watch?v=FnlSBBEqACM), Red Hat
-  Summit, 2017
-
-- [Monitoring Java Application Performance Using
-  Thermostat](https://www.youtube.com/watch?v=dRe0A1smpyM), Red Hat
-  Summit, 2017
-
-- [Analyzing Java Applications Using
-  Thermostat](https://www.youtube.com/watch?v=JOrwMm2Y7Rc), DevNation/Red Hat
-  Summit, 2016
-
-- [Analyzing Java Applications using
-  Thermostat](https://www.youtube.com/watch?v=jwCc9yIufvQ), FSOSS, 2015
-
-- [Diagnosing Performance Issues with
-  Thermostat](https://www.youtube.com/watch?v=CxuR1tBHR_o), Java One, 2015
-
-- [Java Performance Monitoring
-  Tools](https://www.youtube.com/watch?v=CxuR1tBHR_o), Toronto Java
-  Users Group, 2013
 
 ### License
 

@@ -225,6 +225,7 @@ ignored it.
 
 Hopefully, you now have a good idea of how `file` and `magic` work.
 You also have a good starting point to use and debug these tools if
+you never need to.
 
 
 [^1]: The `thing(number)` convention is pretty common in Unix/Linux

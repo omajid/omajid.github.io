@@ -10,9 +10,8 @@ copyright = "© Omair Majid 2011 - 2020 | [License](/about/)"
   avatar = "https://github.com/omajid.png"
 
 [taxonomies]
-  tags = "tags"
+  tag = "tags"
   category = "categories"
-  series = "series"  # what is this??
 
 [[menu.main]]
   name = "Home"
@@ -25,9 +24,19 @@ copyright = "© Omair Majid 2011 - 2020 | [License](/about/)"
   weight = 2
 
 [[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 3
+
+[[menu.main]]
+  name = "Talks"
+  url = "/talks/"
+  weight = 4
+
+[[menu.main]]
   name = "About"
   url = "/about/"
-  weight = 3
+  weight = 5
 
 [[params.social]]
   name = "Email"
