@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linux on Omair Majid</title>
-    <link>https://omajid.github.io/tags/linux/</link>
-    <description>Recent content in linux on omajid.github.io</description>
+    <link>https://omairmajid.com/tags/linux/</link>
+    <description>Recent content in linux on omairmajid.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© Omair Majid 2011 - 2020 | License</copyright>
     <lastBuildDate>Thu, 25 Jun 2020 00:58:07 -0400</lastBuildDate>
     
-    <atom:link href="https://omajid.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://omairmajid.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Variables and Environment Variables In Bash</title>
-      <link>https://omajid.github.io/posts/2020-06-25-variables-and-environment-variables/</link>
+      <link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
       <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
       
-      <guid>https://omajid.github.io/posts/2020-06-25-variables-and-environment-variables/</guid>
+      <guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
       <description>
       
       Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variabl...
@@ -25,10 +25,10 @@
     </item>
     <item>
       <title>The magic of file</title>
-      <link>https://omajid.github.io/posts/2020-06-10-magic-of-file/</link>
+      <link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
       <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://omajid.github.io/posts/2020-06-10-magic-of-file/</guid>
+      <guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
       <description>
       
       Ever wonder how file(1)1 works?

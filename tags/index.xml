@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Omair Majid</title>
-    <link>https://omajid.github.io/tags/</link>
-    <description>Recent content in Tags on omajid.github.io</description>
+    <link>https://omairmajid.com/tags/</link>
+    <description>Recent content in Tags on omairmajid.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© Omair Majid 2011 - 2020 | License</copyright>
     <lastBuildDate>Thu, 25 Jun 2020 00:58:07 -0400</lastBuildDate>
     
-    <atom:link href="https://omajid.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>bash</title>
-      <link>https://omajid.github.io/tags/bash/</link>
+      <link>https://omairmajid.com/tags/bash/</link>
       <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
       
-      <guid>https://omajid.github.io/tags/bash/</guid>
+      <guid>https://omairmajid.com/tags/bash/</guid>
       <description>
       
       
@@ -25,10 +25,10 @@
     </item>
     <item>
       <title>linux</title>
-      <link>https://omajid.github.io/tags/linux/</link>
+      <link>https://omairmajid.com/tags/linux/</link>
       <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
       
-      <guid>https://omajid.github.io/tags/linux/</guid>
+      <guid>https://omairmajid.com/tags/linux/</guid>
       <description>
       
       
@@ -37,10 +37,10 @@
     </item>
     <item>
       <title>unix</title>
-      <link>https://omajid.github.io/tags/unix/</link>
+      <link>https://omairmajid.com/tags/unix/</link>
       <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
       
-      <guid>https://omajid.github.io/tags/unix/</guid>
+      <guid>https://omairmajid.com/tags/unix/</guid>
       <description>
       
       
@@ -49,10 +49,10 @@
     </item>
     <item>
       <title>tools</title>
-      <link>https://omajid.github.io/tags/tools/</link>
+      <link>https://omairmajid.com/tags/tools/</link>
       <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/tools/</guid>
+      <guid>https://omairmajid.com/tags/tools/</guid>
       <description>
       
       
@@ -61,10 +61,10 @@
     </item>
     <item>
       <title>dotnet</title>
-      <link>https://omajid.github.io/tags/dotnet/</link>
+      <link>https://omairmajid.com/tags/dotnet/</link>
       <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/dotnet/</guid>
+      <guid>https://omairmajid.com/tags/dotnet/</guid>
       <description>
       
       
@@ -73,10 +73,10 @@
     </item>
     <item>
       <title>msbuild</title>
-      <link>https://omajid.github.io/tags/msbuild/</link>
+      <link>https://omairmajid.com/tags/msbuild/</link>
       <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/msbuild/</guid>
+      <guid>https://omairmajid.com/tags/msbuild/</guid>
       <description>
       
       
@@ -85,10 +85,10 @@
     </item>
     <item>
       <title>nuget</title>
-      <link>https://omajid.github.io/tags/nuget/</link>
+      <link>https://omairmajid.com/tags/nuget/</link>
       <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/nuget/</guid>
+      <guid>https://omairmajid.com/tags/nuget/</guid>
       <description>
       
       
@@ -97,10 +97,10 @@
     </item>
     <item>
       <title>fedora</title>
-      <link>https://omajid.github.io/tags/fedora/</link>
+      <link>https://omairmajid.com/tags/fedora/</link>
       <pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/fedora/</guid>
+      <guid>https://omairmajid.com/tags/fedora/</guid>
       <description>
       
       
@@ -109,10 +109,10 @@
     </item>
     <item>
       <title>openjdk</title>
-      <link>https://omajid.github.io/tags/openjdk/</link>
+      <link>https://omairmajid.com/tags/openjdk/</link>
       <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/openjdk/</guid>
+      <guid>https://omairmajid.com/tags/openjdk/</guid>
       <description>
       
       
@@ -121,10 +121,10 @@
     </item>
     <item>
       <title>openjdk9</title>
-      <link>https://omajid.github.io/tags/openjdk9/</link>
+      <link>https://omairmajid.com/tags/openjdk9/</link>
       <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/openjdk9/</guid>
+      <guid>https://omairmajid.com/tags/openjdk9/</guid>
       <description>
       
       
@@ -133,10 +133,10 @@
     </item>
     <item>
       <title>icedtea</title>
-      <link>https://omajid.github.io/tags/icedtea/</link>
+      <link>https://omairmajid.com/tags/icedtea/</link>
       <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/icedtea/</guid>
+      <guid>https://omairmajid.com/tags/icedtea/</guid>
       <description>
       
       
@@ -145,10 +145,10 @@
     </item>
     <item>
       <title>icedtea-web</title>
-      <link>https://omajid.github.io/tags/icedtea-web/</link>
+      <link>https://omairmajid.com/tags/icedtea-web/</link>
       <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/icedtea-web/</guid>
+      <guid>https://omairmajid.com/tags/icedtea-web/</guid>
       <description>
       
       
@@ -157,10 +157,10 @@
     </item>
     <item>
       <title>icedtea6</title>
-      <link>https://omajid.github.io/tags/icedtea6/</link>
+      <link>https://omairmajid.com/tags/icedtea6/</link>
       <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/icedtea6/</guid>
+      <guid>https://omairmajid.com/tags/icedtea6/</guid>
       <description>
       
       
@@ -169,10 +169,10 @@
     </item>
     <item>
       <title>icedtea-web-1.1</title>
-      <link>https://omajid.github.io/tags/icedtea-web-1.1/</link>
+      <link>https://omairmajid.com/tags/icedtea-web-1.1/</link>
       <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
       
-      <guid>https://omajid.github.io/tags/icedtea-web-1.1/</guid>
+      <guid>https://omairmajid.com/tags/icedtea-web-1.1/</guid>
       <description>
       
       
