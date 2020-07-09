@@ -7,10 +7,46 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© Omair Majid 2011 - 2020 | License</copyright>
-    <lastBuildDate>Thu, 25 Jun 2020 00:58:07 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
     
     <atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    <item>
+      <title>glibc</title>
+      <link>https://omairmajid.com/tags/glibc/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      
+      <guid>https://omairmajid.com/tags/glibc/</guid>
+      <description>
+      
+      
+      
+      </description>
+    </item>
+    <item>
+      <title>linux</title>
+      <link>https://omairmajid.com/tags/linux/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      
+      <guid>https://omairmajid.com/tags/linux/</guid>
+      <description>
+      
+      
+      
+      </description>
+    </item>
+    <item>
+      <title>tools</title>
+      <link>https://omairmajid.com/tags/tools/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      
+      <guid>https://omairmajid.com/tags/tools/</guid>
+      <description>
+      
+      
+      
+      </description>
+    </item>
     <item>
       <title>bash</title>
       <link>https://omairmajid.com/tags/bash/</link>
@@ -24,35 +60,11 @@
       </description>
     </item>
     <item>
-      <title>linux</title>
-      <link>https://omairmajid.com/tags/linux/</link>
-      <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
-      
-      <guid>https://omairmajid.com/tags/linux/</guid>
-      <description>
-      
-      
-      
-      </description>
-    </item>
-    <item>
       <title>unix</title>
       <link>https://omairmajid.com/tags/unix/</link>
       <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
       
       <guid>https://omairmajid.com/tags/unix/</guid>
-      <description>
-      
-      
-      
-      </description>
-    </item>
-    <item>
-      <title>tools</title>
-      <link>https://omairmajid.com/tags/tools/</link>
-      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/tags/tools/</guid>
       <description>
       
       
