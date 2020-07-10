@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,tools,glibc"><meta property="og:title" content="What is this GLIBCXX error?" />
+<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,tools,glibc"><meta name="description" content=""><meta property="og:title" content="What is this GLIBCXX error?" />
 <meta property="og:description" content="If you use enteprirse or stable Linux distributions, sooner or later you will see an error like this:
 app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app) Or like this:
 app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app) The application (or library) itself will vary. The path to the libc or libstdc&#43;&#43; might vary too. But the error will always mention that a GLIBCXX or GLIBC version was not found." />
@@ -161,6 +161,13 @@ show the error when run on RHEL 7.</p>
 package meant for a newer version of the
 distribuion</a>. <a href="https://stackoverflow.com/q/48591455/3561275">Or install a python
 package</a>.</p>
+<p>You can check the <code>GLIBC</code> or <code>GLIBCXX</code> versions needed by an
+application or library using <code>readelf</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ readelf --dyn-syms /usr/bin/java | grep GLIBC
+     2: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+     6: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</code></pre></div><p>Here, you can see that this application (<code>java</code>) uses two symbols that
+are versioned as <code>GLIBC_2.2.5</code>.</p>
 <h2 id="how-to-fix-this-error">How to fix this error?</h2>
 <p>The correct way to fix this error is to make sure the Linux
 distribution you are using is compatible with the application (or
@@ -203,8 +210,8 @@ And you have probably spotted some ideas here that are not 100%
 correct.</p>
 <p>There&rsquo;s also some advice that it&rsquo;s okay to simply grab a version of
 <code>glibc</code> from another version of your Linux distribution. That might
-work. It might also completely break your installation. But it might
-also prevent any further updates to <code>glibc</code>/<code>libstdc++</code> via the
+work. It might also completely break your installation. It might also
+prevent any further updates to <code>glibc</code>/<code>libstdc++</code> via the
 distribution&rsquo;s package manager.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>You should now know just enough about symbol versioning and ABI
@@ -365,7 +372,7 @@ correctly resolve these <code>version GLIBC_X.Y not found</code> error messages.
 </div></div>
 
 </main><footer>
- © Omair Majid 2011 - 2020 | <a href="/about/">License</a> 
+ © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
 
 
     

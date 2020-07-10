@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="Omair Majid"><meta property="og:title" content="-Wmisleading-indentation in OpenJDK" />
+<meta name="author" content="Omair Majid"><meta name="description" content=""><meta property="og:title" content="-Wmisleading-indentation in OpenJDK" />
 <meta property="og:description" content="Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. So I built OpenJDK 9 using -Wall to find out.
 First, though, a big heads up: the OpenJDK 9 build selectively enables and disables warnings and turns on -Werorr. There doesn&rsquo;t seem to be a straight- forward way of enabling all compiler warnings everywhere. I ended up patching various makefiles to comment out various DISABLED_WARNINGS* flags." />
 <meta property="og:type" content="article" />
@@ -182,7 +182,7 @@ actual misleading indentation issues in OpenJDK.</p>
 </div></div>
 
 </main><footer>
- © Omair Majid 2011 - 2020 | <a href="/about/">License</a> 
+ © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
 
 
     

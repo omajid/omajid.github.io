@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="Omair Majid"><meta property="og:title" content="OpenJDK and Awesome" />
+<meta name="author" content="Omair Majid"><meta name="description" content=""><meta property="og:title" content="OpenJDK and Awesome" />
 <meta property="og:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
 diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit." />
 <meta property="og:type" content="article" />
@@ -136,7 +136,7 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 </div></div>
 
 </main><footer>
- © Omair Majid 2011 - 2020 | <a href="/about/">License</a> 
+ © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
 
 
     
