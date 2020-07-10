@@ -12,11 +12,11 @@ Core](https://github.com/dotnet/core) and
 
 I am passionate about making sure these runtimes are well-maintained,
 secure, perform well, and stay compatible with the rest of the
-ecosystem on Linux, whether it's in the context of a containers
-running in the cloud (such as Kubernetes) or bare-metal.
+ecosystem on Linux, whether it's in the context of containers running
+in the cloud (such as Kubernetes) or bare-metal.
 
 I am a package maintainer in [Fedora](http://www.fedoraproject.org). I
-am a member of the [Fedora .NET Special Interest Group
+am also a member of the [Fedora .NET Special Interest Group
 (SIG)](https://fedoraproject.org/wiki/SIGs/DotNet); I maintain .NET
 Core packages in Fedora as part of the SIG. I am also the current
 maintainer of some packages in [Red Hat Enterprise

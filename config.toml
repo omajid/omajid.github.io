@@ -2,12 +2,15 @@ baseURL = "https://omairmajid.com/"
 languageCode = "en"
 title = "Omair Majid"
 theme = "vitae"
-copyright = "© Omair Majid 2011 - 2020 | [License](/about/)"
+copyright = "© Omair Majid 2011 - 2020 | [License](/about/) | [Source](https://github.com/omajid/omajid.github.io/tree/blog)"
 
 [params]
   author = "Omair Majid"
+  description = "Omair's announcements, thouughts and code"
   subtitle = "Announcements, thoughts, code and fun"
   avatar = "https://github.com/omajid.png"
+
+  mainSections = ["posts"]
 
 [taxonomies]
   tag = "tags"

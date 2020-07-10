@@ -132,6 +132,18 @@ package meant for a newer version of the
 distribuion](https://askubuntu.com/q/1068763). [Or install a python
 package](https://stackoverflow.com/q/48591455/3561275).
 
+You can check the `GLIBC` or `GLIBCXX` versions needed by an
+application or library using `readelf`:
+
+```shell
+$ readelf --dyn-syms /usr/bin/java | grep GLIBC
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 (3)
+     6: 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)
+```
+
+Here, you can see that this application (`java`) uses two symbols that
+are versioned as `GLIBC_2.2.5`.
+
 ## How to fix this error?
 
 The correct way to fix this error is to make sure the Linux
@@ -185,8 +197,8 @@ correct.
 
 There's also some advice that it's okay to simply grab a version of
 `glibc` from another version of your Linux distribution. That might
-work. It might also completely break your installation. But it might
-also prevent any further updates to `glibc`/`libstdc++` via the
+work. It might also completely break your installation. It might also
+prevent any further updates to `glibc`/`libstdc++` via the
 distribution's package manager.
 
 ## Conclusion
