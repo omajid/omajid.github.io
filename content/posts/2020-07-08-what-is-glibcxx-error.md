@@ -6,9 +6,8 @@ categories = [ "linux" ]
 tags = [ "linux", "tools", "glibc" ]
 +++
 
-If you use enteprirse or stable Linux distributions, sooner or later
+If you use enterprise or stable Linux distributions, sooner or later
 you will see an error like this:
-
 
 ```text
 app: /lib64/libc.so.6: version `GLIBC_3.1.45' not found (required by ./app)
@@ -26,24 +25,29 @@ a `GLIBCXX` or `GLIBC` version was not found.
 
 What can you do to fix it?
 
-## What are glibc and libstdc++ ?
+## What are `glibc` and `libstdc++` ?
 
 A little bit of background will help you understand the underlying
 issue better (and hopefully fix it).
 
-`glibc` is the GNU C library on Linux. It's an implementation of the
-standard C library. Any program written in C will use the standard
-library for things like accessing files and the network, displaying
-messages to the user, working with processes and so on. It's a
-fundamental component of the operating system.
+`glibc` is the [GNU C library](https://www.gnu.org/software/libc/).
+It's an implementation of the standard C library. Any program written
+in C will use the standard library for things like accessing files and
+the network, displaying messages to the user, working with processes
+and so on. It's a fundamental component of the operating system.
 
-There are other C libraries on Linux too, such as `musl`, but `glibc`
-is the most common one.
+Hundreds of applications, libraries, and even other non-C programming
+languages installed on a typical Linux system will make use of the C
+library.
 
-`libstdc++` is similar to `glibc`, but for C++: it's an implementation
-of the standard library for C++. Any program written in C++ will use
-this to implement things in the C++ libraries. Things like threads,
-streams, files, Input/Output and so on.
+There are other C libraries on Linux too, such as
+[`musl`](https://musl.libc.org/), but `glibc` is the most common one.
+
+[`libstdc++`](https://gcc.gnu.org/onlinedocs/libstdc++/) is similar to
+`glibc`, but for C++: it's an implementation of the standard library
+for C++. Any program written in C++ will use this to implement things
+in the C++ libraries. Things like threads, streams, files,
+Input/Output and so on.
 
 There is a [great reddit
 comment](https://www.reddit.com/r/linuxquestions/comments/1tghjd/what_is_the_relationship_between_gcc_libstdc/ce7rteb/)
@@ -98,18 +102,17 @@ libraries and symbol versions, lets go back to the errors:
 app: /lib64/libc.so.6: version `GLIBC_3.1.45' not found (required by ./app)
 ```
 
-This error happens when the dynamic linker tries to load the C library
-(`libc`) for `app`. The runtime linker sees that `app` has a
+This error happens when the runtime linker tries to load the standard
+C library (`libc`) for `app`. The runtime linker sees that `app` has a
 dependency on a symbol and the version `GLIBC_3.1.45` is not found in
 this C library.
-
 
 ```text
 app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by ./app)
 ```
 
-This error happens when the dynamic linker tries to load the C++
-library (`libstdc++`) for `app`. The dynamic linker sees that `app`
+This error happens when the runtime linker tries to load the C++
+library (`libstdc++`) for `app`. The runtime linker sees that `app`
 has a dependency on a symbol and the version `GLIBCXX_3.4.20` of the
 symbol is not found in this C++ library.
 
@@ -122,21 +125,31 @@ versions.
 
 This type of error is easy to run into.
 
-You can run into it if you download a pre-built binary compiled for a
-recent Linux distribution and try and run it on an older Linux
-distribution. For example, an application that targets RHEL 8 will
-show the error when run on RHEL 7.
+1. You downloaded a pre-built binary compiled for a recent Linux
+   distribution and try and run it on an older Linux distribution.
 
-But you can also run into it if you somehow [installed a distribution
-package meant for a newer version of the
-distribuion](https://askubuntu.com/q/1068763). [Or install a python
-package](https://stackoverflow.com/q/48591455/3561275).
+   For example, an application compiled to run on RHEL 8 will show the
+   error when run on RHEL 7. So will a [a python package meant to run
+   on a newer
+   distribution.](https://stackoverflow.com/q/48591455/3561275)
+
+2. You somehow [installed a distribution package meant for a newer
+   version of the distribution](https://askubuntu.com/q/1068763).
+
+3. You downloaded an application that just isn't supported on your
+   distribution.
+
+   For example, you will run into this if you try and run .NET Core on
+   RHEL 5.
+
+The root cause is the same: there's an incompatibility between your
+Operating System and the application or library you want to run.
 
 You can check the `GLIBC` or `GLIBCXX` versions needed by an
 application or library using `readelf`:
 
 ```shell
-$ readelf --dyn-syms /usr/bin/java | grep GLIBC
+$ readelf --dyn-syms /usr/bin/java | grep '@GLIBC'
      2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 (3)
      6: 0000000000000000     0 FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 (3)
 ```
@@ -150,24 +163,28 @@ The correct way to fix this error is to make sure the Linux
 distribution you are using is compatible with the application (or
 library) that's causing this error.
 
+**The application/library does *not* support your Linux distribution**:
+
 If you are using a Linux distribution which is too old and not
 supported by the application, upgrade to a newer one.
 
-For example, if you need to run an application on RHEL 6 that reports
-this error, consider upgrading to RHEL 7 (or RHEL 8) to resolve this
-problem.
+For example, if you need to run an application on RHEL 6 that
+reports this error, consider upgrading to RHEL 7 (or RHEL 8) to
+resolve this problem.
+
+**The application/library does support your Linux distribution**:
 
 If the application/library supports the version of your Linux
-distribution, then it's probably that you got the wrong application or
-library binary. See if you can find a binary download that's
-appropriate for your distribution. .NET Core, for example, supports
-RHEL 6, but has a separate binary download for RHEL 6. The regular
-.NET download supports Linux distributions that are newer than RHEL 6.
+distribution, then you got the wrong application or library binary.
+See if you can find a binary download that's appropriate for your
+distribution. .NET Core, for example, supports RHEL 6, but has a
+separate binary download for RHEL 6. The regular .NET download
+supports Linux distributions that are newer than RHEL 6.
 
 You might also want to file a bug/issue or report it to the
-application/library provider some other way. This will help them
-understand whether there's changes to the downloads and/or
-documentation needed to make it easier to avoid this issue.
+application/library provider some other way. This will let them know
+that they need to change the downloads section and the documentation
+to help their users avoid this issue.
 
 ## Here's how *not* to fix the problem
 
@@ -203,6 +220,12 @@ distribution's package manager.
 
 ## Conclusion
 
-You should now know just enough about symbol versioning and ABI
-compatibility of `glibc` and `libstdc++` to be able to identify and
-correctly resolve these `version GLIBC_X.Y not found` error messages.
+After reading this:
+
+- You should now know what symbol versioning is.
+- How `libc` and `libstdc++` use symbol versioning.
+- What the `version GLIBC_X.Y not found` error messages mean.
+- What are some good ways to fix the errors:
+  - Upgrading your Linux distribution
+  - Using a compatible version of the library
+- Most importantly, how *not* to fix this error!

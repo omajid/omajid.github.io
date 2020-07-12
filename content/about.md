@@ -13,7 +13,7 @@ Core](https://github.com/dotnet/core) and
 I am passionate about making sure these runtimes are well-maintained,
 secure, perform well, and stay compatible with the rest of the
 ecosystem on Linux, whether it's in the context of containers running
-in the cloud (such as Kubernetes) or bare-metal.
+in the cloud (such as Kubernetes and OpenShift) or bare-metal.
 
 I am a package maintainer in [Fedora](http://www.fedoraproject.org). I
 am also a member of the [Fedora .NET Special Interest Group
