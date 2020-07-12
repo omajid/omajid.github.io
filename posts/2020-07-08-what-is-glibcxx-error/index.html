@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Omair Majid"><meta name="keywords" content="linux,tools,glibc"><meta name="description" content=""><meta property="og:title" content="What is this GLIBCXX error?" />
-<meta property="og:description" content="If you use enteprirse or stable Linux distributions, sooner or later you will see an error like this:
+<meta property="og:description" content="If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
 app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app) Or like this:
 app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app) The application (or library) itself will vary. The path to the libc or libstdc&#43;&#43; might vary too. But the error will always mention that a GLIBCXX or GLIBC version was not found." />
 <meta property="og:type" content="article" />
@@ -15,7 +15,7 @@ app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (requ
 <meta property="article:modified_time" content="2020-07-08T20:06:54-04:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="What is this GLIBCXX error?"/>
-<meta name="twitter:description" content="If you use enteprirse or stable Linux distributions, sooner or later you will see an error like this:
+<meta name="twitter:description" content="If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
 app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app) Or like this:
 app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app) The application (or library) itself will vary. The path to the libc or libstdc&#43;&#43; might vary too. But the error will always mention that a GLIBCXX or GLIBC version was not found."/>
 
@@ -76,7 +76,7 @@ app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (requ
 </div>
 </div>
 <div class="markdown">
-<p>If you use enteprirse or stable Linux distributions, sooner or later
+<p>If you use enterprise or stable Linux distributions, sooner or later
 you will see an error like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
 </code></pre></div><p>Or like this:</p>
@@ -85,20 +85,24 @@ you will see an error like this:</p>
 or <code>libstdc++</code> might vary too. But the error will always mention that
 a <code>GLIBCXX</code> or <code>GLIBC</code> version was not found.</p>
 <p>What can you do to fix it?</p>
-<h2 id="what-are-glibc-and-libstdc-">What are glibc and libstdc++ ?</h2>
+<h2 id="what-are-glibc-and-libstdc-">What are <code>glibc</code> and <code>libstdc++</code> ?</h2>
 <p>A little bit of background will help you understand the underlying
 issue better (and hopefully fix it).</p>
-<p><code>glibc</code> is the GNU C library on Linux. It&rsquo;s an implementation of the
-standard C library. Any program written in C will use the standard
-library for things like accessing files and the network, displaying
-messages to the user, working with processes and so on. It&rsquo;s a
-fundamental component of the operating system.</p>
-<p>There are other C libraries on Linux too, such as <code>musl</code>, but <code>glibc</code>
-is the most common one.</p>
-<p><code>libstdc++</code> is similar to <code>glibc</code>, but for C++: it&rsquo;s an implementation
-of the standard library for C++. Any program written in C++ will use
-this to implement things in the C++ libraries. Things like threads,
-streams, files, Input/Output and so on.</p>
+<p><code>glibc</code> is the <a href="https://www.gnu.org/software/libc/">GNU C library</a>.
+It&rsquo;s an implementation of the standard C library. Any program written
+in C will use the standard library for things like accessing files and
+the network, displaying messages to the user, working with processes
+and so on. It&rsquo;s a fundamental component of the operating system.</p>
+<p>Hundreds of applications, libraries, and even other non-C programming
+languages installed on a typical Linux system will make use of the C
+library.</p>
+<p>There are other C libraries on Linux too, such as
+<a href="https://musl.libc.org/"><code>musl</code></a>, but <code>glibc</code> is the most common one.</p>
+<p><a href="https://gcc.gnu.org/onlinedocs/libstdc++/"><code>libstdc++</code></a> is similar to
+<code>glibc</code>, but for C++: it&rsquo;s an implementation of the standard library
+for C++. Any program written in C++ will use this to implement things
+in the C++ libraries. Things like threads, streams, files,
+Input/Output and so on.</p>
 <p>There is a <a href="https://www.reddit.com/r/linuxquestions/comments/1tghjd/what_is_the_relationship_between_gcc_libstdc/ce7rteb/">great reddit
 comment</a>
 that goes into more detail about the relationship between these two
@@ -138,13 +142,13 @@ ABIs</a>!</p>
 <p>Now that you have a bit of a background on the C and C++ standard
 libraries and symbol versions, lets go back to the errors:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
-</code></pre></div><p>This error happens when the dynamic linker tries to load the C library
-(<code>libc</code>) for <code>app</code>. The runtime linker sees that <code>app</code> has a
+</code></pre></div><p>This error happens when the runtime linker tries to load the standard
+C library (<code>libc</code>) for <code>app</code>. The runtime linker sees that <code>app</code> has a
 dependency on a symbol and the version <code>GLIBC_3.1.45</code> is not found in
 this C library.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app)
-</code></pre></div><p>This error happens when the dynamic linker tries to load the C++
-library (<code>libstdc++</code>) for <code>app</code>. The dynamic linker sees that <code>app</code>
+</code></pre></div><p>This error happens when the runtime linker tries to load the C++
+library (<code>libstdc++</code>) for <code>app</code>. The runtime linker sees that <code>app</code>
 has a dependency on a symbol and the version <code>GLIBCXX_3.4.20</code> of the
 symbol is not found in this C++ library.</p>
 <p>In other words, the errors mean that <code>app</code> was linked against an newer
@@ -153,17 +157,31 @@ system is too old and does not provide those symbols with those
 versions.</p>
 <h2 id="how-can-this-happen">How can this happen?</h2>
 <p>This type of error is easy to run into.</p>
-<p>You can run into it if you download a pre-built binary compiled for a
-recent Linux distribution and try and run it on an older Linux
-distribution. For example, an application that targets RHEL 8 will
-show the error when run on RHEL 7.</p>
-<p>But you can also run into it if you somehow <a href="https://askubuntu.com/q/1068763">installed a distribution
-package meant for a newer version of the
-distribuion</a>. <a href="https://stackoverflow.com/q/48591455/3561275">Or install a python
-package</a>.</p>
+<ol>
+<li>
+<p>You downloaded a pre-built binary compiled for a recent Linux
+distribution and try and run it on an older Linux distribution.</p>
+<p>For example, an application compiled to run on RHEL 8 will show the
+error when run on RHEL 7. So will a <a href="https://stackoverflow.com/q/48591455/3561275">a python package meant to run
+on a newer
+distribution.</a></p>
+</li>
+<li>
+<p>You somehow <a href="https://askubuntu.com/q/1068763">installed a distribution package meant for a newer
+version of the distribution</a>.</p>
+</li>
+<li>
+<p>You downloaded an application that just isn&rsquo;t supported on your
+distribution.</p>
+<p>For example, you will run into this if you try and run .NET Core on
+RHEL 5.</p>
+</li>
+</ol>
+<p>The root cause is the same: there&rsquo;s an incompatibility between your
+Operating System and the application or library you want to run.</p>
 <p>You can check the <code>GLIBC</code> or <code>GLIBCXX</code> versions needed by an
 application or library using <code>readelf</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ readelf --dyn-syms /usr/bin/java | grep GLIBC
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ readelf --dyn-syms /usr/bin/java | grep <span style="color:#e6db74">&#39;@GLIBC&#39;</span>
      2: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
      6: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
 </code></pre></div><p>Here, you can see that this application (<code>java</code>) uses two symbols that
@@ -172,21 +190,23 @@ are versioned as <code>GLIBC_2.2.5</code>.</p>
 <p>The correct way to fix this error is to make sure the Linux
 distribution you are using is compatible with the application (or
 library) that&rsquo;s causing this error.</p>
+<p><strong>The application/library does <em>not</em> support your Linux distribution</strong>:</p>
 <p>If you are using a Linux distribution which is too old and not
 supported by the application, upgrade to a newer one.</p>
-<p>For example, if you need to run an application on RHEL 6 that reports
-this error, consider upgrading to RHEL 7 (or RHEL 8) to resolve this
-problem.</p>
+<p>For example, if you need to run an application on RHEL 6 that
+reports this error, consider upgrading to RHEL 7 (or RHEL 8) to
+resolve this problem.</p>
+<p><strong>The application/library does support your Linux distribution</strong>:</p>
 <p>If the application/library supports the version of your Linux
-distribution, then it&rsquo;s probably that you got the wrong application or
-library binary. See if you can find a binary download that&rsquo;s
-appropriate for your distribution. .NET Core, for example, supports
-RHEL 6, but has a separate binary download for RHEL 6. The regular
-.NET download supports Linux distributions that are newer than RHEL 6.</p>
+distribution, then you got the wrong application or library binary.
+See if you can find a binary download that&rsquo;s appropriate for your
+distribution. .NET Core, for example, supports RHEL 6, but has a
+separate binary download for RHEL 6. The regular .NET download
+supports Linux distributions that are newer than RHEL 6.</p>
 <p>You might also want to file a bug/issue or report it to the
-application/library provider some other way. This will help them
-understand whether there&rsquo;s changes to the downloads and/or
-documentation needed to make it easier to avoid this issue.</p>
+application/library provider some other way. This will let them know
+that they need to change the downloads section and the documentation
+to help their users avoid this issue.</p>
 <h2 id="heres-how-not-to-fix-the-problem">Here&rsquo;s how <em>not</em> to fix the problem</h2>
 <p>There&rsquo;s a some bad advice on how to fix this issue. Please do not
 follow it.</p>
@@ -214,9 +234,19 @@ work. It might also completely break your installation. It might also
 prevent any further updates to <code>glibc</code>/<code>libstdc++</code> via the
 distribution&rsquo;s package manager.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>You should now know just enough about symbol versioning and ABI
-compatibility of <code>glibc</code> and <code>libstdc++</code> to be able to identify and
-correctly resolve these <code>version GLIBC_X.Y not found</code> error messages.</p>
+<p>After reading this:</p>
+<ul>
+<li>You should now know what symbol versioning is.</li>
+<li>How <code>libc</code> and <code>libstdc++</code> use symbol versioning.</li>
+<li>What the <code>version GLIBC_X.Y not found</code> error messages mean.</li>
+<li>What are some good ways to fix the errors:
+<ul>
+<li>Upgrading your Linux distribution</li>
+<li>Using a compatible version of the library</li>
+</ul>
+</li>
+<li>Most importantly, how <em>not</em> to fix this error!</li>
+</ul>
 
 </div>
 <div class="tags">
