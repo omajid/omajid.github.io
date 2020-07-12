@@ -220,12 +220,12 @@ distribution's package manager.
 
 ## Conclusion
 
-After reading this:
+You should now know:
 
-- You should now know what symbol versioning is.
-- How `libc` and `libstdc++` use symbol versioning.
-- What the `version GLIBC_X.Y not found` error messages mean.
+- What symbol versioning is
+- How `libc` and `libstdc++` use symbol versioning
+- What the `version GLIBC_X.Y not found` error messages mean
 - What are some good ways to fix the errors:
   - Upgrading your Linux distribution
   - Using a compatible version of the library
-- Most importantly, how *not* to fix this error!
+- How *not* to fix this error!
