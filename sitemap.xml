@@ -3,8 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://omairmajid.com/categories/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/debugging/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/dotnet/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/categories/dotnet/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/fedora/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/posts/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/</loc>
+    <lastmod>2020-08-05T19:33:29-04:00</lastmod>
   </url>
   
   <url>
@@ -19,21 +59,6 @@
   
   <url>
     <loc>https://omairmajid.com/categories/linux/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/posts/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/tags/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
   </url>
   
@@ -83,11 +108,6 @@
   </url>
   
   <url>
-    <loc>https://omairmajid.com/tags/dotnet/</loc>
-    <lastmod>2020-05-29T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://omairmajid.com/tags/msbuild/</loc>
     <lastmod>2020-05-29T18:34:41+00:00</lastmod>
   </url>
@@ -108,17 +128,7 @@
   </url>
   
   <url>
-    <loc>https://omairmajid.com/tags/fedora/</loc>
-    <lastmod>2020-05-28T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</loc>
-    <lastmod>2017-03-30T22:14:31+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/categories/dotnet/</loc>
     <lastmod>2017-03-30T22:14:31+00:00</lastmod>
   </url>
   

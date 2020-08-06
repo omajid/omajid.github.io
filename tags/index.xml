@@ -7,10 +7,46 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en</language>
 		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
+		<lastBuildDate>Wed, 05 Aug 2020 19:33:29 -0400</lastBuildDate>
 		
 		<atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>debugging</title>
+			<link>https://omairmajid.com/tags/debugging/</link>
+			<pubDate>Wed, 05 Aug 2020 19:33:29 -0400</pubDate>
+			
+			<guid>https://omairmajid.com/tags/debugging/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>dotnet</title>
+			<link>https://omairmajid.com/tags/dotnet/</link>
+			<pubDate>Wed, 05 Aug 2020 19:33:29 -0400</pubDate>
+			
+			<guid>https://omairmajid.com/tags/dotnet/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>fedora</title>
+			<link>https://omairmajid.com/tags/fedora/</link>
+			<pubDate>Wed, 05 Aug 2020 19:33:29 -0400</pubDate>
+			
+			<guid>https://omairmajid.com/tags/fedora/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
 		<item>
 			<title>glibc</title>
 			<link>https://omairmajid.com/tags/glibc/</link>
@@ -72,18 +108,6 @@
 			</description>
 		</item>
 		<item>
-			<title>dotnet</title>
-			<link>https://omairmajid.com/tags/dotnet/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/dotnet/</guid>
-			<description>
-				
-				
-				
-			</description>
-		</item>
-		<item>
 			<title>msbuild</title>
 			<link>https://omairmajid.com/tags/msbuild/</link>
 			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
@@ -101,18 +125,6 @@
 			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
 			
 			<guid>https://omairmajid.com/tags/nuget/</guid>
-			<description>
-				
-				
-				
-			</description>
-		</item>
-		<item>
-			<title>fedora</title>
-			<link>https://omairmajid.com/tags/fedora/</link>
-			<pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/fedora/</guid>
 			<description>
 				
 				
