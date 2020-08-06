@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>dotnet on Omair Majid</title>
-    <link>https://omairmajid.com/categories/dotnet/</link>
-    <description>Recent content in dotnet on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Thu, 30 Mar 2017 22:14:31 +0000</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/categories/dotnet/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Components &amp; Versioning in .NET Core</title>
-      <link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
-      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
-      <description>
-      
-      This post covers the versions and components in .NET Core 1.x.
+	<channel>
+		<title>dotnet on Omair Majid</title>
+		<link>https://omairmajid.com/categories/dotnet/</link>
+		<description>Recent content in dotnet on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Thu, 30 Mar 2017 22:14:31 +0000</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/categories/dotnet/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Components &amp; Versioning in .NET Core</title>
+			<link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
+			<pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
+			<description>
+				
+				This post covers the versions and components in .NET Core 1.x.
 Components .NET Core consists of multiple components that...
-      
-      </description>
-    </item>
-    
-  </channel>
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

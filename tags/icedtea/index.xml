@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>icedtea on Omair Majid</title>
-    <link>https://omairmajid.com/tags/icedtea/</link>
-    <description>Recent content in icedtea on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Fri, 24 Jan 2014 00:29:36 +0000</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/tags/icedtea/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>IcedTea6 1.11 Branched</title>
-      <link>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</link>
-      <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
-      <description>
-      
-      I have just branched IcedTea6 1.11. Please start subjecting this branch to the most vicious tests you have.
+	<channel>
+		<title>icedtea on Omair Majid</title>
+		<link>https://omairmajid.com/tags/icedtea/</link>
+		<description>Recent content in icedtea on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Fri, 24 Jan 2014 00:29:36 +0000</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/tags/icedtea/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>IcedTea6 1.11 Branched</title>
+			<link>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</link>
+			<pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
+			<description>
+				
+				I have just branched IcedTea6 1.11. Please start subjecting this branch to the most vicious tests you have.
 I am plannin...
-      
-      </description>
-    </item>
-    
-  </channel>
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

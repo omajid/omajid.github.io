@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>openjdk9 on Omair Majid</title>
-    <link>https://omairmajid.com/tags/openjdk9/</link>
-    <description>Recent content in openjdk9 on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Tue, 04 Oct 2016 23:35:09 +0000</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/tags/openjdk9/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>OpenJDK 9 for Fedora/EPEL</title>
-      <link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
-      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
-      <description>
-      
-      Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
-      
-      </description>
-    </item>
-    
-  </channel>
+	<channel>
+		<title>openjdk9 on Omair Majid</title>
+		<link>https://omairmajid.com/tags/openjdk9/</link>
+		<description>Recent content in openjdk9 on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Tue, 04 Oct 2016 23:35:09 +0000</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/tags/openjdk9/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>OpenJDK 9 for Fedora/EPEL</title>
+			<link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
+			<pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
+			<description>
+				
+				Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

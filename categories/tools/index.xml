@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>tools on Omair Majid</title>
-    <link>https://omairmajid.com/categories/tools/</link>
-    <description>Recent content in tools on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/categories/tools/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>The magic of file</title>
-      <link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
-      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
-      <description>
-      
-      Ever wonder how file(1)1 works?
+	<channel>
+		<title>tools on Omair Majid</title>
+		<link>https://omairmajid.com/categories/tools/</link>
+		<description>Recent content in tools on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Wed, 10 Jun 2020 00:00:00 +0000</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>The magic of file</title>
+			<link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
+			<pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
+			<description>
+				
+				Ever wonder how file(1)1 works?
 After reading this post, you should understand all about file and its underpinnings.
 fil...
-      
-      </description>
-    </item>
-    
-  </channel>
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

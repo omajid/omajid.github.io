@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>msbuild on Omair Majid</title>
-    <link>https://omairmajid.com/tags/msbuild/</link>
-    <description>Recent content in msbuild on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/tags/msbuild/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>What is nuget restore doing?</title>
-      <link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
-      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
-      <description>
-      
-      Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
+	<channel>
+		<title>msbuild on Omair Majid</title>
+		<link>https://omairmajid.com/tags/msbuild/</link>
+		<description>Recent content in msbuild on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/tags/msbuild/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>What is nuget restore doing?</title>
+			<link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
+			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
+			<description>
+				
+				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
 ...
-      
-      </description>
-    </item>
-    
-  </channel>
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

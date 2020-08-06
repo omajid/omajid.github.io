@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>openjdk on Omair Majid</title>
-    <link>https://omairmajid.com/tags/openjdk/</link>
-    <description>Recent content in openjdk on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Tue, 04 Oct 2016 23:35:09 +0000</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/tags/openjdk/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>OpenJDK 9 for Fedora/EPEL</title>
-      <link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
-      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
-      <description>
-      
-      Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
-      
-      </description>
-    </item>
-    <item>
-      <title>IcedTea-Web and OpenJDK</title>
-      <link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
-      <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
-      <description>
-      
-      I posted 3 patches today
+	<channel>
+		<title>openjdk on Omair Majid</title>
+		<link>https://omairmajid.com/tags/openjdk/</link>
+		<description>Recent content in openjdk on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Tue, 04 Oct 2016 23:35:09 +0000</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/tags/openjdk/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>OpenJDK 9 for Fedora/EPEL</title>
+			<link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
+			<pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
+			<description>
+				
+				Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
+				
+			</description>
+		</item>
+		<item>
+			<title>IcedTea-Web and OpenJDK</title>
+			<link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
+			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
+			<description>
+				
+				I posted 3 patches today
 The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementati...
-      
-      </description>
-    </item>
-    <item>
-      <title>SharedSecrets in OpenJDK</title>
-      <link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
-      <pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
-      <description>
-      
-      I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
-      
-      </description>
-    </item>
-    
-  </channel>
+				
+			</description>
+		</item>
+		<item>
+			<title>SharedSecrets in OpenJDK</title>
+			<link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
+			<pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
+			<description>
+				
+				I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

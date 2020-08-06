@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-
-  <meta name="generator" content="Hugo 0.69.0" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="Omair Majid"><meta name="description" content=""><meta property="og:title" content="Contributing Patches to OpenJDK" />
+	
+	<meta name="generator" content="Hugo 0.69.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Omair Majid"><meta name="description" content=""><meta property="og:title" content="Contributing Patches to OpenJDK" />
 <meta property="og:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
 The OpenJDK Developer&rsquo;s Guide covers most of this, but some of it is in too much detail and some of it is outdated." />
 <meta property="og:type" content="article" />
@@ -17,64 +17,67 @@ The OpenJDK Developer&rsquo;s Guide covers most of this, but some of it is in to
 <meta name="twitter:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
 The OpenJDK Developer&rsquo;s Guide covers most of this, but some of it is in too much detail and some of it is outdated."/>
 
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
-<title>Contributing Patches to OpenJDK | Omair Majid</title></head>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
+	<title>Contributing Patches to OpenJDK | Omair Majid</title></head>
 <body><header>
-
-  <div id="avatar">
-    <a href="https://omairmajid.com/">
-      <img src="https://github.com/omajid.png" alt="Omair Majid">
-    </a>
-  </div>
-
-  <div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-  <div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
-    <nav>
-      <ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-    </nav>
-  </div>
-  </div>
-  <div id="mainmenu">
-    <nav>
-      <ul>
-        
-        <li><a href="/">Home</a></li>
-        
-        <li><a href="/posts/">Posts</a></li>
-        
-        <li><a href="/projects/">Projects</a></li>
-        
-        <li><a href="/talks/">Talks</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+	
+	<div id="avatar">
+		<a href="https://omairmajid.com/">
+			<img src="https://github.com/omajid.png" alt="Omair Majid">
+		</a>
+	</div>
+	
+	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+			<nav>
+				<ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/posts/">Posts</a></li>
+				
+				<li><a href="/projects/">Projects</a></li>
+				
+				<li><a href="/talks/">Talks</a></li>
+				
+				<li><a href="/about/">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
 </header>
 <main><div class="post">
-<div class="author">
-
-</div>
-<div class="post-header">
-
-<div class="meta">
-
-<div class="date">
-<span class="day">13</span>
-<span class="rest">Sep 2013</span>
-</div>
-
-</div>
-
-<div class="matter">
-<h1 class="title">Contributing Patches to OpenJDK</h1>
-</div>
-</div>
-<div class="markdown">
-<p>Someone asked me earlier today about how to contribute patches to OpenJDK.
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">13</span>
+				<span class="rest">Sep 2013</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Contributing Patches to OpenJDK</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>Someone asked me earlier today about how to contribute patches to OpenJDK.
 OpenJDK is probably not the easiest upstream to contribute patches to - their
 patch approval system is a little different from most other projects. I have
 tried to summarize the basic steps here. Let me know in comments if anything
@@ -155,25 +158,26 @@ repository (<code>jdk8/jdk8</code>).</p>
 <p>Complete details about all this process is available, of course, in the
 Developer&rsquo;s Guide.</p>
 
-</div>
-<div class="tags">
+	</div>
+	
+	
+	
+	
+	
+		
+	
+		
+		
+	</div></div>
 
-
-
-
-
-
-
-
-
-</div></div>
-
-</main><footer>
- © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
-
-
-    
-
+  </main>
+<footer>
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	
+	
+	
 </footer>
+
+
 </body>
 </html>

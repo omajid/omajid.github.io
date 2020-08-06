@@ -1,244 +1,244 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Omair Majid</title>
-    <link>https://omairmajid.com/posts/</link>
-    <description>Recent content in Posts on omairmajid.com</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
-    
-    <atom:link href="https://omairmajid.com/posts/index.xml" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>What is this GLIBCXX error?</title>
-      <link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
-      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
-      <description>
-      
-      If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
+	<channel>
+		<title>Posts on Omair Majid</title>
+		<link>https://omairmajid.com/posts/</link>
+		<description>Recent content in Posts on omairmajid.com</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en</language>
+		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
+		<lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
+		
+		<atom:link href="https://omairmajid.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>What is this GLIBCXX error?</title>
+			<link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
+			<pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
+			<description>
+				
+				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
 app: /lib64/libc.s...
-      
-      </description>
-    </item>
-    <item>
-      <title>Variables and Environment Variables In Bash</title>
-      <link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
-      <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
-      <description>
-      
-      Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variabl...
-      
-      </description>
-    </item>
-    <item>
-      <title>The magic of file</title>
-      <link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
-      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
-      <description>
-      
-      Ever wonder how file(1)1 works?
+				
+			</description>
+		</item>
+		<item>
+			<title>Variables and Environment Variables In Bash</title>
+			<link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
+			<pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
+			<description>
+				
+				Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variabl...
+				
+			</description>
+		</item>
+		<item>
+			<title>The magic of file</title>
+			<link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
+			<pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
+			<description>
+				
+				Ever wonder how file(1)1 works?
 After reading this post, you should understand all about file and its underpinnings.
 fil...
-      
-      </description>
-    </item>
-    <item>
-      <title>What is nuget restore doing?</title>
-      <link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
-      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
-      <description>
-      
-      Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
+				
+			</description>
+		</item>
+		<item>
+			<title>What is nuget restore doing?</title>
+			<link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
+			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
+			<description>
+				
+				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
 ...
-      
-      </description>
-    </item>
-    <item>
-      <title>.NET Core is now available in Fedora</title>
-      <link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
-      <pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
-      <description>
-      
-      One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This ...
-      
-      </description>
-    </item>
-    <item>
-      <title>Components &amp; Versioning in .NET Core</title>
-      <link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
-      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
-      <description>
-      
-      This post covers the versions and components in .NET Core 1.x.
+				
+			</description>
+		</item>
+		<item>
+			<title>.NET Core is now available in Fedora</title>
+			<link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
+			<pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
+			<description>
+				
+				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This ...
+				
+			</description>
+		</item>
+		<item>
+			<title>Components &amp; Versioning in .NET Core</title>
+			<link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
+			<pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
+			<description>
+				
+				This post covers the versions and components in .NET Core 1.x.
 Components .NET Core consists of multiple components that...
-      
-      </description>
-    </item>
-    <item>
-      <title>OpenJDK 9 for Fedora/EPEL</title>
-      <link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
-      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
-      <description>
-      
-      Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
-      
-      </description>
-    </item>
-    <item>
-      <title>-Wmisleading-indentation in OpenJDK</title>
-      <link>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
-      <pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
-      <description>
-      
-      Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. ...
-      
-      </description>
-    </item>
-    <item>
-      <title>IcedTea-Web and OpenJDK</title>
-      <link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
-      <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
-      <description>
-      
-      I posted 3 patches today
+				
+			</description>
+		</item>
+		<item>
+			<title>OpenJDK 9 for Fedora/EPEL</title>
+			<link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
+			<pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
+			<description>
+				
+				Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (...
+				
+			</description>
+		</item>
+		<item>
+			<title>-Wmisleading-indentation in OpenJDK</title>
+			<link>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
+			<pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
+			<description>
+				
+				Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. ...
+				
+			</description>
+		</item>
+		<item>
+			<title>IcedTea-Web and OpenJDK</title>
+			<link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
+			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
+			<description>
+				
+				I posted 3 patches today
 The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementati...
-      
-      </description>
-    </item>
-    <item>
-      <title>OpenJDK6 B29 Released!</title>
-      <link>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</link>
-      <pubDate>Fri, 06 Dec 2013 02:50:16 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</guid>
-      <description>
-      
-      On December 5, 2013, the OpenJDK6 b29 source bundle was published at https://java.net/projects/openjdk6/downloads/.
+				
+			</description>
+		</item>
+		<item>
+			<title>OpenJDK6 B29 Released!</title>
+			<link>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</link>
+			<pubDate>Fri, 06 Dec 2013 02:50:16 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</guid>
+			<description>
+				
+				On December 5, 2013, the OpenJDK6 b29 source bundle was published at https://java.net/projects/openjdk6/downloads/.
 This...
-      
-      </description>
-    </item>
-    <item>
-      <title>OpenJDK6 B28 Released</title>
-      <link>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</link>
-      <pubDate>Fri, 04 Oct 2013 17:51:36 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</guid>
-      <description>
-      
-      On October 4, 2013, the OpenJDK6 b28 source bundle was published at https://java.net/projects/openjdk6/downloads/.
+				
+			</description>
+		</item>
+		<item>
+			<title>OpenJDK6 B28 Released</title>
+			<link>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</link>
+			<pubDate>Fri, 04 Oct 2013 17:51:36 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</guid>
+			<description>
+				
+				On October 4, 2013, the OpenJDK6 b28 source bundle was published at https://java.net/projects/openjdk6/downloads/.
 This ...
-      
-      </description>
-    </item>
-    <item>
-      <title>Contributing Patches to OpenJDK</title>
-      <link>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</link>
-      <pubDate>Fri, 13 Sep 2013 23:43:03 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</guid>
-      <description>
-      
-      Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream ...
-      
-      </description>
-    </item>
-    <item>
-      <title>SharedSecrets in OpenJDK</title>
-      <link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
-      <pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
-      <description>
-      
-      I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
-      
-      </description>
-    </item>
-    <item>
-      <title>OpenJDK and Awesome</title>
-      <link>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</link>
-      <pubDate>Wed, 11 Apr 2012 23:08:41 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</guid>
-      <description>
-      
-      I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running...
-      
-      </description>
-    </item>
-    <item>
-      <title>IcedTea6 1.11.1 Released!</title>
-      <link>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</link>
-      <pubDate>Tue, 14 Feb 2012 21:46:43 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</guid>
-      <description>
-      
-      A new release of IcedTea6 1.11 branch is now available: 1.11.1
+				
+			</description>
+		</item>
+		<item>
+			<title>Contributing Patches to OpenJDK</title>
+			<link>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</link>
+			<pubDate>Fri, 13 Sep 2013 23:43:03 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</guid>
+			<description>
+				
+				Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream ...
+				
+			</description>
+		</item>
+		<item>
+			<title>SharedSecrets in OpenJDK</title>
+			<link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
+			<pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
+			<description>
+				
+				I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
+				
+			</description>
+		</item>
+		<item>
+			<title>OpenJDK and Awesome</title>
+			<link>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</link>
+			<pubDate>Wed, 11 Apr 2012 23:08:41 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</guid>
+			<description>
+				
+				I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running...
+				
+			</description>
+		</item>
+		<item>
+			<title>IcedTea6 1.11.1 Released!</title>
+			<link>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</link>
+			<pubDate>Tue, 14 Feb 2012 21:46:43 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</guid>
+			<description>
+				
+				A new release of IcedTea6 1.11 branch is now available: 1.11.1
 The update contains the following security fixes:
  S70822...
-      
-      </description>
-    </item>
-    <item>
-      <title>IcedTea6 1.11 Released!</title>
-      <link>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</link>
-      <pubDate>Tue, 31 Jan 2012 05:27:50 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</guid>
-      <description>
-      
-      After quite a bit of delay, IcedTea6 1.11 has finally been released!
+				
+			</description>
+		</item>
+		<item>
+			<title>IcedTea6 1.11 Released!</title>
+			<link>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</link>
+			<pubDate>Tue, 31 Jan 2012 05:27:50 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</guid>
+			<description>
+				
+				After quite a bit of delay, IcedTea6 1.11 has finally been released!
 Take a look at the release announcement, download i...
-      
-      </description>
-    </item>
-    <item>
-      <title>IcedTea6 1.11 Branched</title>
-      <link>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</link>
-      <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
-      <description>
-      
-      I have just branched IcedTea6 1.11. Please start subjecting this branch to the most vicious tests you have.
+				
+			</description>
+		</item>
+		<item>
+			<title>IcedTea6 1.11 Branched</title>
+			<link>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</link>
+			<pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
+			<description>
+				
+				I have just branched IcedTea6 1.11. Please start subjecting this branch to the most vicious tests you have.
 I am plannin...
-      
-      </description>
-    </item>
-    <item>
-      <title>What IcedTea-Web 1.1 means for you</title>
-      <link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
-      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
-      
-      <guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
-      <description>
-      
-      A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
-      
-      </description>
-    </item>
-    
-  </channel>
+				
+			</description>
+		</item>
+		<item>
+			<title>What IcedTea-Web 1.1 means for you</title>
+			<link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+			<pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+			<description>
+				
+				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
+				
+			</description>
+		</item>
+		
+	</channel>
 </rss>

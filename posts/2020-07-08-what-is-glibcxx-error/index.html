@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-
-  <meta name="generator" content="Hugo 0.69.0" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,tools,glibc"><meta name="description" content=""><meta property="og:title" content="What is this GLIBCXX error?" />
+	
+	<meta name="generator" content="Hugo 0.69.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,tools,glibc"><meta name="description" content=""><meta property="og:title" content="What is this GLIBCXX error?" />
 <meta property="og:description" content="If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
 app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app) Or like this:
 app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app) The application (or library) itself will vary. The path to the libc or libstdc&#43;&#43; might vary too. But the error will always mention that a GLIBCXX or GLIBC version was not found." />
@@ -19,64 +19,67 @@ app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (requ
 app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app) Or like this:
 app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app) The application (or library) itself will vary. The path to the libc or libstdc&#43;&#43; might vary too. But the error will always mention that a GLIBCXX or GLIBC version was not found."/>
 
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
-<title>What is this GLIBCXX error? | Omair Majid</title></head>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
+	<title>What is this GLIBCXX error? | Omair Majid</title></head>
 <body><header>
-
-  <div id="avatar">
-    <a href="https://omairmajid.com/">
-      <img src="https://github.com/omajid.png" alt="Omair Majid">
-    </a>
-  </div>
-
-  <div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-  <div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
-    <nav>
-      <ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-    </nav>
-  </div>
-  </div>
-  <div id="mainmenu">
-    <nav>
-      <ul>
-        
-        <li><a href="/">Home</a></li>
-        
-        <li><a href="/posts/">Posts</a></li>
-        
-        <li><a href="/projects/">Projects</a></li>
-        
-        <li><a href="/talks/">Talks</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+	
+	<div id="avatar">
+		<a href="https://omairmajid.com/">
+			<img src="https://github.com/omajid.png" alt="Omair Majid">
+		</a>
+	</div>
+	
+	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+			<nav>
+				<ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/posts/">Posts</a></li>
+				
+				<li><a href="/projects/">Projects</a></li>
+				
+				<li><a href="/talks/">Talks</a></li>
+				
+				<li><a href="/about/">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
 </header>
 <main><div class="post">
-<div class="author">
-
-</div>
-<div class="post-header">
-
-<div class="meta">
-
-<div class="date">
-<span class="day">08</span>
-<span class="rest">Jul 2020</span>
-</div>
-
-</div>
-
-<div class="matter">
-<h1 class="title">What is this GLIBCXX error?</h1>
-</div>
-</div>
-<div class="markdown">
-<p>If you use enterprise or stable Linux distributions, sooner or later
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">08</span>
+				<span class="rest">Jul 2020</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">What is this GLIBCXX error?</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>If you use enterprise or stable Linux distributions, sooner or later
 you will see an error like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
 </code></pre></div><p>Or like this:</p>
@@ -248,165 +251,170 @@ distribution&rsquo;s package manager.</p>
 <li>How <em>not</em> to fix this error!</li>
 </ul>
 
-</div>
-<div class="tags">
-
-
-
-
-
-
-
-<div class="taxosfloating_left">
-<p>Categories</p>
-</div>
-<div class="termsfloating_right">
-<p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="/categories/linux/"> linux </a>
-
-
-
-
-
-
-
-
-
-
-
-</div>
-<div class="clearit"></div>
-
-
-
-
-
-
-
-<div class="taxosfloating_left">
-<p>Tags</p>
-</div>
-<div class="termsfloating_right">
-<p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="/tags/glibc/"> glibc </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="/tags/linux/"> linux </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="/tags/tools/"> tools </a>
-
-
-
-
-
-
-
-
-
-
-
-</div>
-<div class="clearit"></div>
-
-
-
-
-
-</div></div>
-
-</main><footer>
- © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
-
-
-    
-
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://omairmajid.com/categories/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://omairmajid.com/tags/glibc/"> glibc </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://omairmajid.com/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://omairmajid.com/tags/tools/"> tools </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+<footer>
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	
+	
+	
 </footer>
+
+
 </body>
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-
-  <meta name="generator" content="Hugo 0.69.0" />
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="author" content="Omair Majid"><meta name="keywords" content="icedtea-web,openjdk"><meta name="description" content=""><meta property="og:title" content="IcedTea-Web and OpenJDK" />
+	
+	<meta name="generator" content="Hugo 0.69.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="icedtea-web,openjdk"><meta name="description" content=""><meta property="og:title" content="IcedTea-Web and OpenJDK" />
 <meta property="og:description" content="I posted 3 patches today
 The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into (pardon the pun) OpenJDK and make use of existing plugin-specific classes in OpenJDK.
 The second and third patches are for IcedTea-Web. They allow IcedTea-Web to (progressively) build against OpenJDK8 and OpenJDK9.
@@ -21,64 +21,67 @@ The first patch is for OpenJDK 9. It creates a hole that allows alternative plug
 The second and third patches are for IcedTea-Web. They allow IcedTea-Web to (progressively) build against OpenJDK8 and OpenJDK9.
 What does this mean? Soon we might actually be able to build and run IcedTea- Web against OpenJDK."/>
 
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
-<title>IcedTea-Web and OpenJDK | Omair Majid</title></head>
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
+	<title>IcedTea-Web and OpenJDK | Omair Majid</title></head>
 <body><header>
-
-  <div id="avatar">
-    <a href="https://omairmajid.com/">
-      <img src="https://github.com/omajid.png" alt="Omair Majid">
-    </a>
-  </div>
-
-  <div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-  <div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
-    <nav>
-      <ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-    </nav>
-  </div>
-  </div>
-  <div id="mainmenu">
-    <nav>
-      <ul>
-        
-        <li><a href="/">Home</a></li>
-        
-        <li><a href="/posts/">Posts</a></li>
-        
-        <li><a href="/projects/">Projects</a></li>
-        
-        <li><a href="/talks/">Talks</a></li>
-        
-        <li><a href="/about/">About</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+	
+	<div id="avatar">
+		<a href="https://omairmajid.com/">
+			<img src="https://github.com/omajid.png" alt="Omair Majid">
+		</a>
+	</div>
+	
+	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+			<nav>
+				<ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/posts/">Posts</a></li>
+				
+				<li><a href="/projects/">Projects</a></li>
+				
+				<li><a href="/talks/">Talks</a></li>
+				
+				<li><a href="/about/">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
 </header>
 <main><div class="post">
-<div class="author">
-
-</div>
-<div class="post-header">
-
-<div class="meta">
-
-<div class="date">
-<span class="day">24</span>
-<span class="rest">Jan 2014</span>
-</div>
-
-</div>
-
-<div class="matter">
-<h1 class="title">IcedTea-Web and OpenJDK</h1>
-</div>
-</div>
-<div class="markdown">
-<p>I posted 3 patches today</p>
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">24</span>
+				<span class="rest">Jan 2014</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">IcedTea-Web and OpenJDK</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>I posted 3 patches today</p>
 <p>The <a href="http://mail.openjdk.java.net/pipermail/jdk9-dev/2014-January/000320.html">first patch</a> is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into (pardon the pun) OpenJDK and make use of existing plugin-specific classes in OpenJDK.</p>
 <p>The <a href="http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2014-January/025972.html">second</a> and <a href="http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2014-January/025993.html">third</a> patches are for IcedTea-Web. They allow IcedTea-Web to (progressively) build against OpenJDK8 and OpenJDK9.</p>
 <p>What does this mean? Soon we might actually be able to build and run IcedTea-
@@ -88,118 +91,121 @@ in the air. The OpenJDK folks might not accept the patch, though I am hopeful
 they will - it&rsquo;s very small and conservative.</p>
 <p>Fun times ahead!</p>
 
-</div>
-<div class="tags">
-
-
-
-
-
-
-
-
-
-<div class="taxosfloating_left">
-<p>Tags</p>
-</div>
-<div class="termsfloating_right">
-<p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="/tags/icedtea-web/"> icedtea-web </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<a href="/tags/openjdk/"> openjdk </a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-<div class="clearit"></div>
-
-
-
-
-
-</div></div>
-
-</main><footer>
- © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
-
-
-    
-
+	</div>
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://omairmajid.com/tags/icedtea-web/"> icedtea-web </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="https://omairmajid.com/tags/openjdk/"> openjdk </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+<footer>
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	
+	
+	
 </footer>
+
+
 </body>
 </html>
