@@ -7,19 +7,19 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en</language>
 		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Wed, 05 Aug 2020 19:33:29 -0400</lastBuildDate>
+		<lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="https://omairmajid.com/tags/debugging/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>.NET Core Symbols on Fedora</title>
 			<link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 19:33:29 -0400</pubDate>
+			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
 			
 			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
 			<description>
 				
-				Have you ever tried to debug an application and seen errors saying debug information or debug symbols are not available?...
+				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not availa...
 				
 			</description>
 		</item>
