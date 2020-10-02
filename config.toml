@@ -8,7 +8,7 @@ copyright = "© Omair Majid 2011 - 2020 | [License](/about/) | [Source](https://
   author = "Omair Majid"
   description = "Omair's announcements, thouughts and code"
   subtitle = "Announcements, thoughts, code and fun"
-  avatar = "https://github.com/omajid.png"
+  avatar = "profile.png"
 
   mainSections = ["posts"]
 
