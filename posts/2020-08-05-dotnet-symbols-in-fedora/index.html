@@ -5,6 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content=".NET Core Symbols on Fedora">
+	
+	
 	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,fedora,debugging"><meta name="description" content=""><meta property="og:title" content=".NET Core Symbols on Fedora" />
 <meta property="og:description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
 What are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.
@@ -19,22 +23,27 @@ What are debug symbols? Source code contains a lot of information that&rsquo;s n
 What are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.
 What are debug symbols? Source code contains a lot of information that&rsquo;s not strictly part of it&rsquo;s functionality."/>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<title>.NET Core Symbols on Fedora | Omair Majid</title></head>
 <body><header>
 	
 	<div id="avatar">
 		<a href="https://omairmajid.com/">
-			<img src="https://github.com/omajid.png" alt="Omair Majid">
+		  <img src="/profile.png" alt="Omair Majid">
 		</a>
 	</div>
 	
 	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
 			<nav>
-				<ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+				<ul>
+					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
+					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
 			</nav>
 		</div>
 	</div>
@@ -351,7 +360,7 @@ role the debug symbols play in this.</p>
 			
 			
 			
-			<a href="https://omairmajid.com/categories/dotnet/"> dotnet </a>
+			<a href="/categories/dotnet/"> dotnet </a>
 			
 			
 			
@@ -392,13 +401,13 @@ role the debug symbols play in this.</p>
 			
 			
 			
-			<a href="https://omairmajid.com/tags/debugging/"> debugging </a>
+			<a href="/tags/debugging/"> debugging </a>
 			
 			
 			
 			
 			
-			<a href="https://omairmajid.com/tags/dotnet/"> dotnet </a>
+			<a href="/tags/dotnet/"> dotnet </a>
 			
 			
 			
@@ -408,7 +417,7 @@ role the debug symbols play in this.</p>
 			
 			
 			
-			<a href="https://omairmajid.com/tags/fedora/"> fedora </a>
+			<a href="/tags/fedora/"> fedora </a>
 			
 			
 			

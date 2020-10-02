@@ -5,6 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="OpenJDK and Awesome">
+	
+	
 	<meta name="author" content="Omair Majid"><meta name="description" content=""><meta property="og:title" content="OpenJDK and Awesome" />
 <meta property="og:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
 diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit." />
@@ -17,22 +21,27 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 <meta name="twitter:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
 diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit."/>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<title>OpenJDK and Awesome | Omair Majid</title></head>
 <body><header>
 	
 	<div id="avatar">
 		<a href="https://omairmajid.com/">
-			<img src="https://github.com/omajid.png" alt="Omair Majid">
+		  <img src="/profile.png" alt="Omair Majid">
 		</a>
 	</div>
 	
 	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
 			<nav>
-				<ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+				<ul>
+					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
+					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
 			</nav>
 		</div>
 	</div>

@@ -5,6 +5,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Variables and Environment Variables In Bash">
+	
+	
 	<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,unix,bash"><meta name="description" content=""><meta property="og:title" content="Variables and Environment Variables In Bash" />
 <meta property="og:description" content="Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
 Shells like bash - also heavily used for writing shell scripts - have a slightly different audience in mind than normal programming languages. They make heavy use of environment variables. So much so that it can sometimes become blurry whether something is a normal variable or an environment variable.
@@ -19,22 +23,27 @@ In this post, I will dig into variables and environment variables in shell, part
 Shells like bash - also heavily used for writing shell scripts - have a slightly different audience in mind than normal programming languages. They make heavy use of environment variables. So much so that it can sometimes become blurry whether something is a normal variable or an environment variable.
 In this post, I will dig into variables and environment variables in shell, particularly bash, to help you understand how to distinguish the two and when to use them."/>
 
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="https://omairmajid.com/css/all.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
 	<title>Variables and Environment Variables In Bash | Omair Majid</title></head>
 <body><header>
 	
 	<div id="avatar">
 		<a href="https://omairmajid.com/">
-			<img src="https://github.com/omajid.png" alt="Omair Majid">
+		  <img src="/profile.png" alt="Omair Majid">
 		</a>
 	</div>
 	
 	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id=social>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
 			<nav>
-				<ul><li><a href="mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li><li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li><li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li><li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+				<ul>
+					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
+					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
 			</nav>
 		</div>
 	</div>
@@ -334,7 +343,7 @@ question</a></p>
 			
 			
 			
-			<a href="https://omairmajid.com/categories/unix/"> unix </a>
+			<a href="/categories/unix/"> unix </a>
 			
 			
 			
@@ -357,7 +366,7 @@ question</a></p>
 			
 			
 			
-			<a href="https://omairmajid.com/tags/bash/"> bash </a>
+			<a href="/tags/bash/"> bash </a>
 			
 			
 			
@@ -405,7 +414,7 @@ question</a></p>
 			
 			
 			
-			<a href="https://omairmajid.com/tags/linux/"> linux </a>
+			<a href="/tags/linux/"> linux </a>
 			
 			
 			
@@ -439,7 +448,7 @@ question</a></p>
 			
 			
 			
-			<a href="https://omairmajid.com/tags/unix/"> unix </a>
+			<a href="/tags/unix/"> unix </a>
 			
 			
 			
