@@ -3,47 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/categories/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/dotnet/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/categories/dotnet/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/fedora/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/posts/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/</loc>
+    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</loc>
     <lastmod>2020-08-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://omairmajid.com/categories/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://omairmajid.com/tags/debugging/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/tags/dotnet/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/categories/dotnet/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/tags/fedora/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/posts/</loc>
-    <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/tags/</loc>
     <lastmod>2020-08-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -153,11 +158,6 @@
   </url>
   
   <url>
-    <loc>https://omairmajid.com/tags/icedtea/</loc>
-    <lastmod>2014-01-24T00:29:36+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://omairmajid.com/tags/icedtea-web/</loc>
     <lastmod>2014-01-24T00:29:36+00:00</lastmod>
   </url>
@@ -200,6 +200,11 @@
   <url>
     <loc>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</loc>
     <lastmod>2012-01-31T05:27:50+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/icedtea/</loc>
+    <lastmod>2012-01-06T22:19:56+00:00</lastmod>
   </url>
   
   <url>

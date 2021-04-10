@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.80.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora">
+	
+	
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,fedora"><meta name="description" content=""><meta property="og:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora" />
+<meta property="og:description" content="Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an executable program.
+But what do you do if there&rsquo;s no compiler?
+That&rsquo;s the dilemma .NET runs into in Fedora.
+Every release of .NET (Core) needs a recent version of a .NET (Core) SDK that can be used to build it. But that&rsquo;s exactly what&rsquo;s missing and what we are trying to build." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/" />
+<meta property="article:published_time" content="2021-04-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-09T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora"/>
+<meta name="twitter:description" content="Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an executable program.
+But what do you do if there&rsquo;s no compiler?
+That&rsquo;s the dilemma .NET runs into in Fedora.
+Every release of .NET (Core) needs a recent version of a .NET (Core) SDK that can be used to build it. But that&rsquo;s exactly what&rsquo;s missing and what we are trying to build."/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora | Omair Majid</title></head>
+<body><header>
+	
+	<div id="avatar">
+		<a href="https://omairmajid.com/">
+		  <img src="/profile.png" alt="Omair Majid">
+		</a>
+	</div>
+	
+	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
+			<nav>
+				<ul>
+					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
+					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/posts/">Posts</a></li>
+				
+				<li><a href="/projects/">Projects</a></li>
+				
+				<li><a href="/talks/">Talks</a></li>
+				
+				<li><a href="/about/">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="author">
+	
+	</div>
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">09</span>
+				<span class="rest">Apr 2021</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</h1>
+		</div>
+	</div>
+	<div class="markdown">
+		<h1 id="why-bootstrap">Why Bootstrap?</h1>
+<p>Compiling code is supposed to be straightforward: you run a compiler
+over the code and the compiler gives you back an executable program.</p>
+<p>But what do you do if there&rsquo;s no compiler?</p>
+<p>That&rsquo;s the dilemma .NET runs into in Fedora.</p>
+<p>Every release of .NET (Core) needs a recent version of a .NET (Core)
+SDK that can be used to build it. But that&rsquo;s exactly what&rsquo;s missing
+and what we are trying to build.</p>
+<p>The general solution to this chicken-and-egg problem is called
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(compilers)">bootstrapping</a>.
+Generally speaking, you somehow produce a runnable compiler (hacks are
+allowed) that understands your programming language, and then use that
+to build the real thing.</p>
+<p>In Fedora, we use a slight variant of this.</p>
+<h1 id="process">Process</h1>
+<p>The rough process looks like this:</p>
+<ol>
+<li>
+<p>Build the bootstrap tarball, for each architecture:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./build-dotnet-tarball --bootstrap v5.0.104-SDK
+</code></pre></div><p>That will produce a <code>dotnet-v5.0.104-SDK-x64-bootstrap.tar.gz</code>.</p>
+<p>You can repeat this command for multiple architectures (such as
+<code>aarch64</code>) if you want.</p>
+</li>
+<li>
+<p>Configure and conditionalize the RPM spec file that you are working
+with for building in bootstrap mode. <a href="https://docs.fedoraproject.org/en-US/packaging-guidelines/#bootstrapping">Fedora suggests doing it like
+this</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># This (badly named) option says to build in &#34;bootstrap&#34; mode by default</span>
+%bcond_without bootstrap
+
+%if %<span style="color:#f92672">{</span>with bootstrap<span style="color:#f92672">}</span>
+<span style="color:#75715e"># special hacks for bootstrapping</span>
+%endif
+
+%if %<span style="color:#f92672">{</span>without bootstrap<span style="color:#f92672">}</span>
+BuildRequires: dotnet-sdk-5.0
+BuildRequires: dotnet5.0-source-build-reference-packages
+%endif
+
+%if %<span style="color:#f92672">{</span>without bootstrap<span style="color:#f92672">}</span>
+<span style="color:#75715e"># remove prebuilts</span>
+find -type f -iname <span style="color:#e6db74">&#39;*.dll&#39;</span> -delete
+%endif
+
+</code></pre></div></li>
+<li>
+<p>Upload sources and commit spec file. Just follow the normal build
+process for any RPM build. <em>But don&rsquo;t build it yet</em>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg new-sources dotnet-v5.0.104-SDK-x64-bootstrap.tar.gz dotnet-v5.0.104-SDK-arm64-bootstrap.tar.gz
+git add dotnet5.0.spec
+git commit -m <span style="color:#e6db74">&#34;Bootstrap .NET 5&#34;</span>
+git push
+</code></pre></div></li>
+<li>
+<p><a href="https://fedoraproject.org/wiki/Package_update_HOWTO#Creating_a_side-tag">Create a
+side-tag</a>.
+Builds done in a side-tag can not become part of the main release
+accidentally. This helps avoid accidentally shipping prebuilts,
+especially in rawhide.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg request-side-tag
+</code></pre></div><p>If you are building for an RPM-based distribution without support
+for side-tags, you can skip this step and just do a normal build in
+the next step.</p>
+</li>
+<li>
+<p>Build the RPM with bootstrap binaries in the side-tag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
+</code></pre></div></li>
+<li>
+<p>Build the
+<a href="https://github.com/dotnet/source-build-reference-packages/">source-build-references-package</a>.
+This is a <a href="https://src.fedoraproject.org/rpms/dotnet5.0-build-reference-packages">regular package with a normal
+spec</a>
+file that can <code>BuildRequire</code> the just-built <code>dotnet-sdk-5.0</code>
+package. Built it in your side-tag, though:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
+</code></pre></div></li>
+<li>
+<p>Once the build works, we can proceed with disabling bootstrapping.
+Produce non-bootstrap source-tarball for the same version:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./build-dotnet-tarball v5.0.104-SDK
+</code></pre></div><p>Leaving out <code>--bootstrap</code> will produce a <code>dotnet-v5.0.104-SDK.tar.gz</code>.</p>
+</li>
+<li>
+<p>Then disable bootstrapping in the spec file. If you got step 2
+right, it should be as easy as this change to your spec file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">-%bcond_without bootstrap
+</span><span style="color:#f92672"></span><span style="color:#a6e22e">+%bcond_with bootstrap
+</span></code></pre></div><p>The strangely named <code>%bcond_with bootstrap</code> means &ldquo;build <em>without</em>
+bootstrap by default&rdquo;.</p>
+<p><a href="https://src.fedoraproject.org/rpms/dotnet5.0/c/2e4240bf831b134d40326b808eee0b02eb7a4d11?branch=rawhide">Here&rsquo;s an example of this in
+Fedora</a>.</p>
+</li>
+<li>
+<p>Upload the new source tarball and commit+push the spec file
+changes. Then build it again in the side-tag:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg new-sources dotnet-v5.0.104-SDK.tar.gz
+git add dotnet5.0.spec
+git commit -m <span style="color:#e6db74">&#34;Disable bootstrap&#34;</span>
+git push
+fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
+</code></pre></div><p>If it fails, try and fix that. Maybe something was broken in the
+initial build? If so, you might have to revert step 8 and rebuild
+the bootstrap build.</p>
+</li>
+<li>
+<p>If the above steps worked, you can take the final non-bootrap
+build and <a href="https://bodhi.fedoraproject.org/updates/new">file an update - use the &ldquo;Use Side Tag&rdquo;
+option</a> - to ship that
+package out to users!</p>
+</li>
+</ol>
+<p>Congrats!</p>
+<h1 id="benefits">Benefits</h1>
+<p>Aside from solving the chicken-and-egg problem and following the
+no-prebuilts-binaries-allowed rule of Fedora, this also solves a few
+other problems.</p>
+<p>The original source-tarball for a .NET SDK release is architecture
+specific: it contains compiler binaries specific to an architecture.
+If we wanted to build .NET on 3 architectures, we would need to
+produce every source-tarball 3 times!</p>
+<p>Building per-architecture requires additional machines (who has 3
+architectures handy?). It requires additional time: many
+architectures are slower than common x86_64 developer machines. It
+also requires additional upload bandwidth/time: 3 times 2GB archives
+add up to a lot of delay uploading tarballs.</p>
+<p>By switching to a single architecture neutral tarball without any
+prebuilts, we cut down source-tarball build and upload time
+by a few orders of magnitude.</p>
+<h1 id="try-it-out">Try it out</h1>
+<p>If you are packaging .NET for a RPM-based distribution, try out
+bootstrapping it! Let me know if it works or not. You can also <a href="https://github.com/dotnet/source-build">report
+issues in source-build</a>.</p>
+<hr>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/dotnet/"> dotnet </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/dotnet/"> dotnet </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/fedora/"> fedora </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+<footer>
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	
+	
+	
+</footer>
+
+
+</body>
+</html>

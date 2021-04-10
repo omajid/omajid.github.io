@@ -7,26 +7,14 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en</language>
 		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>debugging</title>
-			<link>https://omairmajid.com/tags/debugging/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/debugging/</guid>
-			<description>
-				
-				
-				
-			</description>
-		</item>
-		<item>
 			<title>dotnet</title>
 			<link>https://omairmajid.com/tags/dotnet/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
 			
 			<guid>https://omairmajid.com/tags/dotnet/</guid>
 			<description>
@@ -38,9 +26,21 @@
 		<item>
 			<title>fedora</title>
 			<link>https://omairmajid.com/tags/fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
 			
 			<guid>https://omairmajid.com/tags/fedora/</guid>
+			<description>
+				
+				
+				
+			</description>
+		</item>
+		<item>
+			<title>debugging</title>
+			<link>https://omairmajid.com/tags/debugging/</link>
+			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/tags/debugging/</guid>
 			<description>
 				
 				
@@ -156,11 +156,11 @@
 			</description>
 		</item>
 		<item>
-			<title>icedtea</title>
-			<link>https://omairmajid.com/tags/icedtea/</link>
+			<title>icedtea-web</title>
+			<link>https://omairmajid.com/tags/icedtea-web/</link>
 			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
 			
-			<guid>https://omairmajid.com/tags/icedtea/</guid>
+			<guid>https://omairmajid.com/tags/icedtea-web/</guid>
 			<description>
 				
 				
@@ -168,11 +168,11 @@
 			</description>
 		</item>
 		<item>
-			<title>icedtea-web</title>
-			<link>https://omairmajid.com/tags/icedtea-web/</link>
-			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+			<title>icedtea</title>
+			<link>https://omairmajid.com/tags/icedtea/</link>
+			<pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
 			
-			<guid>https://omairmajid.com/tags/icedtea-web/</guid>
+			<guid>https://omairmajid.com/tags/icedtea/</guid>
 			<description>
 				
 				
