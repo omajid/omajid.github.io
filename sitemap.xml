@@ -3,12 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</loc>
-    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
+    <loc>https://omairmajid.com/categories/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://omairmajid.com/categories/</loc>
+    <loc>https://omairmajid.com/tags/development/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/linux/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/posts/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/python/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/categories/python/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/tags/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</loc>
+    <lastmod>2021-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -28,21 +68,6 @@
   </url>
   
   <url>
-    <loc>https://omairmajid.com/</loc>
-    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/posts/</loc>
-    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/tags/</loc>
-    <lastmod>2021-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</loc>
     <lastmod>2020-08-05T00:00:00+00:00</lastmod>
   </url>
@@ -54,11 +79,6 @@
   
   <url>
     <loc>https://omairmajid.com/tags/glibc/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://omairmajid.com/tags/linux/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
   </url>
   

@@ -9,7 +9,7 @@
 	<meta property="og:title" content="-Wmisleading-indentation in OpenJDK">
 	
 	
-	<meta name="author" content="Omair Majid"><meta name="description" content=""><meta property="og:title" content="-Wmisleading-indentation in OpenJDK" />
+	<meta name="author" content="Omair Majid"><meta name="description" content="Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. So I built OpenJDK 9 …"><meta property="og:title" content="-Wmisleading-indentation in OpenJDK" />
 <meta property="og:description" content="Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. So I built OpenJDK 9 using -Wall to find out.
 First, though, a big heads up: the OpenJDK 9 build selectively enables and disables warnings and turns on -Werorr. There doesn&rsquo;t seem to be a straight- forward way of enabling all compiler warnings everywhere. I ended up patching various makefiles to comment out various DISABLED_WARNINGS* flags." />
 <meta property="og:type" content="article" />
@@ -24,7 +24,10 @@ First, though, a big heads up: the OpenJDK 9 build selectively enables and disab
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>-Wmisleading-indentation in OpenJDK | Omair Majid</title></head>
+	<title>-Wmisleading-indentation in OpenJDK | Omair Majid</title>
+
+
+</head>
 <body><header>
 	
 	<div id="avatar">
@@ -86,7 +89,7 @@ First, though, a big heads up: the OpenJDK 9 build selectively enables and disab
 		</div>
 	</div>
 	<div class="markdown">
-		<p>Inspired by <a href="https://gnu.wildebeest.org/blog/mjw/2016/01/09/looking-forward-to-gcc6-nice-new-warnings/">this post by Mark Wielaard</a> I started wondering how OpenJDK 9 would fare in a <code>-Wmisleading-indentation</code> test. So I built OpenJDK 9 using <code>-Wall</code> to find out.</p>
+		<p>Inspired by <a href="https://gnu.wildebeest.org/blog/mjw/2016/01/09/looking-forward-to-gcc6-nice-new-warnings/" target="_blank">this post by Mark Wielaard</a> I started wondering how OpenJDK 9 would fare in a <code>-Wmisleading-indentation</code> test. So I built OpenJDK 9 using <code>-Wall</code> to find out.</p>
 <p>First, though, a big heads up: the OpenJDK 9 build selectively enables and
 disables warnings and turns on <code>-Werorr</code>. There doesn&rsquo;t seem to be a straight-
 forward way of enabling all compiler warnings everywhere. I ended up patching
@@ -159,6 +162,10 @@ actual misleading indentation issues in OpenJDK.</p>
 			
 			
 			<a href="/categories/development/"> development </a>
+			
+			
+			
+			
 			
 			
 			

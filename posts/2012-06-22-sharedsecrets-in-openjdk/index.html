@@ -9,7 +9,7 @@
 	<meta property="og:title" content="SharedSecrets in OpenJDK">
 	
 	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="openjdk"><meta name="description" content=""><meta property="og:title" content="SharedSecrets in OpenJDK" />
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="openjdk"><meta name="description" content="I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that …"><meta property="og:title" content="SharedSecrets in OpenJDK" />
 <meta property="og:description" content="I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the SharedSecrets class! The name of the class is a little misleading since it doesn&rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/" />
@@ -22,7 +22,10 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>SharedSecrets in OpenJDK | Omair Majid</title></head>
+	<title>SharedSecrets in OpenJDK | Omair Majid</title>
+
+
+</head>
 <body><header>
 	
 	<div id="avatar">
@@ -84,7 +87,7 @@
 		</div>
 	</div>
 	<div class="markdown">
-		<p>I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the <a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/misc/SharedSecrets.java" title="Code for sun.misc.SharedSecets">SharedSecrets</a> class! The name of the class is a little misleading since it doesn&rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:</p>
+		<p>I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the <a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/misc/SharedSecrets.java" title="Code for sun.misc.SharedSecets" target="_blank">SharedSecrets</a> class! The name of the class is a little misleading since it doesn&rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:</p>
 <pre><code>/** A repository of &quot;shared secrets&quot;, which are a mechanism for
     calling implementation-private methods in another package without
     using reflection. A package-private class implements a public
@@ -169,6 +172,10 @@ to set the implementation for FooHandler</p>
 			
 			
 			<a href="/categories/development/"> development </a>
+			
+			
+			
+			
 			
 			
 			
@@ -281,7 +288,17 @@ to set the implementation for FooHandler</p>
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			<a href="/tags/openjdk/"> openjdk </a>
+			
+			
+			
+			
 			
 			
 			

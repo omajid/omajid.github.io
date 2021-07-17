@@ -18,9 +18,9 @@
 			
 			<guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
 			<description>
-				
-				Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives...
-				
+			
+				Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an …
+			
 			</description>
 		</item>
 		<item>
@@ -30,9 +30,10 @@
 			
 			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
 			<description>
-				
-				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not availa...
-				
+			
+				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
+What are debug …
+			
 			</description>
 		</item>
 		<item>
@@ -42,10 +43,10 @@
 			
 			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
 			<description>
-				
+			
 				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-...
-				
+Turns out you can …
+			
 			</description>
 		</item>
 		<item>
@@ -55,9 +56,9 @@
 			
 			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
 			<description>
-				
-				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This ...
-				
+			
+				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the …
+			
 			</description>
 		</item>
 		

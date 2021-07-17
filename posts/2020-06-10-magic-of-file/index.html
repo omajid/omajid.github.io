@@ -9,7 +9,9 @@
 	<meta property="og:title" content="The magic of file">
 	
 	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="unix,linux,tools"><meta name="description" content=""><meta property="og:title" content="The magic of file" />
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="unix,linux,tools"><meta name="description" content="Ever wonder how file(1)1 works?
+After reading this post, you should understand all about file and its underpinnings.
+file Using the file …"><meta property="og:title" content="The magic of file" />
 <meta property="og:description" content="Ever wonder how file(1)1 works?
 After reading this post, you should understand all about file and its underpinnings.
 file Using the file tool is quite simple. It&rsquo;s just file file-name-1. You can call it with multiple arguments too. Here&rsquo;s a few examples of running it on my system.
@@ -28,7 +30,10 @@ $ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg ima
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>The magic of file | Omair Majid</title></head>
+	<title>The magic of file | Omair Majid</title>
+
+
+</head>
 <body><header>
 	
 	<div id="avatar">
@@ -144,15 +149,15 @@ Vagrantfile: HTML document, ASCII text
 $ file microsoft.netcore.app.2.1.19.nupkg
 microsoft.netcore.app.2.1.19.nupkg: Microsoft OOXML
 </code></pre></div><p>Yes, it really thinks a
-<a href="https://www.vagrantup.com/docs/vagrantfile"><code>Vagrantfile</code></a> is an
-HTML document and a <a href="https://www.nuget.org/packages/Microsoft.NETCore.App/2.1.19">NuGet package
+<a href="https://www.vagrantup.com/docs/vagrantfile" target="_blank">&lt;code&gt;Vagrantfile&lt;/code&gt;</a> is an
+HTML document and a <a href="https://www.nuget.org/packages/Microsoft.NETCore.App/2.1.19" target="_blank">NuGet package
 file</a>
 is an Office document!</p>
 </li>
 </ol>
 <p>But how does <code>file</code> actually figure out the file type?</p>
 <p>Like other classic Unix tools, <code>file</code> has excellent documentation.
-<a href="https://man7.org/linux/man-pages/man1/file.1.html"><code>man file</code></a> points
+<a href="https://man7.org/linux/man-pages/man1/file.1.html" target="_blank">&lt;code&gt;man file&lt;/code&gt;</a> points
 out that <code>file</code> looks for things in this order.</p>
 <ol>
 <li>
@@ -329,6 +334,10 @@ information to claim if this is Java or not. <a href="#fnref:3" class="footnote-
 			
 			
 			
+			
+			
+			
+			
 			<a href="/categories/tools/"> tools </a>
 			
 			
@@ -408,7 +417,17 @@ information to claim if this is Java or not. <a href="#fnref:3" class="footnote-
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
 			
 			
 			

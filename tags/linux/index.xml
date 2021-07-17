@@ -7,10 +7,23 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en</language>
 		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
+		<lastBuildDate>Fri, 16 Jul 2021 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="https://omairmajid.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Why is hash(-1) == hash(-2) in Python?</title>
+			<link>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</link>
+			<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
+			<description>
+			
+				While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:
+ is hash(-1) == hash(-2) an …
+			
+			</description>
+		</item>
 		<item>
 			<title>What is this GLIBCXX error?</title>
 			<link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
@@ -18,10 +31,10 @@
 			
 			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
 			<description>
-				
+			
 				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
-app: /lib64/libc.s...
-				
+app: /lib64/libc.so.6: version …
+			
 			</description>
 		</item>
 		<item>
@@ -31,9 +44,10 @@ app: /lib64/libc.s...
 			
 			<guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
 			<description>
-				
-				Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variabl...
-				
+			
+				Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
+Shells like bash …
+			
 			</description>
 		</item>
 		<item>
@@ -43,11 +57,11 @@ app: /lib64/libc.s...
 			
 			<guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
 			<description>
-				
+			
 				Ever wonder how file(1)1 works?
 After reading this post, you should understand all about file and its underpinnings.
-fil...
-				
+file Using the file …
+			
 			</description>
 		</item>
 		

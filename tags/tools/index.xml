@@ -18,10 +18,10 @@
 			
 			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
 			<description>
-				
+			
 				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
-app: /lib64/libc.s...
-				
+app: /lib64/libc.so.6: version …
+			
 			</description>
 		</item>
 		<item>
@@ -31,11 +31,11 @@ app: /lib64/libc.s...
 			
 			<guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
 			<description>
-				
+			
 				Ever wonder how file(1)1 works?
 After reading this post, you should understand all about file and its underpinnings.
-fil...
-				
+file Using the file …
+			
 			</description>
 		</item>
 		

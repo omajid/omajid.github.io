@@ -18,10 +18,10 @@
 			
 			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
 			<description>
-				
+			
 				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
-app: /lib64/libc.s...
-				
+app: /lib64/libc.so.6: version …
+			
 			</description>
 		</item>
 		

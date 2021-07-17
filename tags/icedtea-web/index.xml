@@ -18,10 +18,10 @@
 			
 			<guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
 			<description>
-				
+			
 				I posted 3 patches today
-The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementati...
-				
+The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into …
+			
 			</description>
 		</item>
 		<item>
@@ -31,9 +31,9 @@ The first patch is for OpenJDK 9. It creates a hole that allows alternative plug
 			
 			<guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
 			<description>
-				
-				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
-				
+			
+				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need …
+			
 			</description>
 		</item>
 		

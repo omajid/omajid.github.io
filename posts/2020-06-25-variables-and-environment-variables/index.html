@@ -9,7 +9,8 @@
 	<meta property="og:title" content="Variables and Environment Variables In Bash">
 	
 	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,unix,bash"><meta name="description" content=""><meta property="og:title" content="Variables and Environment Variables In Bash" />
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="linux,unix,bash"><meta name="description" content="Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
+Shells like bash …"><meta property="og:title" content="Variables and Environment Variables In Bash" />
 <meta property="og:description" content="Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
 Shells like bash - also heavily used for writing shell scripts - have a slightly different audience in mind than normal programming languages. They make heavy use of environment variables. So much so that it can sometimes become blurry whether something is a normal variable or an environment variable.
 In this post, I will dig into variables and environment variables in shell, particularly bash, to help you understand how to distinguish the two and when to use them." />
@@ -26,7 +27,10 @@ In this post, I will dig into variables and environment variables in shell, part
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>Variables and Environment Variables In Bash | Omair Majid</title></head>
+	<title>Variables and Environment Variables In Bash | Omair Majid</title>
+
+
+</head>
 <body><header>
 	
 	<div id="avatar">
@@ -138,8 +142,8 @@ to write this as <code>cat $filename_2020.txt</code>, <code>bash</code> would un
 this as a single variable named <code>filename_2020</code>. It would treat it as
 if you had written <code>cat ${filename_2020}.txt</code>.</p>
 <p>Using the <code>${name}</code> notation also lets us perform a number of actions,
-such as doing a regular expression replace. The <a href="https://wiki.bash-hackers.org/">Bash Hackers
-Wiki</a> has <a href="https://wiki.bash-hackers.org/syntax/pe">a great reference on what
+such as doing a regular expression replace. The <a href="https://wiki.bash-hackers.org/" target="_blank">Bash Hackers
+Wiki</a> has <a href="https://wiki.bash-hackers.org/syntax/pe" target="_blank">a great reference on what
 these difference types of these actions
 are</a></p>
 <p>The variables you have seen till now have been simple pieces of text.
@@ -179,13 +183,13 @@ script, the process id of the current script, and access the exit code
 of the last command we used. Here are some examples:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo The name of this script is $0
 echo The process id of this script is $$
-</code></pre></div><p>The <a href="https://wiki.bash-hackers.org/syntax/shellvars">Bash Hackers Wiki has a
+</code></pre></div><p>The <a href="https://wiki.bash-hackers.org/syntax/shellvars" target="_blank">Bash Hackers Wiki has a
 great guide covering all the special and built in
 variables</a></p>
 <h2 id="understanding-creating-and-using-environment-variables">Understanding, creating and using environment variables</h2>
 <p>Environment variables are a way to specify the <em>environment</em> in which
 a program is running. They are useful for providing a way to customize
-how a process behaves. For example, <a href="https://12factor.net/config">The 12 Factor
+how a process behaves. For example, <a href="https://12factor.net/config" target="_blank">The 12 Factor
 App</a> guidelines require that all
 configuration for a program to be specified via environment variable.</p>
 <p>Environment variable are simple key and values containing some data.
@@ -295,7 +299,7 @@ defining variables (not environment variables) with extra spaces.</p>
 <p>You should now have a really good idea about what bash variables and
 environment variables are, how they differ, and when you might want to
 use them.</p>
-<p>This post was inspired by <a href="https://stackoverflow.com/q/62502977/3561275">this StackOverflow
+<p>This post was inspired by <a href="https://stackoverflow.com/q/62502977/3561275" target="_blank">this StackOverflow
 question</a></p>
 
 	</div>
@@ -312,6 +316,10 @@ question</a></p>
 		</div>
 		<div class="termsfloating_right">
 			<p>
+			
+			
+			
+			
 			
 			
 			
@@ -420,7 +428,17 @@ question</a></p>
 			
 			
 			
+			
+			
+			
+			
+			
+			
 			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
 			
 			
 			

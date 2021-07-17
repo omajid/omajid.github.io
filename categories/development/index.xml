@@ -18,10 +18,10 @@
 			
 			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
 			<description>
-				
+			
 				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-...
-				
+Turns out you can …
+			
 			</description>
 		</item>
 		<item>
@@ -31,9 +31,9 @@
 			
 			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
 			<description>
-				
-				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This ...
-				
+			
+				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the …
+			
 			</description>
 		</item>
 		<item>
@@ -43,10 +43,10 @@
 			
 			<guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
 			<description>
-				
+			
 				This post covers the versions and components in .NET Core 1.x.
-Components .NET Core consists of multiple components that...
-				
+Components .NET Core consists of multiple components that are each versioned …
+			
 			</description>
 		</item>
 		<item>
@@ -56,9 +56,9 @@ Components .NET Core consists of multiple components that...
 			
 			<guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
 			<description>
-				
-				Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. ...
-				
+			
+				Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. So I built OpenJDK 9 …
+			
 			</description>
 		</item>
 		<item>
@@ -68,9 +68,9 @@ Components .NET Core consists of multiple components that...
 			
 			<guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
 			<description>
-				
-				I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nift...
-				
+			
+				I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that …
+			
 			</description>
 		</item>
 		<item>
@@ -80,9 +80,9 @@ Components .NET Core consists of multiple components that...
 			
 			<guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
 			<description>
-				
-				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are ...
-				
+			
+				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need …
+			
 			</description>
 		</item>
 		

@@ -9,7 +9,7 @@
 	<meta property="og:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora">
 	
 	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,fedora"><meta name="description" content=""><meta property="og:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora" />
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,fedora"><meta name="description" content="Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an …"><meta property="og:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora" />
 <meta property="og:description" content="Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an executable program.
 But what do you do if there&rsquo;s no compiler?
 That&rsquo;s the dilemma .NET runs into in Fedora.
@@ -28,7 +28,10 @@ Every release of .NET (Core) needs a recent version of a .NET (Core) SDK that ca
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora | Omair Majid</title></head>
+	<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora | Omair Majid</title>
+
+
+</head>
 <body><header>
 	
 	<div id="avatar">
@@ -99,7 +102,7 @@ over the code and the compiler gives you back an executable program.</p>
 SDK that can be used to build it. But that&rsquo;s exactly what&rsquo;s missing
 and what we are trying to build.</p>
 <p>The general solution to this chicken-and-egg problem is called
-<a href="https://en.wikipedia.org/wiki/Bootstrapping_(compilers)">bootstrapping</a>.
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_%28compilers%29" target="_blank">bootstrapping</a>.
 Generally speaking, you somehow produce a runnable compiler (hacks are
 allowed) that understands your programming language, and then use that
 to build the real thing.</p>
@@ -116,7 +119,7 @@ to build the real thing.</p>
 </li>
 <li>
 <p>Configure and conditionalize the RPM spec file that you are working
-with for building in bootstrap mode. <a href="https://docs.fedoraproject.org/en-US/packaging-guidelines/#bootstrapping">Fedora suggests doing it like
+with for building in bootstrap mode. <a href="https://docs.fedoraproject.org/en-US/packaging-guidelines/#bootstrapping" target="_blank">Fedora suggests doing it like
 this</a>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># This (badly named) option says to build in &#34;bootstrap&#34; mode by default</span>
 %bcond_without bootstrap
@@ -145,7 +148,7 @@ git commit -m <span style="color:#e6db74">&#34;Bootstrap .NET 5&#34;</span>
 git push
 </code></pre></div></li>
 <li>
-<p><a href="https://fedoraproject.org/wiki/Package_update_HOWTO#Creating_a_side-tag">Create a
+<p><a href="https://fedoraproject.org/wiki/Package_update_HOWTO#Creating_a_side-tag" target="_blank">Create a
 side-tag</a>.
 Builds done in a side-tag can not become part of the main release
 accidentally. This helps avoid accidentally shipping prebuilts,
@@ -161,8 +164,8 @@ the next step.</p>
 </code></pre></div></li>
 <li>
 <p>Build the
-<a href="https://github.com/dotnet/source-build-reference-packages/">source-build-references-package</a>.
-This is a <a href="https://src.fedoraproject.org/rpms/dotnet5.0-build-reference-packages">regular package with a normal
+<a href="https://github.com/dotnet/source-build-reference-packages/" target="_blank">source-build-references-package</a>.
+This is a <a href="https://src.fedoraproject.org/rpms/dotnet5.0-build-reference-packages" target="_blank">regular package with a normal
 spec</a>
 file that can <code>BuildRequire</code> the just-built <code>dotnet-sdk-5.0</code>
 package. Built it in your side-tag, though:</p>
@@ -181,7 +184,7 @@ right, it should be as easy as this change to your spec file:</p>
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+%bcond_with bootstrap
 </span></code></pre></div><p>The strangely named <code>%bcond_with bootstrap</code> means &ldquo;build <em>without</em>
 bootstrap by default&rdquo;.</p>
-<p><a href="https://src.fedoraproject.org/rpms/dotnet5.0/c/2e4240bf831b134d40326b808eee0b02eb7a4d11?branch=rawhide">Here&rsquo;s an example of this in
+<p><a href="https://src.fedoraproject.org/rpms/dotnet5.0/c/2e4240bf831b134d40326b808eee0b02eb7a4d11?branch=rawhide" target="_blank">Here&amp;rsquo;s an example of this in
 Fedora</a>.</p>
 </li>
 <li>
@@ -198,7 +201,7 @@ the bootstrap build.</p>
 </li>
 <li>
 <p>If the above steps worked, you can take the final non-bootrap
-build and <a href="https://bodhi.fedoraproject.org/updates/new">file an update - use the &ldquo;Use Side Tag&rdquo;
+build and <a href="https://bodhi.fedoraproject.org/updates/new" target="_blank">file an update - use the &amp;ldquo;Use Side Tag&amp;rdquo;
 option</a> - to ship that
 package out to users!</p>
 </li>
@@ -222,7 +225,7 @@ prebuilts, we cut down source-tarball build and upload time
 by a few orders of magnitude.</p>
 <h1 id="try-it-out">Try it out</h1>
 <p>If you are packaging .NET for a RPM-based distribution, try out
-bootstrapping it! Let me know if it works or not. You can also <a href="https://github.com/dotnet/source-build">report
+bootstrapping it! Let me know if it works or not. You can also <a href="https://github.com/dotnet/source-build" target="_blank">report
 issues in source-build</a>.</p>
 <hr>
 
@@ -277,6 +280,10 @@ issues in source-build</a>.</p>
 			
 			
 			
+			
+			
+			
+			
 			</p>
 		</div>
 		<div class="clearit"></div>
@@ -304,6 +311,10 @@ issues in source-build</a>.</p>
 			
 			
 			
+			
+			
+			
+			
 			<a href="/tags/dotnet/"> dotnet </a>
 			
 			
@@ -317,6 +328,12 @@ issues in source-build</a>.</p>
 			
 			
 			<a href="/tags/fedora/"> fedora </a>
+			
+			
+			
+			
+			
+			
 			
 			
 			
