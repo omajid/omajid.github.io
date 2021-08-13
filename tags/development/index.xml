@@ -19,7 +19,7 @@
 			<guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
 			<description>
 			
-				While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:
+				While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
  is hash(-1) == hash(-2) an …
 			
 			</description>

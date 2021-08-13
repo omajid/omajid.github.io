@@ -10,7 +10,7 @@
 	
 	
 	<meta name="author" content="Omair Majid"><meta name="description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems …"><meta property="og:title" content="OpenJDK and Awesome" />
-<meta property="og:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
+<meta property="og:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too ). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
 diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/" />
@@ -18,7 +18,7 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 <meta property="article:modified_time" content="2012-04-11T23:08:41+00:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="OpenJDK and Awesome"/>
-<meta name="twitter:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
+<meta name="twitter:description" content="I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems too ). I hacked together a patch against OpenJDK7 that seems to solve all my issues:
 diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java --- a/src/solaris/classes/sun/awt/X11/XWM.java &#43;&#43;&#43; b/src/solaris/classes/sun/awt/X11/XWM.java @@ -102,7 &#43;102,8 @@  METACITY_WM = 11, COMPIZ_WM = 12, LG3D_WM = 13, - CWM_WM = 14; &#43; CWM_WM = 14, &#43; AWESOME_WM = 15;  public String toString() { switch (WMID) { case NO_WM: @@ -131,6 &#43;132,8 @@  return &#34;LookingGlass&#34;; case CWM_WM: return &#34;CWM&#34;; &#43; case AWESOME_WM: &#43; return &#34;awesomewm&#34;;  case UNDETERMINED_WM: default: return &#34;Undetermined WM&#34;; @@ -573,8 &#43;576,12 @@  // getIntProperty(XToolkit."/>
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
@@ -70,9 +70,6 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 </header>
 <main><div class="post">
 	
-	<div class="author">
-	
-	</div>
 	<div class="post-header">
 	
 		<div class="meta">
@@ -86,10 +83,32 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 		
 		<div class="matter">
 			<h1 class="title">OpenJDK and Awesome</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+    
+      <i class="fas fa-user"></i>&nbsp;
+      
+        Omair Majid
+      
+    
+  
+</span>
+
+
+			</p>
 		</div>
 	</div>
 	<div class="markdown">
-		<p>I have been playing around with <a href="http://awesome.naquadah.org/" title="awesome" target="_blank">awesome</a> and ran into some issues with Java programs (apparently <a href="http://awesome.naquadah.org/wiki/Problems_with_Java" target="_blank">others users are running into those problems too</a>). I hacked together a patch against <a href="http://hg.openjdk.java.net/jdk7u/jdk7u-dev/jdk" title="jdk7u-dev/jdk" target="_blank">OpenJDK7</a> that seems to solve all my issues:</p>
+		<p>I have been playing around with <a href="http://awesome.naquadah.org/" title="awesome" target="_blank">awesome</a>
+ and ran into some issues with Java programs (apparently <a href="http://awesome.naquadah.org/wiki/Problems_with_Java" target="_blank">others users are running into those problems too</a>
+). I hacked together a patch against <a href="http://hg.openjdk.java.net/jdk7u/jdk7u-dev/jdk" title="jdk7u-dev/jdk" target="_blank">OpenJDK7</a>
+ that seems to solve all my issues:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java
 <span style="color:#f92672">--- a/src/solaris/classes/sun/awt/X11/XWM.java
 </span><span style="color:#f92672"></span><span style="color:#a6e22e">+++ b/src/solaris/classes/sun/awt/X11/XWM.java
@@ -135,7 +154,8 @@ diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/
 </span><span style="color:#a6e22e"></span>             }
              /*
               * We don&#39;t check for legacy WM when we already know that WM
-</code></pre></div><p>Given the <a href="http://thread.gmane.org/gmane.comp.java.openjdk.awt.devel/1698" title="path review thread" target="_blank">effort it&amp;rsquo;s taking to push a fix for mutter</a> (the default gnome3 window manager), I wouldnt hold my breath waiting for this code to make it upstream.</p>
+</code></pre></div><p>Given the <a href="http://thread.gmane.org/gmane.comp.java.openjdk.awt.devel/1698" title="path review thread" target="_blank">effort it’s taking to push a fix for mutter</a>
+ (the default gnome3 window manager), I wouldnt hold my breath waiting for this code to make it upstream.</p>
 
 	</div>
 	

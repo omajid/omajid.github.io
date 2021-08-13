@@ -73,9 +73,6 @@ In this post, I will dig into variables and environment variables in shell, part
 </header>
 <main><div class="post">
 	
-	<div class="author">
-	
-	</div>
 	<div class="post-header">
 	
 		<div class="meta">
@@ -89,6 +86,25 @@ In this post, I will dig into variables and environment variables in shell, part
 		
 		<div class="matter">
 			<h1 class="title">Variables and Environment Variables In Bash</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+    
+      <i class="fas fa-user"></i>&nbsp;
+      
+        Omair Majid
+      
+    
+  
+</span>
+
+
+			</p>
 		</div>
 	</div>
 	<div class="markdown">
@@ -143,9 +159,11 @@ this as a single variable named <code>filename_2020</code>. It would treat it as
 if you had written <code>cat ${filename_2020}.txt</code>.</p>
 <p>Using the <code>${name}</code> notation also lets us perform a number of actions,
 such as doing a regular expression replace. The <a href="https://wiki.bash-hackers.org/" target="_blank">Bash Hackers
-Wiki</a> has <a href="https://wiki.bash-hackers.org/syntax/pe" target="_blank">a great reference on what
+Wiki</a>
+ has <a href="https://wiki.bash-hackers.org/syntax/pe" target="_blank">a great reference on what
 these difference types of these actions
-are</a></p>
+are</a>
+</p>
 <p>The variables you have seen till now have been simple pieces of text.
 Both the name and the value were simple text strings. Each variable
 had a single value.</p>
@@ -185,12 +203,14 @@ of the last command we used. Here are some examples:</p>
 echo The process id of this script is $$
 </code></pre></div><p>The <a href="https://wiki.bash-hackers.org/syntax/shellvars" target="_blank">Bash Hackers Wiki has a
 great guide covering all the special and built in
-variables</a></p>
+variables</a>
+</p>
 <h2 id="understanding-creating-and-using-environment-variables">Understanding, creating and using environment variables</h2>
 <p>Environment variables are a way to specify the <em>environment</em> in which
 a program is running. They are useful for providing a way to customize
 how a process behaves. For example, <a href="https://12factor.net/config" target="_blank">The 12 Factor
-App</a> guidelines require that all
+App</a>
+ guidelines require that all
 configuration for a program to be specified via environment variable.</p>
 <p>Environment variable are simple key and values containing some data.
 It is not possible to have the more complex data types that are
@@ -300,7 +320,8 @@ defining variables (not environment variables) with extra spaces.</p>
 environment variables are, how they differ, and when you might want to
 use them.</p>
 <p>This post was inspired by <a href="https://stackoverflow.com/q/62502977/3561275" target="_blank">this StackOverflow
-question</a></p>
+question</a>
+</p>
 
 	</div>
 	

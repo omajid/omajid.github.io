@@ -70,9 +70,6 @@ First, though, a big heads up: the OpenJDK 9 build selectively enables and disab
 </header>
 <main><div class="post">
 	
-	<div class="author">
-	
-	</div>
 	<div class="post-header">
 	
 		<div class="meta">
@@ -86,10 +83,30 @@ First, though, a big heads up: the OpenJDK 9 build selectively enables and disab
 		
 		<div class="matter">
 			<h1 class="title">-Wmisleading-indentation in OpenJDK</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+    
+      <i class="fas fa-user"></i>&nbsp;
+      
+        Omair Majid
+      
+    
+  
+</span>
+
+
+			</p>
 		</div>
 	</div>
 	<div class="markdown">
-		<p>Inspired by <a href="https://gnu.wildebeest.org/blog/mjw/2016/01/09/looking-forward-to-gcc6-nice-new-warnings/" target="_blank">this post by Mark Wielaard</a> I started wondering how OpenJDK 9 would fare in a <code>-Wmisleading-indentation</code> test. So I built OpenJDK 9 using <code>-Wall</code> to find out.</p>
+		<p>Inspired by <a href="https://gnu.wildebeest.org/blog/mjw/2016/01/09/looking-forward-to-gcc6-nice-new-warnings/" target="_blank">this post by Mark Wielaard</a>
+ I started wondering how OpenJDK 9 would fare in a <code>-Wmisleading-indentation</code> test. So I built OpenJDK 9 using <code>-Wall</code> to find out.</p>
 <p>First, though, a big heads up: the OpenJDK 9 build selectively enables and
 disables warnings and turns on <code>-Werorr</code>. There doesn&rsquo;t seem to be a straight-
 forward way of enabling all compiler warnings everywhere. I ended up patching

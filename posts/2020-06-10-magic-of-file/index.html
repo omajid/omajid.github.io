@@ -76,9 +76,6 @@ $ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg ima
 </header>
 <main><div class="post">
 	
-	<div class="author">
-	
-	</div>
 	<div class="post-header">
 	
 		<div class="meta">
@@ -92,6 +89,25 @@ $ file document.pdf document.pdf: PDF document, version 1.4 $ file image.jpg ima
 		
 		<div class="matter">
 			<h1 class="title">The magic of file</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+    
+      <i class="fas fa-user"></i>&nbsp;
+      
+        Omair Majid
+      
+    
+  
+</span>
+
+
+			</p>
 		</div>
 	</div>
 	<div class="markdown">
@@ -149,15 +165,18 @@ Vagrantfile: HTML document, ASCII text
 $ file microsoft.netcore.app.2.1.19.nupkg
 microsoft.netcore.app.2.1.19.nupkg: Microsoft OOXML
 </code></pre></div><p>Yes, it really thinks a
-<a href="https://www.vagrantup.com/docs/vagrantfile" target="_blank">&lt;code&gt;Vagrantfile&lt;/code&gt;</a> is an
+<a href="https://www.vagrantup.com/docs/vagrantfile" target="_blank"><code>Vagrantfile</code></a>
+ is an
 HTML document and a <a href="https://www.nuget.org/packages/Microsoft.NETCore.App/2.1.19" target="_blank">NuGet package
 file</a>
+
 is an Office document!</p>
 </li>
 </ol>
 <p>But how does <code>file</code> actually figure out the file type?</p>
 <p>Like other classic Unix tools, <code>file</code> has excellent documentation.
-<a href="https://man7.org/linux/man-pages/man1/file.1.html" target="_blank">&lt;code&gt;man file&lt;/code&gt;</a> points
+<a href="https://man7.org/linux/man-pages/man1/file.1.html" target="_blank"><code>man file</code></a>
+ points
 out that <code>file</code> looks for things in this order.</p>
 <ol>
 <li>

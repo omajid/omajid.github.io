@@ -68,9 +68,6 @@
 </header>
 <main><div class="post">
 	
-	<div class="author">
-	
-	</div>
 	<div class="post-header">
 	
 		<div class="meta">
@@ -84,10 +81,30 @@
 		
 		<div class="matter">
 			<h1 class="title">SharedSecrets in OpenJDK</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+    
+      <i class="fas fa-user"></i>&nbsp;
+      
+        Omair Majid
+      
+    
+  
+</span>
+
+
+			</p>
 		</div>
 	</div>
 	<div class="markdown">
-		<p>I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the <a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/misc/SharedSecrets.java" title="Code for sun.misc.SharedSecets" target="_blank">SharedSecrets</a> class! The name of the class is a little misleading since it doesn&rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:</p>
+		<p>I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the <a href="http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/misc/SharedSecrets.java" title="Code for sun.misc.SharedSecets" target="_blank">SharedSecrets</a>
+ class! The name of the class is a little misleading since it doesn&rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:</p>
 <pre><code>/** A repository of &quot;shared secrets&quot;, which are a mechanism for
     calling implementation-private methods in another package without
     using reflection. A package-private class implements a public

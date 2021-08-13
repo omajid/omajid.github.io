@@ -19,7 +19,7 @@
 			<guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
 			<description>
 			
-				While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:
+				While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
  is hash(-1) == hash(-2) an …
 			
 			</description>
@@ -234,8 +234,7 @@ This includes all the …
 			<guid>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</guid>
 			<description>
 			
-				A new release of IcedTea6 1.11 branch is now available: 1.11.1
-The update contains the following security fixes:
+				A new release of IcedTea6 1.11 branch is now available: 1.11.1 The update contains the following security fixes:
  S7082299, CVE-2011-3571: …
 			
 			</description>
@@ -249,7 +248,7 @@ The update contains the following security fixes:
 			<description>
 			
 				After quite a bit of delay, IcedTea6 1.11 has finally been released!
-Take a look at the release announcement, download icedtea6 1.11 and …
+Take a look at the release announcement , download icedtea6 1.11 and …
 			
 			</description>
 		</item>
@@ -261,7 +260,7 @@ Take a look at the release announcement, download icedtea6 1.11 and …
 			<guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
 			<description>
 			
-				I have just branched IcedTea6 1.11. Please start subjecting this branch to the most vicious tests you have.
+				I have just branched IcedTea6 1.11 . Please start subjecting this branch to the most vicious tests you have.
 I am planning to release …
 			
 			</description>

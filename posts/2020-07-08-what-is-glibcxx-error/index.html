@@ -73,9 +73,6 @@ app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (requ
 </header>
 <main><div class="post">
 	
-	<div class="author">
-	
-	</div>
 	<div class="post-header">
 	
 		<div class="meta">
@@ -89,6 +86,25 @@ app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (requ
 		
 		<div class="matter">
 			<h1 class="title">What is this GLIBCXX error?</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+    
+      <i class="fas fa-user"></i>&nbsp;
+      
+        Omair Majid
+      
+    
+  
+</span>
+
+
+			</p>
 		</div>
 	</div>
 	<div class="markdown">
@@ -104,7 +120,8 @@ a <code>GLIBCXX</code> or <code>GLIBC</code> version was not found.</p>
 <h2 id="what-are-glibc-and-libstdc-">What are <code>glibc</code> and <code>libstdc++</code> ?</h2>
 <p>A little bit of background will help you understand the underlying
 issue better (and hopefully fix it).</p>
-<p><code>glibc</code> is the <a href="https://www.gnu.org/software/libc/" target="_blank">GNU C library</a>.
+<p><code>glibc</code> is the <a href="https://www.gnu.org/software/libc/" target="_blank">GNU C library</a>
+.
 It&rsquo;s an implementation of the standard C library. Any program written
 in C will use the standard library for things like accessing files and
 the network, displaying messages to the user, working with processes
@@ -113,14 +130,17 @@ and so on. It&rsquo;s a fundamental component of the operating system.</p>
 languages installed on a typical Linux system will make use of the C
 library.</p>
 <p>There are other C libraries on Linux too, such as
-<a href="https://musl.libc.org/" target="_blank">&lt;code&gt;musl&lt;/code&gt;</a>, but <code>glibc</code> is the most common one.</p>
-<p><a href="https://gcc.gnu.org/onlinedocs/libstdc&#43;&#43;/" target="_blank">&lt;code&gt;libstdc&#43;&#43;&lt;/code&gt;</a> is similar to
+<a href="https://musl.libc.org/" target="_blank"><code>musl</code></a>
+, but <code>glibc</code> is the most common one.</p>
+<p><a href="https://gcc.gnu.org/onlinedocs/libstdc&#43;&#43;/" target="_blank"><code>libstdc++</code></a>
+ is similar to
 <code>glibc</code>, but for C++: it&rsquo;s an implementation of the standard library
 for C++. Any program written in C++ will use this to implement things
 in the C++ libraries. Things like threads, streams, files,
 Input/Output and so on.</p>
 <p>There is a <a href="https://www.reddit.com/r/linuxquestions/comments/1tghjd/what_is_the_relationship_between_gcc_libstdc/ce7rteb/" target="_blank">great reddit
 comment</a>
+
 that goes into more detail about the relationship between these two
 libraries as well as how they relate with other core tools on the
 system such as the C compiler (<code>gcc</code>) and <code>binutils</code>.</p>
@@ -147,11 +167,13 @@ newer symbol <code>glob64@GLIBC_2.27</code>.</p>
 <p>The versions used by <code>glibc</code> for symbols generally look like
 <code>GLIBC_&lt;VERSION&gt;</code>. Some examples are <code>GLIBC_2.27</code> and <code>GLIBC_2.2.5</code>.</p>
 <p>You can find <a href="https://developers.redhat.com/blog/2019/08/01/how-the-gnu-c-library-handles-backward-compatibility/" target="_blank">more information about how symbol versioning works in
-&lt;code&gt;glibc&lt;/code&gt;
-here</a></p>
+<code>glibc</code>
+here</a>
+</p>
 <p><code>libstdc++</code> has a similar concept and implementation ABI. In fact,
 some versions of <code>libstdc++</code> even provide <a href="http://allanmcrae.com/2015/06/the-case-of-gcc-5-1-and-the-two-c-abis/" target="_blank">two different
-ABIs</a>!</p>
+ABIs</a>
+!</p>
 <p>The versions exported by <code>libstdc++</code> generally look like
 <code>GLIBCXX_&lt;VERSION&gt;</code>. Some examples: <code>GLIBCXX_3.4</code> and <code>CXXABI_1.3</code>.</p>
 <h2 id="what-does-the-error-mean">What does the error mean?</h2>
@@ -180,11 +202,13 @@ distribution and try and run it on an older Linux distribution.</p>
 <p>For example, an application compiled to run on RHEL 8 will show the
 error when run on RHEL 7. So will a <a href="https://stackoverflow.com/q/48591455/3561275" target="_blank">a python package meant to run
 on a newer
-distribution.</a></p>
+distribution.</a>
+</p>
 </li>
 <li>
 <p>You somehow <a href="https://askubuntu.com/q/1068763" target="_blank">installed a distribution package meant for a newer
-version of the distribution</a>.</p>
+version of the distribution</a>
+.</p>
 </li>
 <li>
 <p>You downloaded an application that just isn&rsquo;t supported on your
@@ -237,9 +261,11 @@ not an appropriate solution for a production environment.</p>
 maintenance, security and compatibility implications of it, there&rsquo;s
 the last option: you can rebuild your own version of <code>glibc</code> or
 <code>libstdc++</code>. There&rsquo;s <a href="https://stackoverflow.com/a/50697155/3561275" target="_blank">steps on how to build your own version of
-&lt;code&gt;glibc&lt;/code&gt; here</a>. And
-there&rsquo;s <a href="https://askubuntu.com/a/319301" target="_blank">an even better way to run your just-built &lt;code&gt;glibc&lt;/code&gt; that&amp;rsquo;s
-described here</a>.</p>
+<code>glibc</code> here</a>
+. And
+there&rsquo;s <a href="https://askubuntu.com/a/319301" target="_blank">an even better way to run your just-built <code>glibc</code> that’s
+described here</a>
+.</p>
 <p>But then again, if you fully understand all the ramification, you
 wouldn&rsquo;t be reading this post to help understand and fix the error.
 And you have probably spotted some ideas here that are not 100%
