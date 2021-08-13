@@ -30,7 +30,7 @@ any employers (past, present or future).
 - Email: [omair.majid@gmail.com](mailto:omair.majid@gmail.com)
 - Github: [`@omajid`](https://github.com/omajid)
 - Gitlab: [`@omajid`](https://gitlab.com/omajid)
-- IRC: `omajid` on irc.freenode.net and OFTC
+- IRC: `omajid` on irc.libera.chat and OFTC
 - Reddit: [`omair-majid`](https://reddit.com/u/omair-majid)
 - StackOverflow: [`omajid`](https://stackoverflow.com/users/3561275/)
 
