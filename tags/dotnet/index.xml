@@ -7,10 +7,22 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en</language>
 		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Wed, 25 Aug 2021 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="https://omairmajid.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Using .NET with OpenSSL in CentOS Stream 9</title>
+			<link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
+			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
+			<description>
+			
+				Or, how to deal with error:0E07607...
+			
+			</description>
+		</item>
 		<item>
 			<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
 			<link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
