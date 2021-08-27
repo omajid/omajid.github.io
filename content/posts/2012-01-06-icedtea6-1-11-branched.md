@@ -1,7 +1,6 @@
 +++
 title = "IcedTea6 1.11 Branched"
 date = "Fri, 06 Jan 2012 22:19:56 +0000"
-author = "Omair Majid"
 tags = [ "icedtea", "icedtea6" ]
 aliases = [
     "/2012/01/06/icedtea6-1-11-branched/",

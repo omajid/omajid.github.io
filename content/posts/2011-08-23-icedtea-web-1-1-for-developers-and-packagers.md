@@ -1,7 +1,6 @@
 +++
 title = "What IcedTea-Web 1.1 means for you"
 date = "Tue, 23 Aug 2011 18:34:41 +0000"
-author = "Omair Majid"
 categories = [ "development" ]
 tags = [ "icedtea-web", "icedtea-web-1.1" ]
 aliases = [

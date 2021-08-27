@@ -1,6 +1,5 @@
 +++
 title = "About"
-author = "Omair Majid"
 +++
 
 Hi, I am Omair Majid.

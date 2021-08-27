@@ -1,7 +1,6 @@
 +++
 title = "Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora"
 date = "2021-04-09"
-author = "Omair Majid"
 categories = [ "dotnet" ]
 tags = [ "dotnet", "fedora" ]
 +++

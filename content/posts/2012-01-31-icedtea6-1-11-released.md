@@ -1,7 +1,6 @@
 +++
 title = "IcedTea6 1.11 Released!"
 date = "Tue, 31 Jan 2012 05:27:50 +0000"
-author = "Omair Majid"
 aliases = [
     "/2012/01/31/icedtea6-1-11-released/",
 ]

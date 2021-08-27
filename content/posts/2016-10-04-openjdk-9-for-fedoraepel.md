@@ -1,7 +1,6 @@
 +++
 title = "OpenJDK 9 for Fedora/EPEL"
 date = "Tue, 04 Oct 2016 23:35:09 +0000"
-author = "Omair Majid"
 tags = [ "openjdk", "openjdk9" ]
 aliases = [
     "/2016/10/04/openjdk-9-for-fedoraepel/",

@@ -1,7 +1,6 @@
 +++
 title = "What is this GLIBCXX error?"
 date = "2020-07-08T20:06:54-04:00"
-author = "Omair Majid"
 categories = [ "linux" ]
 tags = [ "linux", "tools", "glibc" ]
 +++

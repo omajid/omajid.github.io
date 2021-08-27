@@ -1,6 +1,5 @@
 +++
 title = "Projects"
-author = "Omair Majid"
 +++
 
 This is a list of projects I am involved with or maintain.

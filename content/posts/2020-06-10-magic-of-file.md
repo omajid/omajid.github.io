@@ -1,6 +1,5 @@
 +++
 title = "The magic of file"
-author = "Omair Majid"
 date = "2020-06-10"
 categories = ["tools"]
 tags = ["unix", "linux", "tools"]

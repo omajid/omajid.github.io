@@ -1,7 +1,6 @@
 +++
 title = "Variables and Environment Variables In Bash"
 date = "2020-06-25T00:58:07-04:00"
-author = "Omair Majid"
 categories = [ "unix" ]
 tags = [ "linux", "unix", "bash", ]
 +++

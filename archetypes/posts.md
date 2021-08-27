@@ -1,7 +1,6 @@
 +++
 title = "{{ replace .Name "-" " " | title }}"
 date = "{{ .Date }}"
-author = "Omair Majid"
 draft = true
 categories = [  ]
 tags = [ ]

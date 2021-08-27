@@ -1,7 +1,6 @@
 +++
 title = "Components & Versioning in .NET Core"
 date = "Thu, 30 Mar 2017 22:14:31 +0000"
-author = "Omair Majid"
 categories = [ "development", "dotnet" ]
 aliases = [
     "/2017/03/30/components-versioning-in-net-core/",

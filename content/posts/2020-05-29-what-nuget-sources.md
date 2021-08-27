@@ -1,6 +1,5 @@
 +++
 title = "What is nuget restore doing?"
-author = "Omair Majid"
 date = "Fri, 29 May 2020 18:34:41 +0000"
 categories = [ "development" ]
 tags = [ "dotnet", "msbuild", "nuget"]

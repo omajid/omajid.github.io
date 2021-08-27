@@ -1,7 +1,6 @@
 +++
 title = "-Wmisleading-indentation in OpenJDK"
 date = "Mon, 29 Feb 2016 15:21:27 +0000"
-author = "Omair Majid"
 categories = [ "development" ]
 aliases = [
     "/2016/02/29/wmisleading-indentation-in-openjdk/",

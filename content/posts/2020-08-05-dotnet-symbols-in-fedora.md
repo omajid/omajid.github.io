@@ -1,7 +1,6 @@
 +++
 title = ".NET Core Symbols on Fedora"
 date = "2020-08-05"
-author = "Omair Majid"
 categories = [ "dotnet" ]
 tags = [ "dotnet", "fedora", "debugging" ]
 +++

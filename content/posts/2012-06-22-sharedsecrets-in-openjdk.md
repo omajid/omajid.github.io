@@ -1,7 +1,6 @@
 +++
 title = "SharedSecrets in OpenJDK"
 date = "Fri, 22 Jun 2012 23:10:03 +0000"
-author = "Omair Majid"
 categories = [ "development" ]
 tags = [ "openjdk" ]
 aliases = [

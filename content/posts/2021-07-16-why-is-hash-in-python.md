@@ -1,7 +1,6 @@
 +++
 title = "Why is hash(-1) == hash(-2) in Python?"
 date = "2021-07-16"
-author = "Omair Majid"
 categories = [ "python" ]
 tags = [ "python", "linux", "development" ]
 +++

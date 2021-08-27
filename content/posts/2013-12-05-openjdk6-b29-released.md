@@ -1,7 +1,6 @@
 +++
 title = "OpenJDK6 B29 Released!"
 date = "Fri, 06 Dec 2013 02:50:16 +0000"
-author = "Omair Majid"
 aliases = [
     "/2013/12/05/openjdk6-b29-released/",
 ]

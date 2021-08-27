@@ -1,7 +1,6 @@
 +++
 title = "Contributing Patches to OpenJDK"
 date = "Fri, 13 Sep 2013 23:43:03 +0000"
-author = "Omair Majid"
 aliases = [
     "/2013/09/13/contributing-patches-to-openjdk/",
 ]

@@ -1,6 +1,5 @@
 +++
 title = "Talks"
-author = "Omair Majid"
 +++
 
 

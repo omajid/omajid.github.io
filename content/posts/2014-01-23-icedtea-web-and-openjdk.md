@@ -1,7 +1,6 @@
 +++
 title = "IcedTea-Web and OpenJDK"
 date = "Fri, 24 Jan 2014 00:29:36 +0000"
-author = "Omair Majid"
 tags = [ "icedtea-web", "openjdk" ]
 aliases = [
     "/2014/01/23/icedtea-web-and-openjdk/",

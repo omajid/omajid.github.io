@@ -1,7 +1,6 @@
 +++
 title = "OpenJDK and Awesome"
 date = "Wed, 11 Apr 2012 23:08:41 +0000"
-author = "Omair Majid"
 aliases = [
     "/2012/04/11/openjdk-and-awesome/",
 ]
