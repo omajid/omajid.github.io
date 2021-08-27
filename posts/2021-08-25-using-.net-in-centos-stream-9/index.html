@@ -89,12 +89,6 @@
 
   
     
-    
-      <i class="fas fa-user"></i>&nbsp;
-      
-        Omair Majid
-      
-    
   
 </span>
 
@@ -103,39 +97,48 @@
 		</div>
 	</div>
 	<div class="markdown">
-		<p>Or, how to deal with <code>error:0E07607</code>&hellip;.</p>
+		<p>Or, how to deal with <code>error:0E07607: configuration file routines</code>&hellip;.</p>
+<hr>
+<p>TLDR:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># Only for .NET 5 or .NET Core 3.1</span>
+sudo dnf install -y compat-openssl11
+export OPENSSL_CONF<span style="color:#f92672">=</span>/etc/pki/openssl11.cnf
+dotnet whatever
+</code></pre></div><hr>
 <h1 id="introduction">Introduction</h1>
 <p>How do you get .NET applications - whether the SDK/runtime itself or a
 self-contained application - working on RHEL 9?</p>
 <p>Generally, this should be a walk in the park. .NET is a cross platform
 runtime. It explicitly supports RHEL. There shouldn&rsquo;t be any surprises
 here.</p>
-<p>Unfortunately, RHEL 9 (or CentOS
-Stream 9, rather) is still in development. It has also switched to
-OpenSSL 3.0, which currently-released versions of .NET don&rsquo;t support.
-Even forcing OpenSSL 1.1 leads to an obscure <code>error:0E07607: configuration file routines</code> error.</p>
-<p>In the rest of this post, I will walk you through on how to get a
-simple .NET Core 3.1 network-using application to work on CentOS
-Stream 9. I will be using container images, but only because it makes
-things easy to reproduce. There&rsquo;s nothing here specific to container
-images.</p>
+<p>Unfortunately, RHEL 9 (or CentOS Stream 9, rather) is still in
+development. It has also switched to OpenSSL 3.0, which
+currently-released versions of .NET don&rsquo;t support. Even forcing
+OpenSSL 1.1 leads to an obscure <code>error:0E07607: configuration file routines</code> error.</p>
+<p>In the rest of this post, I will walk you through running a simple
+.NET Core network-using application on CentOS Stream 9. I will be
+using container images, but only because it makes things easier to
+reproduce. There&rsquo;s nothing here that&rsquo;s specific to container images.</p>
 <h1 id="centos-stream-why-not-rhel-9">CentOS Stream? Why not RHEL 9?</h1>
 <p>CentOS Stream 9 is the in-development version of what will eventually
-become RHEL 9. You can <a href="https://www.redhat.com/en/blog/faq-centos-stream-updates" target="_blank">find more details
+become RHEL 9. You can <a href="https://www.redhat.com/en/blog/faq-centos-stream-updates" target="_blank">find more details about how RHEL 9 and CentOS
+Stream 9 relate
 here</a>
 . I am
 going to use CentOS Stream 9 in the rest of this post.</p>
-<p>First, let&rsquo;s get our hands on a container we can use for playing
-around with. I am going to use the latest CentOS Stream 9 image:
+<p>First, let&rsquo;s get our hands on a container we can use for trying things
+out. I am going to use the latest CentOS Stream 9 image:
 <code>quay.io/centos/centos:stream9-development</code>. <a href="https://quay.io/repository/centos/centos?tab=tags" target="_blank">Other CentOS images are
 available too</a>
-). If
+. If
 you are wondering, these images are <a href="https://lists.centos.org/pipermail/centos-announce/2021-March/048282.html" target="_blank">official images created by the
 CentOS Stream
 folks</a>
 .</p>
-<p>I will use <code>podman</code> through this post, but feel free to replace with
-<code>docker</code> and things should work more-or-less the same.</p>
+<p>I will use <code>podman</code> through this post. Feel free to replace the
+<code>podman</code> command with <code>docker</code> if you want. The <code>podman</code> and <code>docker</code>
+commands accept the same set of sub-commands and arguments. There
+shouldn&rsquo;t be a function difference b</p>
 <p>This image claims it&rsquo;s CentOS Stream 9, and even tells us that it
 should reflect the next release of RHEL 9:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ podman run -it quay.io/centos/centos:stream9-development cat /etc/os-release
@@ -165,7 +168,7 @@ run a trivial .NET Core 3.1 application:</p>
 </span><span style="color:#ae81ff"></span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>Here&rsquo;s what this <code>Dockerfile</code> does, line by line.</p>
 <ol>
-<li>Use the CentOS Stream container image</li>
+<li>Use the CentOS Stream 9 container image</li>
 <li>Install some dependencies
 <ul>
 <li><code>wget</code> is needed to download .NET Core itself</li>
@@ -344,8 +347,9 @@ configuration file.</p>
 <a href="https://bugzilla.redhat.com/show_bug.cgi?id=1694850,">https://bugzilla.redhat.com/show_bug.cgi?id=1694850,</a> we should
 override the default and unusable configuration with a configuration
 usable by OpenSSL 1.1.</p>
-<p>If we look for all <code>.cnf</code> files installed by <code>compat-openssl11</code>, we
-can find where a usable configuration file is:</p>
+<p>If we look for all <code>.cnf</code> files owned/installed by the
+<code>compat-openssl11</code> package, we can find where a usable configuration
+file is:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ podman run -it centos-dotnet-container rpm -ql compat-openssl11 | grep cnf
 /etc/pki/openssl11.cnf
 </code></pre></div><p>Then we can modify our <code>Dockerfile</code> to <code>export OPENSSL_CONF=/etc/pki/openssl11.cnf</code> to override the default OpenSSL
@@ -354,7 +358,8 @@ can find where a usable configuration file is:</p>
 </span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># #RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
