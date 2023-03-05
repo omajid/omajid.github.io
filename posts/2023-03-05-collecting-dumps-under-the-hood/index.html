@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	
+	<meta name="generator" content="Hugo 0.98.0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta property="og:title" content="Collecting dumps; under the hood">
+	
+	
+	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,linux"><meta name="description" content="Or how dotnet-dump collect works on Linux
+If you are trying to diagnose the behaviour of a mis-behaving application in production, one …"><meta property="og:title" content="Collecting dumps; under the hood" />
+<meta property="og:description" content="Or how dotnet-dump collect works on Linux
+If you are trying to diagnose the behaviour of a mis-behaving application in production, one option is to use the dotnet-dump tool to get a memory dump of the application so you can study it offline. With a dump, you can get stack traces, look at all the threads and even dig through the entire heap offline.
+But how does dotnet-dump actually work?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-03-05T01:32:23-05:00" />
+<meta property="article:modified_time" content="2023-03-05T01:32:23-05:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Collecting dumps; under the hood"/>
+<meta name="twitter:description" content="Or how dotnet-dump collect works on Linux
+If you are trying to diagnose the behaviour of a mis-behaving application in production, one option is to use the dotnet-dump tool to get a memory dump of the application so you can study it offline. With a dump, you can get stack traces, look at all the threads and even dig through the entire heap offline.
+But how does dotnet-dump actually work?"/>
+
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
+	<title>Collecting dumps; under the hood | Omair Majid</title>
+
+
+</head>
+<body><header>
+	
+	<div id="avatar">
+		<a href="https://omairmajid.com/">
+		  <img src="/profile.png" alt="Omair Majid">
+		</a>
+	</div>
+	
+	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
+	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
+			<nav>
+				<ul>
+					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
+					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
+					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
+					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
+					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/">Home</a></li>
+				
+				<li><a href="/posts/">Posts</a></li>
+				
+				<li><a href="/projects/">Projects</a></li>
+				
+				<li><a href="/talks/">Talks</a></li>
+				
+				<li><a href="/about/">About</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+	
+	<div class="post-header">
+	
+		<div class="meta">
+			
+			<div class="date">
+				<span class="day">05</span>
+				<span class="rest">Mar 2023</span>
+			</div>
+			
+		</div>
+		
+		<div class="matter">
+			<h1 class="title">Collecting dumps; under the hood</h1>
+			<p class="post-meta">
+				<span class="post-meta">
+  
+
+  
+
+  
+    
+  
+</span>
+
+
+			</p>
+		</div>
+	</div>
+	<div class="markdown">
+		<p>Or how <code>dotnet-dump collect</code> works on Linux</p>
+<p>If you are trying to diagnose the behaviour of a mis-behaving
+application in production, one option is to use the
+<a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump" target="_blank"><code>dotnet-dump</code></a>
+
+tool to get a memory dump of the application so you can study it
+offline. With a dump, you can get stack traces, look at all the
+threads and even dig through the entire heap offline.</p>
+<p>But how does <code>dotnet-dump</code> actually work?</p>
+<p>This post will try and summarize what I found as I tried digging
+through what <code>dotnet dump collect</code> does under the hood.</p>
+<h2 id="the-client">The client</h2>
+<p>Let&rsquo;s start by looking at the first result of a google search for
+&ldquo;dotnet-dump&rdquo;: the <a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump" target="_blank">official documentation for <code>dotnet-dump</code>
+command</a>
+.
+That points to the <a href="https://www.nuget.org/packages/dotnet-dump" target="_blank">NuGet Package
+page</a>
+ for <code>dotnet-dump</code>.
+And the NuGet Package page has a link to the <a href="https://github.com/dotnet/diagnostics/" target="_blank">source
+repository</a>
+.</p>
+<p>Now we can poke around in <a href="https://github.com/dotnet/diagnostics" target="_blank">https://github.com/dotnet/diagnostics</a>
+ <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+repository to find the source code for the <code>dotnet dump collect</code>
+command.</p>
+<p>There&rsquo;s a <code>src/Tools</code> directory which contains a <code>dotnet-dump</code>
+directory. That seems like a likely candidate for the source code of
+this tool. The
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Tools/dotnet-dump/Program.cs" target="_blank">Program.cs</a>
+
+seems like a good place to start digging into the code.</p>
+<p>There&rsquo;s a <code>CollectCommand</code> sub-command in that file that, which
+matches with the <code>collect</code> sub-command name in the <code>dotnet dump</code> CLI
+tool. The code looks roughly like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Command CollectCommand() =&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Command( name: <span style="color:#e6db74">&#34;collect&#34;</span>, description: <span style="color:#e6db74">&#34;Capture dumps from a process&#34;</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Handler</span>
+</span></span><span style="display:flex;"><span>        CommandHandler.Create&lt;...&gt;(<span style="color:#66d9ef">new</span> Dumper().Collect),
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Options</span>
+</span></span><span style="display:flex;"><span>        ProcessIdOption(), OutputOption(), DiagnosticLoggingOption(), CrashReportOption(), TypeOption(), ProcessNameOption()
+</span></span><span style="display:flex;"><span>    };
+</span></span></code></pre></div><p>There&rsquo;s a bit of boiler-plate involving how subcommands, arguments and
+options are handled through <code>System.CommandLine</code>. The actual work is
+done (using what <code>System.CommandLine</code> calls a <code>Handler</code>) by calling
+<code>Dumper.Collect</code>.</p>
+<p>Let&rsquo;s look into that. The
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Tools/dotnet-dump/Dumper.cs" target="_blank"><code>Dumper.Collect()</code></a>
+
+method looks something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dumper</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Collect(....)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">// Lots of error handling</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span> (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+</span></span><span style="display:flex;"><span>       {
+</span></span><span style="display:flex;"><span>           <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>           Windows.CollectDump(...);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">var</span> client = <span style="color:#66d9ef">new</span> DiagnosticsClient(processId);
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>            client.WriteDump(...) ;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>That checks for the OS - Windows or Linux/macOS - and then calls
+OS-specific code to handle each condition. For Linux, it calls into
+the <code>DiagnosticsClient</code> class to create a dump.</p>
+<p>The (relevant) core logic of the
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsClient/DiagnosticsClient.cs" target="_blank">DiagnosticsClient</a>
+
+class is this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiagnosticsClient</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> DiagnosticsClient(<span style="color:#66d9ef">int</span> processId): <span style="color:#66d9ef">this</span>(<span style="color:#66d9ef">new</span> PidIpcEndPoint(processId))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> WriteDump(...)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>       IpcMessage request = CreateWriteDumpMessage(...);
+</span></span><span style="display:flex;"><span>       IpcMessage response = IpcClient.SendMessage(...);
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">// lots of error handling and fallback if IPC response</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">// indicates failure</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This client is process-id based (this will come in handy later). To
+write a dump, it creates a message and then sends it over some IPC
+(Inter-Process Communication) mechanism via the <code>IpcClient</code>. A valid
+response confirms that the dump was created.</p>
+<p>What is this IPC mechanism? Who&rsquo;s listening on the other side?</p>
+<h2 id="net-diagnostics-ipc">.NET diagnostics IPC</h2>
+<p>The interesting bits of
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsIpc/IpcClient.cs" target="_blank"><code>IpcClient</code></a>
+
+look roughly like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcClient</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IpcMessage SendMessage(IpcEndpoint endpoint, IpcMessage message)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        IpcResponse response = SendMessageGetContunation(endpoint, message);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> response.Message;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IpcResponse SendMessageGetContnuation(IpcEndpoint endpoint, IpcMessage message)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Stream stream = endpoint.Connect(...);
+</span></span><span style="display:flex;"><span>        Write(stream, message);
+</span></span><span style="display:flex;"><span>        IpcMessage response = Read(stream);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> IpcResponse(...);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Write(Stream stream, IpcMessage message)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">byte</span>[] buffer = message.Serialize();
+</span></span><span style="display:flex;"><span>       stream.Write(buffer, ...);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>When we call <code>SendMessage</code>, it calls <code>SendMessageWithContinuation</code> to
+the heavy work and then returns the response.
+<code>SendMessageWithContinuation</code> connects to an endpoint, uses some form
+of serialization to convert the request message to an array of bytes
+and then writes those bytes into a stream.</p>
+<p>Lets dig into these one by one</p>
+<ol>
+<li>
+<p>The <code>endpoint</code> is represented by the
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsIpc/IpcTransport.cs" target="_blank"><code>IpcEndpoint</code></a>
+
+class. Remember how <code>DiagnosticsClient</code> had created a
+<code>PidIpcEndpoint</code> instance explcitly?</p>
+<p>The <code>PidIpcEndpoint</code> and related classes look roughly like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcEndpoint</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PidIpcEndpoint</span> : IpcEndpoint
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> stirng IpcRootPath { <span style="color:#66d9ef">get</span>; } = Path.GetTempPath();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#ae81ff">_</span>pid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> Stream Connect(TimeSpan timeout)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">string</span> address = GetDefaultAddress();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> IpcEndPointHelper.Connect(address, timeout)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> GetDefaultAddress()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...</span>
+</span></span><span style="display:flex;"><span>        TryGetDefaultAddress(<span style="color:#ae81ff">_</span>pid, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">string</span> transportName);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> transportName;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> TryGetDefaultAddress(<span style="color:#66d9ef">int</span> pid, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">string</span> defaultAddress)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        defaultAddress = Directory.GetFiles(IpcRootPath, <span style="color:#e6db74">$&#34;dotnet-diagnostic-{pid}-*-socket&#34;</span>)
+</span></span><span style="display:flex;"><span>                                  .FirstOrDefualt();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> defaultAddress;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcEndpointHelper</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Stream Connect(...)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> socket = <span style="color:#66d9ef">new</span> IpcUnixDomainSocket()
+</span></span><span style="display:flex;"><span>        socket.Connect(<span style="color:#66d9ef">new</span> IpcUnixDomainSocketEndpoint(...));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> ExposedSocketNetworkStream(socket);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The entrypoint to this code is supposed to be the
+<code>EndPoint.Connect</code> method. When <code>PidIpcEndpoint.Connect</code> is called,
+To summarize, it looks for a file matching a specific file name
+pattern in <code>/tmp</code>. After finding the file, the code opens the file
+as a unix domain socket and uses that for sending (and receiving)
+data.</p>
+</li>
+<li>
+<p>The serialization mechanism</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcMessage</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Serialize()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> writer = <span style="color:#66d9ef">new</span> BinaryWriter(...))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            writer.Write(...);
+</span></span><span style="display:flex;"><span>            writer.Flush();
+</span></span><span style="display:flex;"><span>            serializedData = stream.ToArray();
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> serializedData;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This uses simple <code>BinaryWriter</code>-based serialization.</p>
+</li>
+</ol>
+<p>Okay, so now we know that we are using <code>BinaryWriter</code>-based
+serialization to send a message to a socket. Is this something ad-hoc
+or part of an intentionally designed feature in .NET?</p>
+<h2 id="net-diagnostic-sockets">.NET diagnostic sockets</h2>
+<p>It turns out that this socket is an intentional part of the of the
+.NET runtime.</p>
+<p>Whenever a .NET process starts, it creates a socket (file) at
+<code>/tmp/dotnet-diagnostics-${pid}-${random}-socket</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ps aux | grep 1688<span style="color:#f92672">[</span>7<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>omajid     <span style="color:#ae81ff">16887</span>  0.0  0.3 <span style="color:#ae81ff">273609920</span> <span style="color:#ae81ff">103020</span> pts/6 Sl+ 16:42   0:00 /home/omajid/local/dotnet/microsoft/7.0.101/dotnet --roll-forward major bin/Debug/net6.0/Pause.dll
+</span></span><span style="display:flex;"><span>$ ls -al /tmp/dotnet-diagnostic-16887*socket
+</span></span><span style="display:flex;"><span>srw-------. <span style="color:#ae81ff">1</span> omajid omajid <span style="color:#ae81ff">0</span> Dec <span style="color:#ae81ff">22</span> 16:42 /tmp/dotnet-diagnostic-16887-1636599-socket
+</span></span><span style="display:flex;"><span>$ stat /tmp/dotnet-diagnostic-16887-1636599-socket
+</span></span><span style="display:flex;"><span>  File: /tmp/dotnet-diagnostic-16887-1636599-socket
+</span></span><span style="display:flex;"><span>  Size: <span style="color:#ae81ff">0</span>               Blocks: <span style="color:#ae81ff">0</span>          IO Block: <span style="color:#ae81ff">4096</span>   socket
+</span></span><span style="display:flex;"><span>Device: 0,37    Inode: <span style="color:#ae81ff">259</span>         Links: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>Access: <span style="color:#f92672">(</span>0600/srw-------<span style="color:#f92672">)</span>  Uid: <span style="color:#f92672">(</span> 1000/  omajid<span style="color:#f92672">)</span>   Gid: <span style="color:#f92672">(</span> 1000/  omajid<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Context: unconfined_u:object_r:user_tmp_t:s0
+</span></span><span style="display:flex;"><span>Access: 2022-12-22 16:42:42.097080354 -0500
+</span></span><span style="display:flex;"><span>Modify: 2022-12-22 16:42:42.097080354 -0500
+</span></span><span style="display:flex;"><span>Change: 2022-12-22 16:42:42.097080354 -0500
+</span></span><span style="display:flex;"><span> Birth: 2022-12-22 16:42:42.097080354 -0500
+</span></span></code></pre></div><p>A custom protocol - based on <code>BinaryWriter</code> serialization - is used to
+send messages across this. This is what the all the code that we have
+seen so far has been doing.</p>
+<p>The full IPC protocol is documented in
+<a href="https://github.com/dotnet/diagnostics/blob/main/documentation/design-docs/ipc-protocol.md" target="_blank"><code>ipc-protocol.md</code></a>
+.</p>
+<p>We still have a remaining question: who is listening on the other
+side and how do they handle these messages? The IPC protocol gives a
+great hint:</p>
+<blockquote>
+<p>.. IPC Protocol [is] used for communicating
+with the dotnet core runtime&rsquo;s Diagnostics Server</p>
+</blockquote>
+<p>What is this?</p>
+<h2 id="the-net-runtime">The .NET Runtime</h2>
+<p>Following the hint, lets try and dig through the dotnet/runtime code.
+If you want to follow along, you can find the source code for code for
+the .NET runtime at <a href="https://github.com/dotnet/runtime/" target="_blank">https://github.com/dotnet/runtime/</a>
+.</p>
+<p>We can start by searching the CoreCLR VM in the runtime for anything
+related to diagnostics:</p>
+<pre tabindex="0"><code>$ find src/coreclr/vm -iname &#39;*diagnostic*&#39;
+src/coreclr/vm/diagnosticserveradapter.h
+</code></pre><p>That seems like a great starting point! It seems to defer everything
+to <code>ds-server.c</code>.</p>
+<p>The initialization code of the diagnostics server is defined in
+<a href="https://github.com/dotnet/runtime/blob/615de00422f4f8d80e0009da1a117cc06dbb57e0/src/native/eventpipe/ds-server.c#L189" target="_blank"><code>ds_server_init</code></a>
+.
+It looks, roughly like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">ds_server_init</span>(<span style="color:#66d9ef">void</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lots of initialization
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ep_rt_thread_create(server_threads, ...);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">server_thread</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>server_shutting_down)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        DiagnosticsIpcMessage message;
+</span></span><span style="display:flex;"><span>        ds_ipc_message_init(<span style="color:#f92672">&amp;</span>message)
+</span></span><span style="display:flex;"><span>        ds_ipc_message_inititalize_stream(<span style="color:#f92672">&amp;</span>message, stream)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span> (ds_ipc_header_get_command(...))
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> DS_SERVER_COMMANDSET_DUMP:
+</span></span><span style="display:flex;"><span>			    ds_dump_protocol_helper_handle_ipc_message (<span style="color:#f92672">&amp;</span>message, stream);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This thread runs forever, waiting for any diagnostics commands.</p>
+<p>When a diagnostics command is received, this calls
+<code>ds_dump_protocol_helper_handle_ipc_message</code> to handle the message and
+write the dump to an on-disk location:
+<a href="https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243" target="_blank">https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243</a>
+</p>
+<p>That eventually leads to
+<a href="https://github.com/dotnet/runtime/blob/e07f4527bdedff6278accf9db8a8c7f9f2a48beb/src/coreclr/pal/src/thread/process.cpp#L2337" target="_blank"><code>PAL_GenerateCoreDump</code></a>
+.
+That looks roughly like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>PAL_GenerateCoreDump(
+</span></span><span style="display:flex;"><span>    ...)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span> argvCreateDump
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> program <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> pidarg <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>        PROCBuildCreateDumpCommandLine(argvCreateDump, <span style="color:#f92672">&amp;</span>program, <span style="color:#f92672">&amp;</span>pidarg);
+</span></span><span style="display:flex;"><span>        PROCCreateCrashDump(argvCreateDump);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PROCBuildCreateDumpCommandLine(
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;&amp;</span> argv,
+</span></span><span style="display:flex;"><span>    ...)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> DumpGeneratorName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;createdump&#34;</span>;
+</span></span><span style="display:flex;"><span>        argv.push_back(program);
+</span></span><span style="display:flex;"><span>        argv.push_back(pidarg);
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><p>Hang on a second, this just runs the <code>createdump</code> command! This
+command is included with the .NET runtime, on your disk:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ find /usr/lib64/dotnet/ -name createdump
+</span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/7.0.2/createdump
+</span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/6.0.13/createdump
+</span></span></code></pre></div><p><code>createdump</code> is also included with self-contained applications.
+There&rsquo;s some discussion on how it should be removed
+<a href="https://github.com/dotnet/sdk/issues/27336" target="_blank">here</a>
+.</p>
+<h1 id="what-does-createdump-do">What does <code>createdump</code> do?</h1>
+<p>We can start by searching the dotnet/runtime repository for any file
+that might look like it&rsquo;s relevant to the createdump command.
+Searching for such files leads me to a promisingly named
+createdump/main.cpp file:
+<a href="https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp" target="_blank">https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp</a>
+</p>
+<p>Let&rsquo;s start with the <code>main</code> method. It looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lots of argument parsing
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (CreateDump(dumpPathtTemplate, pid, ...))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>       <span style="color:#75715e">// success
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// cleanup and exit
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p><code>CreateDump</code> is defined in createdumpunix.cpp for Linux and macOS
+<a href="https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14" target="_blank">https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14</a>
+</p>
+<p>There&rsquo;s a ton of code to dig through, and a lot of it goes down into
+Linux-specific detail. I might do a detailed walk-through in another
+post. But here are the important points:</p>
+<ol>
+<li>
+<p><code>CreateDump</code> calls <code>CrashInfo::EnumerateAndSuspendThreads</code>, which
+uses <code>ptrace(2)</code> to suspend all threads in the .NET application</p>
+</li>
+<li>
+<p><code>CreateDump</code> calls <code>CrashInfo::GatherCrashInfo</code> to collect data:</p>
+<ol>
+<li>
+<p>Get information from <code>/proc/$PID/auxv</code> (the auxillary vector
+data).</p>
+</li>
+<li>
+<p>Get information from <code>/proc/pid/maps</code> about the memory regions</p>
+</li>
+<li>
+<p>Use the DAC (Data Access Component) of the runtime to find the
+managed modules</p>
+</li>
+<li>
+<p>Unwind all the threads</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Use the DAC again to enumerate the managed memory regions.</p>
+</li>
+<li>
+<p>Write the dump out as an ELF file.</p>
+</li>
+</ol>
+<p>On a side note, the last point is particularly interesting.
+<code>createdump</code> writes out a regular ELF core file. This is a standard
+core file, similar to those produced by other tools like <code>gcore</code>. It&rsquo;s
+in a format that&rsquo;s readable by both <code>dotnet dump analyze</code> but also
+native debugging tools like <code>lldb</code> and <code>gdb</code>. The corefile can be used
+to debugged applications using <code>gdb</code>/<code>lldb</code>, but they will need the
+unmanaged (or native) debug symbols. That&rsquo;s not true for <code>dotnet dump analyze</code> which - surprise - again makes use of the DAC to figure out
+the managed state of the application.</p>
+<p>When all that is done, we finally get the core file that we were
+looking for!</p>
+<h1 id="summary">Summary</h1>
+<p>That was a lot to chew through. So let&rsquo;s do a quick recap of what
+happens when we use `dotnet dump collect.</p>
+<ul>
+<li>
+<p>The <code>dotnet dump</code> tool parses the user&rsquo;s command and figures out
+that the user wants to trigger a particular type of dump.</p>
+</li>
+<li>
+<p><code>dotnet dump</code> creates a specially crafted message that it sends to
+the target .NET application over the .NET diagnostics socket.</p>
+</li>
+<li>
+<p>The .NET runtime receives the message over the socket and parses it.</p>
+</li>
+<li>
+<p>The runtime then runs <code>createdump</code> as a separate process, pointing
+<code>createdump</code> to the .NET application itself.</p>
+</li>
+<li>
+<p><code>createdump</code> pauses the target .NET application and collects
+everything needed from the application by walking through the
+managed memory (with the help of the DAC) and the unmanaged memory.</p>
+</li>
+<li>
+<p><code>createdump</code> writes out the dump to disk.</p>
+</li>
+</ul>
+<p>At the end of this, we finally have a file on disk that contains the
+application&rsquo;s dump</p>
+<p>There are some interesting consequences that come up because of this
+approach:</p>
+<ol start="0">
+<li>
+<p>.NET runtimes provides a mechanism for other applications to
+request information from them. If this mechanism is turned off (eg,
+via
+<a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_enablediagnostics" target="_blank"><code>DOTNET_EnableDiagnostics</code></a>
+),
+then tools like <code>dotnet-dump</code> become useless.</p>
+</li>
+<li>
+<p>Thanks to a single protocol, it&rsquo;s possible for <code>dotnet dump collect</code> to work against any number of different .NET runtimes and
+versions. And All runtime-specific detail is handled by the
+runtime&rsquo;s built-in <code>createdump</code> command.</p>
+</li>
+<li>
+<p>Some folks have tried removing the <code>createdump</code> binary from their
+published applications to save on size. Removing <code>createdump</code> from
+those applications means tools like <code>dotnet-dump</code> aren&rsquo;t fully
+funtional against those applications. Their applications can become
+harder to diagnose.</p>
+</li>
+<li>
+<p>If you really need to, you can take advantage of the diagnostics
+protocol and write your own custom tools to talk to the .NET
+runtime.</p>
+</li>
+</ol>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>I have linked to the classes/files on GitHub, but it might
+easier to clone the repo and look through it using your
+favourite tools.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Categories</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/categories/dotnet/"> dotnet </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+	
+	
+	
+	<div class="tags">
+		<div class="taxosfloating_left">
+			<p>Tags</p>
+		</div>
+		<div class="termsfloating_right">
+			<p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/dotnet/"> dotnet </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<a href="/tags/linux/"> linux </a>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			</p>
+		</div>
+		<div class="clearit"></div>
+		
+		
+		
+		
+		
+	</div></div>
+
+  </main>
+<footer>
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
+ | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
+	
+	
+	
+</footer>
+
+
+</body>
+</html>
