@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.80.0" />
+	<meta name="generator" content="Hugo 0.98.0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +15,10 @@ What are debug …"><meta property="og:title" content=".NET Core Symbols on Fedo
 What are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.
 What are debug symbols? Source code contains a lot of information that&rsquo;s not strictly part of it&rsquo;s functionality." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/" />
+<meta property="og:url" content="https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-08-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-05T00:00:00+00:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=".NET Core Symbols on Fedora"/>
 <meta name="twitter:description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
@@ -173,9 +174,9 @@ installed the SDK and symbols) and let you use them to step through
 code and debug it.</p>
 <p>Tools like <code>file</code> can tell you whether a binary has embedded debug
 symbols or not:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ file /usr/bin/file
-/usr/bin/file: ELF 64-bit LSB shared object, x86-64, version <span style="color:#ae81ff">1</span> <span style="color:#f92672">(</span>SYSV<span style="color:#f92672">)</span>, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID<span style="color:#f92672">[</span>sha1<span style="color:#f92672">]=</span>e7df66a91efb28e483449a77221cb4242620541c, <span style="color:#66d9ef">for</span> GNU/Linux 3.2.0, stripped
-</code></pre></div><p>The last word in the output, <code>stripped</code>, indicates that the debug
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file /usr/bin/file
+</span></span><span style="display:flex;"><span>/usr/bin/file: ELF 64-bit LSB shared object, x86-64, version <span style="color:#ae81ff">1</span> <span style="color:#f92672">(</span>SYSV<span style="color:#f92672">)</span>, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID<span style="color:#f92672">[</span>sha1<span style="color:#f92672">]=</span>e7df66a91efb28e483449a77221cb4242620541c, <span style="color:#66d9ef">for</span> GNU/Linux 3.2.0, stripped
+</span></span></code></pre></div><p>The last word in the output, <code>stripped</code>, indicates that the debug
 information has been remove from this binary.</p>
 <p>It&rsquo;s important to note that <strong>debug symbols are unique for each
 binary</strong>. Two binaries will not have the same debug symbols unless
@@ -192,13 +193,13 @@ to extract them into a separate file.</p>
 <p>.NET Core generates debug symbols by default. You can turn it off
 using the <code>DebugSymbols</code> and <code>DebugType</code> msbuild properties.</p>
 <p>You can put that in your <code>.csproj</code> file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;PropertyGroup&gt;</span>
-  <span style="color:#f92672">&lt;DebugSymbols&gt;</span>false<span style="color:#f92672">&lt;/DebugSymbols&gt;</span>
-  <span style="color:#f92672">&lt;DebugType&gt;</span>None<span style="color:#f92672">&lt;/DebugType&gt;</span>
-<span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
-</code></pre></div><p>Or set that through the command line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ dotnet publish -p:DebugSymbols<span style="color:#f92672">=</span>false -p:DebugType<span style="color:#f92672">=</span>None
-</code></pre></div><p>However, unless turned off, you will see <code>.pdb</code> files being built and
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;PropertyGroup&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;DebugSymbols&gt;</span>false<span style="color:#f92672">&lt;/DebugSymbols&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;DebugType&gt;</span>None<span style="color:#f92672">&lt;/DebugType&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
+</span></span></code></pre></div><p>Or set that through the command line:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet publish -p:DebugSymbols<span style="color:#f92672">=</span>false -p:DebugType<span style="color:#f92672">=</span>None
+</span></span></code></pre></div><p>However, unless turned off, you will see <code>.pdb</code> files being built and
 published along with the rest of your application whenever you do
 <code>dotnet build</code> or <code>dotnet publish</code>.</p>
 <h2 id="what-symbols-are-available-for-net-core-itself">What symbols are available for .NET Core itself?</h2>
@@ -223,9 +224,9 @@ your .NET Core SDK and/or Runtime.</p>
 <p>If you have downloaded the .NET Core SDK and/or Runtime from
 Microsoft, you can use the <code>dotnet symbol</code> tool to get symbol
 packages:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ dotnet tool install -g dotnet-symbol
-$ dotnet symbol /usr/share/dotnet/dotnet
-</code></pre></div><p>This <code>dotnet symbol</code> tool uses the Microsoft symbol server. The
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet tool install -g dotnet-symbol
+</span></span><span style="display:flex;"><span>$ dotnet symbol /usr/share/dotnet/dotnet
+</span></span></code></pre></div><p>This <code>dotnet symbol</code> tool uses the Microsoft symbol server. The
 Microsoft symbol server includes a copy of (hopefully) all the symbol
 packages that Microsoft has ever built for .NET Core releases.</p>
 <p>The tool simply asks the symbol server to download the symbol package
@@ -233,15 +234,15 @@ for a binary, based on the build id of the binary. If that symbol file
 exists, <code>dotnet symbol</code> will download it.</p>
 <p>You can also ask <code>dotnet symbol</code> to place the files in a given
 location by using the <code>-o</code> flag:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ dotnet symbol /usr/share/dotnet/dotnet -o my-symbol-directory
-</code></pre></div><p>If you are worried about using it incorrectly, don&rsquo;t worry. The tool
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet symbol /usr/share/dotnet/dotnet -o my-symbol-directory
+</span></span></code></pre></div><p>If you are worried about using it incorrectly, don&rsquo;t worry. The tool
 will warn you and fail if you run it against any binary that the
 Microsoft symbol server doesn&rsquo;t have symbols for:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ dotnet symbol /usr/lib64/dotnet/dotnet
-Downloading from http://msdl.microsoft.com/download/symbols/
-ERROR: HttpSymbolStore: <span style="color:#ae81ff">404</span> Not Found <span style="color:#e6db74">&#39;http://msdl.microsoft.com/download/symbols/dotnet%2Felf-buildid-75e20435c061d0643096f93d91eb19701f7d6d13%2Fdotnet&#39;</span>
-ERROR: HttpSymbolStore: <span style="color:#ae81ff">404</span> Not Found <span style="color:#e6db74">&#39;http://msdl.microsoft.com/download/symbols/_.debug%2Felf-buildid-sym-75e20435c061d0643096f93d91eb19701f7d6d13%2F_.debug&#39;</span>
-</code></pre></div><h3 id="net-core-packages-from-fedora">.NET Core packages from Fedora</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet symbol /usr/lib64/dotnet/dotnet
+</span></span><span style="display:flex;"><span>Downloading from http://msdl.microsoft.com/download/symbols/
+</span></span><span style="display:flex;"><span>ERROR: HttpSymbolStore: <span style="color:#ae81ff">404</span> Not Found <span style="color:#e6db74">&#39;http://msdl.microsoft.com/download/symbols/dotnet%2Felf-buildid-75e20435c061d0643096f93d91eb19701f7d6d13%2Fdotnet&#39;</span>
+</span></span><span style="display:flex;"><span>ERROR: HttpSymbolStore: <span style="color:#ae81ff">404</span> Not Found <span style="color:#e6db74">&#39;http://msdl.microsoft.com/download/symbols/_.debug%2Felf-buildid-sym-75e20435c061d0643096f93d91eb19701f7d6d13%2F_.debug&#39;</span>
+</span></span></code></pre></div><h3 id="net-core-packages-from-fedora">.NET Core packages from Fedora</h3>
 <p>The .NET Core packages that are included in Fedora and RHEL are built
 from source. That means all the binaries included were built within
 the Fedora build infrastructure.</p>
@@ -259,11 +260,11 @@ packages. It uses this for symbols too.</p>
 <p>If you are using the Fedora packages for .NET Core (such as
 <code>dotnet-sdk-3.1</code>), the managed symbols are installed as part of the
 SDK/Runtime itself:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ find /usr/lib64/dotnet/shared -name <span style="color:#e6db74">&#39;System.IO.FileSystem.[^A-Z]*&#39;</span>
-/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
-/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.dll
-/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.ni.<span style="color:#f92672">{</span>cfbfb1a5-d8bb-4fdd-835e-860da92311e2<span style="color:#f92672">}</span>.map
-</code></pre></div><p>Lets go through the 3 files here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ find /usr/lib64/dotnet/shared -name <span style="color:#e6db74">&#39;System.IO.FileSystem.[^A-Z]*&#39;</span>
+</span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
+</span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.dll
+</span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.ni.<span style="color:#f92672">{</span>cfbfb1a5-d8bb-4fdd-835e-860da92311e2<span style="color:#f92672">}</span>.map
+</span></span></code></pre></div><p>Lets go through the 3 files here:</p>
 <ol>
 <li>
 <p>The <code>.dll</code> file</p>
@@ -274,9 +275,9 @@ assembly, not plain .NET IL).</p>
 <li>
 <p>The <code>.pdb</code> file</p>
 <p>The <code>.pdb</code> file contains the debug symbols:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ file /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
-/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb: Microsoft Roslyn C# debugging symbols version 1.0
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
+</span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb: Microsoft Roslyn C# debugging symbols version 1.0
+</span></span></code></pre></div></li>
 <li>
 <p>The <code>.ni.map</code> file</p>
 <p>The <code>.ni.map</code> files contain information used by .NET performance
@@ -294,34 +295,33 @@ consider moving it to a separate package.</p>
 <h4 id="unmanagednative-symbols">Unmanaged/Native Symbols</h4>
 <p>The unmanaged (or native) debug symbols are available through the
 normal mechanisms on Fedora:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo dnf debuginfo-install <span style="color:#e6db74">&#39;dotnet*&#39;</span>
-enabling fedora-modular-debuginfo repository
-enabling updates-modular-debuginfo repository
-enabling updates-debuginfo repository
-enabling fedora-debuginfo repository
-...
-Dependencies resolved.
-<span style="color:#f92672">=================================================================================================</span>
- Package                            Architecture     Version           Repository           Size
-<span style="color:#f92672">=================================================================================================</span>
-Installing:
- dotnet-apphost-pack-3.1-debuginfo  x86_64           3.1.6-1.fc32      updates-debuginfo   <span style="color:#ae81ff">233</span> k
- dotnet-host-debuginfo              x86_64           3.1.6-1.fc32      updates-debuginfo   <span style="color:#ae81ff">131</span> k
- dotnet-hostfxr-3.1-debuginfo       x86_64           3.1.6-1.fc32      updates-debuginfo   1.0 M
- dotnet-runtime-3.1-debuginfo       x86_64           3.1.6-1.fc32      updates-debuginfo    <span style="color:#ae81ff">27</span> M
- dotnet-sdk-3.1-debuginfo           x86_64           3.1.106-1.fc32    updates-debuginfo   <span style="color:#ae81ff">159</span> k
- dotnet3.1-debuginfo                x86_64           3.1.106-1.fc32    updates-debuginfo   <span style="color:#ae81ff">686</span> k
- dotnet3.1-debugsource              x86_64           3.1.106-1.fc32    updates-debuginfo   7.6 M
-
-Transaction Summary
-<span style="color:#f92672">=================================================================================================</span>
-Install  <span style="color:#ae81ff">7</span> Packages
-
-</code></pre></div><p>You can also explicitly install the native/unamanged symbols for any
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dnf debuginfo-install <span style="color:#e6db74">&#39;dotnet*&#39;</span>
+</span></span><span style="display:flex;"><span>enabling fedora-modular-debuginfo repository
+</span></span><span style="display:flex;"><span>enabling updates-modular-debuginfo repository
+</span></span><span style="display:flex;"><span>enabling updates-debuginfo repository
+</span></span><span style="display:flex;"><span>enabling fedora-debuginfo repository
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>Dependencies resolved.
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=================================================================================================</span>
+</span></span><span style="display:flex;"><span> Package                            Architecture     Version           Repository           Size
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=================================================================================================</span>
+</span></span><span style="display:flex;"><span>Installing:
+</span></span><span style="display:flex;"><span> dotnet-apphost-pack-3.1-debuginfo  x86_64           3.1.6-1.fc32      updates-debuginfo   <span style="color:#ae81ff">233</span> k
+</span></span><span style="display:flex;"><span> dotnet-host-debuginfo              x86_64           3.1.6-1.fc32      updates-debuginfo   <span style="color:#ae81ff">131</span> k
+</span></span><span style="display:flex;"><span> dotnet-hostfxr-3.1-debuginfo       x86_64           3.1.6-1.fc32      updates-debuginfo   1.0 M
+</span></span><span style="display:flex;"><span> dotnet-runtime-3.1-debuginfo       x86_64           3.1.6-1.fc32      updates-debuginfo    <span style="color:#ae81ff">27</span> M
+</span></span><span style="display:flex;"><span> dotnet-sdk-3.1-debuginfo           x86_64           3.1.106-1.fc32    updates-debuginfo   <span style="color:#ae81ff">159</span> k
+</span></span><span style="display:flex;"><span> dotnet3.1-debuginfo                x86_64           3.1.106-1.fc32    updates-debuginfo   <span style="color:#ae81ff">686</span> k
+</span></span><span style="display:flex;"><span> dotnet3.1-debugsource              x86_64           3.1.106-1.fc32    updates-debuginfo   7.6 M
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Transaction Summary
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=================================================================================================</span>
+</span></span><span style="display:flex;"><span>Install  <span style="color:#ae81ff">7</span> Packages
+</span></span></code></pre></div><p>You can also explicitly install the native/unamanged symbols for any
 specific (not just .NET COre) package by the full name-version with
 the <code>dnf debuginfo-install</code> command on Fedora:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo dnf debuginfo-install dotnet-runtime-3.1 glibc python3
-</code></pre></div><p>Once installed, you can use the native debugger, like <code>gdb</code> or <code>lldb</code>,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dnf debuginfo-install dotnet-runtime-3.1 glibc python3
+</span></span></code></pre></div><p>Once installed, you can use the native debugger, like <code>gdb</code> or <code>lldb</code>,
 and they will automatically find, load and make use of the
 just-installed unmanaged debug symbols on Fedora.</p>
 <h2 id="summary">Summary</h2>
@@ -550,7 +550,8 @@ role the debug symbols play in this.</p>
 
   </main>
 <footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
+ | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
 	
 	
 	

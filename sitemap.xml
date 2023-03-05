@@ -1,282 +1,170 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://omairmajid.com/categories/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/centos/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/dotnet/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/categories/dotnet/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/linux/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/openssl/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/rhel/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</loc>
     <lastmod>2021-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/development/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/python/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/categories/python/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/fedora/</loc>
     <lastmod>2021-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</loc>
     <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/debugging/</loc>
     <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/glibc/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/categories/linux/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/tools/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/bash/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/unix/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/categories/unix/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2020-06-10-magic-of-file/</loc>
     <lastmod>2020-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/categories/tools/</loc>
     <lastmod>2020-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/categories/development/</loc>
     <lastmod>2020-05-29T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/msbuild/</loc>
     <lastmod>2020-05-29T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/nuget/</loc>
     <lastmod>2020-05-29T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</loc>
     <lastmod>2020-05-29T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</loc>
     <lastmod>2020-05-28T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</loc>
     <lastmod>2017-03-30T22:14:31+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/openjdk/</loc>
     <lastmod>2016-10-04T23:35:09+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</loc>
     <lastmod>2016-10-04T23:35:09+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/openjdk9/</loc>
     <lastmod>2016-10-04T23:35:09+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</loc>
     <lastmod>2016-02-29T15:21:27+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/icedtea-web/</loc>
     <lastmod>2014-01-24T00:29:36+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</loc>
     <lastmod>2014-01-24T00:29:36+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</loc>
     <lastmod>2013-12-06T02:50:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</loc>
     <lastmod>2013-10-04T17:51:36+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</loc>
     <lastmod>2013-09-13T23:43:03+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</loc>
     <lastmod>2012-06-22T23:10:03+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</loc>
     <lastmod>2012-04-11T23:08:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</loc>
     <lastmod>2012-02-14T21:46:43+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</loc>
     <lastmod>2012-01-31T05:27:50+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/icedtea/</loc>
     <lastmod>2012-01-06T22:19:56+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/icedtea6/</loc>
     <lastmod>2012-01-06T22:19:56+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</loc>
     <lastmod>2012-01-06T22:19:56+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/tags/icedtea-web-1.1/</loc>
     <lastmod>2011-08-23T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</loc>
     <lastmod>2011-08-23T18:34:41+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/about/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/projects/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://omairmajid.com/talks/</loc>
   </url>
-  
 </urlset>

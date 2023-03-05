@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.80.0" />
+	<meta name="generator" content="Hugo 0.98.0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +15,10 @@ But what do you do if there&rsquo;s no compiler?
 That&rsquo;s the dilemma .NET runs into in Fedora.
 Every release of .NET (Core) needs a recent version of a .NET (Core) SDK that can be used to build it. But that&rsquo;s exactly what&rsquo;s missing and what we are trying to build." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/" />
+<meta property="og:url" content="https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-04-09T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-04-09T00:00:00+00:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora"/>
 <meta name="twitter:description" content="Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an executable program.
@@ -123,8 +124,8 @@ to build the real thing.</p>
 <ol>
 <li>
 <p>Build the bootstrap tarball, for each architecture:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./build-dotnet-tarball --bootstrap v5.0.104-SDK
-</code></pre></div><p>That will produce a <code>dotnet-v5.0.104-SDK-x64-bootstrap.tar.gz</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./build-dotnet-tarball --bootstrap v5.0.104-SDK
+</span></span></code></pre></div><p>That will produce a <code>dotnet-v5.0.104-SDK-x64-bootstrap.tar.gz</code>.</p>
 <p>You can repeat this command for multiple architectures (such as
 <code>aarch64</code>) if you want.</p>
 </li>
@@ -133,32 +134,31 @@ to build the real thing.</p>
 with for building in bootstrap mode. <a href="https://docs.fedoraproject.org/en-US/packaging-guidelines/#bootstrapping" target="_blank">Fedora suggests doing it like
 this</a>
 :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># This (badly named) option says to build in &#34;bootstrap&#34; mode by default</span>
-%bcond_without bootstrap
-
-%if %<span style="color:#f92672">{</span>with bootstrap<span style="color:#f92672">}</span>
-<span style="color:#75715e"># special hacks for bootstrapping</span>
-%endif
-
-%if %<span style="color:#f92672">{</span>without bootstrap<span style="color:#f92672">}</span>
-BuildRequires: dotnet-sdk-5.0
-BuildRequires: dotnet5.0-source-build-reference-packages
-%endif
-
-%if %<span style="color:#f92672">{</span>without bootstrap<span style="color:#f92672">}</span>
-<span style="color:#75715e"># remove prebuilts</span>
-find -type f -iname <span style="color:#e6db74">&#39;*.dll&#39;</span> -delete
-%endif
-
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># This (badly named) option says to build in &#34;bootstrap&#34; mode by default</span>
+</span></span><span style="display:flex;"><span>%bcond_without bootstrap
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>%if %<span style="color:#f92672">{</span>with bootstrap<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># special hacks for bootstrapping</span>
+</span></span><span style="display:flex;"><span>%endif
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>%if %<span style="color:#f92672">{</span>without bootstrap<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>BuildRequires: dotnet-sdk-5.0
+</span></span><span style="display:flex;"><span>BuildRequires: dotnet5.0-source-build-reference-packages
+</span></span><span style="display:flex;"><span>%endif
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>%if %<span style="color:#f92672">{</span>without bootstrap<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># remove prebuilts</span>
+</span></span><span style="display:flex;"><span>find -type f -iname <span style="color:#e6db74">&#39;*.dll&#39;</span> -delete
+</span></span><span style="display:flex;"><span>%endif
+</span></span></code></pre></div></li>
 <li>
 <p>Upload sources and commit spec file. Just follow the normal build
 process for any RPM build. <em>But don&rsquo;t build it yet</em>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg new-sources dotnet-v5.0.104-SDK-x64-bootstrap.tar.gz dotnet-v5.0.104-SDK-arm64-bootstrap.tar.gz
-git add dotnet5.0.spec
-git commit -m <span style="color:#e6db74">&#34;Bootstrap .NET 5&#34;</span>
-git push
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fedpkg new-sources dotnet-v5.0.104-SDK-x64-bootstrap.tar.gz dotnet-v5.0.104-SDK-arm64-bootstrap.tar.gz
+</span></span><span style="display:flex;"><span>git add dotnet5.0.spec
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Bootstrap .NET 5&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span></code></pre></div></li>
 <li>
 <p><a href="https://fedoraproject.org/wiki/Package_update_HOWTO#Creating_a_side-tag" target="_blank">Create a
 side-tag</a>
@@ -166,15 +166,15 @@ side-tag</a>
 Builds done in a side-tag can not become part of the main release
 accidentally. This helps avoid accidentally shipping prebuilts,
 especially in rawhide.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg request-side-tag
-</code></pre></div><p>If you are building for an RPM-based distribution without support
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fedpkg request-side-tag
+</span></span></code></pre></div><p>If you are building for an RPM-based distribution without support
 for side-tags, you can skip this step and just do a normal build in
 the next step.</p>
 </li>
 <li>
 <p>Build the RPM with bootstrap binaries in the side-tag:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
+</span></span></code></pre></div></li>
 <li>
 <p>Build the
 <a href="https://github.com/dotnet/source-build-reference-packages/" target="_blank">source-build-references-package</a>
@@ -184,20 +184,20 @@ spec</a>
 
 file that can <code>BuildRequire</code> the just-built <code>dotnet-sdk-5.0</code>
 package. Built it in your side-tag, though:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
+</span></span></code></pre></div></li>
 <li>
 <p>Once the build works, we can proceed with disabling bootstrapping.
 Produce non-bootstrap source-tarball for the same version:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./build-dotnet-tarball v5.0.104-SDK
-</code></pre></div><p>Leaving out <code>--bootstrap</code> will produce a <code>dotnet-v5.0.104-SDK.tar.gz</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./build-dotnet-tarball v5.0.104-SDK
+</span></span></code></pre></div><p>Leaving out <code>--bootstrap</code> will produce a <code>dotnet-v5.0.104-SDK.tar.gz</code>.</p>
 </li>
 <li>
 <p>Then disable bootstrapping in the spec file. If you got step 2
 right, it should be as easy as this change to your spec file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#f92672">-%bcond_without bootstrap
-</span><span style="color:#f92672"></span><span style="color:#a6e22e">+%bcond_with bootstrap
-</span></code></pre></div><p>The strangely named <code>%bcond_with bootstrap</code> means &ldquo;build <em>without</em>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span><span style="color:#f92672">-%bcond_without bootstrap
+</span></span></span><span style="display:flex;"><span><span style="color:#f92672"></span><span style="color:#a6e22e">+%bcond_with bootstrap
+</span></span></span></code></pre></div><p>The strangely named <code>%bcond_with bootstrap</code> means &ldquo;build <em>without</em>
 bootstrap by default&rdquo;.</p>
 <p><a href="https://src.fedoraproject.org/rpms/dotnet5.0/c/2e4240bf831b134d40326b808eee0b02eb7a4d11?branch=rawhide" target="_blank">Here’s an example of this in
 Fedora</a>
@@ -206,12 +206,12 @@ Fedora</a>
 <li>
 <p>Upload the new source tarball and commit+push the spec file
 changes. Then build it again in the side-tag:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">fedpkg new-sources dotnet-v5.0.104-SDK.tar.gz
-git add dotnet5.0.spec
-git commit -m <span style="color:#e6db74">&#34;Disable bootstrap&#34;</span>
-git push
-fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
-</code></pre></div><p>If it fails, try and fix that. Maybe something was broken in the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>fedpkg new-sources dotnet-v5.0.104-SDK.tar.gz
+</span></span><span style="display:flex;"><span>git add dotnet5.0.spec
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Disable bootstrap&#34;</span>
+</span></span><span style="display:flex;"><span>git push
+</span></span><span style="display:flex;"><span>fedpkg build --target<span style="color:#f92672">=</span>f35-build-side-foobar
+</span></span></code></pre></div><p>If it fails, try and fix that. Maybe something was broken in the
 initial build? If so, you might have to revert step 8 and rebuild
 the bootstrap build.</p>
 </li>
@@ -451,7 +451,8 @@ issues in source-build</a>
 
   </main>
 <footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
+ | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
 	
 	
 	

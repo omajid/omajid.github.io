@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.80.0" />
+	<meta name="generator" content="Hugo 0.98.0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +15,10 @@ Shells like bash …"><meta property="og:title" content="Variables and Environme
 Shells like bash - also heavily used for writing shell scripts - have a slightly different audience in mind than normal programming languages. They make heavy use of environment variables. So much so that it can sometimes become blurry whether something is a normal variable or an environment variable.
 In this post, I will dig into variables and environment variables in shell, particularly bash, to help you understand how to distinguish the two and when to use them." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/" />
+<meta property="og:url" content="https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-06-25T00:58:07-04:00" />
 <meta property="article:modified_time" content="2020-06-25T00:58:07-04:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Variables and Environment Variables In Bash"/>
 <meta name="twitter:description" content="Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
@@ -121,33 +122,33 @@ variables. A variable is basically a value that has a name. It is
 local to the running program. Variables can be local to <code>bash</code>
 functions or global to the entire <code>bash</code> script.</p>
 <p>Defining a variable is easy in <code>bash</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">variable<span style="color:#f92672">=</span>value
-</code></pre></div><p>Leaving out the value defines a variable with a blank value:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">variable<span style="color:#f92672">=</span>
-</code></pre></div><p>The spacing is very important in defining and setting the values of
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>variable<span style="color:#f92672">=</span>value
+</span></span></code></pre></div><p>Leaving out the value defines a variable with a blank value:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>variable<span style="color:#f92672">=</span>
+</span></span></code></pre></div><p>The spacing is very important in defining and setting the values of
 variable. <code>bash</code> scripts are both scripts but also valid commands for
 the shell. Adding a space will result in an error or do something that
 you might not expect at first:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># this runs the program `var` with the argument `=value`</span>
-var <span style="color:#f92672">=</span>value
-
-<span style="color:#75715e"># this runs the program `var` with 2 arguments: `=` and `value`</span>
-var <span style="color:#f92672">=</span> value
-
-<span style="color:#75715e"># this will make more sense later, but it runs the program `value`!</span>
-var<span style="color:#f92672">=</span> value
-</code></pre></div><p>To access a variable, use a dollar sign (<code>$</code>). <code>echo</code> is great for
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># this runs the program `var` with the argument `=value`</span>
+</span></span><span style="display:flex;"><span>var <span style="color:#f92672">=</span>value
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># this runs the program `var` with 2 arguments: `=` and `value`</span>
+</span></span><span style="display:flex;"><span>var <span style="color:#f92672">=</span> value
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># this will make more sense later, but it runs the program `value`!</span>
+</span></span><span style="display:flex;"><span>var<span style="color:#f92672">=</span> value
+</span></span></code></pre></div><p>To access a variable, use a dollar sign (<code>$</code>). <code>echo</code> is great for
 seeing the result of the variable:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">variable<span style="color:#f92672">=</span>value
-echo $variable
-</code></pre></div><p>You can mix variables and your own text freely:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">name<span style="color:#f92672">=</span>John
-echo Hello $name
-</code></pre></div><p>You can use <code>${</code> and <code>}</code> to specify where a variable name starts and
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>variable<span style="color:#f92672">=</span>value
+</span></span><span style="display:flex;"><span>echo $variable
+</span></span></code></pre></div><p>You can mix variables and your own text freely:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>name<span style="color:#f92672">=</span>John
+</span></span><span style="display:flex;"><span>echo Hello $name
+</span></span></code></pre></div><p>You can use <code>${</code> and <code>}</code> to specify where a variable name starts and
 ends. For example, lets say you want to show the file <code>readme_2020.txt</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">filename<span style="color:#f92672">=</span>readme
-cat <span style="color:#e6db74">${</span>filename<span style="color:#e6db74">}</span>_2020.txt
-</code></pre></div><p>The underscore (<code>_</code>) is a valid part of a variable name. If you were
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>filename<span style="color:#f92672">=</span>readme
+</span></span><span style="display:flex;"><span>cat <span style="color:#e6db74">${</span>filename<span style="color:#e6db74">}</span>_2020.txt
+</span></span></code></pre></div><p>The underscore (<code>_</code>) is a valid part of a variable name. If you were
 to write this as <code>cat $filename_2020.txt</code>, <code>bash</code> would understand
 this as a single variable named <code>filename_2020</code>. It would treat it as
 if you had written <code>cat ${filename_2020}.txt</code>.</p>
@@ -164,38 +165,38 @@ had a single value.</p>
 <p><code>bash</code> supports additional types of variables, such as array and
 integers.</p>
 <p><code>bash</code> lets us define arrays using the array notation.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">array<span style="color:#f92672">=(</span>value1 value2<span style="color:#f92672">)</span>
-</code></pre></div><p>However, for some other types of variables, such as integers and
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>array<span style="color:#f92672">=(</span>value1 value2<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>However, for some other types of variables, such as integers and
 read-only (also known as constant) variables, we have to <code>declare</code> the
 type first.</p>
 <h2 id="using-declare-to-customize-variables">Using declare to customize variables</h2>
 <p>We can also customize the type of a variable using the <code>declare</code> built
 in. The syntax is <code>declare [OPTION] variable_name[=value]</code>, where both
 the option and the value are optional.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># declare a normal variable</span>
-declare variable
-
-<span style="color:#75715e"># declare an array named days_of_week</span>
-declare -a days_of_week
-
-<span style="color:#75715e"># declare that the variable ten has the read-only value 10</span>
-declare -r ten<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
-</code></pre></div><p>However, <code>declare</code> is often optional. You can just define the value
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># declare a normal variable</span>
+</span></span><span style="display:flex;"><span>declare variable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># declare an array named days_of_week</span>
+</span></span><span style="display:flex;"><span>declare -a days_of_week
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># declare that the variable ten has the read-only value 10</span>
+</span></span><span style="display:flex;"><span>declare -r ten<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><p>However, <code>declare</code> is often optional. You can just define the value
 and <code>declare</code> is only needed if the value would normally be understood
 as something different.</p>
 <p>For example, you can just create an array using the array notation
 without having to declare it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">days_of_week<span style="color:#f92672">=(</span>Monday Tuesday Wednesday Thursday Friday Saturday Sunday<span style="color:#f92672">)</span>
-
-echo The first day of the week is <span style="color:#e6db74">${</span>days_of_week[0]<span style="color:#e6db74">}</span>
-</code></pre></div><h2 id="using-special-and-built-in-variables">Using special and built-in variables</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>days_of_week<span style="color:#f92672">=(</span>Monday Tuesday Wednesday Thursday Friday Saturday Sunday<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>echo The first day of the week is <span style="color:#e6db74">${</span>days_of_week[0]<span style="color:#e6db74">}</span>
+</span></span></code></pre></div><h2 id="using-special-and-built-in-variables">Using special and built-in variables</h2>
 <p><code>bash</code> also has several built-in and special variables. They allow us to
 do a few cool things like access the arguments of a running shell
 script, the process id of the current script, and access the exit code
 of the last command we used. Here are some examples:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo The name of this script is $0
-echo The process id of this script is $$
-</code></pre></div><p>The <a href="https://wiki.bash-hackers.org/syntax/shellvars" target="_blank">Bash Hackers Wiki has a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo The name of this script is $0
+</span></span><span style="display:flex;"><span>echo The process id of this script is $$
+</span></span></code></pre></div><p>The <a href="https://wiki.bash-hackers.org/syntax/shellvars" target="_blank">Bash Hackers Wiki has a
 great guide covering all the special and built in
 variables</a>
 </p>
@@ -246,8 +247,8 @@ shell.</p>
 </ul>
 <p>To make an environment variable in <code>bash</code> you have to use the <code>export</code>
 builtin:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export ENV_VAR
-</code></pre></div><p>That creates and defines the environment variable <code>ENV_VAR</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export ENV_VAR
+</span></span></code></pre></div><p>That creates and defines the environment variable <code>ENV_VAR</code>.</p>
 <p>If you have paid attention to the properties above, you might have
 realized to figure out that <code>export</code> can&rsquo;t be a separate program that
 the shell spawns and runs. If it was, <code>export</code> couldn&rsquo;t modify the
@@ -259,11 +260,11 @@ variables.</p>
 uppercase for environment variables. But it&rsquo;s not required. You can
 use uppercase for variables and lowercase for environment variables.</p>
 <p>You can give an environment variable a value after defining it:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export ENV_VAR
-ENV_VAR<span style="color:#f92672">=</span>value
-</code></pre></div><p>You can also create and assign a value at the same time:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export ENV_VAR<span style="color:#f92672">=</span>value
-</code></pre></div><p>The only difference in how normal variables and environment variables
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export ENV_VAR
+</span></span><span style="display:flex;"><span>ENV_VAR<span style="color:#f92672">=</span>value
+</span></span></code></pre></div><p>You can also create and assign a value at the same time:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export ENV_VAR<span style="color:#f92672">=</span>value
+</span></span></code></pre></div><p>The only difference in how normal variables and environment variables
 are defined is the presence of the <code>export</code> keyword.</p>
 <p>Environment variables are used exactly like normal variables: via
 <code>$NAME</code> or <code>${NAME}</code>. There&rsquo;s no difference between them. The only way
@@ -273,41 +274,41 @@ specialized command like <code>env</code> (not a great idea).</p>
 <p>Modifying a variable (if it&rsquo;s not read-only) or environment variable
 doesn&rsquo;t change it&rsquo;s type.</p>
 <p>Re-<code>export</code>ing an environment variable has no impact.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># PATH and $HOME are common and well known environment variable</span>
-export PATH<span style="color:#f92672">=</span>$PATH:$HOME/bin
-
-<span style="color:#75715e"># same as above</span>
-PATH<span style="color:#f92672">=</span>$PATH:$HOME/bin
-</code></pre></div><p>This is why you will often see shell configuration asking to add
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># PATH and $HOME are common and well known environment variable</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:$HOME/bin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># same as above</span>
+</span></span><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span>$PATH:$HOME/bin
+</span></span></code></pre></div><p>This is why you will often see shell configuration asking to add
 things to your <code>~/.profile</code> file and use snippets like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># PATH is already a well known and already-initialized environment variable</span>
-<span style="color:#75715e"># No need to export it</span>
-PATH<span style="color:#f92672">=</span>$PATH:$HOME/path/where/you/installed/program
-
-<span style="color:#75715e"># This is a new environment variable</span>
-<span style="color:#75715e"># It needs to be exported</span>
-export DOTNET_ROOT<span style="color:#f92672">=</span>$HOME/path/where/you/installed/program
-</code></pre></div><p>If the <code>DOTNET_ROOT</code> environment variable was not <code>export</code>ed, it would
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># PATH is already a well known and already-initialized environment variable</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># No need to export it</span>
+</span></span><span style="display:flex;"><span>PATH<span style="color:#f92672">=</span>$PATH:$HOME/path/where/you/installed/program
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># This is a new environment variable</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># It needs to be exported</span>
+</span></span><span style="display:flex;"><span>export DOTNET_ROOT<span style="color:#f92672">=</span>$HOME/path/where/you/installed/program
+</span></span></code></pre></div><p>If the <code>DOTNET_ROOT</code> environment variable was not <code>export</code>ed, it would
 be initialized as a normal variable within the shell and not be made
 available to other programs that are looking for this environment
 variable.</p>
 <p>You can also set environment variables for a single command by passing
 the environment variable names and values just before the command
 name.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ENV_VAR<span style="color:#f92672">=</span>VALUE program
-</code></pre></div><p>This sets the environment variable <code>ENV_VAR</code> to the value <code>VALUE</code> only
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ENV_VAR<span style="color:#f92672">=</span>VALUE program
+</span></span></code></pre></div><p>This sets the environment variable <code>ENV_VAR</code> to the value <code>VALUE</code> only
 for the <code>program</code>.</p>
 <p>The syntax is like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">var1<span style="color:#f92672">=</span>value1 <span style="color:#f92672">[</span>var2<span style="color:#f92672">=</span>value2 var3<span style="color:#f92672">=</span>value3 ...<span style="color:#f92672">]</span> command
-</code></pre></div><p>A common style used in compiling code is something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">CC<span style="color:#f92672">=</span>gcc make
-</code></pre></div><p>This runs <code>make</code> with the environment variable <code>CC</code> set to the value
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>var1<span style="color:#f92672">=</span>value1 <span style="color:#f92672">[</span>var2<span style="color:#f92672">=</span>value2 var3<span style="color:#f92672">=</span>value3 ...<span style="color:#f92672">]</span> command
+</span></span></code></pre></div><p>A common style used in compiling code is something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>CC<span style="color:#f92672">=</span>gcc make
+</span></span></code></pre></div><p>This runs <code>make</code> with the environment variable <code>CC</code> set to the value
 <code>gcc</code>. In turn, <code>make</code> understands this to mean that <code>make</code> should use
 <code>gcc</code> as the c compiler.</p>
 <p>Let&rsquo;s go back to the example we saw earlier in the section about
 defining variables (not environment variables) with extra spaces.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">var<span style="color:#f92672">=</span> value
-</code></pre></div><p>You can now see that why this runs the program <code>value</code> with the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>var<span style="color:#f92672">=</span> value
+</span></span></code></pre></div><p>You can now see that why this runs the program <code>value</code> with the
 <em>environment variable</em> <code>var</code> set to the empty value.</p>
 <h2 id="summary">Summary</h2>
 <p>You should now have a really good idea about what bash variables and
@@ -523,7 +524,8 @@ question</a>
 
   </main>
 <footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
+ | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
 	
 	
 	

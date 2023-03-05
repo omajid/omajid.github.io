@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	
-	<meta name="generator" content="Hugo 0.80.0" />
+	<meta name="generator" content="Hugo 0.98.0" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +15,10 @@ app: /lib64/libc.so.6: version …"><meta property="og:title" content="What is t
 app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app) Or like this:
 app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app) The application (or library) itself will vary. The path to the libc or libstdc&#43;&#43; might vary too. But the error will always mention that a GLIBCXX or GLIBC version was not found." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/" />
+<meta property="og:url" content="https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-07-08T20:06:54-04:00" />
 <meta property="article:modified_time" content="2020-07-08T20:06:54-04:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="What is this GLIBCXX error?"/>
 <meta name="twitter:description" content="If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
@@ -104,10 +105,10 @@ app: /lib64/libstdc&#43;&#43;.so.6: version `GLIBCXX_3.4.20&#39; not found (requ
 	<div class="markdown">
 		<p>If you use enterprise or stable Linux distributions, sooner or later
 you will see an error like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
-</code></pre></div><p>Or like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app)
-</code></pre></div><p>The application (or library) itself will vary. The path to the <code>libc</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
+</span></span></code></pre></div><p>Or like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app)
+</span></span></code></pre></div><p>The application (or library) itself will vary. The path to the <code>libc</code>
 or <code>libstdc++</code> might vary too. But the error will always mention that
 a <code>GLIBCXX</code> or <code>GLIBC</code> version was not found.</p>
 <p>What can you do to fix it?</p>
@@ -173,13 +174,13 @@ ABIs</a>
 <h2 id="what-does-the-error-mean">What does the error mean?</h2>
 <p>Now that you have a bit of a background on the C and C++ standard
 libraries and symbol versions, lets go back to the errors:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
-</code></pre></div><p>This error happens when the runtime linker tries to load the standard
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>app: /lib64/libc.so.6: version `GLIBC_3.1.45&#39; not found (required by ./app)
+</span></span></code></pre></div><p>This error happens when the runtime linker tries to load the standard
 C library (<code>libc</code>) for <code>app</code>. The runtime linker sees that <code>app</code> has a
 dependency on a symbol and the version <code>GLIBC_3.1.45</code> is not found in
 this C library.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app)
-</code></pre></div><p>This error happens when the runtime linker tries to load the C++
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&#39; not found (required by ./app)
+</span></span></code></pre></div><p>This error happens when the runtime linker tries to load the C++
 library (<code>libstdc++</code>) for <code>app</code>. The runtime linker sees that <code>app</code>
 has a dependency on a symbol and the version <code>GLIBCXX_3.4.20</code> of the
 symbol is not found in this C++ library.</p>
@@ -215,10 +216,10 @@ RHEL 5.</p>
 Operating System and the application or library you want to run.</p>
 <p>You can check the <code>GLIBC</code> or <code>GLIBCXX</code> versions needed by an
 application or library using <code>readelf</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ readelf --dyn-syms /usr/bin/java | grep <span style="color:#e6db74">&#39;@GLIBC&#39;</span>
-     2: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
-     6: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
-</code></pre></div><p>Here, you can see that this application (<code>java</code>) uses two symbols that
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ readelf --dyn-syms /usr/bin/java | grep <span style="color:#e6db74">&#39;@GLIBC&#39;</span>
+</span></span><span style="display:flex;"><span>     2: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    GLOBAL DEFAULT  UND __libc_start_main@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>     6: <span style="color:#ae81ff">0000000000000000</span>     <span style="color:#ae81ff">0</span> FUNC    WEAK   DEFAULT  UND __cxa_finalize@GLIBC_2.2.5 <span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>Here, you can see that this application (<code>java</code>) uses two symbols that
 are versioned as <code>GLIBC_2.2.5</code>.</p>
 <h2 id="how-to-fix-this-error">How to fix this error?</h2>
 <p>The correct way to fix this error is to make sure the Linux
@@ -490,7 +491,8 @@ distribution&rsquo;s package manager.</p>
 
   </main>
 <footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a> 
+	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
+ | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
 	
 	
 	
