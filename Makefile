@@ -2,26 +2,26 @@ COMMIT:=$(shell git rev-parse HEAD)
 AUTHOR:="$(shell git config user.name) <$(shell git config user.email)>"
 
 .PHONY: all
-all: serve-local
+all: serve-locally
 
-public/:
+gh-pages/:
 	git worktree prune
-	git worktree add -B master public/ origin/master
+	git worktree add -B gh-pages gh-pages/ origin/gh-pages
 
-.PHONY: serve-local
-serve-local:
+.PHONY: serve-locally
+serve-locally:
 	hugo server --buildDrafts --buildFuture
 
-.PHONY: publish-locally
-publish-locally: public/
-	rm -rf public/*
-	hugo
-	cd public && \
+.PHONY: build-and-commit-to-gh-pages-locally
+build-and-commit-to-gh-pages-locally: gh-pages/
+	rm -rf gh-pages/*
+	hugo --destination gh-pages/
+	cd gh-pages && \
 	  git add --all && \
 	  git commit -m "Updated content based on $(COMMIT)" --author=$(AUTHOR)
 
 .PHONY: publish-to-github
-publish-to-github:
+push-to-github:
 	git push --force-with-lease
-	cd public && \
+	cd gh-pages && \
 	  git push --force-with-lease
