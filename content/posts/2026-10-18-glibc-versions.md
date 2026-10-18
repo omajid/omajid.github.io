@@ -1,7 +1,7 @@
 +++
 title = "What glibc version do I care about?"
 date = "2026-10-18"
-draft = true
+draft = false
 categories = [ "linux"  ]
 tags = [ "linux", "glibc" ]
 +++
