@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>What glibc version do I care about? | Omair Majid</title>
+<meta name="keywords" content="linux, glibc">
+<meta name="description" content="Linux distributions include a C standard library, which allows programs written in C to use the standard library features (like printf() and &lt;limits.h&gt;), talk to the kernel without directly using syscalls, and so on.
+Glibc is the most common implementation used on Linux, though there are others such as musl (used in Alpine), llvm-libc (by the LLVM project), dietlibc and uclibc (for embedded systems). Windows and BSDs have their own implementations of a C standard library, of couse.">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2026-10-18-glibc-versions/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2026-10-18-glibc-versions/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2026-10-18-glibc-versions/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="What glibc version do I care about?">
+  <meta property="og:description" content="Linux distributions include a C standard library, which allows programs written in C to use the standard library features (like printf() and &lt;limits.h&gt;), talk to the kernel without directly using syscalls, and so on.
+Glibc is the most common implementation used on Linux, though there are others such as musl (used in Alpine), llvm-libc (by the LLVM project), dietlibc and uclibc (for embedded systems). Windows and BSDs have their own implementations of a C standard library, of couse.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-10-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-10-18T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Glibc">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="What glibc version do I care about?">
+  <meta name="twitter:description" content="Linux distributions include a C standard library, which allows programs written in C to use the standard library features (like printf() and &lt;limits.h&gt;), talk to the kernel without directly using syscalls, and so on.
+Glibc is the most common implementation used on Linux, though there are others such as musl (used in Alpine), llvm-libc (by the LLVM project), dietlibc and uclibc (for embedded systems). Windows and BSDs have their own implementations of a C standard library, of couse.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "What glibc version do I care about?",
+      "item": "https://omairmajid.com/posts/2026-10-18-glibc-versions/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What glibc version do I care about?",
+  "name": "What glibc version do I care about?",
+  "description": "Linux distributions include a C standard library, which allows programs written in C to use the standard library features (like printf() and \u0026lt;limits.h\u0026gt;), talk to the kernel without directly using syscalls, and so on.\nGlibc is the most common implementation used on Linux, though there are others such as musl (used in Alpine), llvm-libc (by the LLVM project), dietlibc and uclibc (for embedded systems). Windows and BSDs have their own implementations of a C standard library, of couse.\n",
+  "keywords": [
+    "linux", "glibc"
+  ],
+  "articleBody": "Linux distributions include a C standard library, which allows programs written in C to use the standard library features (like printf() and ), talk to the kernel without directly using syscalls, and so on.\nGlibc is the most common implementation used on Linux, though there are others such as musl (used in Alpine), llvm-libc (by the LLVM project), dietlibc and uclibc (for embedded systems). Windows and BSDs have their own implementations of a C standard library, of couse.\nIf you are developing an application for Linux, you need to be careful with what glibc version you use. If you are shipping sources, you can rely on users/packagers/administrators to build your application against a specific glibc and then use the application. If you are shipping a binary for Linux, you need to be careful with what glibc you are linking against. The target platform may have a differen version of glibc. An application will run fine on a newer version of glibc; it will fail to run when an older verison of glibc is used.\nIn other words: glibc is often the first challenge when it comes to binary compatiblity on Linux.\nIf you need a binary to be widely compatible, make an explicit decision on what version of glibc it is built against.\nHere’s a compilation of some recent versions of glibc and what Linux distribution provide that version of glibc. Hopefully that will give you some good context on what a binary’s compatiblity matrix might look like.\nglibc versions by linux distribution distribution name glibc version AlmaLinux 8 2.28 AlmaLinux 9 2.34 AlmaLinux 10 2.39 CentOS Stream 9 2.34 CentOS Stream 10 2.39 Debian 9 2.24 Debian 10 2.28 Debian 11 2.31 Debian 12 2.36 Debian 13 2.41 Fedora 30 2.29 Fedora 40 2.39 Fedora 44 2.43 Fedora 45 2.44 RHEL 8 2.28 RHEL 9 2.34 RHEL 10 2.39 Rocky Linux 8 2.28 Rocky Linux 9 2.34 Rocky Linux 10 2.39 Ubuntu 22.04 2.35 Ubuntu 24.04 2.39 Ubuntu 26.04 2.43 Ubuntu 26.10 2.44 glibc version and distro compatiblity glibc version compatible minimum distributions 2.24 Debian 9 2.25 2.26 2.27 2.28 AlmaLinux 8, Debian 10, RHEL 8, Rocky Linux 8 2.29 Fedora 30 2.30 2.31 Debian 11 2.32 2.33 2.34 AlmaLinux 9, CentOS Stream 9, RHEL 9, Rocky Linux 9 2.35 Ubuntu 22.04 2.36 Debian 12 2.37 2.38 2.39 AlmaLinux 10, CentOS Stream 10, Fedora 40, RHEL 10, RockyLinux 10, Ubuntu 24.04 2.40 2.41 Debian 13 2.42 2.43 Fedora 44, Ubuntu 26.04 2.44 Fedora 45, Ubuntu 26.10 2.45 How to find glibc versions If you know the path to the C sandard library, execute the library (yes!) directly:\n$ /usr/lib64/libc.so.6 | head -1 GNU C Library (GNU libc) stable release version 2.43. You can also execute ldd to find out:\n$ ldd --version | head -1 ldd (GNU libc) 2.43 You can also ask your distribution’s package manager:\nDebian: dpkg -s libc6 | grep \"^Version\" Fedora: rpm -q --qf '%{VERSION}\\n' glibc RHEL: rpm -q --qf '%{VERSION}\\n' glibc Here’s a full script that findes the version for each distribution:\n#!/bin/bash set -euo pipefail for alma in 8 9 10; do image=docker.io/library/almalinux:${alma} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c 'rpm -q --qf \"%{VERSION}\\n\" glibc') echo \"AlmaLinux $alma $glibc\" done for centos in 9 10; do image=quay.io/centos/centos:stream${centos} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c 'rpm -q --qf \"%{VERSION}\\n\" glibc') echo \"CentOS Stream $centos $glibc\" done for debian in 9 10 11 12 13 ; do image=docker.io/library/debian:${debian} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c \"dpkg -s libc6 | grep '^Version' | cut -d: -f2 | sed -E 's/-.*$//' \") echo \"Debian $debian $glibc\" done for fedora in 30 40 44 45 46; do image=registry.fedoraproject.org/fedora:${fedora} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c 'rpm -q --qf \"%{VERSION}\\n\" glibc') echo \"Fedora $fedora $glibc\" done for rhel in 8 9 10; do image=registry.access.redhat.com/ubi${rhel} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c 'rpm -q --qf \"%{VERSION}\\n\" glibc') echo \"RHEL $rhel $glibc\" done for rocky in 8 9 10; do image=docker.io/rockylinux/rockylinux:${rocky} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c 'rpm -q --qf \"%{VERSION}\\n\" glibc') echo \"Rocky Linux $rocky $glibc\" done for ubuntu in 22.04 24.04 26.04 26.10 ; do image=docker.io/library/ubuntu:${ubuntu} podman pull -q \"${image}\" \u003e /dev/null glibc=$(podman run --pull=never -it \"${image}\" \\ /bin/bash -c \"dpkg -s libc6 | grep '^Version' | cut -d: -f2 | sed -E 's/-.*$//' \") echo \"Ubuntu $ubuntu $glibc\" done ",
+  "wordCount" : "764",
+  "inLanguage": "en",
+  "datePublished": "2026-10-18T00:00:00Z",
+  "dateModified": "2026-10-18T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2026-10-18-glibc-versions/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      What glibc version do I care about?
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-10-18 00:00:00 +0000 UTC'>October 18, 2026</span>&nbsp;·&nbsp;<span>Omair Majid</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Linux distributions include a C standard library, which allows programs written in C to use the standard library features (like <code>printf()</code> and <code>&lt;limits.h&gt;</code>), talk to the kernel without directly using syscalls, and so on.</p>
+<p>Glibc is the most common implementation used on Linux, though there are others such as <code>musl</code> (used in Alpine), <code>llvm-libc</code> (by the LLVM project), <code>dietlibc</code> and <code>uclibc</code> (for embedded systems). Windows and BSDs have their own implementations of a C standard library, of couse.</p>
+<p>If you are developing an application for Linux, you need to be careful with what glibc version you use. If you are shipping sources, you can rely on users/packagers/administrators to build your application against a specific glibc and then use the application. If you are shipping a binary for Linux, you need to be careful with what glibc you are linking against. The target platform may have a differen version of glibc. An application will run fine on a newer version of glibc; it will fail to run when an older verison of glibc is used.</p>
+<p>In other words: glibc is often the first challenge when it comes to binary compatiblity on Linux.</p>
+<p>If you need a binary to be widely compatible, make an explicit decision on what version of glibc it is built against.</p>
+<p>Here&rsquo;s a compilation of some recent versions of glibc and what Linux distribution provide that version of glibc. Hopefully that will give you some good context on what a binary&rsquo;s compatiblity matrix might look like.</p>
+<h2 id="glibc-versions-by-linux-distribution">glibc versions by linux distribution<a hidden class="anchor" aria-hidden="true" href="#glibc-versions-by-linux-distribution">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">distribution name</th>
+					<th style="text-align: left">glibc version</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">AlmaLinux 8</td>
+					<td style="text-align: left">2.28</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">AlmaLinux 9</td>
+					<td style="text-align: left">2.34</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">AlmaLinux 10</td>
+					<td style="text-align: left">2.39</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">CentOS Stream 9</td>
+					<td style="text-align: left">2.34</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">CentOS Stream 10</td>
+					<td style="text-align: left">2.39</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Debian 9</td>
+					<td style="text-align: left">2.24</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Debian 10</td>
+					<td style="text-align: left">2.28</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Debian 11</td>
+					<td style="text-align: left">2.31</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Debian 12</td>
+					<td style="text-align: left">2.36</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Debian 13</td>
+					<td style="text-align: left">2.41</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Fedora 30</td>
+					<td style="text-align: left">2.29</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Fedora 40</td>
+					<td style="text-align: left">2.39</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Fedora 44</td>
+					<td style="text-align: left">2.43</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Fedora 45</td>
+					<td style="text-align: left">2.44</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">RHEL 8</td>
+					<td style="text-align: left">2.28</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">RHEL 9</td>
+					<td style="text-align: left">2.34</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">RHEL 10</td>
+					<td style="text-align: left">2.39</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Rocky Linux 8</td>
+					<td style="text-align: left">2.28</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Rocky Linux 9</td>
+					<td style="text-align: left">2.34</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Rocky Linux 10</td>
+					<td style="text-align: left">2.39</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Ubuntu 22.04</td>
+					<td style="text-align: left">2.35</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Ubuntu 24.04</td>
+					<td style="text-align: left">2.39</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Ubuntu 26.04</td>
+					<td style="text-align: left">2.43</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Ubuntu 26.10</td>
+					<td style="text-align: left">2.44</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="glibc-version-and-distro-compatiblity">glibc version and distro compatiblity<a hidden class="anchor" aria-hidden="true" href="#glibc-version-and-distro-compatiblity">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">glibc version</th>
+					<th style="text-align: left">compatible minimum distributions</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">2.24</td>
+					<td style="text-align: left">Debian 9</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.25</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.26</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.27</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.28</td>
+					<td style="text-align: left">AlmaLinux 8, Debian 10, RHEL 8, Rocky Linux 8</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.29</td>
+					<td style="text-align: left">Fedora 30</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.30</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.31</td>
+					<td style="text-align: left">Debian 11</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.32</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.33</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.34</td>
+					<td style="text-align: left">AlmaLinux 9, CentOS Stream 9, RHEL 9, Rocky Linux 9</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.35</td>
+					<td style="text-align: left">Ubuntu 22.04</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.36</td>
+					<td style="text-align: left">Debian 12</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.37</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.38</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.39</td>
+					<td style="text-align: left">AlmaLinux 10, CentOS Stream 10, Fedora 40, RHEL 10, RockyLinux 10, Ubuntu 24.04</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.40</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.41</td>
+					<td style="text-align: left">Debian 13</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.42</td>
+					<td style="text-align: left"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.43</td>
+					<td style="text-align: left">Fedora 44, Ubuntu 26.04</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.44</td>
+					<td style="text-align: left">Fedora 45, Ubuntu 26.10</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">2.45</td>
+					<td style="text-align: left"></td>
+			</tr>
+	</tbody>
+</table>
+<h1 id="how-to-find-glibc-versions">How to find glibc versions<a hidden class="anchor" aria-hidden="true" href="#how-to-find-glibc-versions">#</a></h1>
+<ul>
+<li>
+<p>If you know the path to the C sandard library, execute the library (yes!) directly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ /usr/lib64/libc.so.6 | head -1
+</span></span><span style="display:flex;"><span>GNU C Library <span style="color:#f92672">(</span>GNU libc<span style="color:#f92672">)</span> stable release version 2.43.
+</span></span></code></pre></div></li>
+<li>
+<p>You can also execute <code>ldd</code> to find out:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ldd --version | head -1
+</span></span><span style="display:flex;"><span>ldd <span style="color:#f92672">(</span>GNU libc<span style="color:#f92672">)</span> 2.43
+</span></span></code></pre></div></li>
+<li>
+<p>You can also ask your distribution&rsquo;s package manager:</p>
+<ul>
+<li>Debian: <code>dpkg -s libc6 | grep &quot;^Version&quot;</code></li>
+<li>Fedora: <code>rpm -q --qf '%{VERSION}\n' glibc</code></li>
+<li>RHEL: <code>rpm -q --qf '%{VERSION}\n' glibc</code></li>
+</ul>
+<p>Here&rsquo;s a full script that findes the version for each distribution:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set -euo pipefail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> alma in <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span> 10; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>docker.io/library/almalinux:<span style="color:#e6db74">${</span>alma<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>              /bin/bash -c <span style="color:#e6db74">&#39;rpm -q --qf &#34;%{VERSION}\n&#34; glibc&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;AlmaLinux </span>$alma<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> centos in <span style="color:#ae81ff">9</span> 10; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>quay.io/centos/centos:stream<span style="color:#e6db74">${</span>centos<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>            /bin/bash -c <span style="color:#e6db74">&#39;rpm -q --qf &#34;%{VERSION}\n&#34; glibc&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;CentOS Stream </span>$centos<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> debian in <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> ; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>docker.io/library/debian:<span style="color:#e6db74">${</span>debian<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>            /bin/bash -c <span style="color:#e6db74">&#34;dpkg -s libc6 | grep &#39;^Version&#39; | cut -d: -f2 | sed -E &#39;s/-.*</span>$<span style="color:#e6db74">//&#39; &#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Debian </span>$debian<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> fedora in <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">40</span> <span style="color:#ae81ff">44</span> <span style="color:#ae81ff">45</span> 46; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>registry.fedoraproject.org/fedora:<span style="color:#e6db74">${</span>fedora<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>              /bin/bash -c <span style="color:#e6db74">&#39;rpm -q --qf &#34;%{VERSION}\n&#34; glibc&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Fedora </span>$fedora<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> rhel in <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span> 10; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>registry.access.redhat.com/ubi<span style="color:#e6db74">${</span>rhel<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>            /bin/bash -c <span style="color:#e6db74">&#39;rpm -q --qf &#34;%{VERSION}\n&#34; glibc&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;RHEL </span>$rhel<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> rocky in <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span> 10; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>docker.io/rockylinux/rockylinux:<span style="color:#e6db74">${</span>rocky<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>            /bin/bash -c <span style="color:#e6db74">&#39;rpm -q --qf &#34;%{VERSION}\n&#34; glibc&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Rocky Linux </span>$rocky<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ubuntu in 22.04 24.04  26.04  26.10 ; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#f92672">=</span>docker.io/library/ubuntu:<span style="color:#e6db74">${</span>ubuntu<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    podman pull -q <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null
+</span></span><span style="display:flex;"><span>    glibc<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>podman run --pull<span style="color:#f92672">=</span>never -it <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>image<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>            /bin/bash -c <span style="color:#e6db74">&#34;dpkg -s libc6 | grep &#39;^Version&#39; | cut -d: -f2 | sed -E &#39;s/-.*</span>$<span style="color:#e6db74">//&#39; &#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Ubuntu </span>$ubuntu<span style="color:#e6db74">  </span>$glibc<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">done</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/linux/">Linux</a></li>
+      <li><a href="https://omairmajid.com/tags/glibc/">Glibc</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

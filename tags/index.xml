@@ -7,20 +7,27 @@
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
-    <lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 18 Oct 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Dotnet</title>
-      <link>https://omairmajid.com/tags/dotnet/</link>
-      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-      <guid>https://omairmajid.com/tags/dotnet/</guid>
+      <title>Glibc</title>
+      <link>https://omairmajid.com/tags/glibc/</link>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/glibc/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
       <link>https://omairmajid.com/tags/linux/</link>
-      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 +0000</pubDate>
       <guid>https://omairmajid.com/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dotnet</title>
+      <link>https://omairmajid.com/tags/dotnet/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/tags/dotnet/</guid>
       <description></description>
     </item>
     <item>
@@ -70,13 +77,6 @@
       <link>https://omairmajid.com/tags/debugging/</link>
       <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
       <guid>https://omairmajid.com/tags/debugging/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Glibc</title>
-      <link>https://omairmajid.com/tags/glibc/</link>
-      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-      <guid>https://omairmajid.com/tags/glibc/</guid>
       <description></description>
     </item>
     <item>

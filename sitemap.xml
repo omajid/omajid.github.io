@@ -4,7 +4,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://omairmajid.com/categories/</loc>
-    <lastmod>2023-03-05T01:32:23-05:00</lastmod>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/tags/glibc/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/categories/linux/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/tags/linux/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/posts/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/tags/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://omairmajid.com/posts/2026-10-18-glibc-versions/</loc>
+    <lastmod>2026-10-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</loc>
     <lastmod>2023-03-05T01:32:23-05:00</lastmod>
@@ -13,18 +34,6 @@
     <lastmod>2023-03-05T01:32:23-05:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/tags/dotnet/</loc>
-    <lastmod>2023-03-05T01:32:23-05:00</lastmod>
-  </url><url>
-    <loc>https://omairmajid.com/tags/linux/</loc>
-    <lastmod>2023-03-05T01:32:23-05:00</lastmod>
-  </url><url>
-    <loc>https://omairmajid.com/</loc>
-    <lastmod>2023-03-05T01:32:23-05:00</lastmod>
-  </url><url>
-    <loc>https://omairmajid.com/posts/</loc>
-    <lastmod>2023-03-05T01:32:23-05:00</lastmod>
-  </url><url>
-    <loc>https://omairmajid.com/tags/</loc>
     <lastmod>2023-03-05T01:32:23-05:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/tags/centos/</loc>
@@ -62,12 +71,6 @@
   </url><url>
     <loc>https://omairmajid.com/tags/debugging/</loc>
     <lastmod>2020-08-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://omairmajid.com/tags/glibc/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
-  </url><url>
-    <loc>https://omairmajid.com/categories/linux/</loc>
-    <lastmod>2020-07-08T20:06:54-04:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/tags/tools/</loc>
     <lastmod>2020-07-08T20:06:54-04:00</lastmod>
