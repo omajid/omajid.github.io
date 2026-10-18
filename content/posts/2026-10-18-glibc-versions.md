@@ -164,3 +164,7 @@ Here's a compilation of some recent versions of glibc and what Linux distributio
   ```
 
 ---
+
+This article was motivated by the [new regresion in `SQLitePCL.raw`, which breaks `Microsoft.Data.Sqlite` on RHEL 8](https://github.com/dotnet/efcore/issues/39148).
+
+---
