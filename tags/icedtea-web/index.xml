@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>icedtea-web on Omair Majid</title>
-		<link>https://omairmajid.com/tags/icedtea-web/</link>
-		<description>Recent content in icedtea-web on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Fri, 24 Jan 2014 00:29:36 +0000</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/icedtea-web/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>IcedTea-Web and OpenJDK</title>
-			<link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
-			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
-			<description>
-			
-				I posted 3 patches today
-The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into …
-			
-			</description>
-		</item>
-		<item>
-			<title>What IcedTea-Web 1.1 means for you</title>
-			<link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
-			<pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
-			<description>
-			
-				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Icedtea-Web on Omair Majid</title>
+    <link>https://omairmajid.com/tags/icedtea-web/</link>
+    <description>Recent content in Icedtea-Web on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Fri, 24 Jan 2014 00:29:36 +0000</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/icedtea-web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IcedTea-Web and OpenJDK</title>
+      <link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
+      <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
+      <description>&lt;p&gt;I posted 3 patches today&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/jdk9-dev/2014-January/000320.html&#34;&gt;first patch&lt;/a&gt; is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into (pardon the pun) OpenJDK and make use of existing plugin-specific classes in OpenJDK.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2014-January/025972.html&#34;&gt;second&lt;/a&gt; and &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2014-January/025993.html&#34;&gt;third&lt;/a&gt; patches are for IcedTea-Web. They allow IcedTea-Web to (progressively) build against OpenJDK8 and OpenJDK9.&lt;/p&gt;
+&lt;p&gt;What does this mean? Soon we might actually be able to build and run IcedTea-
+Web against OpenJDK. Yes, an Open Source/Free Software plugin running on top
+of OpenJDK (without any custom patches). Of course, a lot of this is still up
+in the air. The OpenJDK folks might not accept the patch, though I am hopeful
+they will - it&amp;rsquo;s very small and conservative.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What IcedTea-Web 1.1 means for you</title>
+      <link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+      <description>&lt;p&gt;A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If
+you are a packager or a developer here are some things you need to know.&lt;/p&gt;
+&lt;h2 id=&#34;are-you-a-packager&#34;&gt;Are you a packager?&lt;/h2&gt;
+&lt;p&gt;IcedTea-Web 1.1 can be installed into a regular prefix (&lt;code&gt;/usr/&lt;/code&gt; or
+&lt;code&gt;/usr/local/&lt;/code&gt; or anything else). Unlike IcedTea-Web 1.0, you do not need to
+install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to
+build itself (specified using &lt;code&gt;--with-jdk-home&lt;/code&gt;). IcedTea-Web will use the JDK
+it was compiled against to run. The launchers (&lt;code&gt;javaws&lt;/code&gt; and &lt;code&gt;itweb-settings&lt;/code&gt;)
+are now shell scripts and can be customized as needed.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

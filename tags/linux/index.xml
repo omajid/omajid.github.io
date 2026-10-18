@@ -1,94 +1,124 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>linux on Omair Majid</title>
-		<link>https://omairmajid.com/tags/linux/</link>
-		<description>Recent content in linux on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Collecting dumps; under the hood</title>
-			<link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
-			<pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
-			<description>
-			
-				Or how dotnet-dump collect works on Linux
-If you are trying to diagnose the behaviour of a mis-behaving application in production, one …
-			
-			</description>
-		</item>
-		<item>
-			<title>Using .NET with OpenSSL in CentOS Stream 9</title>
-			<link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
-			<description>
-			
-				Or, how to deal with error:0E07607...
-			
-			</description>
-		</item>
-		<item>
-			<title>Why is hash(-1) == hash(-2) in Python?</title>
-			<link>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</link>
-			<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
-			<description>
-			
-				While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
- is hash(-1) == hash(-2) an …
-			
-			</description>
-		</item>
-		<item>
-			<title>What is this GLIBCXX error?</title>
-			<link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
-			<pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
-			<description>
-			
-				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
-app: /lib64/libc.so.6: version …
-			
-			</description>
-		</item>
-		<item>
-			<title>Variables and Environment Variables In Bash</title>
-			<link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
-			<pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
-			<description>
-			
-				Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
-Shells like bash …
-			
-			</description>
-		</item>
-		<item>
-			<title>The magic of file</title>
-			<link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
-			<pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
-			<description>
-			
-				Ever wonder how file(1)1 works?
-After reading this post, you should understand all about file and its underpinnings.
-file Using the file …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Omair Majid</title>
+    <link>https://omairmajid.com/tags/linux/</link>
+    <description>Recent content in Linux on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collecting dumps; under the hood</title>
+      <link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
+      <description>&lt;p&gt;Or how &lt;code&gt;dotnet-dump collect&lt;/code&gt; works on Linux&lt;/p&gt;
+&lt;p&gt;If you are trying to diagnose the behaviour of a mis-behaving
+application in production, one option is to use the
+&lt;a href=&#34;https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump&#34;&gt;&lt;code&gt;dotnet-dump&lt;/code&gt;&lt;/a&gt;
+tool to get a memory dump of the application so you can study it
+offline. With a dump, you can get stack traces, look at all the
+threads and even dig through the entire heap offline.&lt;/p&gt;
+&lt;p&gt;But how does &lt;code&gt;dotnet-dump&lt;/code&gt; actually work?&lt;/p&gt;
+&lt;p&gt;This post will try and summarize what I found as I tried digging
+through what &lt;code&gt;dotnet dump collect&lt;/code&gt; does under the hood.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using .NET with OpenSSL in CentOS Stream 9</title>
+      <link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
+      <description>Or, how to deal with error:0E07607...</description>
+    </item>
+    <item>
+      <title>Why is hash(-1) == hash(-2) in Python?</title>
+      <link>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
+      <description>&lt;p&gt;While &lt;del&gt;browsing Reddit the other day&lt;/del&gt; &lt;a href=&#34;https://xkcd.com/303/&#34;&gt;waiting for my code to
+compile&lt;/a&gt;, I ran across this question on
+r/Python:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.reddit.com/r/Python/comments/oks5km/is_hash_1hash2_an_easter_egg/&#34;&gt;is hash(-1) == hash(-2) an easter egg?&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Wait, is that really true?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt; python
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Python &lt;span style=&#34;color:#ae81ff&#34;&gt;3.9.6&lt;/span&gt; (default, Jun &lt;span style=&#34;color:#ae81ff&#34;&gt;29&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2021&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[GCC &lt;span style=&#34;color:#ae81ff&#34;&gt;11.1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20210531&lt;/span&gt; (Red Hat &lt;span style=&#34;color:#ae81ff&#34;&gt;11.1.1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)] on linux
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Type &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;help&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;copyright&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;credits&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;license&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; more information&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Yes, it is. How surprising!&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s check some other common hash values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All small numbers seem to hash to themselves, except &lt;code&gt;-1&lt;/code&gt;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is this GLIBCXX error?</title>
+      <link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      <guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
+      <description>&lt;p&gt;If you use enterprise or stable Linux distributions, sooner or later
+you will see an error like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;app: /lib64/libc.so.6: version `GLIBC_3.1.45&amp;#39; not found (required by ./app)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&amp;#39; not found (required by ./app)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The application (or library) itself will vary. The path to the &lt;code&gt;libc&lt;/code&gt;
+or &lt;code&gt;libstdc++&lt;/code&gt; might vary too. But the error will always mention that
+a &lt;code&gt;GLIBCXX&lt;/code&gt; or &lt;code&gt;GLIBC&lt;/code&gt; version was not found.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Variables and Environment Variables In Bash</title>
+      <link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
+      <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
+      <guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
+      <description>&lt;p&gt;Most programming languages make heavy use of ordinary variables. They
+also (generally) support using environment variables.&lt;/p&gt;
+&lt;p&gt;Shells like &lt;code&gt;bash&lt;/code&gt; - also heavily used for writing shell scripts -
+have a slightly different audience in mind than normal programming
+languages. They make heavy use of environment variables. So much so
+that it can sometimes become blurry whether something is a normal
+variable or an environment variable.&lt;/p&gt;
+&lt;p&gt;In this post, I will dig into variables and environment variables in
+shell, particularly &lt;code&gt;bash&lt;/code&gt;, to help you understand how to distinguish
+the two and when to use them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The magic of file</title>
+      <link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
+      <description>&lt;p&gt;Ever wonder how &lt;code&gt;file(1)&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; works?&lt;/p&gt;
+&lt;p&gt;After reading this post, you should understand all about &lt;code&gt;file&lt;/code&gt; and
+its underpinnings.&lt;/p&gt;
+&lt;h2 id=&#34;file&#34;&gt;file&lt;/h2&gt;
+&lt;p&gt;Using the &lt;code&gt;file&lt;/code&gt; tool is quite simple. It&amp;rsquo;s just &lt;code&gt;file file-name-1&lt;/code&gt;.
+You can call it with multiple arguments too. Here&amp;rsquo;s a few examples of
+running it on my system.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file document.pdf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;document.pdf: PDF document, version 1.4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file image.jpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;image.jpg: JPEG image data, Exif standard: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;TIFF image data, big-endian, direntries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; ...orientation&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;upper-left, datetime&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;2019:10:30 21:44:30, width&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1740&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, baseline, precision 8, 2017x961, components &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file video.mp4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;video.mp4: ISO Media, MP4 v2 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ISO 14496-14&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file notes.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;notes.org: UTF-8 Unicode text, with very long lines
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file /dev/video0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/video0: character special &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;81/0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can already see a few things:&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

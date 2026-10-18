@@ -1,268 +1,160 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Tags on Omair Majid</title>
-		<link>https://omairmajid.com/tags/</link>
-		<description>Recent content in Tags on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>dotnet</title>
-			<link>https://omairmajid.com/tags/dotnet/</link>
-			<pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-			
-			<guid>https://omairmajid.com/tags/dotnet/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>linux</title>
-			<link>https://omairmajid.com/tags/linux/</link>
-			<pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-			
-			<guid>https://omairmajid.com/tags/linux/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>centos</title>
-			<link>https://omairmajid.com/tags/centos/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/centos/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>openssl</title>
-			<link>https://omairmajid.com/tags/openssl/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/openssl/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>rhel</title>
-			<link>https://omairmajid.com/tags/rhel/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/rhel/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>development</title>
-			<link>https://omairmajid.com/tags/development/</link>
-			<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/development/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>python</title>
-			<link>https://omairmajid.com/tags/python/</link>
-			<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/python/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>fedora</title>
-			<link>https://omairmajid.com/tags/fedora/</link>
-			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/fedora/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>debugging</title>
-			<link>https://omairmajid.com/tags/debugging/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/debugging/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>glibc</title>
-			<link>https://omairmajid.com/tags/glibc/</link>
-			<pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/tags/glibc/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>tools</title>
-			<link>https://omairmajid.com/tags/tools/</link>
-			<pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/tags/tools/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>bash</title>
-			<link>https://omairmajid.com/tags/bash/</link>
-			<pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/tags/bash/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>unix</title>
-			<link>https://omairmajid.com/tags/unix/</link>
-			<pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/tags/unix/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>msbuild</title>
-			<link>https://omairmajid.com/tags/msbuild/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/msbuild/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>nuget</title>
-			<link>https://omairmajid.com/tags/nuget/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/nuget/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>openjdk</title>
-			<link>https://omairmajid.com/tags/openjdk/</link>
-			<pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/openjdk/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>openjdk9</title>
-			<link>https://omairmajid.com/tags/openjdk9/</link>
-			<pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/openjdk9/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>icedtea-web</title>
-			<link>https://omairmajid.com/tags/icedtea-web/</link>
-			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/icedtea-web/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>icedtea</title>
-			<link>https://omairmajid.com/tags/icedtea/</link>
-			<pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/icedtea/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>icedtea6</title>
-			<link>https://omairmajid.com/tags/icedtea6/</link>
-			<pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/icedtea6/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		<item>
-			<title>icedtea-web-1.1</title>
-			<link>https://omairmajid.com/tags/icedtea-web-1.1/</link>
-			<pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/tags/icedtea-web-1.1/</guid>
-			<description>
-			
-				
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Omair Majid</title>
+    <link>https://omairmajid.com/tags/</link>
+    <description>Recent content in Tags on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dotnet</title>
+      <link>https://omairmajid.com/tags/dotnet/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/tags/dotnet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://omairmajid.com/tags/linux/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Centos</title>
+      <link>https://omairmajid.com/tags/centos/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/centos/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Openssl</title>
+      <link>https://omairmajid.com/tags/openssl/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/openssl/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rhel</title>
+      <link>https://omairmajid.com/tags/rhel/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/rhel/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Development</title>
+      <link>https://omairmajid.com/tags/development/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://omairmajid.com/tags/python/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fedora</title>
+      <link>https://omairmajid.com/tags/fedora/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/fedora/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Debugging</title>
+      <link>https://omairmajid.com/tags/debugging/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/debugging/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Glibc</title>
+      <link>https://omairmajid.com/tags/glibc/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      <guid>https://omairmajid.com/tags/glibc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tools</title>
+      <link>https://omairmajid.com/tags/tools/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      <guid>https://omairmajid.com/tags/tools/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Bash</title>
+      <link>https://omairmajid.com/tags/bash/</link>
+      <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
+      <guid>https://omairmajid.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Unix</title>
+      <link>https://omairmajid.com/tags/unix/</link>
+      <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
+      <guid>https://omairmajid.com/tags/unix/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Msbuild</title>
+      <link>https://omairmajid.com/tags/msbuild/</link>
+      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/msbuild/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Nuget</title>
+      <link>https://omairmajid.com/tags/nuget/</link>
+      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/nuget/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Openjdk</title>
+      <link>https://omairmajid.com/tags/openjdk/</link>
+      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/openjdk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Openjdk9</title>
+      <link>https://omairmajid.com/tags/openjdk9/</link>
+      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/openjdk9/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Icedtea-Web</title>
+      <link>https://omairmajid.com/tags/icedtea-web/</link>
+      <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/icedtea-web/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Icedtea</title>
+      <link>https://omairmajid.com/tags/icedtea/</link>
+      <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/icedtea/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Icedtea6</title>
+      <link>https://omairmajid.com/tags/icedtea6/</link>
+      <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/icedtea6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Icedtea-Web-1.1</title>
+      <link>https://omairmajid.com/tags/icedtea-web-1.1/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/tags/icedtea-web-1.1/</guid>
+      <description></description>
+    </item>
+  </channel>
 </rss>

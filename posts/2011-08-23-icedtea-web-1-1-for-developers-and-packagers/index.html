@@ -1,115 +1,231 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content="What IcedTea-Web 1.1 means for you">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="icedtea-web,icedtea-web-1.1"><meta name="description" content="A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need …"><meta property="og:title" content="What IcedTea-Web 1.1 means for you" />
-<meta property="og:description" content="A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need to know.
-Are you a packager? IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or /usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to build itself (specified using --with-jdk-home)." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2011-08-23T18:34:41+00:00" />
-<meta property="article:modified_time" content="2011-08-23T18:34:41+00:00" />
+<html lang="en" dir="auto" data-theme="auto">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What IcedTea-Web 1.1 means for you"/>
-<meta name="twitter:description" content="A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need to know.
-Are you a packager? IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or /usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to build itself (specified using --with-jdk-home)."/>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>What IcedTea-Web 1.1 means for you | Omair Majid</title>
+<meta name="keywords" content="icedtea-web, icedtea-web-1.1">
+<meta name="description" content="A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If
+you are a packager or a developer here are some things you need to know.
+Are you a packager?
+IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or
+/usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to
+install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to
+build itself (specified using --with-jdk-home). IcedTea-Web will use the JDK
+it was compiled against to run. The launchers (javaws and itweb-settings)
+are now shell scripts and can be customized as needed.">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>What IcedTea-Web 1.1 means for you | Omair Majid</title>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="What IcedTea-Web 1.1 means for you">
+  <meta property="og:description" content="A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need to know.
+Are you a packager? IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or /usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to build itself (specified using --with-jdk-home). IcedTea-Web will use the JDK it was compiled against to run. The launchers (javaws and itweb-settings) are now shell scripts and can be customized as needed.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2011-08-23T18:34:41+00:00">
+    <meta property="article:modified_time" content="2011-08-23T18:34:41+00:00">
+    <meta property="article:tag" content="Icedtea-Web">
+    <meta property="article:tag" content="Icedtea-Web-1.1">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="What IcedTea-Web 1.1 means for you">
+  <meta name="twitter:description" content="A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need to know.
+Are you a packager? IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or /usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to build itself (specified using --with-jdk-home). IcedTea-Web will use the JDK it was compiled against to run. The launchers (javaws and itweb-settings) are now shell scripts and can be customized as needed.">
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "What IcedTea-Web 1.1 means for you",
+      "item": "https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What IcedTea-Web 1.1 means for you",
+  "name": "What IcedTea-Web 1.1 means for you",
+  "description": "A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need to know.\nAre you a packager? IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or /usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to build itself (specified using --with-jdk-home). IcedTea-Web will use the JDK it was compiled against to run. The launchers (javaws and itweb-settings) are now shell scripts and can be customized as needed.\n",
+  "keywords": [
+    "icedtea-web", "icedtea-web-1.1"
+  ],
+  "articleBody": "A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need to know.\nAre you a packager? IcedTea-Web 1.1 can be installed into a regular prefix (/usr/ or /usr/local/ or anything else). Unlike IcedTea-Web 1.0, you do not need to install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to build itself (specified using --with-jdk-home). IcedTea-Web will use the JDK it was compiled against to run. The launchers (javaws and itweb-settings) are now shell scripts and can be customized as needed.\nAre you a developer using applets or java web start? IcedTea-Web 1.1 provides netscape.javascript.* and javax.jnlp.* classes that applets and web start applications use. However, unlike icedtea-web \u003c 1.1 (or older releases of icedtea6) the jars that provide these classes will not be automatically be picked up by the JDK. netscape.javascript.* classes are included in IcedTea-Web’s plugin.jar. javax.jnlp.* classes are included in IcedTea-Web’s netx.jar. Please add these classes to your classpath when building.\n",
+  "wordCount" : "171",
+  "inLanguage": "en",
+  "datePublished": "2011-08-23T18:34:41Z",
+  "dateModified": "2011-08-23T18:34:41Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">23</span>
-				<span class="rest">Aug 2011</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">What IcedTea-Web 1.1 means for you</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
+<main class="main">
 
-  
-
-  
+<article class="post-single">
+  <header class="post-header">
     
-  
-</span>
+    <h1 class="post-title entry-hint-parent">
+      What IcedTea-Web 1.1 means for you
+    </h1>
+    <div class="post-meta">
 
+<span title='2011-08-23 18:34:41 +0000 +0000'>August 23, 2011</span>&nbsp;·&nbsp;<span>Omair Majid</span>
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If
+</div>
+  </header> 
+  <div class="post-content md-content"><p>A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If
 you are a packager or a developer here are some things you need to know.</p>
-<h2 id="are-you-a-packager">Are you a packager?</h2>
+<h2 id="are-you-a-packager">Are you a packager?<a hidden class="anchor" aria-hidden="true" href="#are-you-a-packager">#</a></h2>
 <p>IcedTea-Web 1.1 can be installed into a regular prefix (<code>/usr/</code> or
 <code>/usr/local/</code> or anything else). Unlike IcedTea-Web 1.0, you do not need to
 install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to
 build itself (specified using <code>--with-jdk-home</code>). IcedTea-Web will use the JDK
 it was compiled against to run. The launchers (<code>javaws</code> and <code>itweb-settings</code>)
 are now shell scripts and can be customized as needed.</p>
-<h2 id="are-you-a-developer-using-applets-or-java-web-start">Are you a developer using applets or java web start?</h2>
+<h2 id="are-you-a-developer-using-applets-or-java-web-start">Are you a developer using applets or java web start?<a hidden class="anchor" aria-hidden="true" href="#are-you-a-developer-using-applets-or-java-web-start">#</a></h2>
 <p>IcedTea-Web 1.1 provides <code>netscape.javascript.*</code> and <code>javax.jnlp.*</code> classes
 that applets and web start applications use. However, unlike icedtea-web &lt; 1.1
 (or older releases of icedtea6) the jars that provide these classes will not
@@ -118,223 +234,96 @@ included in IcedTea-Web&rsquo;s <code>plugin.jar</code>. <code>javax.jnlp.*</cod
 IcedTea-Web&rsquo;s <code>netx.jar</code>. Please add these classes to your classpath when
 building.</p>
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Categories</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/categories/development/"> development </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/icedtea-web/"> icedtea-web </a>
-			
-			
-			
-			
-			
-			<a href="/tags/icedtea-web-1.1/"> icedtea-web-1.1 </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/icedtea-web/">Icedtea-Web</a></li>
+      <li><a href="https://omairmajid.com/tags/icedtea-web-1.1/">Icedtea-Web-1.1</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

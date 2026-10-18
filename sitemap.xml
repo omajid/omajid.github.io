@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -8,10 +9,10 @@
     <loc>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</loc>
     <lastmod>2023-03-05T01:32:23-05:00</lastmod>
   </url><url>
-    <loc>https://omairmajid.com/tags/dotnet/</loc>
+    <loc>https://omairmajid.com/categories/dotnet/</loc>
     <lastmod>2023-03-05T01:32:23-05:00</lastmod>
   </url><url>
-    <loc>https://omairmajid.com/categories/dotnet/</loc>
+    <loc>https://omairmajid.com/tags/dotnet/</loc>
     <lastmod>2023-03-05T01:32:23-05:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/tags/linux/</loc>
@@ -41,10 +42,10 @@
     <loc>https://omairmajid.com/tags/development/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://omairmajid.com/tags/python/</loc>
+    <loc>https://omairmajid.com/categories/python/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://omairmajid.com/categories/python/</loc>
+    <loc>https://omairmajid.com/tags/python/</loc>
     <lastmod>2021-07-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</loc>
@@ -77,10 +78,10 @@
     <loc>https://omairmajid.com/tags/bash/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
   </url><url>
-    <loc>https://omairmajid.com/tags/unix/</loc>
+    <loc>https://omairmajid.com/categories/unix/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
   </url><url>
-    <loc>https://omairmajid.com/categories/unix/</loc>
+    <loc>https://omairmajid.com/tags/unix/</loc>
     <lastmod>2020-06-25T00:58:07-04:00</lastmod>
   </url><url>
     <loc>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</loc>

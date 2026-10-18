@@ -1,118 +1,257 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content="Why is hash(-1) == hash(-2) in Python?">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="python,linux,development"><meta name="description" content="While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
- is hash(-1) == hash(-2) an …"><meta property="og:title" content="Why is hash(-1) == hash(-2) in Python?" />
-<meta property="og:description" content="While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
- is hash(-1) == hash(-2) an easter egg?  Wait, is that really true?
-$ python Python 3.9.6 (default, Jun 29 2021, 00:00:00) [GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34; for more information. &gt;&gt;&gt; hash(-1) -2 &gt;&gt;&gt; hash(-2) -2 &gt;&gt;&gt; hash(-1) == hash(-2) True Yes, it is." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-07-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-07-16T00:00:00+00:00" />
+<html lang="en" dir="auto" data-theme="auto">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Why is hash(-1) == hash(-2) in Python?"/>
-<meta name="twitter:description" content="While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
- is hash(-1) == hash(-2) an easter egg?  Wait, is that really true?
-$ python Python 3.9.6 (default, Jun 29 2021, 00:00:00) [GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34; for more information. &gt;&gt;&gt; hash(-1) -2 &gt;&gt;&gt; hash(-2) -2 &gt;&gt;&gt; hash(-1) == hash(-2) True Yes, it is."/>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Why is hash(-1) == hash(-2) in Python? | Omair Majid</title>
+<meta name="keywords" content="python, linux, development">
+<meta name="description" content="While browsing Reddit the other day waiting for my code to
+compile, I ran across this question on
+r/Python:
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>Why is hash(-1) == hash(-2) in Python? | Omair Majid</title>
+is hash(-1) == hash(-2) an easter egg?
+
+Wait, is that really true?
+$ python
+Python 3.9.6 (default, Jun 29 2021, 00:00:00)
+[GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux
+Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34; for more information.
+&gt;&gt;&gt; hash(-1)
+-2
+&gt;&gt;&gt; hash(-2)
+-2
+&gt;&gt;&gt; hash(-1) == hash(-2)
+True
+Yes, it is. How surprising!
+Let&rsquo;s check some other common hash values:
+&gt;&gt;&gt; hash(1)
+1
+&gt;&gt;&gt; hash(0)
+0
+&gt;&gt;&gt; hash(3)
+3
+&gt;&gt;&gt; hash(-4)
+-4
+All small numbers seem to hash to themselves, except -1&hellip;">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="Why is hash(-1) == hash(-2) in Python?">
+  <meta property="og:description" content="While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:
+is hash(-1) == hash(-2) an easter egg?
+Wait, is that really true?
+$ python Python 3.9.6 (default, Jun 29 2021, 00:00:00) [GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34; for more information. &gt;&gt;&gt; hash(-1) -2 &gt;&gt;&gt; hash(-2) -2 &gt;&gt;&gt; hash(-1) == hash(-2) True Yes, it is. How surprising!
+Let’s check some other common hash values:
+&gt;&gt;&gt; hash(1) 1 &gt;&gt;&gt; hash(0) 0 &gt;&gt;&gt; hash(3) 3 &gt;&gt;&gt; hash(-4) -4 All small numbers seem to hash to themselves, except -1…">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-07-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-07-16T00:00:00+00:00">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Development">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Why is hash(-1) == hash(-2) in Python?">
+  <meta name="twitter:description" content="While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:
+is hash(-1) == hash(-2) an easter egg?
+Wait, is that really true?
+$ python Python 3.9.6 (default, Jun 29 2021, 00:00:00) [GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux Type &#34;help&#34;, &#34;copyright&#34;, &#34;credits&#34; or &#34;license&#34; for more information. &gt;&gt;&gt; hash(-1) -2 &gt;&gt;&gt; hash(-2) -2 &gt;&gt;&gt; hash(-1) == hash(-2) True Yes, it is. How surprising!
+Let’s check some other common hash values:
+&gt;&gt;&gt; hash(1) 1 &gt;&gt;&gt; hash(0) 0 &gt;&gt;&gt; hash(3) 3 &gt;&gt;&gt; hash(-4) -4 All small numbers seem to hash to themselves, except -1…">
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Why is hash(-1) == hash(-2) in Python?",
+      "item": "https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why is hash(-1) == hash(-2) in Python?",
+  "name": "Why is hash(-1) == hash(-2) in Python?",
+  "description": "While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:\nis hash(-1) == hash(-2) an easter egg?\nWait, is that really true?\n$ python Python 3.9.6 (default, Jun 29 2021, 00:00:00) [GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux Type \u0026#34;help\u0026#34;, \u0026#34;copyright\u0026#34;, \u0026#34;credits\u0026#34; or \u0026#34;license\u0026#34; for more information. \u0026gt;\u0026gt;\u0026gt; hash(-1) -2 \u0026gt;\u0026gt;\u0026gt; hash(-2) -2 \u0026gt;\u0026gt;\u0026gt; hash(-1) == hash(-2) True Yes, it is. How surprising!\nLet\u0026rsquo;s check some other common hash values:\n\u0026gt;\u0026gt;\u0026gt; hash(1) 1 \u0026gt;\u0026gt;\u0026gt; hash(0) 0 \u0026gt;\u0026gt;\u0026gt; hash(3) 3 \u0026gt;\u0026gt;\u0026gt; hash(-4) -4 All small numbers seem to hash to themselves, except -1\u0026hellip;\n",
+  "keywords": [
+    "python", "linux", "development"
+  ],
+  "articleBody": "While browsing Reddit the other day waiting for my code to compile, I ran across this question on r/Python:\nis hash(-1) == hash(-2) an easter egg?\nWait, is that really true?\n$ python Python 3.9.6 (default, Jun 29 2021, 00:00:00) [GCC 11.1.1 20210531 (Red Hat 11.1.1-3)] on linux Type \"help\", \"copyright\", \"credits\" or \"license\" for more information. \u003e\u003e\u003e hash(-1) -2 \u003e\u003e\u003e hash(-2) -2 \u003e\u003e\u003e hash(-1) == hash(-2) True Yes, it is. How surprising!\nLet’s check some other common hash values:\n\u003e\u003e\u003e hash(1) 1 \u003e\u003e\u003e hash(0) 0 \u003e\u003e\u003e hash(3) 3 \u003e\u003e\u003e hash(-4) -4 All small numbers seem to hash to themselves, except -1…\nNow I was completely intrigued. I tried to find the answer myself. In the rest of this post, I will walk you through how you can also find this answer yourself.\nHow can we get started? What would have an authoritative answer? Let’s use the source! The actual python implementation source code!\nLet’s get the source code! I am hoping that, like myself when I began this exercise, you have no idea where the source code of python is.\nSo how can we (assuming we have never looked at the source code of python) get the source code to answer the original question?\nMaybe we can use google? A search for “python implementation” brings up a set of interesting results.\nThe first result for me, https://wiki.python.org/moin/PythonImplementations calls out “the Cpython reference implementation”.\nhttps://github.com/python has “cpython” as the number 2 repo. That looks legit. How can we be extra sure?\nWe can check python.org. Let’s go to source downloads. I eventually ended up at https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz. Extracting that, the README.rst also points to https://github.com/python/cpython\nOkay, that’s where we will start. Let’s get this code so we can later search through it:\ngit clone https://github.com/python/cpython --depth 1 The --depth 1 argument makes git fetch a limited amount of history. This makes the clone operation much faster. If we need the complete history, we can get it later.\nLet’s walk through it We need to find a starting point as we begin to dig through the code. Something easy to search for. Something like a simple string without too many misleading matches.\nMaybe we can use the documentation of the hash function? We can use help(hash) to see the documentation text:\n\u003e\u003e\u003e hash \u003cbuilt-in function hash\u003e \u003e\u003e\u003e help(hash) Help on built-in function hash in module builtins: hash(obj, /) Return the hash value for the given object. Two objects that compare equal must also have the same hash value, but the reverse is not necessarily true. Now, we can use it to find the implementation of hash():\n$ grep -r 'Return the hash value' Python/clinic/bltinmodule.c.h:\"Return the hash value for the given object.\\n\" Python/bltinmodule.c:Return the hash value for the given object. Doc/library/functions.rst: Return the hash value of the object (if it has one). Hash values are Lib/hmac.py: \"\"\"Return the hash value of this hashing object. The hmac is probably related to the crypto HMAC implementation. So we can probably ignore that. The functions.rst is a documentation file. So, let’s ignore that too.\nPython/bltinmodule.c looks interesting. If we look through that, we find this snippet of code:\n/* ... Return the hash value for the given object. Two objects that compare equal must also have the same hash value, but the reverse is not necessarily true. [clinic start generated code]*/ static PyObject * builtin_hash(PyObject *module, PyObject *obj) /*[clinic end generated code: output=237668e9d7688db7 input=58c48be822bf9c54]*/ { Py_hash_t x; x = PyObject_Hash(obj); if (x == -1) return NULL; return PyLong_FromSsize_t(x); } A search for PyLong brings me here. Looks like PyLongObject is the native representation of a python integer (this will come in handy later too). After skimming the PyLongObject doc and then re-reading this code, it looks like:\nWe call PyObject_Hash to find the hash of an object If the computed hash value is -1, that’s an error. It looks like we use -1 to indicate an error, so no hash function will ever compute -1 for a real object We convert Py_Ssize_t to PyLongObject (which the documentation calls out as: “This subtype of PyObject represents a Python integer object). Aha! that answers why hash(0) is 0, hash(1) is 1, hash(-2) is -2, but hash(-1) is not -1. It’s because -1 is internally used to indicate an error.\nBut why is hash(-1) -2? What sets it to that value?\nLets see if we can find out why.\nWe can start by looking for PyObject_Hash. Let’s search for it.\n$ ag PyObject_Hash ... Objects/rangeobject.c 552: result = PyObject_Hash(t); Objects/object.c 777:PyObject_HashNotImplemented(PyObject *v) 785:PyObject_Hash(PyObject *v) 802: return PyObject_HashNotImplemented(v); Objects/classobject.c 307: y = PyObject_Hash(a-\u003eim_func); 538: y = PyObject_Hash(PyInstanceMethod_GET_FUNCTION(self)); ... There’s a lot of noise, but the only implementation appears to be in Objects/object.c:\nPy_hash_t PyObject_Hash(PyObject *v) { PyTypeObject *tp = Py_TYPE(v); if (tp-\u003etp_hash != NULL) return (*tp-\u003etp_hash)(v); /* To keep to the general practice that inheriting * solely from object in C code should work without * an explicit call to PyType_Ready, we implicitly call * PyType_Ready here and then check the tp_hash slot again */ if (tp-\u003etp_dict == NULL) { if (PyType_Ready(tp) \u003c 0) return -1; if (tp-\u003etp_hash != NULL) return (*tp-\u003etp_hash)(v); } /* Otherwise, the object can't be hashed */ return PyObject_HashNotImplemented(v); } This is quite a confusing piece of code. Thankfully, the comment is illuminating. After reading through it a few times, it seems like the code - accounting for some lazy loading of the type (?) - finds the type of the object (using Py_TYPE). Then looks for a function tp_hash of that type and calls that function on v: (*tp-\u003etp_hash)(v)\nWhere would we find the tp_hash of -1? Let’s do another search for tp_hash:\n$ ag tp_hash -l ... Modules/_multiprocessing/semaphore.c Objects/sliceobject.c Objects/moduleobject.c Objects/exceptions.c Modules/_pickle.c Objects/frameobject.c Objects/setobject.c Objects/rangeobject.c Objects/longobject.c Objects/object.c Objects/methodobject.c Objects/classobject.c Objects/enumobject.c Objects/odictobject.c Objects/complexobject.c ... That’s a huge list. Recalling what the documentation said about PyLongObject (“This … represents a Python integer object”), I started by looking at Objects/longobject.c:\nPyTypeObject PyLong_Type = { PyVarObject_HEAD_INIT(\u0026PyType_Type, 0) \"int\", /* tp_name */ offsetof(PyLongObject, ob_digit), /* tp_basicsize */ sizeof(digit), /* tp_itemsize */ 0, /* tp_dealloc */ 0, /* tp_vectorcall_offset */ 0, /* tp_getattr */ 0, /* tp_setattr */ 0, /* tp_as_async */ long_to_decimal_string, /* tp_repr */ \u0026long_as_number, /* tp_as_number */ 0, /* tp_as_sequence */ 0, /* tp_as_mapping */ (hashfunc)long_hash, /* tp_hash */ ... So tp_hash is long_hash of objects of type PyLongObject. Let’s look at that.\nstatic Py_hash_t long_hash(PyLongObject *v) { Py_uhash_t x; Py_ssize_t i; int sign; ... if (x == (Py_uhash_t)-1) x = (Py_uhash_t)-2; return (Py_hash_t)x; } Note that I have removed a big chunk of the implementation details. But the ending of this function matches exactly what we are expecting: -1 is reserved for an error signal, so the code converts that return value explicitly to -2!\nAnd that explains the entire reason why hash(-1) ends up being the same as hash(-2). Not an easter egg, just working around the unavailability of -1 as the possible result of a hash() method.\nIs this the right/complete answer? As I said earlier, I have never looked through the python code base at all. I think I have an answer. But is it right? I might be completely wrong.\nThankfully, /u/ExoticMandibles provided an answer on the Reddit post itself:\nThe reference implementation of Python is “CPython”, which is almost certainly the Python you’re using. CPython is written in C, and unlike Python, C doesn’t have exceptions. So, in C, when you design a function, and you want your function to be able to indicate “there was an error”, it has to return that error as its return value.\nThe hash() function in CPython can return an error, so it defines a return code of -1 to mean “there was an error”. But this could be confusing if the hash worked correctly, and the actual hash of an object was -1. So the convention is: if hashing worked, and you got a -1, return -2.\nThere’s special code in the hash function for ints (“long objects”) in CPython that does exactly that:\nhttps://github.com/python/cpython/blob/main/Objects/longobject.c#L2967\nThis is exactly what I had guessed by reading the code.\nConclusion I started with a question that I thought might be difficult to answer. But a few minutes of digging through code - and python’s clean codebase makes looking through it much easier than some other codebases I have seen - and the answer is quite easy to discover and understand! Which shouldn’t be surprising if you have been around computers. There’s no magic, just layers and layers of abstractions and code.\nIf there’s a take away here, let it be this: Use the source!\n",
+  "wordCount" : "1427",
+  "inLanguage": "en",
+  "datePublished": "2021-07-16T00:00:00Z",
+  "dateModified": "2021-07-16T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">16</span>
-				<span class="rest">Jul 2021</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">Why is hash(-1) == hash(-2) in Python?</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
+<main class="main">
 
-  
-
-  
+<article class="post-single">
+  <header class="post-header">
     
-  
-</span>
+    <h1 class="post-title entry-hint-parent">
+      Why is hash(-1) == hash(-2) in Python?
+    </h1>
+    <div class="post-meta">
 
+<span title='2021-07-16 00:00:00 +0000 UTC'>July 16, 2021</span>&nbsp;·&nbsp;<span>Omair Majid</span>
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>While <del>browsing Reddit the other day</del> <a href="https://xkcd.com/303/" target="_blank">waiting for my code to
-compile</a>
-, I ran across this question on
+</div>
+  </header> 
+  <div class="post-content md-content"><p>While <del>browsing Reddit the other day</del> <a href="https://xkcd.com/303/">waiting for my code to
+compile</a>, I ran across this question on
 r/Python:</p>
 <blockquote>
-<p><a href="https://www.reddit.com/r/Python/comments/oks5km/is_hash_1hash2_an_easter_egg/" target="_blank">is hash(-1) == hash(-2) an easter egg?</a>
-</p>
+<p><a href="https://www.reddit.com/r/Python/comments/oks5km/is_hash_1hash2_an_easter_egg/">is hash(-1) == hash(-2) an easter egg?</a></p>
 </blockquote>
 <p>Wait, is that really true?</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> python
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">$</span> python
 </span></span><span style="display:flex;"><span>Python <span style="color:#ae81ff">3.9.6</span> (default, Jun <span style="color:#ae81ff">29</span> <span style="color:#ae81ff">2021</span>, <span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>)
 </span></span><span style="display:flex;"><span>[GCC <span style="color:#ae81ff">11.1.1</span> <span style="color:#ae81ff">20210531</span> (Red Hat <span style="color:#ae81ff">11.1.1</span><span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)] on linux
 </span></span><span style="display:flex;"><span>Type <span style="color:#e6db74">&#34;help&#34;</span>, <span style="color:#e6db74">&#34;copyright&#34;</span>, <span style="color:#e6db74">&#34;credits&#34;</span> <span style="color:#f92672">or</span> <span style="color:#e6db74">&#34;license&#34;</span> <span style="color:#66d9ef">for</span> more information<span style="color:#f92672">.</span>
@@ -124,7 +263,7 @@ r/Python:</p>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
 </span></span></code></pre></div><p>Yes, it is. How surprising!</p>
 <p>Let&rsquo;s check some other common hash values:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> hash(<span style="color:#ae81ff">1</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> hash(<span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> hash(<span style="color:#ae81ff">0</span>)
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>
@@ -138,7 +277,7 @@ the rest of this post, I will walk you through how you can also find
 this answer yourself.</p>
 <p>How can we get started? What would have an authoritative answer? Let&rsquo;s
 use the source! The actual python implementation source code!</p>
-<h2 id="lets-get-the-source-code">Let&rsquo;s get the source code!</h2>
+<h2 id="lets-get-the-source-code">Let&rsquo;s get the source code!<a hidden class="anchor" aria-hidden="true" href="#lets-get-the-source-code">#</a></h2>
 <p>I am hoping that, like myself when I began this exercise, you have no
 idea where the source code of python is.</p>
 <p>So how can we (assuming we have <em>never</em> looked at the source code of
@@ -146,31 +285,27 @@ python) get the source code to answer the original question?</p>
 <p>Maybe we can use google? A search for &ldquo;python implementation&rdquo; brings
 up a set of interesting results.</p>
 <p>The first result for me,
-<a href="https://wiki.python.org/moin/PythonImplementations" target="_blank">https://wiki.python.org/moin/PythonImplementations</a>
- calls out &ldquo;the Cpython
+<a href="https://wiki.python.org/moin/PythonImplementations">https://wiki.python.org/moin/PythonImplementations</a> calls out &ldquo;the Cpython
 reference implementation&rdquo;.</p>
-<p><a href="https://github.com/python" target="_blank">https://github.com/python</a>
- has &ldquo;cpython&rdquo; as the number 2 repo. That
+<p><a href="https://github.com/python">https://github.com/python</a> has &ldquo;cpython&rdquo; as the number 2 repo. That
 looks legit. How can we be extra sure?</p>
 <p>We can check python.org. Let&rsquo;s go to source downloads. I eventually
-ended up at <a href="https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz" target="_blank">https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz</a>
-.
+ended up at <a href="https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz">https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tgz</a>.
 Extracting that, the <code>README.rst</code> also points to
-<a href="https://github.com/python/cpython" target="_blank">https://github.com/python/cpython</a>
-</p>
+<a href="https://github.com/python/cpython">https://github.com/python/cpython</a></p>
 <p>Okay, that&rsquo;s where we will start. Let&rsquo;s get this code so we can later
 search through it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/python/cpython --depth <span style="color:#ae81ff">1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/python/cpython --depth <span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><p>The <code>--depth 1</code> argument makes <code>git</code> fetch a limited amount of
 history. This makes the clone operation much faster. If we need the
 complete history, we can get it later.</p>
-<h2 id="lets-walk-through-it">Let&rsquo;s walk through it</h2>
+<h2 id="lets-walk-through-it">Let&rsquo;s walk through it<a hidden class="anchor" aria-hidden="true" href="#lets-walk-through-it">#</a></h2>
 <p>We need to find a starting point as we begin to dig through the code.
 Something easy to search for. Something like a simple string without
 too many misleading matches.</p>
 <p>Maybe we can use the documentation of the <code>hash</code> function? We can use
 <code>help(hash)</code> to see the documentation text:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> hash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> hash
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>built<span style="color:#f92672">-</span><span style="color:#f92672">in</span> function hash<span style="color:#f92672">&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> help(hash)
 </span></span><span style="display:flex;"><span>Help on built<span style="color:#f92672">-</span><span style="color:#f92672">in</span> function hash <span style="color:#f92672">in</span> module builtins:
@@ -181,7 +316,7 @@ too many misleading matches.</p>
 </span></span><span style="display:flex;"><span>    Two objects that compare equal must also have the same hash value, but the
 </span></span><span style="display:flex;"><span>    reverse <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> necessarily true<span style="color:#f92672">.</span>
 </span></span></code></pre></div><p>Now, we can use it to find the implementation of <code>hash()</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ grep -r <span style="color:#e6db74">&#39;Return the hash value&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ grep -r <span style="color:#e6db74">&#39;Return the hash value&#39;</span>
 </span></span><span style="display:flex;"><span>Python/clinic/bltinmodule.c.h:<span style="color:#e6db74">&#34;Return the hash value for the given object.\n&#34;</span>
 </span></span><span style="display:flex;"><span>Python/bltinmodule.c:Return the hash value <span style="color:#66d9ef">for</span> the given object.
 </span></span><span style="display:flex;"><span>Doc/library/functions.rst:   Return the hash value of the object <span style="color:#f92672">(</span><span style="color:#66d9ef">if</span> it has one<span style="color:#f92672">)</span>.  Hash values are
@@ -191,7 +326,7 @@ we can probably ignore that. The <code>functions.rst</code> is a documentation
 file. So, let&rsquo;s ignore that too.</p>
 <p><code>Python/bltinmodule.c</code> looks interesting. If we look through that, we
 find this snippet of code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">...
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">Return the hash value for the given object.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">
@@ -205,14 +340,13 @@ find this snippet of code:</p>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    Py_hash_t x;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> PyObject_Hash(obj);
+</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#a6e22e">PyObject_Hash</span>(obj);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (x <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> NULL;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> PyLong_FromSsize_t(x);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">PyLong_FromSsize_t</span>(x);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>A search for <code>PyLong</code> brings me
-<a href="https://docs.python.org/3/c-api/long.html" target="_blank">here</a>
-. Looks like
+<a href="https://docs.python.org/3/c-api/long.html">here</a>. Looks like
 <code>PyLongObject</code> is the native representation of a python integer (this
 will come in handy later too). After skimming the <code>PyLongObject</code> doc
 and then re-reading this code, it looks like:</p>
@@ -233,7 +367,7 @@ used to indicate an error.</p>
 <p>But why is <code>hash(-1)</code> <code>-2</code>? What sets it to that value?</p>
 <p>Lets see if we can find out why.</p>
 <p>We can start by looking for <code>PyObject_Hash</code>. Let&rsquo;s search for it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ag PyObject_Hash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ag PyObject_Hash
 </span></span><span style="display:flex;"><span>...
 </span></span><span style="display:flex;"><span>Objects/rangeobject.c
 </span></span><span style="display:flex;"><span>552:    result <span style="color:#f92672">=</span> PyObject_Hash<span style="color:#f92672">(</span>t<span style="color:#f92672">)</span>;
@@ -249,10 +383,10 @@ used to indicate an error.</p>
 </span></span><span style="display:flex;"><span>...
 </span></span></code></pre></div><p>There&rsquo;s a lot of noise, but the only implementation appears to be in
 <code>Objects/object.c</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>Py_hash_t
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>Py_hash_t
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">PyObject_Hash</span>(PyObject <span style="color:#f92672">*</span>v)
 </span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    PyTypeObject <span style="color:#f92672">*</span>tp <span style="color:#f92672">=</span> Py_TYPE(v);
+</span></span><span style="display:flex;"><span>    PyTypeObject <span style="color:#f92672">*</span>tp <span style="color:#f92672">=</span> <span style="color:#a6e22e">Py_TYPE</span>(v);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (tp<span style="color:#f92672">-&gt;</span>tp_hash <span style="color:#f92672">!=</span> NULL)
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#f92672">*</span>tp<span style="color:#f92672">-&gt;</span>tp_hash)(v);
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* To keep to the general practice that inheriting
@@ -261,13 +395,13 @@ used to indicate an error.</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * PyType_Ready here and then check the tp_hash slot again
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (tp<span style="color:#f92672">-&gt;</span>tp_dict <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (PyType_Ready(tp) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">PyType_Ready</span>(tp) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (tp<span style="color:#f92672">-&gt;</span>tp_hash <span style="color:#f92672">!=</span> NULL)
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> (<span style="color:#f92672">*</span>tp<span style="color:#f92672">-&gt;</span>tp_hash)(v);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* Otherwise, the object can&#39;t be hashed */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> PyObject_HashNotImplemented(v);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">PyObject_HashNotImplemented</span>(v);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>This is quite a confusing piece of code. Thankfully, the comment is
 illuminating. After reading through it a few times, it seems like the
@@ -277,7 +411,7 @@ type of the object (using <code>Py_TYPE</code>). Then looks for a function
 <code>(*tp-&gt;tp_hash)(v)</code></p>
 <p>Where would we find the <code>tp_hash</code> of <code>-1</code>? Let&rsquo;s do another search for
 <code>tp_hash</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ag tp_hash -l
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ag tp_hash -l
 </span></span><span style="display:flex;"><span>...
 </span></span><span style="display:flex;"><span>Modules/_multiprocessing/semaphore.c
 </span></span><span style="display:flex;"><span>Objects/sliceobject.c
@@ -298,10 +432,10 @@ type of the object (using <code>Py_TYPE</code>). Then looks for a function
 </span></span></code></pre></div><p>That&rsquo;s a huge list. Recalling what the documentation said about
 <code>PyLongObject</code> (&ldquo;This &hellip; represents a Python integer object&rdquo;), I
 started by looking at <code>Objects/longobject.c</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>PyTypeObject PyLong_Type <span style="color:#f92672">=</span> {
-</span></span><span style="display:flex;"><span>    PyVarObject_HEAD_INIT(<span style="color:#f92672">&amp;</span>PyType_Type, <span style="color:#ae81ff">0</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>PyTypeObject PyLong_Type <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">PyVarObject_HEAD_INIT</span>(<span style="color:#f92672">&amp;</span>PyType_Type, <span style="color:#ae81ff">0</span>)
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;int&#34;</span>,                                      <span style="color:#75715e">/* tp_name */</span>
-</span></span><span style="display:flex;"><span>    offsetof(PyLongObject, ob_digit),           <span style="color:#75715e">/* tp_basicsize */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">offsetof</span>(PyLongObject, ob_digit),           <span style="color:#75715e">/* tp_basicsize */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">sizeof</span>(digit),                              <span style="color:#75715e">/* tp_itemsize */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,                                          <span style="color:#75715e">/* tp_dealloc */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">0</span>,                                          <span style="color:#75715e">/* tp_vectorcall_offset */</span>
@@ -315,7 +449,7 @@ started by looking at <code>Objects/longobject.c</code>:</p>
 </span></span><span style="display:flex;"><span>    (hashfunc)long_hash,                        <span style="color:#75715e">/* tp_hash */</span>
 </span></span><span style="display:flex;"><span>    ...
 </span></span></code></pre></div><p>So <code>tp_hash</code> is <code>long_hash</code> of objects of type <code>PyLongObject</code>. Let&rsquo;s look at that.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> Py_hash_t
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> Py_hash_t
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">long_hash</span>(PyLongObject <span style="color:#f92672">*</span>v)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    Py_uhash_t x;
@@ -335,13 +469,12 @@ value explicitly to <code>-2</code>!</p>
 <p>And that explains the entire reason why <code>hash(-1)</code> ends up being the
 same as <code>hash(-2)</code>. Not an easter egg, just working around the
 unavailability of <code>-1</code> as the possible result of a <code>hash()</code> method.</p>
-<h2 id="is-this-the-rightcomplete-answer">Is this the right/complete answer?</h2>
+<h2 id="is-this-the-rightcomplete-answer">Is this the right/complete answer?<a hidden class="anchor" aria-hidden="true" href="#is-this-the-rightcomplete-answer">#</a></h2>
 <p>As I said earlier, I have never looked through the python code base at
 all. I <em>think</em> I have an answer. But is it right? I might be
 completely wrong.</p>
-<p>Thankfully, <a href="https://www.reddit.com/r/Python/comments/oks5km/is_hash_1hash2_an_easter_egg/h5a7ylc/" target="_blank">/u/ExoticMandibles provided an answer on the Reddit post
-itself</a>
-:</p>
+<p>Thankfully, <a href="https://www.reddit.com/r/Python/comments/oks5km/is_hash_1hash2_an_easter_egg/h5a7ylc/">/u/ExoticMandibles provided an answer on the Reddit post
+itself</a>:</p>
 <blockquote>
 <p>The reference implementation of Python is &ldquo;CPython&rdquo;, which is almost
 certainly the Python you&rsquo;re using. CPython is written in C, and
@@ -355,11 +488,10 @@ object was -1. So the convention is: if hashing worked, and you got
 a -1, return -2.</p>
 <p>There&rsquo;s special code in the hash function for ints (&ldquo;long objects&rdquo;)
 in CPython that does exactly that:</p>
-<p><a href="https://github.com/python/cpython/blob/main/Objects/longobject.c#L2967" target="_blank">https://github.com/python/cpython/blob/main/Objects/longobject.c#L2967</a>
-</p>
+<p><a href="https://github.com/python/cpython/blob/main/Objects/longobject.c#L2967">https://github.com/python/cpython/blob/main/Objects/longobject.c#L2967</a></p>
 </blockquote>
 <p>This is exactly what I had guessed by reading the code.</p>
-<h2 id="conclusion">Conclusion</h2>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
 <p>I started with a question that I thought might be difficult to answer.
 But a few minutes of digging through code - and python&rsquo;s clean
 codebase makes looking through it much easier than some other
@@ -367,229 +499,100 @@ codebases I have seen - and the answer is quite easy to discover and
 understand! Which shouldn&rsquo;t be surprising if you have been around
 computers. There&rsquo;s no magic, just layers and layers of abstractions
 and code.</p>
-<p>If there&rsquo;s a take away here, let it be this: <a href="https://wiki.c2.com/?UseTheSourceLuke" target="_blank">Use the
-source!</a>
-</p>
+<p>If there&rsquo;s a take away here, let it be this: <a href="https://wiki.c2.com/?UseTheSourceLuke">Use the
+source!</a></p>
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Categories</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/categories/python/"> python </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/development/"> development </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/linux/"> linux </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/python/"> python </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/python/">Python</a></li>
+      <li><a href="https://omairmajid.com/tags/linux/">Linux</a></li>
+      <li><a href="https://omairmajid.com/tags/development/">Development</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>msbuild on Omair Majid</title>
-		<link>https://omairmajid.com/tags/msbuild/</link>
-		<description>Recent content in msbuild on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/msbuild/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>What is nuget restore doing?</title>
-			<link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
-			<description>
-			
-				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-Turns out you can …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Msbuild on Omair Majid</title>
+    <link>https://omairmajid.com/tags/msbuild/</link>
+    <description>Recent content in Msbuild on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/msbuild/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is nuget restore doing?</title>
+      <link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
+      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
+      <description>&lt;p&gt;Ever wonder what &lt;code&gt;nuget&lt;/code&gt; or &lt;code&gt;dotnet restore&lt;/code&gt; is doing? What feeds it
+using? Or what &lt;code&gt;nuget.config&lt;/code&gt; it is using to find feeds?&lt;/p&gt;
+&lt;p&gt;Turns out you can find out what nuget-related information &lt;code&gt;dotnet restore&lt;/code&gt; by looking at the logs.&lt;/p&gt;
+&lt;p&gt;Generally, &lt;code&gt;dotnet restore&lt;/code&gt; is succinct. Restoring a &lt;code&gt;HelloWorld&lt;/code&gt;
+project gives us little information about what&amp;rsquo;s going on:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet new console --no-restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The template &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Console Application&amp;#34;&lt;/span&gt; was created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Restore completed in 72.1 ms &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If we add a &lt;code&gt;nuget.config&lt;/code&gt; file, we still see little information. Not
+even enough to know if it&amp;rsquo;s even being used:&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

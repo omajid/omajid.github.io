@@ -1,122 +1,240 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content="What is nuget restore doing?">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,msbuild,nuget"><meta name="description" content="Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-Turns out you can …"><meta property="og:title" content="What is nuget restore doing?" />
-<meta property="og:description" content="Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>What is nuget restore doing? | Omair Majid</title>
+<meta name="keywords" content="dotnet, msbuild, nuget">
+<meta name="description" content="Ever wonder what nuget or dotnet restore is doing? What feeds it
+using? Or what nuget.config it is using to find feeds?
 Turns out you can find out what nuget-related information dotnet restore by looking at the logs.
-Generally, dotnet restore is succinct. Restoring a HelloWorld project gives us little information about what&rsquo;s going on:
-$ dotnet new console --no-restore The template &#34;Console Application&#34; was created successfully. $ dotnet restore  Restore completed in 72." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2020-05-29-what-nuget-sources/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-05-29T18:34:41+00:00" />
-<meta property="article:modified_time" content="2020-05-29T18:34:41+00:00" />
+Generally, dotnet restore is succinct. Restoring a HelloWorld
+project gives us little information about what&rsquo;s going on:
+$ dotnet new console --no-restore
+The template &#34;Console Application&#34; was created successfully.
+$ dotnet restore
+  Restore completed in 72.1 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj.
+If we add a nuget.config file, we still see little information. Not
+even enough to know if it&rsquo;s even being used:">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2020-05-29-what-nuget-sources/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2020-05-29-what-nuget-sources/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is nuget restore doing?"/>
-<meta name="twitter:description" content="Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2020-05-29-what-nuget-sources/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="What is nuget restore doing?">
+  <meta property="og:description" content="Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
 Turns out you can find out what nuget-related information dotnet restore by looking at the logs.
-Generally, dotnet restore is succinct. Restoring a HelloWorld project gives us little information about what&rsquo;s going on:
-$ dotnet new console --no-restore The template &#34;Console Application&#34; was created successfully. $ dotnet restore  Restore completed in 72."/>
+Generally, dotnet restore is succinct. Restoring a HelloWorld project gives us little information about what’s going on:
+$ dotnet new console --no-restore The template &#34;Console Application&#34; was created successfully. $ dotnet restore Restore completed in 72.1 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj. If we add a nuget.config file, we still see little information. Not even enough to know if it’s even being used:">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-05-29T18:34:41+00:00">
+    <meta property="article:modified_time" content="2020-05-29T18:34:41+00:00">
+    <meta property="article:tag" content="Dotnet">
+    <meta property="article:tag" content="Msbuild">
+    <meta property="article:tag" content="Nuget">
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>What is nuget restore doing? | Omair Majid</title>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="What is nuget restore doing?">
+  <meta name="twitter:description" content="Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
+Turns out you can find out what nuget-related information dotnet restore by looking at the logs.
+Generally, dotnet restore is succinct. Restoring a HelloWorld project gives us little information about what’s going on:
+$ dotnet new console --no-restore The template &#34;Console Application&#34; was created successfully. $ dotnet restore Restore completed in 72.1 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj. If we add a nuget.config file, we still see little information. Not even enough to know if it’s even being used:">
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "What is nuget restore doing?",
+      "item": "https://omairmajid.com/posts/2020-05-29-what-nuget-sources/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What is nuget restore doing?",
+  "name": "What is nuget restore doing?",
+  "description": "Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?\nTurns out you can find out what nuget-related information dotnet restore by looking at the logs.\nGenerally, dotnet restore is succinct. Restoring a HelloWorld project gives us little information about what\u0026rsquo;s going on:\n$ dotnet new console --no-restore The template \u0026#34;Console Application\u0026#34; was created successfully. $ dotnet restore Restore completed in 72.1 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj. If we add a nuget.config file, we still see little information. Not even enough to know if it\u0026rsquo;s even being used:\n",
+  "keywords": [
+    "dotnet", "msbuild", "nuget"
+  ],
+  "articleBody": "Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?\nTurns out you can find out what nuget-related information dotnet restore by looking at the logs.\nGenerally, dotnet restore is succinct. Restoring a HelloWorld project gives us little information about what’s going on:\n$ dotnet new console --no-restore The template \"Console Application\" was created successfully. $ dotnet restore Restore completed in 72.1 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj. If we add a nuget.config file, we still see little information. Not even enough to know if it’s even being used:\n$ rm -rf * $ dotnet new console --no-restore The template \"Console Application\" was created successfully. $ dotnet new nugetconfig The template \"NuGet Config\" was created successfully. $ ls HelloWorld.csproj nuget.config Program.cs $ dotnet restore Restore completed in 52.87 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj. And it certainly doesn’t give us a hint about any other nuget.config files are being used.\nBut we can find out more from dotnet restore by increasing the verbosity to normal:\n$ rm -rf * $ dotnet new console --no-restore The template \"Console Application\" was created successfully. $ dotnet new nugetconfig The template \"NuGet Config\" was created successfully. $ dotnet restore --verbosity:normal Build started 5/29/2020 11:14:01 PM. 1\u003eProject \"/home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj\" on node 1 (Restore target(s)). 1\u003eRestore: Restoring packages for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj... Committing restore... Generating MSBuild file /home/omajid/cliche/dotnet/HelloWorld/obj/HelloWorld.csproj.nuget.g.props. Generating MSBuild file /home/omajid/cliche/dotnet/HelloWorld/obj/HelloWorld.csproj.nuget.g.targets. Writing assets file to disk. Path: /home/omajid/cliche/dotnet/HelloWorld/obj/project.assets.json Restore completed in 54.6 ms for /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj. NuGet Config files used: /home/omajid/cliche/dotnet/HelloWorld/nuget.config /home/omajid/.nuget/NuGet/NuGet.Config Feeds used: https://api.nuget.org/v3/index.json 1\u003eDone Building Project \"/home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj\" (Restore target(s)). Build succeeded. 0 Warning(s) 0 Error(s) Time Elapsed 00:00:00.43 Now we can see a list of all the nuget.config files being used. Turns out there is one in my home directory at ~/.nuget/NuGet/NuGet.config that I probably would have missed even if I had dug around in the project directory.\nIf you are wondering about the particular output format, this is just the normal log output from msbuild. That’s why we see a Task called Restore running.\nThere are a couple of possible configurations for verbosity. q (or quiet) is the default. n (or normal) can be handy. diagnostic or detailed can show a lot of information that can be a bit hard to parse by hand.\nYou can even make the invocation smaller: dotnet restore -v:n sets verbosity (via -v) to normal (via n).\nHopefully, you now have a new tool to debug/traces any issues you might be hitting during dotnet restore!\n",
+  "wordCount" : "410",
+  "inLanguage": "en",
+  "datePublished": "2020-05-29T18:34:41Z",
+  "dateModified": "2020-05-29T18:34:41Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2020-05-29-what-nuget-sources/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">29</span>
-				<span class="rest">May 2020</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">What is nuget restore doing?</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
+<main class="main">
 
-  
-
-  
+<article class="post-single">
+  <header class="post-header">
     
-  
-</span>
+    <h1 class="post-title entry-hint-parent">
+      What is nuget restore doing?
+    </h1>
+    <div class="post-meta">
 
+<span title='2020-05-29 18:34:41 +0000 +0000'>May 29, 2020</span>&nbsp;·&nbsp;<span>Omair Majid</span>
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>Ever wonder what <code>nuget</code> or <code>dotnet restore</code> is doing? What feeds it
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Ever wonder what <code>nuget</code> or <code>dotnet restore</code> is doing? What feeds it
 using? Or what <code>nuget.config</code> it is using to find feeds?</p>
 <p>Turns out you can find out what nuget-related information <code>dotnet restore</code> by looking at the logs.</p>
 <p>Generally, <code>dotnet restore</code> is succinct. Restoring a <code>HelloWorld</code>
 project gives us little information about what&rsquo;s going on:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ dotnet new console --no-restore
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ dotnet new console --no-restore
 </span></span><span style="display:flex;"><span>The template <span style="color:#e6db74">&#34;Console Application&#34;</span> was created successfully.
 </span></span><span style="display:flex;"><span>$ dotnet restore
 </span></span><span style="display:flex;"><span>  Restore completed in 72.1 ms <span style="color:#66d9ef">for</span> /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj.
 </span></span></code></pre></div><p>If we add a <code>nuget.config</code> file, we still see little information. Not
 even enough to know if it&rsquo;s even being used:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ rm -rf *
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ rm -rf *
 </span></span><span style="display:flex;"><span>$ dotnet new console --no-restore
 </span></span><span style="display:flex;"><span>The template <span style="color:#e6db74">&#34;Console Application&#34;</span> was created successfully.
 </span></span><span style="display:flex;"><span>$ dotnet new nugetconfig
@@ -129,7 +247,7 @@ even enough to know if it&rsquo;s even being used:</p>
 files are being used.</p>
 <p>But we can find out more from <code>dotnet restore</code> by increasing the
 verbosity to <code>normal</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ rm -rf *
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ rm -rf *
 </span></span><span style="display:flex;"><span>$ dotnet new console --no-restore
 </span></span><span style="display:flex;"><span>The template <span style="color:#e6db74">&#34;Console Application&#34;</span> was created successfully.
 </span></span><span style="display:flex;"><span>$ dotnet new nugetconfig
@@ -174,225 +292,97 @@ verbosity (via <code>-v</code>) to normal (via <code>n</code>).</p>
 <p>Hopefully, you now have a new tool to debug/traces any issues you
 might be hitting during <code>dotnet restore</code>!</p>
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Categories</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			<a href="/categories/development/"> development </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/msbuild/"> msbuild </a>
-			
-			
-			
-			
-			
-			<a href="/tags/nuget/"> nuget </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/dotnet/">Dotnet</a></li>
+      <li><a href="https://omairmajid.com/tags/msbuild/">Msbuild</a></li>
+      <li><a href="https://omairmajid.com/tags/nuget/">Nuget</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

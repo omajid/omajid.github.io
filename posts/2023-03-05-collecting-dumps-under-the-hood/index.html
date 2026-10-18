@@ -1,144 +1,256 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content="Collecting dumps; under the hood">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,linux"><meta name="description" content="Or how dotnet-dump collect works on Linux
-If you are trying to diagnose the behaviour of a mis-behaving application in production, one …"><meta property="og:title" content="Collecting dumps; under the hood" />
-<meta property="og:description" content="Or how dotnet-dump collect works on Linux
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Collecting dumps; under the hood | Omair Majid</title>
+<meta name="keywords" content="dotnet, linux">
+<meta name="description" content="Or how dotnet-dump collect works on Linux
+If you are trying to diagnose the behaviour of a mis-behaving
+application in production, one option is to use the
+dotnet-dump
+tool to get a memory dump of the application so you can study it
+offline. With a dump, you can get stack traces, look at all the
+threads and even dig through the entire heap offline.
+But how does dotnet-dump actually work?
+This post will try and summarize what I found as I tried digging
+through what dotnet dump collect does under the hood.">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="Collecting dumps; under the hood">
+  <meta property="og:description" content="Or how dotnet-dump collect works on Linux
 If you are trying to diagnose the behaviour of a mis-behaving application in production, one option is to use the dotnet-dump tool to get a memory dump of the application so you can study it offline. With a dump, you can get stack traces, look at all the threads and even dig through the entire heap offline.
-But how does dotnet-dump actually work?" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-03-05T01:32:23-05:00" />
-<meta property="article:modified_time" content="2023-03-05T01:32:23-05:00" />
+But how does dotnet-dump actually work?
+This post will try and summarize what I found as I tried digging through what dotnet dump collect does under the hood.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-03-05T01:32:23-05:00">
+    <meta property="article:modified_time" content="2023-03-05T01:32:23-05:00">
+    <meta property="article:tag" content="Dotnet">
+    <meta property="article:tag" content="Linux">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Collecting dumps; under the hood"/>
-<meta name="twitter:description" content="Or how dotnet-dump collect works on Linux
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Collecting dumps; under the hood">
+  <meta name="twitter:description" content="Or how dotnet-dump collect works on Linux
 If you are trying to diagnose the behaviour of a mis-behaving application in production, one option is to use the dotnet-dump tool to get a memory dump of the application so you can study it offline. With a dump, you can get stack traces, look at all the threads and even dig through the entire heap offline.
-But how does dotnet-dump actually work?"/>
-
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>Collecting dumps; under the hood | Omair Majid</title>
+But how does dotnet-dump actually work?
+This post will try and summarize what I found as I tried digging through what dotnet dump collect does under the hood.">
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Collecting dumps; under the hood",
+      "item": "https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Collecting dumps; under the hood",
+  "name": "Collecting dumps; under the hood",
+  "description": "Or how dotnet-dump collect works on Linux\nIf you are trying to diagnose the behaviour of a mis-behaving application in production, one option is to use the dotnet-dump tool to get a memory dump of the application so you can study it offline. With a dump, you can get stack traces, look at all the threads and even dig through the entire heap offline.\nBut how does dotnet-dump actually work?\nThis post will try and summarize what I found as I tried digging through what dotnet dump collect does under the hood.\n",
+  "keywords": [
+    "dotnet", "linux"
+  ],
+  "articleBody": "Or how dotnet-dump collect works on Linux\nIf you are trying to diagnose the behaviour of a mis-behaving application in production, one option is to use the dotnet-dump tool to get a memory dump of the application so you can study it offline. With a dump, you can get stack traces, look at all the threads and even dig through the entire heap offline.\nBut how does dotnet-dump actually work?\nThis post will try and summarize what I found as I tried digging through what dotnet dump collect does under the hood.\nThe client Let’s start by looking at the first result of a google search for “dotnet-dump”: the official documentation for dotnet-dump command. That points to the NuGet Package page for dotnet-dump. And the NuGet Package page has a link to the source repository.\nNow we can poke around in https://github.com/dotnet/diagnostics 1 repository to find the source code for the dotnet dump collect command.\nThere’s a src/Tools directory which contains a dotnet-dump directory. That seems like a likely candidate for the source code of this tool. The Program.cs seems like a good place to start digging into the code.\nThere’s a CollectCommand sub-command in that file that, which matches with the collect sub-command name in the dotnet dump CLI tool. The code looks roughly like this:\nprivate static Command CollectCommand() =\u003e new Command( name: \"collect\", description: \"Capture dumps from a process\") { // Handler CommandHandler.Create\u003c...\u003e(new Dumper().Collect), // Options ProcessIdOption(), OutputOption(), DiagnosticLoggingOption(), CrashReportOption(), TypeOption(), ProcessNameOption() }; There’s a bit of boiler-plate involving how subcommands, arguments and options are handled through System.CommandLine. The actual work is done (using what System.CommandLine calls a Handler) by calling Dumper.Collect.\nLet’s look into that. The Dumper.Collect() method looks something like this:\npublic partial class Dumper { public int Collect(....) { // Lots of error handling if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) { // ... Windows.CollectDump(...); } else { var client = new DiagnosticsClient(processId); // ... client.WriteDump(...) ; } } } That checks for the OS - Windows or Linux/macOS - and then calls OS-specific code to handle each condition. For Linux, it calls into the DiagnosticsClient class to create a dump.\nThe (relevant) core logic of the DiagnosticsClient class is this:\npublic sealed class DiagnosticsClient { public DiagnosticsClient(int processId): this(new PidIpcEndPoint(processId)) { } // ... public void WriteDump(...) { IpcMessage request = CreateWriteDumpMessage(...); IpcMessage response = IpcClient.SendMessage(...); // lots of error handling and fallback if IPC response // indicates failure } } This client is process-id based (this will come in handy later). To write a dump, it creates a message and then sends it over some IPC (Inter-Process Communication) mechanism via the IpcClient. A valid response confirms that the dump was created.\nWhat is this IPC mechanism? Who’s listening on the other side?\n.NET diagnostics IPC The interesting bits of IpcClient look roughly like this:\ninternal class IpcClient { public static IpcMessage SendMessage(IpcEndpoint endpoint, IpcMessage message) { IpcResponse response = SendMessageGetContunation(endpoint, message); return response.Message; } public static IpcResponse SendMessageGetContnuation(IpcEndpoint endpoint, IpcMessage message) { Stream stream = endpoint.Connect(...); Write(stream, message); IpcMessage response = Read(stream); return new IpcResponse(...); } public static void Write(Stream stream, IpcMessage message) { byte[] buffer = message.Serialize(); stream.Write(buffer, ...); } } When we call SendMessage, it calls SendMessageWithContinuation to the heavy work and then returns the response. SendMessageWithContinuation connects to an endpoint, uses some form of serialization to convert the request message to an array of bytes and then writes those bytes into a stream.\nLets dig into these one by one\nThe endpoint is represented by the IpcEndpoint class. Remember how DiagnosticsClient had created a PidIpcEndpoint instance explcitly?\nThe PidIpcEndpoint and related classes look roughly like this:\ninternal abstract class IpcEndpoint { // ... } internal class PidIpcEndpoint : IpcEndpoint { public static stirng IpcRootPath { get; } = Path.GetTempPath(); int _pid; public override Stream Connect(TimeSpan timeout) { string address = GetDefaultAddress(); return IpcEndPointHelper.Connect(address, timeout) } private string GetDefaultAddress() { // ... TryGetDefaultAddress(_pid, out string transportName); return transportName; } private static bool TryGetDefaultAddress(int pid, out string defaultAddress) { defaultAddress = Directory.GetFiles(IpcRootPath, $\"dotnet-diagnostic-{pid}-*-socket\") .FirstOrDefualt(); return defaultAddress; } } internal class IpcEndpointHelper { public static Stream Connect(...) { var socket = new IpcUnixDomainSocket() socket.Connect(new IpcUnixDomainSocketEndpoint(...)); return new ExposedSocketNetworkStream(socket); } } The entrypoint to this code is supposed to be the EndPoint.Connect method. When PidIpcEndpoint.Connect is called, To summarize, it looks for a file matching a specific file name pattern in /tmp. After finding the file, the code opens the file as a unix domain socket and uses that for sending (and receiving) data.\nThe serialization mechanism\ninternal class IpcMessage { public byte[] Serialize() { using (var writer = new BinaryWriter(...)) { writer.Write(...); writer.Flush(); serializedData = stream.ToArray(); return serializedData; } } } This uses simple BinaryWriter-based serialization.\nOkay, so now we know that we are using BinaryWriter-based serialization to send a message to a socket. Is this something ad-hoc or part of an intentionally designed feature in .NET?\n.NET diagnostic sockets It turns out that this socket is an intentional part of the of the .NET runtime.\nWhenever a .NET process starts, it creates a socket (file) at /tmp/dotnet-diagnostics-${pid}-${random}-socket:\n$ ps aux | grep 1688[7] omajid 16887 0.0 0.3 273609920 103020 pts/6 Sl+ 16:42 0:00 /home/omajid/local/dotnet/microsoft/7.0.101/dotnet --roll-forward major bin/Debug/net6.0/Pause.dll $ ls -al /tmp/dotnet-diagnostic-16887*socket srw-------. 1 omajid omajid 0 Dec 22 16:42 /tmp/dotnet-diagnostic-16887-1636599-socket $ stat /tmp/dotnet-diagnostic-16887-1636599-socket File: /tmp/dotnet-diagnostic-16887-1636599-socket Size: 0 Blocks: 0 IO Block: 4096 socket Device: 0,37 Inode: 259 Links: 1 Access: (0600/srw-------) Uid: ( 1000/ omajid) Gid: ( 1000/ omajid) Context: unconfined_u:object_r:user_tmp_t:s0 Access: 2022-12-22 16:42:42.097080354 -0500 Modify: 2022-12-22 16:42:42.097080354 -0500 Change: 2022-12-22 16:42:42.097080354 -0500 Birth: 2022-12-22 16:42:42.097080354 -0500 A custom protocol - based on BinaryWriter serialization - is used to send messages across this. This is what the all the code that we have seen so far has been doing.\nThe full IPC protocol is documented in ipc-protocol.md.\nWe still have a remaining question: who is listening on the other side and how do they handle these messages? The IPC protocol gives a great hint:\n.. IPC Protocol [is] used for communicating with the dotnet core runtime’s Diagnostics Server\nWhat is this?\nThe .NET Runtime Following the hint, lets try and dig through the dotnet/runtime code. If you want to follow along, you can find the source code for code for the .NET runtime at https://github.com/dotnet/runtime/.\nWe can start by searching the CoreCLR VM in the runtime for anything related to diagnostics:\n$ find src/coreclr/vm -iname '*diagnostic*' src/coreclr/vm/diagnosticserveradapter.h That seems like a great starting point! It seems to defer everything to ds-server.c.\nThe initialization code of the diagnostics server is defined in ds_server_init. It looks, roughly like this:\nbool ds_server_init(void) { // lots of initialization ep_rt_thread_create(server_threads, ...); } void server_thread() { // ... while (!server_shutting_down) { DiagnosticsIpcMessage message; ds_ipc_message_init(\u0026message) ds_ipc_message_inititalize_stream(\u0026message, stream) switch (ds_ipc_header_get_command(...)) { case DS_SERVER_COMMANDSET_DUMP: ds_dump_protocol_helper_handle_ipc_message (\u0026message, stream); break; } } } This thread runs forever, waiting for any diagnostics commands.\nWhen a diagnostics command is received, this calls ds_dump_protocol_helper_handle_ipc_message to handle the message and write the dump to an on-disk location: https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243\nThat eventually leads to PAL_GenerateCoreDump. That looks roughly like this:\nPAL_GenerateCoreDump( ...) { // ... std::vector\u003cconst char*\u003e argvCreateDump char* program = nullptr; char* pidarg = nullptr; PROCBuildCreateDumpCommandLine(argvCreateDump, \u0026program, \u0026pidarg); PROCCreateCrashDump(argvCreateDump); } PROCBuildCreateDumpCommandLine( std::vector\u003cconst char*\u003e\u0026 argv, ...) { // ... const char* DumpGeneratorName = \"createdump\"; argv.push_back(program); argv.push_back(pidarg); // ... } Hang on a second, this just runs the createdump command! This command is included with the .NET runtime, on your disk:\n$ find /usr/lib64/dotnet/ -name createdump /usr/lib64/dotnet/shared/Microsoft.NETCore.App/7.0.2/createdump /usr/lib64/dotnet/shared/Microsoft.NETCore.App/6.0.13/createdump createdump is also included with self-contained applications. There’s some discussion on how it should be removed here.\nWhat does createdump do? We can start by searching the dotnet/runtime repository for any file that might look like it’s relevant to the createdump command. Searching for such files leads me to a promisingly named createdump/main.cpp file: https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp\nLet’s start with the main method. It looks like this:\nint __cdecl main(const int argc, const char* argv[]) { // lots of argument parsing if (CreateDump(dumpPathtTemplate, pid, ...)) { // success } // cleanup and exit } CreateDump is defined in createdumpunix.cpp for Linux and macOS https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14\nThere’s a ton of code to dig through, and a lot of it goes down into Linux-specific detail. I might do a detailed walk-through in another post. But here are the important points:\nCreateDump calls CrashInfo::EnumerateAndSuspendThreads, which uses ptrace(2) to suspend all threads in the .NET application\nCreateDump calls CrashInfo::GatherCrashInfo to collect data:\nGet information from /proc/$PID/auxv (the auxillary vector data).\nGet information from /proc/pid/maps about the memory regions\nUse the DAC (Data Access Component) of the runtime to find the managed modules\nUnwind all the threads\nUse the DAC again to enumerate the managed memory regions.\nWrite the dump out as an ELF file.\nOn a side note, the last point is particularly interesting. createdump writes out a regular ELF core file. This is a standard core file, similar to those produced by other tools like gcore. It’s in a format that’s readable by both dotnet dump analyze but also native debugging tools like lldb and gdb. The corefile can be used to debugged applications using gdb/lldb, but they will need the unmanaged (or native) debug symbols. That’s not true for dotnet dump analyze which - surprise - again makes use of the DAC to figure out the managed state of the application.\nWhen all that is done, we finally get the core file that we were looking for!\nSummary That was a lot to chew through. So let’s do a quick recap of what happens when we use `dotnet dump collect.\nThe dotnet dump tool parses the user’s command and figures out that the user wants to trigger a particular type of dump.\ndotnet dump creates a specially crafted message that it sends to the target .NET application over the .NET diagnostics socket.\nThe .NET runtime receives the message over the socket and parses it.\nThe runtime then runs createdump as a separate process, pointing createdump to the .NET application itself.\ncreatedump pauses the target .NET application and collects everything needed from the application by walking through the managed memory (with the help of the DAC) and the unmanaged memory.\ncreatedump writes out the dump to disk.\nAt the end of this, we finally have a file on disk that contains the application’s dump\nThere are some interesting consequences that come up because of this approach:\n.NET runtimes provides a mechanism for other applications to request information from them. If this mechanism is turned off (eg, via DOTNET_EnableDiagnostics), then tools like dotnet-dump become useless.\nThanks to a single protocol, it’s possible for dotnet dump collect to work against any number of different .NET runtimes and versions. And All runtime-specific detail is handled by the runtime’s built-in createdump command.\nSome folks have tried removing the createdump binary from their published applications to save on size. Removing createdump from those applications means tools like dotnet-dump aren’t fully funtional against those applications. Their applications can become harder to diagnose.\nIf you really need to, you can take advantage of the diagnostics protocol and write your own custom tools to talk to the .NET runtime.\nI have linked to the classes/files on GitHub, but it might easier to clone the repo and look through it using your favourite tools. ↩︎\n",
+  "wordCount" : "1863",
+  "inLanguage": "en",
+  "datePublished": "2023-03-05T01:32:23-05:00",
+  "dateModified": "2023-03-05T01:32:23-05:00",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">05</span>
-				<span class="rest">Mar 2023</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">Collecting dumps; under the hood</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
+<main class="main">
 
-  
-
-  
+<article class="post-single">
+  <header class="post-header">
     
-  
-</span>
+    <h1 class="post-title entry-hint-parent">
+      Collecting dumps; under the hood
+    </h1>
+    <div class="post-meta">
 
+<span title='2023-03-05 01:32:23 -0500 EST'>March 5, 2023</span>&nbsp;·&nbsp;<span>Omair Majid</span>
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>Or how <code>dotnet-dump collect</code> works on Linux</p>
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Or how <code>dotnet-dump collect</code> works on Linux</p>
 <p>If you are trying to diagnose the behaviour of a mis-behaving
 application in production, one option is to use the
-<a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump" target="_blank"><code>dotnet-dump</code></a>
-
+<a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump"><code>dotnet-dump</code></a>
 tool to get a memory dump of the application so you can study it
 offline. With a dump, you can get stack traces, look at all the
 threads and even dig through the entire heap offline.</p>
 <p>But how does <code>dotnet-dump</code> actually work?</p>
 <p>This post will try and summarize what I found as I tried digging
 through what <code>dotnet dump collect</code> does under the hood.</p>
-<h2 id="the-client">The client</h2>
+<h2 id="the-client">The client<a hidden class="anchor" aria-hidden="true" href="#the-client">#</a></h2>
 <p>Let&rsquo;s start by looking at the first result of a google search for
-&ldquo;dotnet-dump&rdquo;: the <a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump" target="_blank">official documentation for <code>dotnet-dump</code>
-command</a>
-.
-That points to the <a href="https://www.nuget.org/packages/dotnet-dump" target="_blank">NuGet Package
-page</a>
- for <code>dotnet-dump</code>.
-And the NuGet Package page has a link to the <a href="https://github.com/dotnet/diagnostics/" target="_blank">source
-repository</a>
-.</p>
-<p>Now we can poke around in <a href="https://github.com/dotnet/diagnostics" target="_blank">https://github.com/dotnet/diagnostics</a>
- <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+&ldquo;dotnet-dump&rdquo;: the <a href="https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump">official documentation for <code>dotnet-dump</code>
+command</a>.
+That points to the <a href="https://www.nuget.org/packages/dotnet-dump">NuGet Package
+page</a> for <code>dotnet-dump</code>.
+And the NuGet Package page has a link to the <a href="https://github.com/dotnet/diagnostics/">source
+repository</a>.</p>
+<p>Now we can poke around in <a href="https://github.com/dotnet/diagnostics">https://github.com/dotnet/diagnostics</a> <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
 repository to find the source code for the <code>dotnet dump collect</code>
 command.</p>
 <p>There&rsquo;s a <code>src/Tools</code> directory which contains a <code>dotnet-dump</code>
 directory. That seems like a likely candidate for the source code of
 this tool. The
-<a href="https://github.com/dotnet/diagnostics/blob/main/src/Tools/dotnet-dump/Program.cs" target="_blank">Program.cs</a>
-
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Tools/dotnet-dump/Program.cs">Program.cs</a>
 seems like a good place to start digging into the code.</p>
 <p>There&rsquo;s a <code>CollectCommand</code> sub-command in that file that, which
 matches with the <code>collect</code> sub-command name in the <code>dotnet dump</code> CLI
 tool. The code looks roughly like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Command CollectCommand() =&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Command CollectCommand() =&gt;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> Command( name: <span style="color:#e6db74">&#34;collect&#34;</span>, description: <span style="color:#e6db74">&#34;Capture dumps from a process&#34;</span>)
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Handler</span>
@@ -151,10 +263,9 @@ options are handled through <code>System.CommandLine</code>. The actual work is
 done (using what <code>System.CommandLine</code> calls a <code>Handler</code>) by calling
 <code>Dumper.Collect</code>.</p>
 <p>Let&rsquo;s look into that. The
-<a href="https://github.com/dotnet/diagnostics/blob/main/src/Tools/dotnet-dump/Dumper.cs" target="_blank"><code>Dumper.Collect()</code></a>
-
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Tools/dotnet-dump/Dumper.cs"><code>Dumper.Collect()</code></a>
 method looks something like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dumper</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">partial</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dumper</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> Collect(....)
 </span></span><span style="display:flex;"><span>    {
@@ -176,10 +287,9 @@ method looks something like this:</p>
 OS-specific code to handle each condition. For Linux, it calls into
 the <code>DiagnosticsClient</code> class to create a dump.</p>
 <p>The (relevant) core logic of the
-<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsClient/DiagnosticsClient.cs" target="_blank">DiagnosticsClient</a>
-
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsClient/DiagnosticsClient.cs">DiagnosticsClient</a>
 class is this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiagnosticsClient</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiagnosticsClient</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> DiagnosticsClient(<span style="color:#66d9ef">int</span> processId): <span style="color:#66d9ef">this</span>(<span style="color:#66d9ef">new</span> PidIpcEndPoint(processId))
 </span></span><span style="display:flex;"><span>    {
@@ -199,12 +309,11 @@ write a dump, it creates a message and then sends it over some IPC
 (Inter-Process Communication) mechanism via the <code>IpcClient</code>. A valid
 response confirms that the dump was created.</p>
 <p>What is this IPC mechanism? Who&rsquo;s listening on the other side?</p>
-<h2 id="net-diagnostics-ipc">.NET diagnostics IPC</h2>
+<h2 id="net-diagnostics-ipc">.NET diagnostics IPC<a hidden class="anchor" aria-hidden="true" href="#net-diagnostics-ipc">#</a></h2>
 <p>The interesting bits of
-<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsIpc/IpcClient.cs" target="_blank"><code>IpcClient</code></a>
-
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsIpc/IpcClient.cs"><code>IpcClient</code></a>
 look roughly like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcClient</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcClient</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> IpcMessage SendMessage(IpcEndpoint endpoint, IpcMessage message)
 </span></span><span style="display:flex;"><span>    {
@@ -235,12 +344,11 @@ and then writes those bytes into a stream.</p>
 <ol>
 <li>
 <p>The <code>endpoint</code> is represented by the
-<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsIpc/IpcTransport.cs" target="_blank"><code>IpcEndpoint</code></a>
-
+<a href="https://github.com/dotnet/diagnostics/blob/main/src/Microsoft.Diagnostics.NETCore.Client/DiagnosticsIpc/IpcTransport.cs"><code>IpcEndpoint</code></a>
 class. Remember how <code>DiagnosticsClient</code> had created a
 <code>PidIpcEndpoint</code> instance explcitly?</p>
 <p>The <code>PidIpcEndpoint</code> and related classes look roughly like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcEndpoint</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcEndpoint</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...</span>
 </span></span><span style="display:flex;"><span>}
@@ -249,7 +357,7 @@ class. Remember how <code>DiagnosticsClient</code> had created a
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> stirng IpcRootPath { <span style="color:#66d9ef">get</span>; } = Path.GetTempPath();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#ae81ff">_</span>pid;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> _pid;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">override</span> Stream Connect(TimeSpan timeout)
 </span></span><span style="display:flex;"><span>    {
@@ -260,7 +368,7 @@ class. Remember how <code>DiagnosticsClient</code> had created a
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">string</span> GetDefaultAddress()
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...</span>
-</span></span><span style="display:flex;"><span>        TryGetDefaultAddress(<span style="color:#ae81ff">_</span>pid, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">string</span> transportName);
+</span></span><span style="display:flex;"><span>        TryGetDefaultAddress(_pid, <span style="color:#66d9ef">out</span> <span style="color:#66d9ef">string</span> transportName);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> transportName;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
@@ -291,7 +399,7 @@ data.</p>
 </li>
 <li>
 <p>The serialization mechanism</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcMessage</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-C#" data-lang="C#"><span style="display:flex;"><span><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IpcMessage</span>
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">byte</span>[] Serialize()
 </span></span><span style="display:flex;"><span>    {
@@ -310,12 +418,12 @@ data.</p>
 <p>Okay, so now we know that we are using <code>BinaryWriter</code>-based
 serialization to send a message to a socket. Is this something ad-hoc
 or part of an intentionally designed feature in .NET?</p>
-<h2 id="net-diagnostic-sockets">.NET diagnostic sockets</h2>
+<h2 id="net-diagnostic-sockets">.NET diagnostic sockets<a hidden class="anchor" aria-hidden="true" href="#net-diagnostic-sockets">#</a></h2>
 <p>It turns out that this socket is an intentional part of the of the
 .NET runtime.</p>
 <p>Whenever a .NET process starts, it creates a socket (file) at
 <code>/tmp/dotnet-diagnostics-${pid}-${random}-socket</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ps aux | grep 1688<span style="color:#f92672">[</span>7<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ps aux | grep 1688<span style="color:#f92672">[</span>7<span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>omajid     <span style="color:#ae81ff">16887</span>  0.0  0.3 <span style="color:#ae81ff">273609920</span> <span style="color:#ae81ff">103020</span> pts/6 Sl+ 16:42   0:00 /home/omajid/local/dotnet/microsoft/7.0.101/dotnet --roll-forward major bin/Debug/net6.0/Pause.dll
 </span></span><span style="display:flex;"><span>$ ls -al /tmp/dotnet-diagnostic-16887*socket
 </span></span><span style="display:flex;"><span>srw-------. <span style="color:#ae81ff">1</span> omajid omajid <span style="color:#ae81ff">0</span> Dec <span style="color:#ae81ff">22</span> 16:42 /tmp/dotnet-diagnostic-16887-1636599-socket
@@ -333,8 +441,7 @@ or part of an intentionally designed feature in .NET?</p>
 send messages across this. This is what the all the code that we have
 seen so far has been doing.</p>
 <p>The full IPC protocol is documented in
-<a href="https://github.com/dotnet/diagnostics/blob/main/documentation/design-docs/ipc-protocol.md" target="_blank"><code>ipc-protocol.md</code></a>
-.</p>
+<a href="https://github.com/dotnet/diagnostics/blob/main/documentation/design-docs/ipc-protocol.md"><code>ipc-protocol.md</code></a>.</p>
 <p>We still have a remaining question: who is listening on the other
 side and how do they handle these messages? The IPC protocol gives a
 great hint:</p>
@@ -343,11 +450,10 @@ great hint:</p>
 with the dotnet core runtime&rsquo;s Diagnostics Server</p>
 </blockquote>
 <p>What is this?</p>
-<h2 id="the-net-runtime">The .NET Runtime</h2>
+<h2 id="the-net-runtime">The .NET Runtime<a hidden class="anchor" aria-hidden="true" href="#the-net-runtime">#</a></h2>
 <p>Following the hint, lets try and dig through the dotnet/runtime code.
 If you want to follow along, you can find the source code for code for
-the .NET runtime at <a href="https://github.com/dotnet/runtime/" target="_blank">https://github.com/dotnet/runtime/</a>
-.</p>
+the .NET runtime at <a href="https://github.com/dotnet/runtime/">https://github.com/dotnet/runtime/</a>.</p>
 <p>We can start by searching the CoreCLR VM in the runtime for anything
 related to diagnostics:</p>
 <pre tabindex="0"><code>$ find src/coreclr/vm -iname &#39;*diagnostic*&#39;
@@ -355,19 +461,18 @@ src/coreclr/vm/diagnosticserveradapter.h
 </code></pre><p>That seems like a great starting point! It seems to defer everything
 to <code>ds-server.c</code>.</p>
 <p>The initialization code of the diagnostics server is defined in
-<a href="https://github.com/dotnet/runtime/blob/615de00422f4f8d80e0009da1a117cc06dbb57e0/src/native/eventpipe/ds-server.c#L189" target="_blank"><code>ds_server_init</code></a>
-.
+<a href="https://github.com/dotnet/runtime/blob/615de00422f4f8d80e0009da1a117cc06dbb57e0/src/native/eventpipe/ds-server.c#L189"><code>ds_server_init</code></a>.
 It looks, roughly like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">ds_server_init</span>(<span style="color:#66d9ef">void</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">ds_server_init</span>(<span style="color:#66d9ef">void</span>)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lots of initialization
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ep_rt_thread_create(server_threads, ...);
+</span></span></span><span style="display:flex;"><span>    ep_rt_thread_create(server_threads, ...);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">server_thread</span>()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>server_shutting_down)
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>server_shutting_down)
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        DiagnosticsIpcMessage message;
 </span></span><span style="display:flex;"><span>        ds_ipc_message_init(<span style="color:#f92672">&amp;</span>message)
@@ -384,17 +489,15 @@ It looks, roughly like this:</p>
 <p>When a diagnostics command is received, this calls
 <code>ds_dump_protocol_helper_handle_ipc_message</code> to handle the message and
 write the dump to an on-disk location:
-<a href="https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243" target="_blank">https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243</a>
-</p>
+<a href="https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243">https://github.com/dotnet/runtime/blob/e467a5f65a4fb6b0b703a5c1c22c519114e99845/src/native/eventpipe/ds-dump-protocol.c#L243</a></p>
 <p>That eventually leads to
-<a href="https://github.com/dotnet/runtime/blob/e07f4527bdedff6278accf9db8a8c7f9f2a48beb/src/coreclr/pal/src/thread/process.cpp#L2337" target="_blank"><code>PAL_GenerateCoreDump</code></a>
-.
+<a href="https://github.com/dotnet/runtime/blob/e07f4527bdedff6278accf9db8a8c7f9f2a48beb/src/coreclr/pal/src/thread/process.cpp#L2337"><code>PAL_GenerateCoreDump</code></a>.
 That looks roughly like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>PAL_GenerateCoreDump(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>PAL_GenerateCoreDump(
 </span></span><span style="display:flex;"><span>    ...)
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span> argvCreateDump
+</span></span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span> argvCreateDump
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> program <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> pidarg <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
 </span></span><span style="display:flex;"><span>        PROCBuildCreateDumpCommandLine(argvCreateDump, <span style="color:#f92672">&amp;</span>program, <span style="color:#f92672">&amp;</span>pidarg);
@@ -406,40 +509,37 @@ That looks roughly like this:</p>
 </span></span><span style="display:flex;"><span>    ...)
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> DumpGeneratorName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;createdump&#34;</span>;
+</span></span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> DumpGeneratorName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;createdump&#34;</span>;
 </span></span><span style="display:flex;"><span>        argv.push_back(program);
 </span></span><span style="display:flex;"><span>        argv.push_back(pidarg);
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>Hang on a second, this just runs the <code>createdump</code> command! This
 command is included with the .NET runtime, on your disk:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ find /usr/lib64/dotnet/ -name createdump
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ find /usr/lib64/dotnet/ -name createdump
 </span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/7.0.2/createdump
 </span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/6.0.13/createdump
 </span></span></code></pre></div><p><code>createdump</code> is also included with self-contained applications.
 There&rsquo;s some discussion on how it should be removed
-<a href="https://github.com/dotnet/sdk/issues/27336" target="_blank">here</a>
-.</p>
-<h1 id="what-does-createdump-do">What does <code>createdump</code> do?</h1>
+<a href="https://github.com/dotnet/sdk/issues/27336">here</a>.</p>
+<h1 id="what-does-createdump-do">What does <code>createdump</code> do?<a hidden class="anchor" aria-hidden="true" href="#what-does-createdump-do">#</a></h1>
 <p>We can start by searching the dotnet/runtime repository for any file
 that might look like it&rsquo;s relevant to the createdump command.
 Searching for such files leads me to a promisingly named
 createdump/main.cpp file:
-<a href="https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp" target="_blank">https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp</a>
-</p>
+<a href="https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp">https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/main.cpp</a></p>
 <p>Let&rsquo;s start with the <code>main</code> method. It looks like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lots of argument parsing
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (CreateDump(dumpPathtTemplate, pid, ...))
+</span></span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">CreateDump</span>(dumpPathtTemplate, pid, ...))
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>       <span style="color:#75715e">// success
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e">// cleanup and exit
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p><code>CreateDump</code> is defined in createdumpunix.cpp for Linux and macOS
-<a href="https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14" target="_blank">https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14</a>
-</p>
+<a href="https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14">https://github.com/dotnet/runtime/blob/f1bdd5a6182f43f3928b389b03f7bc26f826c8bc/src/coreclr/debug/createdump/createdumpunix.cpp#L14</a></p>
 <p>There&rsquo;s a ton of code to dig through, and a lot of it goes down into
 Linux-specific detail. I might do a detailed walk-through in another
 post. But here are the important points:</p>
@@ -484,7 +584,7 @@ unmanaged (or native) debug symbols. That&rsquo;s not true for <code>dotnet dump
 the managed state of the application.</p>
 <p>When all that is done, we finally get the core file that we were
 looking for!</p>
-<h1 id="summary">Summary</h1>
+<h1 id="summary">Summary<a hidden class="anchor" aria-hidden="true" href="#summary">#</a></h1>
 <p>That was a lot to chew through. So let&rsquo;s do a quick recap of what
 happens when we use `dotnet dump collect.</p>
 <ul>
@@ -521,8 +621,7 @@ approach:</p>
 <p>.NET runtimes provides a mechanism for other applications to
 request information from them. If this mechanism is turned off (eg,
 via
-<a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_enablediagnostics" target="_blank"><code>DOTNET_EnableDiagnostics</code></a>
-),
+<a href="https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_enablediagnostics"><code>DOTNET_EnableDiagnostics</code></a>),
 then tools like <code>dotnet-dump</code> become useless.</p>
 </li>
 <li>
@@ -543,234 +642,107 @@ protocol and write your own custom tools to talk to the .NET
 runtime.</p>
 </li>
 </ol>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>I have linked to the classes/files on GitHub, but it might
 easier to clone the repo and look through it using your
 favourite tools.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Categories</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/categories/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/linux/"> linux </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/dotnet/">Dotnet</a></li>
+      <li><a href="https://omairmajid.com/tags/linux/">Linux</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

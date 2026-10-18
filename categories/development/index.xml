@@ -1,90 +1,103 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>development on Omair Majid</title>
-		<link>https://omairmajid.com/categories/development/</link>
-		<description>Recent content in development on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/categories/development/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>What is nuget restore doing?</title>
-			<link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
-			<description>
-			
-				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-Turns out you can …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core is now available in Fedora</title>
-			<link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
-			<pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
-			<description>
-			
-				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the …
-			
-			</description>
-		</item>
-		<item>
-			<title>Components &amp; Versioning in .NET Core</title>
-			<link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
-			<pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
-			<description>
-			
-				This post covers the versions and components in .NET Core 1.x.
-Components .NET Core consists of multiple components that are each versioned …
-			
-			</description>
-		</item>
-		<item>
-			<title>-Wmisleading-indentation in OpenJDK</title>
-			<link>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
-			<pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
-			<description>
-			
-				Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. So I built OpenJDK 9 …
-			
-			</description>
-		</item>
-		<item>
-			<title>SharedSecrets in OpenJDK</title>
-			<link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
-			<pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
-			<description>
-			
-				I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that …
-			
-			</description>
-		</item>
-		<item>
-			<title>What IcedTea-Web 1.1 means for you</title>
-			<link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
-			<pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
-			<description>
-			
-				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Development on Omair Majid</title>
+    <link>https://omairmajid.com/categories/development/</link>
+    <description>Recent content in Development on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Fri, 29 May 2020 18:34:41 +0000</lastBuildDate>
+    <atom:link href="https://omairmajid.com/categories/development/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is nuget restore doing?</title>
+      <link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
+      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
+      <description>&lt;p&gt;Ever wonder what &lt;code&gt;nuget&lt;/code&gt; or &lt;code&gt;dotnet restore&lt;/code&gt; is doing? What feeds it
+using? Or what &lt;code&gt;nuget.config&lt;/code&gt; it is using to find feeds?&lt;/p&gt;
+&lt;p&gt;Turns out you can find out what nuget-related information &lt;code&gt;dotnet restore&lt;/code&gt; by looking at the logs.&lt;/p&gt;
+&lt;p&gt;Generally, &lt;code&gt;dotnet restore&lt;/code&gt; is succinct. Restoring a &lt;code&gt;HelloWorld&lt;/code&gt;
+project gives us little information about what&amp;rsquo;s going on:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet new console --no-restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The template &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Console Application&amp;#34;&lt;/span&gt; was created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Restore completed in 72.1 ms &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If we add a &lt;code&gt;nuget.config&lt;/code&gt; file, we still see little information. Not
+even enough to know if it&amp;rsquo;s even being used:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core is now available in Fedora</title>
+      <link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
+      <pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
+      <description>&lt;p&gt;One exciting feature in the recent release of Fedora 32 is the
+inclusion of .NET Core in the default repositories. This makes Fedora
+32 the first community Linux distribution with .NET Core available out
+of the box!&lt;/p&gt;
+&lt;p&gt;In this post, lets take a quick look at using .NET Core on Fedora 32.
+We will cover installing .NET Core packages and building a container
+image. All using software only from Fedora!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Components &amp; Versioning in .NET Core</title>
+      <link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
+      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
+      <description>&lt;p&gt;This post covers the versions and components in .NET Core 1.x.&lt;/p&gt;
+&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
+&lt;p&gt;.NET Core consists of multiple components that are each versioned
+independently and can often be mixed and matched.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;Shared Framework&lt;/strong&gt; contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.
+&lt;ul&gt;
+&lt;li&gt;The current .NET Core Virtual Machine is called &lt;strong&gt;CoreCLR&lt;/strong&gt;. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector. The complete source code for CoreCLR is available at &lt;a href=&#34;https://github.com/dotnet/coreclr&#34;&gt;https://github.com/dotnet/coreclr&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The .NET Core standard APIs are implemented in &lt;strong&gt;CoreFX&lt;/strong&gt;. This provides implementations of all your favourite APIs such as &lt;code&gt;System.Runtime&lt;/code&gt;, &lt;code&gt;System.Theading&lt;/code&gt; and so on. The source code for CoreFX is available at &lt;a href=&#34;https://github.com/dotnet/corefx&#34;&gt;https://github.com/dotnet/corefx&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;Host&lt;/strong&gt; is also sometimes called the &lt;em&gt;muxer&lt;/em&gt; or &lt;em&gt;driver&lt;/em&gt;. This components represents the &lt;code&gt;dotnet&lt;/code&gt; command and is responsible for deciding what happens next. The source for this is available at &lt;a href=&#34;https://github.com/dotnet/core-setup&#34;&gt;https://github.com/dotnet/core-setup&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;SDK&lt;/strong&gt; consists of the various tools (&lt;code&gt;dotnet&lt;/code&gt; subcommands) and their implementations that deal with building code. This includes handling the restoring of dependencies, compiling code, building binaries, producing packages and publishing standalone or framework dependent packages. The SDK itself consists of the &lt;em&gt;CLI&lt;/em&gt; , which handles command line operations (at &lt;a href=&#34;https://github.com/dotnet/cli&#34;&gt;https://github.com/dotnet/cli&lt;/a&gt;) and various subprojects that implement the various operations the CLI needs to do.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;versions&#34;&gt;Versions&lt;/h2&gt;
+&lt;p&gt;Each of the components listed above are versioned separately. You can find out
+the version of each of those components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>-Wmisleading-indentation in OpenJDK</title>
+      <link>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
+      <pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
+      <description>&lt;p&gt;Inspired by &lt;a href=&#34;https://gnu.wildebeest.org/blog/mjw/2016/01/09/looking-forward-to-gcc6-nice-new-warnings/&#34;&gt;this post by Mark Wielaard&lt;/a&gt; I started wondering how OpenJDK 9 would fare in a &lt;code&gt;-Wmisleading-indentation&lt;/code&gt; test. So I built OpenJDK 9 using &lt;code&gt;-Wall&lt;/code&gt; to find out.&lt;/p&gt;
+&lt;p&gt;First, though, a big heads up: the OpenJDK 9 build selectively enables and
+disables warnings and turns on &lt;code&gt;-Werorr&lt;/code&gt;. There doesn&amp;rsquo;t seem to be a straight-
+forward way of enabling all compiler warnings everywhere. I ended up patching
+various makefiles to comment out various &lt;code&gt;DISABLED_WARNINGS* f&lt;/code&gt;lags. Hotspot
+needed a separate patch to initialize &lt;code&gt;WARNING_FLAGS&lt;/code&gt; with &lt;code&gt;-Wall&lt;/code&gt; in
+&lt;code&gt;hotspot/make/linux/makefiles/gcc.make&lt;/code&gt;. Then I built OpenJDK 9 using:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SharedSecrets in OpenJDK</title>
+      <link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
+      <pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
+      <description>&lt;p&gt;I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the &lt;a href=&#34;http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/misc/SharedSecrets.java&#34; title=&#34;Code for sun.misc.SharedSecets&#34;&gt;SharedSecrets&lt;/a&gt; class! The name of the class is a little misleading since it doesn&amp;rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What IcedTea-Web 1.1 means for you</title>
+      <link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+      <description>&lt;p&gt;A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If
+you are a packager or a developer here are some things you need to know.&lt;/p&gt;
+&lt;h2 id=&#34;are-you-a-packager&#34;&gt;Are you a packager?&lt;/h2&gt;
+&lt;p&gt;IcedTea-Web 1.1 can be installed into a regular prefix (&lt;code&gt;/usr/&lt;/code&gt; or
+&lt;code&gt;/usr/local/&lt;/code&gt; or anything else). Unlike IcedTea-Web 1.0, you do not need to
+install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to
+build itself (specified using &lt;code&gt;--with-jdk-home&lt;/code&gt;). IcedTea-Web will use the JDK
+it was compiled against to run. The launchers (&lt;code&gt;javaws&lt;/code&gt; and &lt;code&gt;itweb-settings&lt;/code&gt;)
+are now shell scripts and can be customized as needed.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

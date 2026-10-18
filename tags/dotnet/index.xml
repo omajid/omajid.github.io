@@ -1,91 +1,97 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>dotnet on Omair Majid</title>
-		<link>https://omairmajid.com/tags/dotnet/</link>
-		<description>Recent content in dotnet on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Collecting dumps; under the hood</title>
-			<link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
-			<pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
-			<description>
-			
-				Or how dotnet-dump collect works on Linux
-If you are trying to diagnose the behaviour of a mis-behaving application in production, one …
-			
-			</description>
-		</item>
-		<item>
-			<title>Using .NET with OpenSSL in CentOS Stream 9</title>
-			<link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
-			<description>
-			
-				Or, how to deal with error:0E07607...
-			
-			</description>
-		</item>
-		<item>
-			<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
-			<link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
-			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
-			<description>
-			
-				Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core Symbols on Fedora</title>
-			<link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
-			<description>
-			
-				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
-What are debug …
-			
-			</description>
-		</item>
-		<item>
-			<title>What is nuget restore doing?</title>
-			<link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
-			<description>
-			
-				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-Turns out you can …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core is now available in Fedora</title>
-			<link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
-			<pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
-			<description>
-			
-				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dotnet on Omair Majid</title>
+    <link>https://omairmajid.com/tags/dotnet/</link>
+    <description>Recent content in Dotnet on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collecting dumps; under the hood</title>
+      <link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
+      <description>&lt;p&gt;Or how &lt;code&gt;dotnet-dump collect&lt;/code&gt; works on Linux&lt;/p&gt;
+&lt;p&gt;If you are trying to diagnose the behaviour of a mis-behaving
+application in production, one option is to use the
+&lt;a href=&#34;https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump&#34;&gt;&lt;code&gt;dotnet-dump&lt;/code&gt;&lt;/a&gt;
+tool to get a memory dump of the application so you can study it
+offline. With a dump, you can get stack traces, look at all the
+threads and even dig through the entire heap offline.&lt;/p&gt;
+&lt;p&gt;But how does &lt;code&gt;dotnet-dump&lt;/code&gt; actually work?&lt;/p&gt;
+&lt;p&gt;This post will try and summarize what I found as I tried digging
+through what &lt;code&gt;dotnet dump collect&lt;/code&gt; does under the hood.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using .NET with OpenSSL in CentOS Stream 9</title>
+      <link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
+      <description>Or, how to deal with error:0E07607...</description>
+    </item>
+    <item>
+      <title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
+      <link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
+      <description>&lt;h1 id=&#34;why-bootstrap&#34;&gt;Why Bootstrap?&lt;/h1&gt;
+&lt;p&gt;Compiling code is supposed to be straightforward: you run a compiler
+over the code and the compiler gives you back an executable program.&lt;/p&gt;
+&lt;p&gt;But what do you do if there&amp;rsquo;s no compiler?&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s the dilemma .NET runs into in Fedora.&lt;/p&gt;
+&lt;p&gt;Every release of .NET (Core) needs a recent version of a .NET (Core)
+SDK that can be used to build it. But that&amp;rsquo;s exactly what&amp;rsquo;s missing
+and what we are trying to build.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core Symbols on Fedora</title>
+      <link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
+      <description>&lt;p&gt;Have you ever tried to debug a .NET application and seen errors saying
+debug information or debug symbols are not available?&lt;/p&gt;
+&lt;p&gt;What are debug symbols? Where are they used? When would you need them?
+How do you get them? This post will try to resolve confusion by
+calling out things you absolutely need to know about them.&lt;/p&gt;
+&lt;h2 id=&#34;what-are-debug-symbols&#34;&gt;What are debug symbols?&lt;/h2&gt;
+&lt;p&gt;Source code contains a lot of information that&amp;rsquo;s not strictly part of
+it&amp;rsquo;s functionality. It contains human readable names, including names
+of types, classes, methods and local variables. It contains lines of
+code in an order that (hopefully!) makes it possible to understand
+what is happening in order.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is nuget restore doing?</title>
+      <link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
+      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
+      <description>&lt;p&gt;Ever wonder what &lt;code&gt;nuget&lt;/code&gt; or &lt;code&gt;dotnet restore&lt;/code&gt; is doing? What feeds it
+using? Or what &lt;code&gt;nuget.config&lt;/code&gt; it is using to find feeds?&lt;/p&gt;
+&lt;p&gt;Turns out you can find out what nuget-related information &lt;code&gt;dotnet restore&lt;/code&gt; by looking at the logs.&lt;/p&gt;
+&lt;p&gt;Generally, &lt;code&gt;dotnet restore&lt;/code&gt; is succinct. Restoring a &lt;code&gt;HelloWorld&lt;/code&gt;
+project gives us little information about what&amp;rsquo;s going on:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet new console --no-restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The template &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Console Application&amp;#34;&lt;/span&gt; was created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Restore completed in 72.1 ms &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If we add a &lt;code&gt;nuget.config&lt;/code&gt; file, we still see little information. Not
+even enough to know if it&amp;rsquo;s even being used:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core is now available in Fedora</title>
+      <link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
+      <pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
+      <description>&lt;p&gt;One exciting feature in the recent release of Fedora 32 is the
+inclusion of .NET Core in the default repositories. This makes Fedora
+32 the first community Linux distribution with .NET Core available out
+of the box!&lt;/p&gt;
+&lt;p&gt;In this post, lets take a quick look at using .NET Core on Fedora 32.
+We will cover installing .NET Core packages and building a container
+image. All using software only from Fedora!&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

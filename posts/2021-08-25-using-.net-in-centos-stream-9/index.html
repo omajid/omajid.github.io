@@ -1,112 +1,226 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content="Using .NET with OpenSSL in CentOS Stream 9">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,linux,rhel,centos,openssl"><meta name="description" content="Or, how to deal with error:0E07607..."><meta property="og:title" content="Using .NET with OpenSSL in CentOS Stream 9" />
-<meta property="og:description" content="Or, how to deal with error:0E07607..." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-08-25T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-08-25T00:00:00+00:00" />
+<html lang="en" dir="auto" data-theme="auto">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Using .NET with OpenSSL in CentOS Stream 9"/>
-<meta name="twitter:description" content="Or, how to deal with error:0E07607..."/>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Using .NET with OpenSSL in CentOS Stream 9 | Omair Majid</title>
+<meta name="keywords" content="dotnet, linux, rhel, centos, openssl">
+<meta name="description" content="Or, how to deal with error:0E07607...">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>Using .NET with OpenSSL in CentOS Stream 9 | Omair Majid</title>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="Using .NET with OpenSSL in CentOS Stream 9">
+  <meta property="og:description" content="Or, how to deal with error:0E07607...">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-08-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2021-08-25T00:00:00+00:00">
+    <meta property="article:tag" content="Dotnet">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Rhel">
+    <meta property="article:tag" content="Centos">
+    <meta property="article:tag" content="Openssl">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Using .NET with OpenSSL in CentOS Stream 9">
+  <meta name="twitter:description" content="Or, how to deal with error:0E07607...">
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Using .NET with OpenSSL in CentOS Stream 9",
+      "item": "https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Using .NET with OpenSSL in CentOS Stream 9",
+  "name": "Using .NET with OpenSSL in CentOS Stream 9",
+  "description": "Or, how to deal with error:0E07607...",
+  "keywords": [
+    "dotnet", "linux", "rhel", "centos", "openssl"
+  ],
+  "articleBody": "Or, how to deal with error:0E07607: configuration file routines….\nTLDR:\n# Only for .NET 5 or .NET Core 3.1 sudo dnf install -y compat-openssl11 export OPENSSL_CONF=/etc/pki/openssl11.cnf dotnet whatever Introduction How do you get .NET applications - whether the SDK/runtime itself or a self-contained application - working on RHEL 9?\nGenerally, this should be a walk in the park. .NET is a cross platform runtime. It explicitly supports RHEL. There shouldn’t be any surprises here.\nUnfortunately, RHEL 9 (or CentOS Stream 9, rather) is still in development. It has also switched to OpenSSL 3.0, which currently-released versions of .NET don’t support. Even forcing OpenSSL 1.1 leads to an obscure error:0E07607: configuration file routines error.\nIn the rest of this post, I will walk you through running a simple .NET Core network-using application on CentOS Stream 9. I will be using container images, but only because it makes things easier to reproduce. There’s nothing here that’s specific to container images.\nCentOS Stream? Why not RHEL 9? CentOS Stream 9 is the in-development version of what will eventually become RHEL 9. You can find more details about how RHEL 9 and CentOS Stream 9 relate here. I am going to use CentOS Stream 9 in the rest of this post.\nFirst, let’s get our hands on a container we can use for trying things out. I am going to use the latest CentOS Stream 9 image: quay.io/centos/centos:stream9-development. Other CentOS images are available too. If you are wondering, these images are official images created by the CentOS Stream folks.\nI will use podman through this post. Feel free to replace the podman command with docker if you want. The podman and docker commands accept the same set of sub-commands and arguments. There shouldn’t be a function difference b\nThis image claims it’s CentOS Stream 9, and even tells us that it should reflect the next release of RHEL 9:\n$ podman run -it quay.io/centos/centos:stream9-development cat /etc/os-release NAME=\"CentOS Stream\" VERSION=\"9\" ID=\"centos\" ID_LIKE=\"rhel fedora\" VERSION_ID=\"9\" PLATFORM_ID=\"platform:el9\" PRETTY_NAME=\"CentOS Stream 9\" ANSI_COLOR=\"0;31\" CPE_NAME=\"cpe:/o:centos:centos:9\" HOME_URL=\"https://centos.org/\" BUG_REPORT_URL=\"https://bugzilla.redhat.com/\" REDHAT_SUPPORT_PRODUCT=\"Red Hat Enterprise Linux 9\" REDHAT_SUPPORT_PRODUCT_VERSION=\"CentOS Stream\" Install and Use .NET Core Let’s start with a simple Dockerfile. We will use this to write and run a trivial .NET Core 3.1 application:\nFROM quay.io/centos/centos:stream9-development RUN dnf install -yq wget libicu openssl RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 \\ bash dotnet-install.sh \u0026\u0026 \\ export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 \\ dotnet new console -o /app Here’s what this Dockerfile does, line by line.\nUse the CentOS Stream 9 container image Install some dependencies wget is needed to download .NET Core itself libicu and openssl are required .NET Core dependencies Get the .NET Core installation script (dotnet-install.sh) Use the installation script to install .NET Core 3.1, which installs it to ~/.dotnet (the same as $HOME/.dotnet) Update $PATH to include the new .NET installation directory, to make future invocations of dotnet work. Create a new Hello-World application at /app. Now, let’s build this Dockerfile:\n$ podman build --tag centos-dotnet-container --file Dockerfile STEP 1: FROM quay.io/centos/centos:stream9-development Trying to pull quay.io/centos/centos:stream9-development... Getting image source signatures Copying blob 21c097e6cb77 done Copying config 236076175b done Writing manifest to image destination Storing signatures STEP 2: RUN dnf install -yq wget libicu openssl Installed: libicu-67.1-9.el9.x86_64 openssl-1:3.0.0-0.beta2.6.el9.x86_64 wget-1.21.1-6.el9.x86_64 --\u003e e6a20071b75 STEP 3: RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 bash dotnet-install.sh \u0026\u0026 export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 dotnet new console -o /app dotnet-install: Note that the intended use of this script is for Continuous Integration (CI) scenarios, where: ... SNIP ... Write your first app: https://aka.ms/first-net-core-app -------------------------------------------------------------------------------------- No usable version of libssl was found container exited on segmentation fault Error: error building at STEP \"RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 bash dotnet-install.sh \u0026\u0026 export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 dotnet new console -o /app\": error while running runtime: exit status 1 As you can see, this fails to work with a No usable version of libssl was found. libssl is a part of OpenSSL. This message means that .NET couldn’t find a version of OpenSSL that it could use.\nSwitch to OpenSSL 1.1 If you check the container, it has OpenSSL 3.0 already installed:\n$ podman run -it quay.io/centos/centos:stream9-development rpm -q openssl-libs openssl-libs-3.0.0-0.beta2.6.el9.x86_64 Does that mean .NET doesn’t know how to make use of that?\nYes. It turns out .NET Core 3.1 and .NET 5.0 only know how to make use of OpenSSL 1.0 and 1.1. Support for OpenSSL 3.0 will be included in .NET 6 and later.\nSo let’s install OpenSSL 1.1, which .NET Core 3.1 can use.\nThe CentOS Stream 9 package for OpenSSL 1.1 is called compat-openssl11. Due to a bug, it’s not currently available in the CentOS Stream 9 package repositories. It should be available soon. For now, we will work around that by manually getting the package and installing it.\nFROM quay.io/centos/centos:stream9-development RUN dnf install -yq wget libicu openssl # This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11 # This next line is the workaround: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm \u0026\u0026 dnf install -yq ./compat-openssl11*.rpm RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 \\ bash dotnet-install.sh \u0026\u0026 \\ export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 \\ dotnet new console -o /app \u0026\u0026 \\ cd /app \u0026\u0026 \\ dotnet run Running this should get us a working hello world:\n$ podman build --tag centos-dotnet-container --file Dockerfile STEP 1: FROM quay.io/centos/centos:stream9-development STEP 2: RUN dnf install -yq wget libicu openssl STEP 3: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm \u0026\u0026 dnf install -yq ./compat-openssl11*.rpm STEP 4: RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 bash dotnet-install.sh \u0026\u0026 export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 dotnet new console -o /app \u0026\u0026 cd /app \u0026\u0026 dotnet run ... SNIP ... Getting ready... The template \"Console Application\" was created successfully. Processing post-creation actions... Running 'dotnet restore' on /app/app.csproj... Determining projects to restore... Restored /app/app.csproj (in 119 ms). Restore succeeded. Hello World! STEP 5: COMMIT centos-dotnet-container Successfully tagged localhost/centos-dotnet-container:latest 1f2ce75a289fd914567952c3ff209dcd8671382af9573922d03f464aa90d91cf Is OpenSSL 1.1 Actually Working? The error messages about libssl not being found have gone away. But we haven’t actually used any networking or cryptographic features. At this point, we don’t actually know if OpenSSL support in .NET is functional.\nWe can confirm, at least to certain extent, that .NET is working with OpenSSL with this trivial program at Program.cs.\nusing System; using System.Net.Http; using System.Threading.Tasks; class Program { static readonly HttpClient client = new HttpClient(); static async Task Main() { try { string response = await client.GetStringAsync(\"http://dot.net/\"); Console.WriteLine($\"Got {response.Length} bytes\"); } catch (HttpRequestException e) { Console.Error.WriteLine(e.ToString()); } } } This program is based on the HttpClient sample. It simply connects to https://dot.net/ and gets the contents of returned by that URL as a string.\nSince the URL is an https resource, it ends up using a large part of the cryptographic stack of .NET, much of which is using the underlying OpenSSL library on Linux. In other words, if we can access this URL, we can safely assume that a large number of cryptographic features in OpenSSL can be correctly used by our .NET runtime.\nLet’s add this into our application through our Dockerfile.\nFROM quay.io/centos/centos:stream9-development RUN dnf install -yq wget libicu openssl # This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11 # This next line is the workaround: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm \u0026\u0026 dnf install -yq ./compat-openssl11*.rpm RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 \\ bash dotnet-install.sh \u0026\u0026 \\ export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 \\ dotnet new console -o /app ADD Program.cs /app/ CMD cd /app \u0026\u0026 \\ export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 \\ dotnet run Then, we can build it.\n$ podman build --tag centos-dotnet-container --file Dockerfile ... SNIP ... STEP 7: COMMIT centos-dotnet-container --\u003e e6f6459a92e Successfully tagged localhost/centos-dotnet-container:latest e6f6459a92eb673c4d869790584d27ecdbb84d085aff562df3b9271d81f9ffd4 Finally, we run our application:\n$ podman run -it centos-dotnet-container System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception. ---\u003e System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception. ---\u003e System.TypeInitializationException: The type initializer for 'SslMethods' threw an exception. ---\u003e System.TypeInitializationException: The type initializer for 'Ssl' threw an exception. ---\u003e System.TypeInitializationException: The type initializer for 'SslInitializer' threw an exception. ---\u003e Interop+Crypto+OpenSslCryptographicException: error:0E076071:configuration file routines:module_run:unknown module name at Interop.SslInitializer..cctor() --- End of inner exception stack trace --- at Interop.Ssl..cctor() ... SNIP ... at System.Net.Http.HttpClient.GetStringAsyncCore(Task`1 getTask) at Program.Main() in /app/Program.cs:line 13 Well, that’s certainly not an error I had ever seen before.\nA quick google for 0E076071 brings us to https://github.com/dotnet/runtime/issues/27792. My take away from that discussion is that an unknown module name error basically means that the current version of OpenSSL can not parse the OpenSSL configuration file (located at /etc/pki/tls/openssl.cnf for CentOS Stream 9). We need to use a different OpenSSL version, or use a different configuration file.\nFollowing the advice from https://bugzilla.redhat.com/show_bug.cgi?id=1694850, we should override the default and unusable configuration with a configuration usable by OpenSSL 1.1.\nIf we look for all .cnf files owned/installed by the compat-openssl11 package, we can find where a usable configuration file is:\n$ podman run -it centos-dotnet-container rpm -ql compat-openssl11 | grep cnf /etc/pki/openssl11.cnf Then we can modify our Dockerfile to export OPENSSL_CONF=/etc/pki/openssl11.cnf to override the default OpenSSL 1.1 configuration:\nFROM quay.io/centos/centos:stream9-development RUN dnf install -yq wget libicu openssl # This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11 # This next line is the workaround: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm \u0026\u0026 dnf install -yq ./compat-openssl11*.rpm RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 \\ bash dotnet-install.sh \u0026\u0026 \\ export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 \\ dotnet new console -o /app ADD Program.cs /app/ CMD cd /app \u0026\u0026 \\ export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 \\ export OPENSSL_CONF=/etc/pki/openssl11.cnf \u0026\u0026 \\ dotnet run Now, let’s build and run it one last time.\n$ podman build --tag centos-dotnet-container --file Dockerfile STEP 1: FROM quay.io/centos/centos:stream9-development STEP 2: RUN dnf install -yq wget libicu openssl STEP 3: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm \u0026\u0026 dnf install -yq ./compat-openssl11*.rpm STEP 4: RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh \u0026\u0026 bash dotnet-install.sh \u0026\u0026 export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 dotnet new console -o /app STEP 5: ADD Program.cs /app/ STEP 6: CMD cd /app \u0026\u0026 export PATH=$PATH:$HOME/.dotnet/ \u0026\u0026 export OPENSSL_CONF=/etc/pki/openssl11.cnf \u0026\u0026 dotnet run STEP 7: COMMIT centos-dotnet-container $ podman run -it centos-dotnet-container Got 61174 bytes Finally, it all works!\nWhat’s next To summarize, running .NET Core 3.1 (and .NET 5) on CentOS Stream 9 involves 2 main steps:\nInstalling OpenSSL 1.1 Forcing .NET to use OpenSSL 1.1’s configuration file instead of the default OpenSSL configuration Now that you know how to work around things, you can figure out how to get older .NET applications running on RHEL 9, including standalone applications.\n.NET 6, which is on the horizon, will support OpenSSL 3.0 natively and will not need any of the workarounds we had to resort to.\nThat’s just one of the reasons to get excited about .NET 6. Download .NET 6 today and try it out on your favourite Linux distribution!\nAnd of course, like previous versions of .NET, .NET 6 will be available in CentOS Stream 9 as dotnet-sdk-6.0 at some point in the future.\n",
+  "wordCount" : "1794",
+  "inLanguage": "en",
+  "datePublished": "2021-08-25T00:00:00Z",
+  "dateModified": "2021-08-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">25</span>
-				<span class="rest">Aug 2021</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">Using .NET with OpenSSL in CentOS Stream 9</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
+<main class="main">
 
-  
-
-  
+<article class="post-single">
+  <header class="post-header">
     
-  
-</span>
+    <h1 class="post-title entry-hint-parent">
+      Using .NET with OpenSSL in CentOS Stream 9
+    </h1>
+    <div class="post-description">
+      Or, how to deal with error:0E07607...
+    </div>
+    <div class="post-meta">
 
+<span title='2021-08-25 00:00:00 +0000 UTC'>August 25, 2021</span>&nbsp;·&nbsp;<span>Omair Majid</span>
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>Or, how to deal with <code>error:0E07607: configuration file routines</code>&hellip;.</p>
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Or, how to deal with <code>error:0E07607: configuration file routines</code>&hellip;.</p>
 <hr>
 <p>TLDR:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># Only for .NET 5 or .NET Core 3.1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e"># Only for .NET 5 or .NET Core 3.1</span>
 </span></span><span style="display:flex;"><span>sudo dnf install -y compat-openssl11
 </span></span><span style="display:flex;"><span>export OPENSSL_CONF<span style="color:#f92672">=</span>/etc/pki/openssl11.cnf
 </span></span><span style="display:flex;"><span>dotnet whatever
 </span></span></code></pre></div><hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
 <p>How do you get .NET applications - whether the SDK/runtime itself or a
 self-contained application - working on RHEL 9?</p>
 <p>Generally, this should be a walk in the park. .NET is a cross platform
@@ -120,29 +234,26 @@ OpenSSL 1.1 leads to an obscure <code>error:0E07607: configuration file routines
 .NET Core network-using application on CentOS Stream 9. I will be
 using container images, but only because it makes things easier to
 reproduce. There&rsquo;s nothing here that&rsquo;s specific to container images.</p>
-<h1 id="centos-stream-why-not-rhel-9">CentOS Stream? Why not RHEL 9?</h1>
+<h1 id="centos-stream-why-not-rhel-9">CentOS Stream? Why not RHEL 9?<a hidden class="anchor" aria-hidden="true" href="#centos-stream-why-not-rhel-9">#</a></h1>
 <p>CentOS Stream 9 is the in-development version of what will eventually
-become RHEL 9. You can <a href="https://www.redhat.com/en/blog/faq-centos-stream-updates" target="_blank">find more details about how RHEL 9 and CentOS
+become RHEL 9. You can <a href="https://www.redhat.com/en/blog/faq-centos-stream-updates">find more details about how RHEL 9 and CentOS
 Stream 9 relate
-here</a>
-. I am
+here</a>. I am
 going to use CentOS Stream 9 in the rest of this post.</p>
 <p>First, let&rsquo;s get our hands on a container we can use for trying things
 out. I am going to use the latest CentOS Stream 9 image:
-<code>quay.io/centos/centos:stream9-development</code>. <a href="https://quay.io/repository/centos/centos?tab=tags" target="_blank">Other CentOS images are
-available too</a>
-. If
-you are wondering, these images are <a href="https://lists.centos.org/pipermail/centos-announce/2021-March/048282.html" target="_blank">official images created by the
+<code>quay.io/centos/centos:stream9-development</code>. <a href="https://quay.io/repository/centos/centos?tab=tags">Other CentOS images are
+available too</a>. If
+you are wondering, these images are <a href="https://lists.centos.org/pipermail/centos-announce/2021-March/048282.html">official images created by the
 CentOS Stream
-folks</a>
-.</p>
+folks</a>.</p>
 <p>I will use <code>podman</code> through this post. Feel free to replace the
 <code>podman</code> command with <code>docker</code> if you want. The <code>podman</code> and <code>docker</code>
 commands accept the same set of sub-commands and arguments. There
 shouldn&rsquo;t be a function difference b</p>
 <p>This image claims it&rsquo;s CentOS Stream 9, and even tells us that it
 should reflect the next release of RHEL 9:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman run -it quay.io/centos/centos:stream9-development cat /etc/os-release
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman run -it quay.io/centos/centos:stream9-development cat /etc/os-release
 </span></span><span style="display:flex;"><span>NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;CentOS Stream&#34;</span>
 </span></span><span style="display:flex;"><span>VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;9&#34;</span>
 </span></span><span style="display:flex;"><span>ID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;centos&#34;</span>
@@ -156,17 +267,17 @@ should reflect the next release of RHEL 9:</p>
 </span></span><span style="display:flex;"><span>BUG_REPORT_URL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://bugzilla.redhat.com/&#34;</span>
 </span></span><span style="display:flex;"><span>REDHAT_SUPPORT_PRODUCT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Red Hat Enterprise Linux 9&#34;</span>
 </span></span><span style="display:flex;"><span>REDHAT_SUPPORT_PRODUCT_VERSION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;CentOS Stream&#34;</span>
-</span></span></code></pre></div><h1 id="install-and-use-net-core">Install and Use .NET Core</h1>
+</span></span></code></pre></div><h1 id="install-and-use-net-core">Install and Use .NET Core<a hidden class="anchor" aria-hidden="true" href="#install-and-use-net-core">#</a></h1>
 <p>Let&rsquo;s start with a simple <code>Dockerfile</code>. We will use this to write and
 run a trivial .NET Core 3.1 application:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>Here&rsquo;s what this <code>Dockerfile</code> does, line by line.</p>
 <ol>
 <li>Use the CentOS Stream 9 container image</li>
@@ -184,7 +295,7 @@ make future invocations of <code>dotnet</code> work.</li>
 <li>Create a new Hello-World application at <code>/app</code>.</li>
 </ol>
 <p>Now, let&rsquo;s build this <code>Dockerfile</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
 </span></span><span style="display:flex;"><span>STEP 1: FROM quay.io/centos/centos:stream9-development
 </span></span><span style="display:flex;"><span>Trying to pull quay.io/centos/centos:stream9-development...
 </span></span><span style="display:flex;"><span>Getting image source signatures
@@ -209,37 +320,36 @@ make future invocations of <code>dotnet</code> work.</li>
 </span></span><span style="display:flex;"><span>Error: error building at STEP <span style="color:#e6db74">&#34;RUN wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh &amp;&amp;     bash dotnet-install.sh &amp;&amp;     export PATH=</span>$PATH<span style="color:#e6db74">:</span>$HOME<span style="color:#e6db74">/.dotnet/ &amp;&amp;     dotnet new console -o /app&#34;</span>: error <span style="color:#66d9ef">while</span> running runtime: exit status <span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><p>As you can see, this fails to work with a <code>No usable version of libssl was found</code>. <code>libssl</code> is a part of OpenSSL. This message means that
 .NET couldn&rsquo;t find a version of OpenSSL that it could use.</p>
-<h1 id="switch-to-openssl-11">Switch to OpenSSL 1.1</h1>
+<h1 id="switch-to-openssl-11">Switch to OpenSSL 1.1<a hidden class="anchor" aria-hidden="true" href="#switch-to-openssl-11">#</a></h1>
 <p>If you check the container, it has OpenSSL 3.0 already installed:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ podman run -it quay.io/centos/centos:stream9-development rpm -q openssl-libs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ podman run -it quay.io/centos/centos:stream9-development rpm -q openssl-libs
 </span></span><span style="display:flex;"><span>openssl-libs-3.0.0-0.beta2.6.el9.x86_64
 </span></span></code></pre></div><p>Does that mean .NET doesn&rsquo;t know how to make use of that?</p>
 <p>Yes. It turns out .NET Core 3.1 and .NET 5.0 only know how to make use
-of OpenSSL 1.0 and 1.1. <a href="https://github.com/dotnet/runtime/issues/46526" target="_blank">Support for OpenSSL 3.0 will be included in
-.NET 6 and later.</a>
-</p>
+of OpenSSL 1.0 and 1.1. <a href="https://github.com/dotnet/runtime/issues/46526">Support for OpenSSL 3.0 will be included in
+.NET 6 and later.</a></p>
 <p>So let&rsquo;s install OpenSSL 1.1, which .NET Core 3.1 can use.</p>
 <p>The CentOS Stream 9 package for OpenSSL 1.1 is called
 <code>compat-openssl11</code>. Due to a bug, it&rsquo;s not currently available in the
 CentOS Stream 9 package repositories. It should be available soon. For
 now, we will work around that by manually getting the package and
 installing it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet new console -o /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet run<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet new console -o /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet run<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>Running this should get us a working hello world:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
 </span></span><span style="display:flex;"><span>STEP 1: FROM quay.io/centos/centos:stream9-development
 </span></span><span style="display:flex;"><span>STEP 2: RUN dnf install -yq wget libicu openssl
 </span></span><span style="display:flex;"><span>STEP 3: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm
@@ -259,13 +369,13 @@ installing it.</p>
 </span></span><span style="display:flex;"><span>STEP 5: COMMIT centos-dotnet-container
 </span></span><span style="display:flex;"><span>Successfully tagged localhost/centos-dotnet-container:latest
 </span></span><span style="display:flex;"><span>1f2ce75a289fd914567952c3ff209dcd8671382af9573922d03f464aa90d91cf
-</span></span></code></pre></div><h1 id="is-openssl-11-actually-working">Is OpenSSL 1.1 Actually Working?</h1>
+</span></span></code></pre></div><h1 id="is-openssl-11-actually-working">Is OpenSSL 1.1 Actually Working?<a hidden class="anchor" aria-hidden="true" href="#is-openssl-11-actually-working">#</a></h1>
 <p>The error messages about <code>libssl</code> not being found have gone away. But
 we haven&rsquo;t actually used any networking or cryptographic features. At
 this point, we don&rsquo;t actually know if OpenSSL support in .NET is functional.</p>
 <p>We can confirm, at least to certain extent, that .NET is working with
 OpenSSL with this trivial program at <code>Program.cs</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Net.Http;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> System.Threading.Tasks;
 </span></span><span style="display:flex;"><span>
@@ -286,11 +396,9 @@ OpenSSL with this trivial program at <code>Program.cs</code>.</p>
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This program is based on the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0#examples" target="_blank">HttpClient
-sample</a>
-.
-It simply connects to <a href="https://dot.net/" target="_blank">https://dot.net/</a>
- and gets the contents of
+</span></span></code></pre></div><p>This program is based on the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-5.0#examples">HttpClient
+sample</a>.
+It simply connects to <a href="https://dot.net/">https://dot.net/</a> and gets the contents of
 returned by that URL as a <code>string</code>.</p>
 <p>Since the URL is an <code>https</code> resource, it ends up using a large part of
 the cryptographic stack of .NET, much of which is using the underlying
@@ -298,33 +406,33 @@ OpenSSL library on Linux. In other words, if we can access this URL,
 we can safely assume that a large number of cryptographic features
 in OpenSSL can be correctly used by our .NET runtime.</p>
 <p>Let&rsquo;s add this into our application through our <code>Dockerfile</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> Program.cs /app/<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> Program.cs /app/<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet run<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet run<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>Then, we can build it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
 </span></span><span style="display:flex;"><span>... SNIP ...
 </span></span><span style="display:flex;"><span>STEP 7: COMMIT centos-dotnet-container
 </span></span><span style="display:flex;"><span>--&gt; e6f6459a92e
 </span></span><span style="display:flex;"><span>Successfully tagged localhost/centos-dotnet-container:latest
 </span></span><span style="display:flex;"><span>e6f6459a92eb673c4d869790584d27ecdbb84d085aff562df3b9271d81f9ffd4
 </span></span></code></pre></div><p>Finally, we run our application:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman run -it centos-dotnet-container
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman run -it centos-dotnet-container
 </span></span><span style="display:flex;"><span>System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
 </span></span><span style="display:flex;"><span> ---&gt; System.Security.Authentication.AuthenticationException: Authentication failed, see inner exception.
 </span></span><span style="display:flex;"><span> ---&gt; System.TypeInitializationException: The type initializer <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;SslMethods&#39;</span> threw an exception.
@@ -339,46 +447,44 @@ in OpenSSL can be correctly used by our .NET runtime.</p>
 </span></span><span style="display:flex;"><span>   at Program.Main<span style="color:#f92672">()</span> in /app/Program.cs:line <span style="color:#ae81ff">13</span>
 </span></span></code></pre></div><p>Well, that&rsquo;s certainly not an error I had ever seen before.</p>
 <p>A quick google for <code>0E076071</code> brings us to
-<a href="https://github.com/dotnet/runtime/issues/27792" target="_blank">https://github.com/dotnet/runtime/issues/27792</a>
-. My take away from that
+<a href="https://github.com/dotnet/runtime/issues/27792">https://github.com/dotnet/runtime/issues/27792</a>. My take away from that
 discussion is that an <code>unknown module name</code> error basically means that
 the current version of OpenSSL can not parse the OpenSSL configuration
 file (located at <code>/etc/pki/tls/openssl.cnf</code> for CentOS Stream 9). We
 need to use a different OpenSSL version, or use a different
 configuration file.</p>
 <p>Following the advice from
-<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1694850" target="_blank">https://bugzilla.redhat.com/show_bug.cgi?id=1694850</a>
-, we should
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=1694850">https://bugzilla.redhat.com/show_bug.cgi?id=1694850</a>, we should
 override the default and unusable configuration with a configuration
 usable by OpenSSL 1.1.</p>
 <p>If we look for all <code>.cnf</code> files owned/installed by the
 <code>compat-openssl11</code> package, we can find where a usable configuration
 file is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman run -it centos-dotnet-container rpm -ql compat-openssl11 | grep cnf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman run -it centos-dotnet-container rpm -ql compat-openssl11 | grep cnf
 </span></span><span style="display:flex;"><span>/etc/pki/openssl11.cnf
 </span></span></code></pre></div><p>Then we can modify our <code>Dockerfile</code> to <code>export OPENSSL_CONF=/etc/pki/openssl11.cnf</code> to override the default OpenSSL
 1.1 configuration:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span> <span style="color:#e6db74">quay.io/centos/centos:stream9-development</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> dnf install -yq wget libicu openssl<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># This is the correct method once the issue is fixed: RUN dnf install -y compat-openssl11</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># This next line is the workaround:</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">RUN</span> wget -q --no-check-certificate https://dot.net/v1/dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    bash dotnet-install.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet new console -o /app<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ADD</span> Program.cs /app/<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">ADD</span> Program.cs /app/<span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    export OPENSSL_CONF<span style="color:#f92672">=</span>/etc/pki/openssl11.cnf <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    dotnet run<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">CMD</span> cd /app <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:$HOME/.dotnet/ <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    export OPENSSL_CONF<span style="color:#f92672">=</span>/etc/pki/openssl11.cnf <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span>    dotnet run<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>Now, let&rsquo;s build and run it one last time.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ podman build --tag centos-dotnet-container --file Dockerfile
 </span></span><span style="display:flex;"><span>STEP 1: FROM quay.io/centos/centos:stream9-development
 </span></span><span style="display:flex;"><span>STEP 2: RUN dnf install -yq wget libicu openssl
 </span></span><span style="display:flex;"><span>STEP 3: RUN wget -q --no-check-certificate https://kojihub.stream.rdu2.redhat.com/kojifiles/packages/compat-openssl11/1.1.1k/2.el9/x86_64/compat-openssl11-1.1.1k-2.el9.x86_64.rpm <span style="color:#f92672">&amp;&amp;</span> dnf install -yq ./compat-openssl11*.rpm
@@ -389,7 +495,7 @@ file is:</p>
 </span></span><span style="display:flex;"><span>$ podman run -it centos-dotnet-container
 </span></span><span style="display:flex;"><span>Got <span style="color:#ae81ff">61174</span> bytes
 </span></span></code></pre></div><p>Finally, it all works!</p>
-<h1 id="whats-next">What&rsquo;s next</h1>
+<h1 id="whats-next">What&rsquo;s next<a hidden class="anchor" aria-hidden="true" href="#whats-next">#</a></h1>
 <p>To summarize, running .NET Core 3.1 (and .NET 5) on CentOS Stream 9
 involves 2 main steps:</p>
 <ul>
@@ -408,229 +514,99 @@ will not need any of the workarounds we had to resort to.</p>
 available in CentOS Stream 9 as <code>dotnet-sdk-6.0</code> at some point in the
 future.</p>
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Categories</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/categories/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/centos/"> centos </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/linux/"> linux </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/openssl/"> openssl </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/rhel/"> rhel </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/dotnet/">Dotnet</a></li>
+      <li><a href="https://omairmajid.com/tags/linux/">Linux</a></li>
+      <li><a href="https://omairmajid.com/tags/rhel/">Rhel</a></li>
+      <li><a href="https://omairmajid.com/tags/centos/">Centos</a></li>
+      <li><a href="https://omairmajid.com/tags/openssl/">Openssl</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

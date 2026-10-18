@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>glibc on Omair Majid</title>
-		<link>https://omairmajid.com/tags/glibc/</link>
-		<description>Recent content in glibc on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/glibc/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>What is this GLIBCXX error?</title>
-			<link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
-			<pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
-			<description>
-			
-				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
-app: /lib64/libc.so.6: version …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Glibc on Omair Majid</title>
+    <link>https://omairmajid.com/tags/glibc/</link>
+    <description>Recent content in Glibc on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Wed, 08 Jul 2020 20:06:54 -0400</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/glibc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is this GLIBCXX error?</title>
+      <link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      <guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
+      <description>&lt;p&gt;If you use enterprise or stable Linux distributions, sooner or later
+you will see an error like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;app: /lib64/libc.so.6: version `GLIBC_3.1.45&amp;#39; not found (required by ./app)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&amp;#39; not found (required by ./app)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The application (or library) itself will vary. The path to the &lt;code&gt;libc&lt;/code&gt;
+or &lt;code&gt;libstdc++&lt;/code&gt; might vary too. But the error will always mention that
+a &lt;code&gt;GLIBCXX&lt;/code&gt; or &lt;code&gt;GLIBC&lt;/code&gt; version was not found.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

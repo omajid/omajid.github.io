@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>fedora on Omair Majid</title>
-		<link>https://omairmajid.com/tags/fedora/</link>
-		<description>Recent content in fedora on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
-			<link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
-			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
-			<description>
-			
-				Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core Symbols on Fedora</title>
-			<link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
-			<description>
-			
-				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
-What are debug …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core is now available in Fedora</title>
-			<link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
-			<pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
-			<description>
-			
-				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Fedora on Omair Majid</title>
+    <link>https://omairmajid.com/tags/fedora/</link>
+    <description>Recent content in Fedora on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
+      <link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
+      <description>&lt;h1 id=&#34;why-bootstrap&#34;&gt;Why Bootstrap?&lt;/h1&gt;
+&lt;p&gt;Compiling code is supposed to be straightforward: you run a compiler
+over the code and the compiler gives you back an executable program.&lt;/p&gt;
+&lt;p&gt;But what do you do if there&amp;rsquo;s no compiler?&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s the dilemma .NET runs into in Fedora.&lt;/p&gt;
+&lt;p&gt;Every release of .NET (Core) needs a recent version of a .NET (Core)
+SDK that can be used to build it. But that&amp;rsquo;s exactly what&amp;rsquo;s missing
+and what we are trying to build.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core Symbols on Fedora</title>
+      <link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
+      <description>&lt;p&gt;Have you ever tried to debug a .NET application and seen errors saying
+debug information or debug symbols are not available?&lt;/p&gt;
+&lt;p&gt;What are debug symbols? Where are they used? When would you need them?
+How do you get them? This post will try to resolve confusion by
+calling out things you absolutely need to know about them.&lt;/p&gt;
+&lt;h2 id=&#34;what-are-debug-symbols&#34;&gt;What are debug symbols?&lt;/h2&gt;
+&lt;p&gt;Source code contains a lot of information that&amp;rsquo;s not strictly part of
+it&amp;rsquo;s functionality. It contains human readable names, including names
+of types, classes, methods and local variables. It contains lines of
+code in an order that (hopefully!) makes it possible to understand
+what is happening in order.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core is now available in Fedora</title>
+      <link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
+      <pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
+      <description>&lt;p&gt;One exciting feature in the recent release of Fedora 32 is the
+inclusion of .NET Core in the default repositories. This makes Fedora
+32 the first community Linux distribution with .NET Core available out
+of the box!&lt;/p&gt;
+&lt;p&gt;In this post, lets take a quick look at using .NET Core on Fedora 32.
+We will cover installing .NET Core packages and building a container
+image. All using software only from Fedora!&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

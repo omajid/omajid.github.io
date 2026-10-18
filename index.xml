@@ -1,347 +1,464 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>Omair Majid</title>
-		<link>https://omairmajid.com/</link>
-		<description>Recent content on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Collecting dumps; under the hood</title>
-			<link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
-			<pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
-			<description>
-			
-				Or how dotnet-dump collect works on Linux
-If you are trying to diagnose the behaviour of a mis-behaving application in production, one …
-			
-			</description>
-		</item>
-		<item>
-			<title>Using .NET with OpenSSL in CentOS Stream 9</title>
-			<link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
-			<description>
-			
-				Or, how to deal with error:0E07607...
-			
-			</description>
-		</item>
-		<item>
-			<title>Why is hash(-1) == hash(-2) in Python?</title>
-			<link>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</link>
-			<pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
-			<description>
-			
-				While browsing Reddit the other day waiting for my code to compile , I ran across this question on r/Python:
- is hash(-1) == hash(-2) an …
-			
-			</description>
-		</item>
-		<item>
-			<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
-			<link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
-			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
-			<description>
-			
-				Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core Symbols on Fedora</title>
-			<link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
-			<description>
-			
-				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
-What are debug …
-			
-			</description>
-		</item>
-		<item>
-			<title>What is this GLIBCXX error?</title>
-			<link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
-			<pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
-			<description>
-			
-				If you use enterprise or stable Linux distributions, sooner or later you will see an error like this:
-app: /lib64/libc.so.6: version …
-			
-			</description>
-		</item>
-		<item>
-			<title>Variables and Environment Variables In Bash</title>
-			<link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
-			<pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
-			<description>
-			
-				Most programming languages make heavy use of ordinary variables. They also (generally) support using environment variables.
-Shells like bash …
-			
-			</description>
-		</item>
-		<item>
-			<title>The magic of file</title>
-			<link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
-			<pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
-			<description>
-			
-				Ever wonder how file(1)1 works?
-After reading this post, you should understand all about file and its underpinnings.
-file Using the file …
-			
-			</description>
-		</item>
-		<item>
-			<title>What is nuget restore doing?</title>
-			<link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
-			<pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
-			<description>
-			
-				Ever wonder what nuget or dotnet restore is doing? What feeds it using? Or what nuget.config it is using to find feeds?
-Turns out you can …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core is now available in Fedora</title>
-			<link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
-			<pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
-			<description>
-			
-				One exciting feature in the recent release of Fedora 32 is the inclusion of .NET Core in the default repositories. This makes Fedora 32 the …
-			
-			</description>
-		</item>
-		<item>
-			<title>Components &amp; Versioning in .NET Core</title>
-			<link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
-			<pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
-			<description>
-			
-				This post covers the versions and components in .NET Core 1.x.
-Components .NET Core consists of multiple components that are each versioned …
-			
-			</description>
-		</item>
-		<item>
-			<title>OpenJDK 9 for Fedora/EPEL</title>
-			<link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
-			<pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
-			<description>
-			
-				Looking to try out OpenJDK 9? If you didn’t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (assuming the pattern for …
-			
-			</description>
-		</item>
-		<item>
-			<title>-Wmisleading-indentation in OpenJDK</title>
-			<link>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
-			<pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
-			<description>
-			
-				Inspired by this post by Mark Wielaard I started wondering how OpenJDK 9 would fare in a -Wmisleading-indentation test. So I built OpenJDK 9 …
-			
-			</description>
-		</item>
-		<item>
-			<title>IcedTea-Web and OpenJDK</title>
-			<link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
-			<pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
-			<description>
-			
-				I posted 3 patches today
-The first patch is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into …
-			
-			</description>
-		</item>
-		<item>
-			<title>OpenJDK6 B29 Released!</title>
-			<link>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</link>
-			<pubDate>Fri, 06 Dec 2013 02:50:16 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</guid>
-			<description>
-			
-				On December 5, 2013, the OpenJDK6 b29 source bundle was published at https://java.net/projects/openjdk6/downloads/ .
-This is a security …
-			
-			</description>
-		</item>
-		<item>
-			<title>OpenJDK6 B28 Released</title>
-			<link>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</link>
-			<pubDate>Fri, 04 Oct 2013 17:51:36 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</guid>
-			<description>
-			
-				On October 4, 2013, the OpenJDK6 b28 source bundle was published at https://java.net/projects/openjdk6/downloads/ .
-This includes all the …
-			
-			</description>
-		</item>
-		<item>
-			<title>Contributing Patches to OpenJDK</title>
-			<link>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</link>
-			<pubDate>Fri, 13 Sep 2013 23:43:03 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</guid>
-			<description>
-			
-				Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute …
-			
-			</description>
-		</item>
-		<item>
-			<title>SharedSecrets in OpenJDK</title>
-			<link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
-			<pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
-			<description>
-			
-				I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that …
-			
-			</description>
-		</item>
-		<item>
-			<title>OpenJDK and Awesome</title>
-			<link>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</link>
-			<pubDate>Wed, 11 Apr 2012 23:08:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</guid>
-			<description>
-			
-				I have been playing around with awesome and ran into some issues with Java programs (apparently others users are running into those problems …
-			
-			</description>
-		</item>
-		<item>
-			<title>IcedTea6 1.11.1 Released!</title>
-			<link>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</link>
-			<pubDate>Tue, 14 Feb 2012 21:46:43 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</guid>
-			<description>
-			
-				A new release of IcedTea6 1.11 branch is now available: 1.11.1 The update contains the following security fixes:
- S7082299, CVE-2011-3571: …
-			
-			</description>
-		</item>
-		<item>
-			<title>IcedTea6 1.11 Released!</title>
-			<link>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</link>
-			<pubDate>Tue, 31 Jan 2012 05:27:50 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</guid>
-			<description>
-			
-				After quite a bit of delay, IcedTea6 1.11 has finally been released!
-Take a look at the release announcement , download icedtea6 1.11 and …
-			
-			</description>
-		</item>
-		<item>
-			<title>IcedTea6 1.11 Branched</title>
-			<link>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</link>
-			<pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
-			<description>
-			
-				I have just branched IcedTea6 1.11 . Please start subjecting this branch to the most vicious tests you have.
-I am planning to release …
-			
-			</description>
-		</item>
-		<item>
-			<title>What IcedTea-Web 1.1 means for you</title>
-			<link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
-			<pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
-			<description>
-			
-				A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If you are a packager or a developer here are some things you need …
-			
-			</description>
-		</item>
-		<item>
-			<title>About</title>
-			<link>https://omairmajid.com/about/</link>
-			<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/about/</guid>
-			<description>
-			
-				Hi, I am Omair Majid.
-I am a Principal Software Engineer at Red Hat who works with open source languages, runtimes and projects like .NET …
-			
-			</description>
-		</item>
-		<item>
-			<title>Projects</title>
-			<link>https://omairmajid.com/projects/</link>
-			<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/projects/</guid>
-			<description>
-			
-				This is a list of projects I am involved with or maintain.
-I maintain some emacs packages:
- csproj-mode : a major mode for working with …
-			
-			</description>
-		</item>
-		<item>
-			<title>Talks</title>
-			<link>https://omairmajid.com/talks/</link>
-			<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/talks/</guid>
-			<description>
-			
-				  .NET Core: Versions and Components , Red Hat Summit, 2017
-  Monitoring Java Application Performance Using Thermostat , Red Hat Summit, …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Omair Majid</title>
+    <link>https://omairmajid.com/</link>
+    <description>Recent content on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
+    <atom:link href="https://omairmajid.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collecting dumps; under the hood</title>
+      <link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
+      <description>&lt;p&gt;Or how &lt;code&gt;dotnet-dump collect&lt;/code&gt; works on Linux&lt;/p&gt;
+&lt;p&gt;If you are trying to diagnose the behaviour of a mis-behaving
+application in production, one option is to use the
+&lt;a href=&#34;https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump&#34;&gt;&lt;code&gt;dotnet-dump&lt;/code&gt;&lt;/a&gt;
+tool to get a memory dump of the application so you can study it
+offline. With a dump, you can get stack traces, look at all the
+threads and even dig through the entire heap offline.&lt;/p&gt;
+&lt;p&gt;But how does &lt;code&gt;dotnet-dump&lt;/code&gt; actually work?&lt;/p&gt;
+&lt;p&gt;This post will try and summarize what I found as I tried digging
+through what &lt;code&gt;dotnet dump collect&lt;/code&gt; does under the hood.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using .NET with OpenSSL in CentOS Stream 9</title>
+      <link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
+      <description>Or, how to deal with error:0E07607...</description>
+    </item>
+    <item>
+      <title>Why is hash(-1) == hash(-2) in Python?</title>
+      <link>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</link>
+      <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-07-16-why-is-hash-in-python/</guid>
+      <description>&lt;p&gt;While &lt;del&gt;browsing Reddit the other day&lt;/del&gt; &lt;a href=&#34;https://xkcd.com/303/&#34;&gt;waiting for my code to
+compile&lt;/a&gt;, I ran across this question on
+r/Python:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.reddit.com/r/Python/comments/oks5km/is_hash_1hash2_an_easter_egg/&#34;&gt;is hash(-1) == hash(-2) an easter egg?&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Wait, is that really true?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;$&lt;/span&gt; python
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Python &lt;span style=&#34;color:#ae81ff&#34;&gt;3.9.6&lt;/span&gt; (default, Jun &lt;span style=&#34;color:#ae81ff&#34;&gt;29&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2021&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;00&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[GCC &lt;span style=&#34;color:#ae81ff&#34;&gt;11.1.1&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;20210531&lt;/span&gt; (Red Hat &lt;span style=&#34;color:#ae81ff&#34;&gt;11.1.1&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)] on linux
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Type &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;help&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;copyright&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;credits&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;license&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; more information&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Yes, it is. How surprising!&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s check some other common hash values:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; hash(&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;All small numbers seem to hash to themselves, except &lt;code&gt;-1&lt;/code&gt;&amp;hellip;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
+      <link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
+      <description>&lt;h1 id=&#34;why-bootstrap&#34;&gt;Why Bootstrap?&lt;/h1&gt;
+&lt;p&gt;Compiling code is supposed to be straightforward: you run a compiler
+over the code and the compiler gives you back an executable program.&lt;/p&gt;
+&lt;p&gt;But what do you do if there&amp;rsquo;s no compiler?&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s the dilemma .NET runs into in Fedora.&lt;/p&gt;
+&lt;p&gt;Every release of .NET (Core) needs a recent version of a .NET (Core)
+SDK that can be used to build it. But that&amp;rsquo;s exactly what&amp;rsquo;s missing
+and what we are trying to build.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core Symbols on Fedora</title>
+      <link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
+      <description>&lt;p&gt;Have you ever tried to debug a .NET application and seen errors saying
+debug information or debug symbols are not available?&lt;/p&gt;
+&lt;p&gt;What are debug symbols? Where are they used? When would you need them?
+How do you get them? This post will try to resolve confusion by
+calling out things you absolutely need to know about them.&lt;/p&gt;
+&lt;h2 id=&#34;what-are-debug-symbols&#34;&gt;What are debug symbols?&lt;/h2&gt;
+&lt;p&gt;Source code contains a lot of information that&amp;rsquo;s not strictly part of
+it&amp;rsquo;s functionality. It contains human readable names, including names
+of types, classes, methods and local variables. It contains lines of
+code in an order that (hopefully!) makes it possible to understand
+what is happening in order.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is this GLIBCXX error?</title>
+      <link>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</link>
+      <pubDate>Wed, 08 Jul 2020 20:06:54 -0400</pubDate>
+      <guid>https://omairmajid.com/posts/2020-07-08-what-is-glibcxx-error/</guid>
+      <description>&lt;p&gt;If you use enterprise or stable Linux distributions, sooner or later
+you will see an error like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;app: /lib64/libc.so.6: version `GLIBC_3.1.45&amp;#39; not found (required by ./app)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Or like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;app: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20&amp;#39; not found (required by ./app)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The application (or library) itself will vary. The path to the &lt;code&gt;libc&lt;/code&gt;
+or &lt;code&gt;libstdc++&lt;/code&gt; might vary too. But the error will always mention that
+a &lt;code&gt;GLIBCXX&lt;/code&gt; or &lt;code&gt;GLIBC&lt;/code&gt; version was not found.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Variables and Environment Variables In Bash</title>
+      <link>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</link>
+      <pubDate>Thu, 25 Jun 2020 00:58:07 -0400</pubDate>
+      <guid>https://omairmajid.com/posts/2020-06-25-variables-and-environment-variables/</guid>
+      <description>&lt;p&gt;Most programming languages make heavy use of ordinary variables. They
+also (generally) support using environment variables.&lt;/p&gt;
+&lt;p&gt;Shells like &lt;code&gt;bash&lt;/code&gt; - also heavily used for writing shell scripts -
+have a slightly different audience in mind than normal programming
+languages. They make heavy use of environment variables. So much so
+that it can sometimes become blurry whether something is a normal
+variable or an environment variable.&lt;/p&gt;
+&lt;p&gt;In this post, I will dig into variables and environment variables in
+shell, particularly &lt;code&gt;bash&lt;/code&gt;, to help you understand how to distinguish
+the two and when to use them.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The magic of file</title>
+      <link>https://omairmajid.com/posts/2020-06-10-magic-of-file/</link>
+      <pubDate>Wed, 10 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-06-10-magic-of-file/</guid>
+      <description>&lt;p&gt;Ever wonder how &lt;code&gt;file(1)&lt;/code&gt;&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; works?&lt;/p&gt;
+&lt;p&gt;After reading this post, you should understand all about &lt;code&gt;file&lt;/code&gt; and
+its underpinnings.&lt;/p&gt;
+&lt;h2 id=&#34;file&#34;&gt;file&lt;/h2&gt;
+&lt;p&gt;Using the &lt;code&gt;file&lt;/code&gt; tool is quite simple. It&amp;rsquo;s just &lt;code&gt;file file-name-1&lt;/code&gt;.
+You can call it with multiple arguments too. Here&amp;rsquo;s a few examples of
+running it on my system.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file document.pdf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;document.pdf: PDF document, version 1.4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file image.jpg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;image.jpg: JPEG image data, Exif standard: &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;TIFF image data, big-endian, direntries&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt; ...orientation&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;upper-left, datetime&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;2019:10:30 21:44:30, width&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;1740&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;, baseline, precision 8, 2017x961, components &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file video.mp4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;video.mp4: ISO Media, MP4 v2 &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ISO 14496-14&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file notes.org
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;notes.org: UTF-8 Unicode text, with very long lines
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ file /dev/video0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/dev/video0: character special &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;81/0&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;You can already see a few things:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is nuget restore doing?</title>
+      <link>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</link>
+      <pubDate>Fri, 29 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-29-what-nuget-sources/</guid>
+      <description>&lt;p&gt;Ever wonder what &lt;code&gt;nuget&lt;/code&gt; or &lt;code&gt;dotnet restore&lt;/code&gt; is doing? What feeds it
+using? Or what &lt;code&gt;nuget.config&lt;/code&gt; it is using to find feeds?&lt;/p&gt;
+&lt;p&gt;Turns out you can find out what nuget-related information &lt;code&gt;dotnet restore&lt;/code&gt; by looking at the logs.&lt;/p&gt;
+&lt;p&gt;Generally, &lt;code&gt;dotnet restore&lt;/code&gt; is succinct. Restoring a &lt;code&gt;HelloWorld&lt;/code&gt;
+project gives us little information about what&amp;rsquo;s going on:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet new console --no-restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;The template &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Console Application&amp;#34;&lt;/span&gt; was created successfully.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ dotnet restore
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Restore completed in 72.1 ms &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; /home/omajid/cliche/dotnet/HelloWorld/HelloWorld.csproj.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If we add a &lt;code&gt;nuget.config&lt;/code&gt; file, we still see little information. Not
+even enough to know if it&amp;rsquo;s even being used:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core is now available in Fedora</title>
+      <link>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</link>
+      <pubDate>Thu, 28 May 2020 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-05-28-dotnet-in-fedora/</guid>
+      <description>&lt;p&gt;One exciting feature in the recent release of Fedora 32 is the
+inclusion of .NET Core in the default repositories. This makes Fedora
+32 the first community Linux distribution with .NET Core available out
+of the box!&lt;/p&gt;
+&lt;p&gt;In this post, lets take a quick look at using .NET Core on Fedora 32.
+We will cover installing .NET Core packages and building a container
+image. All using software only from Fedora!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Components &amp; Versioning in .NET Core</title>
+      <link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
+      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
+      <description>&lt;p&gt;This post covers the versions and components in .NET Core 1.x.&lt;/p&gt;
+&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
+&lt;p&gt;.NET Core consists of multiple components that are each versioned
+independently and can often be mixed and matched.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;Shared Framework&lt;/strong&gt; contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.
+&lt;ul&gt;
+&lt;li&gt;The current .NET Core Virtual Machine is called &lt;strong&gt;CoreCLR&lt;/strong&gt;. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector. The complete source code for CoreCLR is available at &lt;a href=&#34;https://github.com/dotnet/coreclr&#34;&gt;https://github.com/dotnet/coreclr&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The .NET Core standard APIs are implemented in &lt;strong&gt;CoreFX&lt;/strong&gt;. This provides implementations of all your favourite APIs such as &lt;code&gt;System.Runtime&lt;/code&gt;, &lt;code&gt;System.Theading&lt;/code&gt; and so on. The source code for CoreFX is available at &lt;a href=&#34;https://github.com/dotnet/corefx&#34;&gt;https://github.com/dotnet/corefx&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;Host&lt;/strong&gt; is also sometimes called the &lt;em&gt;muxer&lt;/em&gt; or &lt;em&gt;driver&lt;/em&gt;. This components represents the &lt;code&gt;dotnet&lt;/code&gt; command and is responsible for deciding what happens next. The source for this is available at &lt;a href=&#34;https://github.com/dotnet/core-setup&#34;&gt;https://github.com/dotnet/core-setup&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;SDK&lt;/strong&gt; consists of the various tools (&lt;code&gt;dotnet&lt;/code&gt; subcommands) and their implementations that deal with building code. This includes handling the restoring of dependencies, compiling code, building binaries, producing packages and publishing standalone or framework dependent packages. The SDK itself consists of the &lt;em&gt;CLI&lt;/em&gt; , which handles command line operations (at &lt;a href=&#34;https://github.com/dotnet/cli&#34;&gt;https://github.com/dotnet/cli&lt;/a&gt;) and various subprojects that implement the various operations the CLI needs to do.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;versions&#34;&gt;Versions&lt;/h2&gt;
+&lt;p&gt;Each of the components listed above are versioned separately. You can find out
+the version of each of those components.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenJDK 9 for Fedora/EPEL</title>
+      <link>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</link>
+      <pubDate>Tue, 04 Oct 2016 23:35:09 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2016-10-04-openjdk-9-for-fedoraepel/</guid>
+      <description>&lt;p&gt;Looking to try out OpenJDK 9? If you didn&amp;rsquo;t know, OpenJDK 9 is going to be the reference implemtation for Java 9 (assuming the pattern for Java 7 and Java 8 continues). Pre-release packages for Fedora 23, 24, 25 and Rawhide as well as RHEL 7 are &lt;a href=&#34;https://copr.fedoraproject.org/coprs/omajid/openjdk9/&#34;&gt;available on copr&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://copr.fedoraproject.org/coprs/omajid/openjdk9/&#34;&gt;https://copr.fedoraproject.org/coprs/omajid/openjdk9/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Please note that these are not official Fedora (or RHEL) packages. Official
+Fedora packages will be proposed and added to Fedora closer to OpenJDK 9&amp;rsquo;s
+release.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>-Wmisleading-indentation in OpenJDK</title>
+      <link>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</link>
+      <pubDate>Mon, 29 Feb 2016 15:21:27 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2016-02-29-wmisleading-indentation-in-openjdk/</guid>
+      <description>&lt;p&gt;Inspired by &lt;a href=&#34;https://gnu.wildebeest.org/blog/mjw/2016/01/09/looking-forward-to-gcc6-nice-new-warnings/&#34;&gt;this post by Mark Wielaard&lt;/a&gt; I started wondering how OpenJDK 9 would fare in a &lt;code&gt;-Wmisleading-indentation&lt;/code&gt; test. So I built OpenJDK 9 using &lt;code&gt;-Wall&lt;/code&gt; to find out.&lt;/p&gt;
+&lt;p&gt;First, though, a big heads up: the OpenJDK 9 build selectively enables and
+disables warnings and turns on &lt;code&gt;-Werorr&lt;/code&gt;. There doesn&amp;rsquo;t seem to be a straight-
+forward way of enabling all compiler warnings everywhere. I ended up patching
+various makefiles to comment out various &lt;code&gt;DISABLED_WARNINGS* f&lt;/code&gt;lags. Hotspot
+needed a separate patch to initialize &lt;code&gt;WARNING_FLAGS&lt;/code&gt; with &lt;code&gt;-Wall&lt;/code&gt; in
+&lt;code&gt;hotspot/make/linux/makefiles/gcc.make&lt;/code&gt;. Then I built OpenJDK 9 using:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>IcedTea-Web and OpenJDK</title>
+      <link>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</link>
+      <pubDate>Fri, 24 Jan 2014 00:29:36 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2014-01-23-icedtea-web-and-openjdk/</guid>
+      <description>&lt;p&gt;I posted 3 patches today&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/jdk9-dev/2014-January/000320.html&#34;&gt;first patch&lt;/a&gt; is for OpenJDK 9. It creates a hole that allows alternative plugin implementations to plug into (pardon the pun) OpenJDK and make use of existing plugin-specific classes in OpenJDK.&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2014-January/025972.html&#34;&gt;second&lt;/a&gt; and &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2014-January/025993.html&#34;&gt;third&lt;/a&gt; patches are for IcedTea-Web. They allow IcedTea-Web to (progressively) build against OpenJDK8 and OpenJDK9.&lt;/p&gt;
+&lt;p&gt;What does this mean? Soon we might actually be able to build and run IcedTea-
+Web against OpenJDK. Yes, an Open Source/Free Software plugin running on top
+of OpenJDK (without any custom patches). Of course, a lot of this is still up
+in the air. The OpenJDK folks might not accept the patch, though I am hopeful
+they will - it&amp;rsquo;s very small and conservative.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenJDK6 B29 Released!</title>
+      <link>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</link>
+      <pubDate>Fri, 06 Dec 2013 02:50:16 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2013-12-05-openjdk6-b29-released/</guid>
+      <description>&lt;p&gt;On December 5, 2013, the &lt;a href=&#34;https://java.net/projects/openjdk6/downloads/download/openjdk-6-src-b29-05_dec_2013.tar.gz&#34; title=&#34;OpenJDK6 b29&#34;&gt;OpenJDK6 b29 source bundle&lt;/a&gt; was published at &lt;a href=&#34;https://java.net/projects/openjdk6/downloads/&#34;&gt;https://java.net/projects/openjdk6/downloads/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is a security bugfix release that includes all the security patches since the b28 release. A &lt;a href=&#34;https://openjdk6.java.net/OpenJDK6-B29-Changes.html&#34;&gt;complete list of changes is available&lt;/a&gt; too.&lt;/p&gt;
+&lt;p&gt;The test results were not ideal.&lt;/p&gt;
+&lt;p&gt;The TCK failed, with all issues again basically boiling down to limited cryptography support. There are &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/security-dev/2008-August/000283.html&#34;&gt;patches available to fix this&lt;/a&gt;. As far as I can tell this is not a regression.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenJDK6 B28 Released</title>
+      <link>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</link>
+      <pubDate>Fri, 04 Oct 2013 17:51:36 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2013-10-04-openjdk6-b28-released/</guid>
+      <description>&lt;p&gt;On October 4, 2013, the &lt;a href=&#34;https://java.net/projects/openjdk6/downloads/download/openjdk-6-src-b28-04_oct_2013.tar.gz&#34; title=&#34;OpenJDK6 b28&#34;&gt;OpenJDK6 b28 source bundle&lt;/a&gt; was published at &lt;a href=&#34;https://java.net/projects/openjdk6/downloads/&#34;&gt;https://java.net/projects/openjdk6/downloads/&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This includes all the security patches since the b27 release as well as &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/jdk6-dev/2013-September/003039.html&#34;&gt;a major version bump in hotspot to hs23&lt;/a&gt;. A &lt;a href=&#34;https://openjdk6.java.net/OpenJDK6-B28-Changes.html&#34;&gt;complete list of changes is available&lt;/a&gt; too.&lt;/p&gt;
+&lt;p&gt;The test results were not ideal.&lt;/p&gt;
+&lt;p&gt;The TCK failed, with all issues basically boiling down to limited cryptography support. There are &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/security-dev/2008-August/000283.html&#34;&gt;patches available to fix this&lt;/a&gt;. As far as I can tell this is not a regression.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Contributing Patches to OpenJDK</title>
+      <link>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</link>
+      <pubDate>Fri, 13 Sep 2013 23:43:03 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/</guid>
+      <description>&lt;p&gt;Someone asked me earlier today about how to contribute patches to OpenJDK.
+OpenJDK is probably not the easiest upstream to contribute patches to - their
+patch approval system is a little different from most other projects. I have
+tried to summarize the basic steps here. Let me know in comments if anything
+is not clear.&lt;/p&gt;
+&lt;p&gt;The OpenJDK &lt;a href=&#34;http://openjdk.java.net/guide/&#34; title=&#34;The OpenJDK Developer&#39;s Guide&#34;&gt;Developer&amp;rsquo;s Guide&lt;/a&gt; covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SharedSecrets in OpenJDK</title>
+      <link>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</link>
+      <pubDate>Fri, 22 Jun 2012 23:10:03 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2012-06-22-sharedsecrets-in-openjdk/</guid>
+      <description>&lt;p&gt;I have always been impressed by the effort OpenJDK folks go to maintain API compatibility. I recently came across a nifty little trick that is used in the OpenJDK codebase to help achieve this goal. Behold the &lt;a href=&#34;http://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/sun/misc/SharedSecrets.java&#34; title=&#34;Code for sun.misc.SharedSecets&#34;&gt;SharedSecrets&lt;/a&gt; class! The name of the class is a little misleading since it doesn&amp;rsquo;t have anything to do with the cryptographic concepts of shared secrets. The javadocs do a (slightly) better job describing its purpose:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>OpenJDK and Awesome</title>
+      <link>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</link>
+      <pubDate>Wed, 11 Apr 2012 23:08:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2012-04-11-openjdk-and-awesome/</guid>
+      <description>&lt;p&gt;I have been playing around with &lt;a href=&#34;http://awesome.naquadah.org/&#34; title=&#34;awesome&#34;&gt;awesome&lt;/a&gt; and ran into some issues with Java programs (apparently &lt;a href=&#34;http://awesome.naquadah.org/wiki/Problems_with_Java&#34;&gt;others users are running into those problems too&lt;/a&gt;). I hacked together a patch against &lt;a href=&#34;http://hg.openjdk.java.net/jdk7u/jdk7u-dev/jdk&#34; title=&#34;jdk7u-dev/jdk&#34;&gt;OpenJDK7&lt;/a&gt; that seems to solve all my issues:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-diff&#34; data-lang=&#34;diff&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;diff --git a/src/solaris/classes/sun/awt/X11/XWM.java b/src/solaris/classes/sun/awt/X11/XWM.java
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;--- a/src/solaris/classes/sun/awt/X11/XWM.java
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+++ b/src/solaris/classes/sun/awt/X11/XWM.java
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;@@ -102,7 +102,8 @@
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         METACITY_WM = 11,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         COMPIZ_WM = 12,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         LG3D_WM = 13,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-        CWM_WM = 14;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+        CWM_WM = 14,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+        AWESOME_WM = 15;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     public String toString() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         switch  (WMID) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           case NO_WM:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;@@ -131,6 +132,8 @@
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;               return &amp;#34;LookingGlass&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           case CWM_WM:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;               return &amp;#34;CWM&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+          case AWESOME_WM:
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+              return &amp;#34;awesomewm&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           case UNDETERMINED_WM:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           default:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;               return &amp;#34;Undetermined WM&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;@@ -573,8 +576,12 @@
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; //                            getIntProperty(XToolkit.getDefaultRootWindow(), XAtom.XA_CARDINAL)) == 0);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+    static boolean isAwesomeWM() {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+        return isNetWMName(&amp;#34;awesome&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+    }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     static boolean isNonReparentingWM() {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-        return (XWM.getWMID() == XWM.COMPIZ_WM || XWM.getWMID() == XWM.LG3D_WM || XWM.getWMID() == XWM.CWM_WM);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+        return (XWM.getWMID() == XWM.COMPIZ_WM || XWM.getWMID() == XWM.LG3D_WM || XWM.getWMID() == XWM.CWM_WM || XWM.getWMID() == XWM.AWESOME_WM);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     /*
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;@@ -754,6 +761,8 @@
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 awt_wmgr = CWM_WM;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             } else if (doIsIceWM &amp;amp;&amp;amp; isIceWM()) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 awt_wmgr = XWM.ICE_WM;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+            } else if (isAwesomeWM()) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;+                awt_wmgr = XWM.AWESOME_WM;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             /*
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              * We don&amp;#39;t check for legacy WM when we already know that WM
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Given the &lt;a href=&#34;http://thread.gmane.org/gmane.comp.java.openjdk.awt.devel/1698&#34; title=&#34;path review thread&#34;&gt;effort it&amp;rsquo;s taking to push a fix for mutter&lt;/a&gt; (the default gnome3 window manager), I wouldnt hold my breath waiting for this code to make it upstream.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>IcedTea6 1.11.1 Released!</title>
+      <link>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</link>
+      <pubDate>Tue, 14 Feb 2012 21:46:43 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2012-02-14-icedtea6-1-11-1-released/</guid>
+      <description>&lt;p&gt;A new release of IcedTea6 1.11 branch is now available: &lt;a href=&#34;http://icedtea.classpath.org/download/source/icedtea6-1.11.1.tar.gz&#34;&gt;1.11.1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The update contains the following security fixes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;S7082299, CVE-2011-3571: Fix in AtomicReferenceArray&lt;/li&gt;
+&lt;li&gt;S7088367, CVE-2011-3563: Fix issues in java sound&lt;/li&gt;
+&lt;li&gt;S7110683, CVE-2012-0502: Issues with some KeyboardFocusManager method&lt;/li&gt;
+&lt;li&gt;S7110687, CVE-2012-0503: Issues with TimeZone class&lt;/li&gt;
+&lt;li&gt;S7110700, CVE-2012-0505: Enhance exception throwing mechanism in ObjectStreamClass&lt;/li&gt;
+&lt;li&gt;S7110704, CVE-2012-0506: Issues with some method in corba&lt;/li&gt;
+&lt;li&gt;S7112642, CVE-2012-0497: Incorrect checking for graphics rendering object&lt;/li&gt;
+&lt;li&gt;S7118283, CVE-2012-0501: Better input parameter checking in zip file processing&lt;/li&gt;
+&lt;li&gt;S7126960, CVE-2011-5035: (httpserver) Add property to limit number of request headers to the HTTP Server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This release also contains the following additional fix:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>IcedTea6 1.11 Released!</title>
+      <link>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</link>
+      <pubDate>Tue, 31 Jan 2012 05:27:50 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2012-01-31-icedtea6-1-11-released/</guid>
+      <description>&lt;p&gt;After quite a bit of delay, IcedTea6 1.11 has finally been released!&lt;/p&gt;
+&lt;p&gt;Take a look at the &lt;a href=&#34;http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2012-January/017060.html&#34; title=&#34;IcedTea6 1.11 Released!&#34;&gt;release announcement&lt;/a&gt;, &lt;a href=&#34;http://icedtea.classpath.org/download/source/icedtea6-1.11.tar.gz&#34; title=&#34;icedtea6-1.11.tar.gz&#34;&gt;download icedtea6 1.11&lt;/a&gt; and &lt;a href=&#34;http://icedtea.classpath.org/hg/release/icedtea6-1.11/raw-file/746c78997ad9/INSTALL&#34; title=&#34;Build Instructions&#34;&gt;build it&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Onwards to IcedTea6 1.12!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>IcedTea6 1.11 Branched</title>
+      <link>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</link>
+      <pubDate>Fri, 06 Jan 2012 22:19:56 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2012-01-06-icedtea6-1-11-branched/</guid>
+      <description>&lt;p&gt;I have just branched &lt;a href=&#34;http://icedtea.classpath.org/hg/release/icedtea6-1.11/&#34;&gt;IcedTea6 1.11&lt;/a&gt;. Please start subjecting this branch to the most vicious tests you have.&lt;/p&gt;
+&lt;p&gt;I am planning to release IcedTea6 1.11 on Wednesday 2012-01-18, unless major problems are discovered. As always, a list of new features in this release can be found in the &lt;a href=&#34;http://icedtea.classpath.org/hg/release/icedtea6-1.11/file/tip/NEWS&#34;&gt;NEWS file&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Only bugfixes are likely to be accepted for the branch. Please try to minimize
+changes and hold off any build-system related changes unless they are
+absolutely necessary.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What IcedTea-Web 1.1 means for you</title>
+      <link>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</link>
+      <pubDate>Tue, 23 Aug 2011 18:34:41 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2011-08-23-icedtea-web-1-1-for-developers-and-packagers/</guid>
+      <description>&lt;p&gt;A number of changes occurred between IcedTea-Web 1.0 and IcedTea-Web 1.1. If
+you are a packager or a developer here are some things you need to know.&lt;/p&gt;
+&lt;h2 id=&#34;are-you-a-packager&#34;&gt;Are you a packager?&lt;/h2&gt;
+&lt;p&gt;IcedTea-Web 1.1 can be installed into a regular prefix (&lt;code&gt;/usr/&lt;/code&gt; or
+&lt;code&gt;/usr/local/&lt;/code&gt; or anything else). Unlike IcedTea-Web 1.0, you do not need to
+install IcedTea-Web into a JDK or JRE directory. IcedTea-Web uses a JDK to
+build itself (specified using &lt;code&gt;--with-jdk-home&lt;/code&gt;). IcedTea-Web will use the JDK
+it was compiled against to run. The launchers (&lt;code&gt;javaws&lt;/code&gt; and &lt;code&gt;itweb-settings&lt;/code&gt;)
+are now shell scripts and can be customized as needed.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>About</title>
+      <link>https://omairmajid.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/about/</guid>
+      <description>&lt;p&gt;Hi, I am Omair Majid.&lt;/p&gt;
+&lt;p&gt;I am a Principal Software Engineer at Red Hat who works with open
+source languages, runtimes and projects like &lt;a href=&#34;https://github.com/dotnet/core&#34;&gt;.NET
+Core&lt;/a&gt; and
+&lt;a href=&#34;http://openjdk.java.net/&#34;&gt;OpenJDK&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I am passionate about making sure these runtimes are well-maintained,
+secure, perform well, and stay compatible with the rest of the
+ecosystem on Linux, whether it&amp;rsquo;s in the context of containers running
+in the cloud (such as Kubernetes and OpenShift) or bare-metal.&lt;/p&gt;
+&lt;p&gt;I am a package maintainer in &lt;a href=&#34;http://www.fedoraproject.org&#34;&gt;Fedora&lt;/a&gt;. I
+am also a member of the &lt;a href=&#34;https://fedoraproject.org/wiki/SIGs/DotNet&#34;&gt;Fedora .NET Special Interest Group
+(SIG)&lt;/a&gt;; I maintain .NET
+Core packages in Fedora as part of the SIG. I am also the current
+maintainer of some packages in &lt;a href=&#34;http://www.redhat.com/rhel/&#34;&gt;Red Hat Enterprise
+Linux&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>https://omairmajid.com/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/projects/</guid>
+      <description>&lt;p&gt;This is a list of projects I am involved with or maintain.&lt;/p&gt;
+&lt;p&gt;I maintain some emacs packages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/omajid/csproj-mode&#34;&gt;csproj-mode&lt;/a&gt;: a major mode
+for working with &lt;code&gt;.csproj&lt;/code&gt; and other .NET project types.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Talks</title>
+      <link>https://omairmajid.com/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/talks/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=FnlSBBEqACM&#34;&gt;.NET Core: Versions and
+Components&lt;/a&gt;, Red Hat
+Summit, 2017&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=dRe0A1smpyM&#34;&gt;Monitoring Java Application Performance Using
+Thermostat&lt;/a&gt;, Red Hat
+Summit, 2017&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=JOrwMm2Y7Rc&#34;&gt;Analyzing Java Applications Using
+Thermostat&lt;/a&gt;, DevNation/Red Hat
+Summit, 2016&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=jwCc9yIufvQ&#34;&gt;Analyzing Java Applications using
+Thermostat&lt;/a&gt;, FSOSS, 2015&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=CxuR1tBHR_o&#34;&gt;Diagnosing Performance Issues with
+Thermostat&lt;/a&gt;, Java One, 2015&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=CxuR1tBHR_o&#34;&gt;Java Performance Monitoring
+Tools&lt;/a&gt;, Toronto Java
+Users Group, 2013&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+  </channel>
 </rss>

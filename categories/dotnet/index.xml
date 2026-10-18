@@ -1,79 +1,92 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>dotnet on Omair Majid</title>
-		<link>https://omairmajid.com/categories/dotnet/</link>
-		<description>Recent content in dotnet on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/categories/dotnet/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>Collecting dumps; under the hood</title>
-			<link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
-			<pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
-			<description>
-			
-				Or how dotnet-dump collect works on Linux
-If you are trying to diagnose the behaviour of a mis-behaving application in production, one …
-			
-			</description>
-		</item>
-		<item>
-			<title>Using .NET with OpenSSL in CentOS Stream 9</title>
-			<link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
-			<pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
-			<description>
-			
-				Or, how to deal with error:0E07607...
-			
-			</description>
-		</item>
-		<item>
-			<title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
-			<link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
-			<pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
-			<description>
-			
-				Why Bootstrap? Compiling code is supposed to be straightforward: you run a compiler over the code and the compiler gives you back an …
-			
-			</description>
-		</item>
-		<item>
-			<title>.NET Core Symbols on Fedora</title>
-			<link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
-			<description>
-			
-				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
-What are debug …
-			
-			</description>
-		</item>
-		<item>
-			<title>Components &amp; Versioning in .NET Core</title>
-			<link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
-			<pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
-			<description>
-			
-				This post covers the versions and components in .NET Core 1.x.
-Components .NET Core consists of multiple components that are each versioned …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Dotnet on Omair Majid</title>
+    <link>https://omairmajid.com/categories/dotnet/</link>
+    <description>Recent content in Dotnet on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Sun, 05 Mar 2023 01:32:23 -0500</lastBuildDate>
+    <atom:link href="https://omairmajid.com/categories/dotnet/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Collecting dumps; under the hood</title>
+      <link>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</link>
+      <pubDate>Sun, 05 Mar 2023 01:32:23 -0500</pubDate>
+      <guid>https://omairmajid.com/posts/2023-03-05-collecting-dumps-under-the-hood/</guid>
+      <description>&lt;p&gt;Or how &lt;code&gt;dotnet-dump collect&lt;/code&gt; works on Linux&lt;/p&gt;
+&lt;p&gt;If you are trying to diagnose the behaviour of a mis-behaving
+application in production, one option is to use the
+&lt;a href=&#34;https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump&#34;&gt;&lt;code&gt;dotnet-dump&lt;/code&gt;&lt;/a&gt;
+tool to get a memory dump of the application so you can study it
+offline. With a dump, you can get stack traces, look at all the
+threads and even dig through the entire heap offline.&lt;/p&gt;
+&lt;p&gt;But how does &lt;code&gt;dotnet-dump&lt;/code&gt; actually work?&lt;/p&gt;
+&lt;p&gt;This post will try and summarize what I found as I tried digging
+through what &lt;code&gt;dotnet dump collect&lt;/code&gt; does under the hood.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using .NET with OpenSSL in CentOS Stream 9</title>
+      <link>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</link>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-08-25-using-.net-in-centos-stream-9/</guid>
+      <description>Or, how to deal with error:0E07607...</description>
+    </item>
+    <item>
+      <title>Build .NET and avoid prebuilts: Bootstrapping .NET in Fedora</title>
+      <link>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2021-04-09-bootstrapping-.net-on-fedora/</guid>
+      <description>&lt;h1 id=&#34;why-bootstrap&#34;&gt;Why Bootstrap?&lt;/h1&gt;
+&lt;p&gt;Compiling code is supposed to be straightforward: you run a compiler
+over the code and the compiler gives you back an executable program.&lt;/p&gt;
+&lt;p&gt;But what do you do if there&amp;rsquo;s no compiler?&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s the dilemma .NET runs into in Fedora.&lt;/p&gt;
+&lt;p&gt;Every release of .NET (Core) needs a recent version of a .NET (Core)
+SDK that can be used to build it. But that&amp;rsquo;s exactly what&amp;rsquo;s missing
+and what we are trying to build.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>.NET Core Symbols on Fedora</title>
+      <link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
+      <description>&lt;p&gt;Have you ever tried to debug a .NET application and seen errors saying
+debug information or debug symbols are not available?&lt;/p&gt;
+&lt;p&gt;What are debug symbols? Where are they used? When would you need them?
+How do you get them? This post will try to resolve confusion by
+calling out things you absolutely need to know about them.&lt;/p&gt;
+&lt;h2 id=&#34;what-are-debug-symbols&#34;&gt;What are debug symbols?&lt;/h2&gt;
+&lt;p&gt;Source code contains a lot of information that&amp;rsquo;s not strictly part of
+it&amp;rsquo;s functionality. It contains human readable names, including names
+of types, classes, methods and local variables. It contains lines of
+code in an order that (hopefully!) makes it possible to understand
+what is happening in order.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Components &amp; Versioning in .NET Core</title>
+      <link>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</link>
+      <pubDate>Thu, 30 Mar 2017 22:14:31 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2017-03-30-components-versioning-in-net-core/</guid>
+      <description>&lt;p&gt;This post covers the versions and components in .NET Core 1.x.&lt;/p&gt;
+&lt;h2 id=&#34;components&#34;&gt;Components&lt;/h2&gt;
+&lt;p&gt;.NET Core consists of multiple components that are each versioned
+independently and can often be mixed and matched.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;Shared Framework&lt;/strong&gt; contains the APIs and the Virtual Machine and other runtime services needed for running .NET Core applications.
+&lt;ul&gt;
+&lt;li&gt;The current .NET Core Virtual Machine is called &lt;strong&gt;CoreCLR&lt;/strong&gt;. This executes the .NET bytecode by compiling it JIT and provides various runtime services including a garbage collector. The complete source code for CoreCLR is available at &lt;a href=&#34;https://github.com/dotnet/coreclr&#34;&gt;https://github.com/dotnet/coreclr&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The .NET Core standard APIs are implemented in &lt;strong&gt;CoreFX&lt;/strong&gt;. This provides implementations of all your favourite APIs such as &lt;code&gt;System.Runtime&lt;/code&gt;, &lt;code&gt;System.Theading&lt;/code&gt; and so on. The source code for CoreFX is available at &lt;a href=&#34;https://github.com/dotnet/corefx&#34;&gt;https://github.com/dotnet/corefx&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;Host&lt;/strong&gt; is also sometimes called the &lt;em&gt;muxer&lt;/em&gt; or &lt;em&gt;driver&lt;/em&gt;. This components represents the &lt;code&gt;dotnet&lt;/code&gt; command and is responsible for deciding what happens next. The source for this is available at &lt;a href=&#34;https://github.com/dotnet/core-setup&#34;&gt;https://github.com/dotnet/core-setup&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;SDK&lt;/strong&gt; consists of the various tools (&lt;code&gt;dotnet&lt;/code&gt; subcommands) and their implementations that deal with building code. This includes handling the restoring of dependencies, compiling code, building binaries, producing packages and publishing standalone or framework dependent packages. The SDK itself consists of the &lt;em&gt;CLI&lt;/em&gt; , which handles command line operations (at &lt;a href=&#34;https://github.com/dotnet/cli&#34;&gt;https://github.com/dotnet/cli&lt;/a&gt;) and various subprojects that implement the various operations the CLI needs to do.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;versions&#34;&gt;Versions&lt;/h2&gt;
+&lt;p&gt;Each of the components listed above are versioned separately. You can find out
+the version of each of those components.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>

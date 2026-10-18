@@ -1,114 +1,232 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content=".NET Core Symbols on Fedora">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="keywords" content="dotnet,fedora,debugging"><meta name="description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
-What are debug …"><meta property="og:title" content=".NET Core Symbols on Fedora" />
-<meta property="og:description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>.NET Core Symbols on Fedora | Omair Majid</title>
+<meta name="keywords" content="dotnet, fedora, debugging">
+<meta name="description" content="Have you ever tried to debug a .NET application and seen errors saying
+debug information or debug symbols are not available?
+What are debug symbols? Where are they used? When would you need them?
+How do you get them? This post will try to resolve confusion by
+calling out things you absolutely need to know about them.
+What are debug symbols?
+Source code contains a lot of information that&rsquo;s not strictly part of
+it&rsquo;s functionality. It contains human readable names, including names
+of types, classes, methods and local variables. It contains lines of
+code in an order that (hopefully!) makes it possible to understand
+what is happening in order.">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content=".NET Core Symbols on Fedora">
+  <meta property="og:description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
 What are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.
-What are debug symbols? Source code contains a lot of information that&rsquo;s not strictly part of it&rsquo;s functionality." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-08-05T00:00:00+00:00" />
-<meta property="article:modified_time" content="2020-08-05T00:00:00+00:00" />
+What are debug symbols? Source code contains a lot of information that’s not strictly part of it’s functionality. It contains human readable names, including names of types, classes, methods and local variables. It contains lines of code in an order that (hopefully!) makes it possible to understand what is happening in order.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-08-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2020-08-05T00:00:00+00:00">
+    <meta property="article:tag" content="Dotnet">
+    <meta property="article:tag" content="Fedora">
+    <meta property="article:tag" content="Debugging">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=".NET Core Symbols on Fedora"/>
-<meta name="twitter:description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content=".NET Core Symbols on Fedora">
+  <meta name="twitter:description" content="Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
 What are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.
-What are debug symbols? Source code contains a lot of information that&rsquo;s not strictly part of it&rsquo;s functionality."/>
-
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>.NET Core Symbols on Fedora | Omair Majid</title>
+What are debug symbols? Source code contains a lot of information that’s not strictly part of it’s functionality. It contains human readable names, including names of types, classes, methods and local variables. It contains lines of code in an order that (hopefully!) makes it possible to understand what is happening in order.">
 
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": ".NET Core Symbols on Fedora",
+      "item": "https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": ".NET Core Symbols on Fedora",
+  "name": ".NET Core Symbols on Fedora",
+  "description": "Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?\nWhat are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.\nWhat are debug symbols? Source code contains a lot of information that\u0026rsquo;s not strictly part of it\u0026rsquo;s functionality. It contains human readable names, including names of types, classes, methods and local variables. It contains lines of code in an order that (hopefully!) makes it possible to understand what is happening in order.\n",
+  "keywords": [
+    "dotnet", "fedora", "debugging"
+  ],
+  "articleBody": "Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?\nWhat are debug symbols? Where are they used? When would you need them? How do you get them? This post will try to resolve confusion by calling out things you absolutely need to know about them.\nWhat are debug symbols? Source code contains a lot of information that’s not strictly part of it’s functionality. It contains human readable names, including names of types, classes, methods and local variables. It contains lines of code in an order that (hopefully!) makes it possible to understand what is happening in order.\nGenerally, a good optimizing compiler will remove things that are not strictly related to the functionality to produce efficient code. It may remove local variables (but keep their effects). It may perform some computations in advance at compile time to remove the amount of work needed at runtime. It may re-order operations and computations to produce more efficient code.\nWhen you are debugging your code through a debugger you want to see those local variables, their names and values. You want the additional context like line numbers. Consider this: things like “step through one line of code” become meaningless if the compiler has removed the concept of a “line” entirely from the optimized binary.\nDebug symbols try and produce the best of both worlds: you get the optimized code but also keep much of the information in the original source code to make it easier to debug your application.\nIf you are looking to debug a .NET Core application or trace performance, you will want to make use of debug symbols.\nDebug symbols are also referred to as “debuginfo”, “debug info” or just “symbols”, depending on the platform, language and tools. They contain information used to make it possible to debug compiled and optimized code. Some pieces of information that are present in the debug symbols:\nNames of things that are not required to be visible for correct runtime behaviour, such as names of local variables.\nLine number information, including the line number in the original source code a particular computation happens in.\nFunctions/methods that are executing that might have actually been in-lined into the method.\nEach language, runtime or platform may have its own way of generating and storing debug symbols. Each application, library and binary can have its own debug symbols.\nFor example, if you are writing an application in C# that runs on top of .NET Core running on top of Linux, multiple sets of debug symbols are in play. Your application has its own debug symbols. And .NET Core also has its own debug symbols. .NET Core runs on top of the C runtime on Linux; the C runtime also has its own debug symbols.\nFor C# code, debug symbols are generated by the compiler (Roslyn) and stored in .pdb (“Program Database”) files. Tools like Visual Studio Code can use these debug symbols to step through framework implementation code.\nFor C and C++ code, the symbols vary by platform.\nBinaries generated from C code on Windows also use .pdb files for storing debug symbols.\nBinaries on Linux, generated by compilers like gcc and clang, use the DWARF format for symbols. These can be embedded in the binary or kept in separate .debug files. Tools like gdb and lldb can load these symbols (automatically or manually, depending on how you have installed the SDK and symbols) and let you use them to step through code and debug it.\nTools like file can tell you whether a binary has embedded debug symbols or not:\n$ file /usr/bin/file /usr/bin/file: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e7df66a91efb28e483449a77221cb4242620541c, for GNU/Linux 3.2.0, stripped The last word in the output, stripped, indicates that the debug information has been remove from this binary.\nIt’s important to note that debug symbols are unique for each binary. Two binaries will not have the same debug symbols unless they were compiled using the exact same sources by the exact same compilers with the exact same set of dependencies.\nHow to generate debug symbols for your own applications or libraries? Most compilers, runtimes, and platforms support some way of generating these debug symbols. Some even generate these symbols by default, but most generate them only when explicitly asked to.\nC/C++ compilers, such as gcc and clang, support using the -g flag to produce debug symbols. This debug information is embedded in the generated binaries. Tools like objcopy and strip can be used to extract them into a separate file.\n.NET Core generates debug symbols by default. You can turn it off using the DebugSymbols and DebugType msbuild properties.\nYou can put that in your .csproj file:\nfalse None Or set that through the command line:\n$ dotnet publish -p:DebugSymbols=false -p:DebugType=None However, unless turned off, you will see .pdb files being built and published along with the rest of your application whenever you do dotnet build or dotnet publish.\nWhat symbols are available for .NET Core itself? .NET Core is itself an application too. Like other applications and libraries, .NET Core also has its own debug symbols.\nWith these symbols, you can debug and/or profile the code in the runtime and the framework libraries itself.\n.NET Core has both managed and unmanaged (aka native) code. In fact, it includes code compiled by (at least) two different compilers - the C/C++ compiler that compiles the CLR and the low-level runtime as well as the C# compiler that compiles the core framework libraries and the rest of the framework written in C#.\nBoth these compilers generate different types of debug symbols. We have to use and deal with managed and unmanaged debug symbols separately.\nWhere to get symbols for .NET Core? The debug symbols are unique for each build of .NET Core. And they also differ between each release of .NET Core.\nThe process for getting the symbols really depends on where you got your .NET Core SDK and/or Runtime.\n.NET Core from Microsoft If you have downloaded the .NET Core SDK and/or Runtime from Microsoft, you can use the dotnet symbol tool to get symbol packages:\n$ dotnet tool install -g dotnet-symbol $ dotnet symbol /usr/share/dotnet/dotnet This dotnet symbol tool uses the Microsoft symbol server. The Microsoft symbol server includes a copy of (hopefully) all the symbol packages that Microsoft has ever built for .NET Core releases.\nThe tool simply asks the symbol server to download the symbol package for a binary, based on the build id of the binary. If that symbol file exists, dotnet symbol will download it.\nYou can also ask dotnet symbol to place the files in a given location by using the -o flag:\n$ dotnet symbol /usr/share/dotnet/dotnet -o my-symbol-directory If you are worried about using it incorrectly, don’t worry. The tool will warn you and fail if you run it against any binary that the Microsoft symbol server doesn’t have symbols for:\n$ dotnet symbol /usr/lib64/dotnet/dotnet Downloading from http://msdl.microsoft.com/download/symbols/ ERROR: HttpSymbolStore: 404 Not Found 'http://msdl.microsoft.com/download/symbols/dotnet%2Felf-buildid-75e20435c061d0643096f93d91eb19701f7d6d13%2Fdotnet' ERROR: HttpSymbolStore: 404 Not Found 'http://msdl.microsoft.com/download/symbols/_.debug%2Felf-buildid-sym-75e20435c061d0643096f93d91eb19701f7d6d13%2F_.debug' .NET Core packages from Fedora The .NET Core packages that are included in Fedora and RHEL are built from source. That means all the binaries included were built within the Fedora build infrastructure.\nSince these binaries are not identical to the .NET Core binaries built by Microsoft, these debug symbols are different than the debug symbols from Microsoft too. Microsoft doesn’t have a copy of these debug symbols from Fedora.\nFedora doesn’t have its own symbol server. Fedora also doesn’t want to push to an external symbol server. You might think this would be a problem.\nFortunately, Fedora already has a technique for shipping things: RPM packages. It uses this for symbols too.\nThat’s right: symbols are available as ordinary RPM packages in Fedora!\nManaged Symbols If you are using the Fedora packages for .NET Core (such as dotnet-sdk-3.1), the managed symbols are installed as part of the SDK/Runtime itself:\n$ find /usr/lib64/dotnet/shared -name 'System.IO.FileSystem.[^A-Z]*' /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.dll /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.ni.{cfbfb1a5-d8bb-4fdd-835e-860da92311e2}.map Lets go through the 3 files here:\nThe .dll file\nThe .dll is the .NET assembly that contains the implementation of the System.IO.FileSystem namespace. (It’s actually a crossgen’ed assembly, not plain .NET IL).\nThe .pdb file\nThe .pdb file contains the debug symbols:\n$ file /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb: Microsoft Roslyn C# debugging symbols version 1.0 The .ni.map file\nThe .ni.map files contain information used by .NET performance tracing tools. It contains a map from the address in the binary to the names of the assembly methods that are being executed. This allows the performance tracing tools to identify the names of the methods from addresses.\nAside: If the pdb file size is significant enough that it impacts the size of the SDK/runtime on disk for you, please let us know, we can consider moving it to a separate package.\nUnmanaged/Native Symbols The unmanaged (or native) debug symbols are available through the normal mechanisms on Fedora:\n$ sudo dnf debuginfo-install 'dotnet*' enabling fedora-modular-debuginfo repository enabling updates-modular-debuginfo repository enabling updates-debuginfo repository enabling fedora-debuginfo repository ... Dependencies resolved. ================================================================================================= Package Architecture Version Repository Size ================================================================================================= Installing: dotnet-apphost-pack-3.1-debuginfo x86_64 3.1.6-1.fc32 updates-debuginfo 233 k dotnet-host-debuginfo x86_64 3.1.6-1.fc32 updates-debuginfo 131 k dotnet-hostfxr-3.1-debuginfo x86_64 3.1.6-1.fc32 updates-debuginfo 1.0 M dotnet-runtime-3.1-debuginfo x86_64 3.1.6-1.fc32 updates-debuginfo 27 M dotnet-sdk-3.1-debuginfo x86_64 3.1.106-1.fc32 updates-debuginfo 159 k dotnet3.1-debuginfo x86_64 3.1.106-1.fc32 updates-debuginfo 686 k dotnet3.1-debugsource x86_64 3.1.106-1.fc32 updates-debuginfo 7.6 M Transaction Summary ================================================================================================= Install 7 Packages You can also explicitly install the native/unamanged symbols for any specific (not just .NET COre) package by the full name-version with the dnf debuginfo-install command on Fedora:\n$ sudo dnf debuginfo-install dotnet-runtime-3.1 glibc python3 Once installed, you can use the native debugger, like gdb or lldb, and they will automatically find, load and make use of the just-installed unmanaged debug symbols on Fedora.\nSummary You should now understand:\nWhat debug symbols are\nHow they are specific for each language/runtime\nHow you can generate them for .NET Core\nHow you can get managed and unmanaged symbols for .NET Core on your system\nIf you ever need to profile or dig into the .NET Core source code for debugging, you should now be able to understand the basics of what role the debug symbols play in this.\n",
+  "wordCount" : "1708",
+  "inLanguage": "en",
+  "datePublished": "2020-08-05T00:00:00Z",
+  "dateModified": "2020-08-05T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">05</span>
-				<span class="rest">Aug 2020</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">.NET Core Symbols on Fedora</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
+<main class="main">
 
-  
-
-  
+<article class="post-single">
+  <header class="post-header">
     
-  
-</span>
+    <h1 class="post-title entry-hint-parent">
+      .NET Core Symbols on Fedora
+    </h1>
+    <div class="post-meta">
 
+<span title='2020-08-05 00:00:00 +0000 UTC'>August 5, 2020</span>&nbsp;·&nbsp;<span>Omair Majid</span>
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>Have you ever tried to debug a .NET application and seen errors saying
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Have you ever tried to debug a .NET application and seen errors saying
 debug information or debug symbols are not available?</p>
 <p>What are debug symbols? Where are they used? When would you need them?
 How do you get them? This post will try to resolve confusion by
 calling out things you absolutely need to know about them.</p>
-<h2 id="what-are-debug-symbols">What are debug symbols?</h2>
+<h2 id="what-are-debug-symbols">What are debug symbols?<a hidden class="anchor" aria-hidden="true" href="#what-are-debug-symbols">#</a></h2>
 <p>Source code contains a lot of information that&rsquo;s not strictly part of
 it&rsquo;s functionality. It contains human readable names, including names
 of types, classes, methods and local variables. It contains lines of
@@ -128,9 +246,8 @@ concept of a &ldquo;line&rdquo; entirely from the optimized binary.</p>
 <p>Debug symbols try and produce the best of both worlds: you get the
 optimized code but also keep much of the information in the original
 source code to make it easier to debug your application.</p>
-<p>If you are looking to debug a .NET Core application or <a href="https://github.com/dotnet/runtime/blob/master/docs/project/linux-performance-tracing.md" target="_blank">trace
-performance</a>
-,
+<p>If you are looking to debug a .NET Core application or <a href="https://github.com/dotnet/runtime/blob/master/docs/project/linux-performance-tracing.md">trace
+performance</a>,
 you will want to make use of debug symbols.</p>
 <p>Debug symbols are also referred to as &ldquo;debuginfo&rdquo;, &ldquo;debug info&rdquo; or
 just &ldquo;symbols&rdquo;, depending on the platform, language and tools. They
@@ -174,7 +291,7 @@ installed the SDK and symbols) and let you use them to step through
 code and debug it.</p>
 <p>Tools like <code>file</code> can tell you whether a binary has embedded debug
 symbols or not:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file /usr/bin/file
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file /usr/bin/file
 </span></span><span style="display:flex;"><span>/usr/bin/file: ELF 64-bit LSB shared object, x86-64, version <span style="color:#ae81ff">1</span> <span style="color:#f92672">(</span>SYSV<span style="color:#f92672">)</span>, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID<span style="color:#f92672">[</span>sha1<span style="color:#f92672">]=</span>e7df66a91efb28e483449a77221cb4242620541c, <span style="color:#66d9ef">for</span> GNU/Linux 3.2.0, stripped
 </span></span></code></pre></div><p>The last word in the output, <code>stripped</code>, indicates that the debug
 information has been remove from this binary.</p>
@@ -182,7 +299,7 @@ information has been remove from this binary.</p>
 binary</strong>. Two binaries will not have the same debug symbols unless
 they were compiled using the exact same sources by the exact same
 compilers with the exact same set of dependencies.</p>
-<h2 id="how-to-generate-debug-symbols-for-your-own-applications-or-libraries">How to generate debug symbols for your own applications or libraries?</h2>
+<h2 id="how-to-generate-debug-symbols-for-your-own-applications-or-libraries">How to generate debug symbols for your own applications or libraries?<a hidden class="anchor" aria-hidden="true" href="#how-to-generate-debug-symbols-for-your-own-applications-or-libraries">#</a></h2>
 <p>Most compilers, runtimes, and platforms support some way of generating
 these debug symbols. Some even generate these symbols by default, but
 most generate them only when explicitly asked to.</p>
@@ -193,16 +310,16 @@ to extract them into a separate file.</p>
 <p>.NET Core generates debug symbols by default. You can turn it off
 using the <code>DebugSymbols</code> and <code>DebugType</code> msbuild properties.</p>
 <p>You can put that in your <code>.csproj</code> file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;PropertyGroup&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;PropertyGroup&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;DebugSymbols&gt;</span>false<span style="color:#f92672">&lt;/DebugSymbols&gt;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;DebugType&gt;</span>None<span style="color:#f92672">&lt;/DebugType&gt;</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/PropertyGroup&gt;</span>
 </span></span></code></pre></div><p>Or set that through the command line:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet publish -p:DebugSymbols<span style="color:#f92672">=</span>false -p:DebugType<span style="color:#f92672">=</span>None
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet publish -p:DebugSymbols<span style="color:#f92672">=</span>false -p:DebugType<span style="color:#f92672">=</span>None
 </span></span></code></pre></div><p>However, unless turned off, you will see <code>.pdb</code> files being built and
 published along with the rest of your application whenever you do
 <code>dotnet build</code> or <code>dotnet publish</code>.</p>
-<h2 id="what-symbols-are-available-for-net-core-itself">What symbols are available for .NET Core itself?</h2>
+<h2 id="what-symbols-are-available-for-net-core-itself">What symbols are available for .NET Core itself?<a hidden class="anchor" aria-hidden="true" href="#what-symbols-are-available-for-net-core-itself">#</a></h2>
 <p>.NET Core is itself an application too. Like other applications and
 libraries, .NET Core also has its own debug symbols.</p>
 <p>With these symbols, you can debug and/or profile the code in the
@@ -215,16 +332,16 @@ rest of the framework written in C#.</p>
 <p>Both these compilers generate different types of debug symbols. We
 have to use and deal with managed and unmanaged debug symbols
 separately.</p>
-<h2 id="where-to-get-symbols-for-net-core">Where to get symbols for .NET Core?</h2>
+<h2 id="where-to-get-symbols-for-net-core">Where to get symbols for .NET Core?<a hidden class="anchor" aria-hidden="true" href="#where-to-get-symbols-for-net-core">#</a></h2>
 <p>The debug symbols are unique for each build of .NET Core. And they
 also differ between each release of .NET Core.</p>
 <p>The process for getting the symbols really depends on where you got
 your .NET Core SDK and/or Runtime.</p>
-<h3 id="net-core-from-microsoft">.NET Core from Microsoft</h3>
+<h3 id="net-core-from-microsoft">.NET Core from Microsoft<a hidden class="anchor" aria-hidden="true" href="#net-core-from-microsoft">#</a></h3>
 <p>If you have downloaded the .NET Core SDK and/or Runtime from
 Microsoft, you can use the <code>dotnet symbol</code> tool to get symbol
 packages:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet tool install -g dotnet-symbol
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet tool install -g dotnet-symbol
 </span></span><span style="display:flex;"><span>$ dotnet symbol /usr/share/dotnet/dotnet
 </span></span></code></pre></div><p>This <code>dotnet symbol</code> tool uses the Microsoft symbol server. The
 Microsoft symbol server includes a copy of (hopefully) all the symbol
@@ -234,15 +351,15 @@ for a binary, based on the build id of the binary. If that symbol file
 exists, <code>dotnet symbol</code> will download it.</p>
 <p>You can also ask <code>dotnet symbol</code> to place the files in a given
 location by using the <code>-o</code> flag:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet symbol /usr/share/dotnet/dotnet -o my-symbol-directory
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet symbol /usr/share/dotnet/dotnet -o my-symbol-directory
 </span></span></code></pre></div><p>If you are worried about using it incorrectly, don&rsquo;t worry. The tool
 will warn you and fail if you run it against any binary that the
 Microsoft symbol server doesn&rsquo;t have symbols for:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet symbol /usr/lib64/dotnet/dotnet
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ dotnet symbol /usr/lib64/dotnet/dotnet
 </span></span><span style="display:flex;"><span>Downloading from http://msdl.microsoft.com/download/symbols/
 </span></span><span style="display:flex;"><span>ERROR: HttpSymbolStore: <span style="color:#ae81ff">404</span> Not Found <span style="color:#e6db74">&#39;http://msdl.microsoft.com/download/symbols/dotnet%2Felf-buildid-75e20435c061d0643096f93d91eb19701f7d6d13%2Fdotnet&#39;</span>
 </span></span><span style="display:flex;"><span>ERROR: HttpSymbolStore: <span style="color:#ae81ff">404</span> Not Found <span style="color:#e6db74">&#39;http://msdl.microsoft.com/download/symbols/_.debug%2Felf-buildid-sym-75e20435c061d0643096f93d91eb19701f7d6d13%2F_.debug&#39;</span>
-</span></span></code></pre></div><h3 id="net-core-packages-from-fedora">.NET Core packages from Fedora</h3>
+</span></span></code></pre></div><h3 id="net-core-packages-from-fedora">.NET Core packages from Fedora<a hidden class="anchor" aria-hidden="true" href="#net-core-packages-from-fedora">#</a></h3>
 <p>The .NET Core packages that are included in Fedora and RHEL are built
 from source. That means all the binaries included were built within
 the Fedora build infrastructure.</p>
@@ -256,11 +373,11 @@ problem.</p>
 <p>Fortunately, Fedora already has a technique for shipping things: RPM
 packages. It uses this for symbols too.</p>
 <p>That&rsquo;s right: <strong>symbols are available as ordinary RPM packages in Fedora!</strong></p>
-<h4 id="managed-symbols">Managed Symbols</h4>
+<h4 id="managed-symbols">Managed Symbols<a hidden class="anchor" aria-hidden="true" href="#managed-symbols">#</a></h4>
 <p>If you are using the Fedora packages for .NET Core (such as
 <code>dotnet-sdk-3.1</code>), the managed symbols are installed as part of the
 SDK/Runtime itself:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ find /usr/lib64/dotnet/shared -name <span style="color:#e6db74">&#39;System.IO.FileSystem.[^A-Z]*&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ find /usr/lib64/dotnet/shared -name <span style="color:#e6db74">&#39;System.IO.FileSystem.[^A-Z]*&#39;</span>
 </span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
 </span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.dll
 </span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.ni.<span style="color:#f92672">{</span>cfbfb1a5-d8bb-4fdd-835e-860da92311e2<span style="color:#f92672">}</span>.map
@@ -275,7 +392,7 @@ assembly, not plain .NET IL).</p>
 <li>
 <p>The <code>.pdb</code> file</p>
 <p>The <code>.pdb</code> file contains the debug symbols:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ file /usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb
 </span></span><span style="display:flex;"><span>/usr/lib64/dotnet/shared/Microsoft.NETCore.App/3.1.6/System.IO.FileSystem.pdb: Microsoft Roslyn C# debugging symbols version 1.0
 </span></span></code></pre></div></li>
 <li>
@@ -292,10 +409,10 @@ addresses.</p>
 size of the SDK/runtime on disk for you, please let us know, we can
 consider moving it to a separate package.</p>
 <hr>
-<h4 id="unmanagednative-symbols">Unmanaged/Native Symbols</h4>
+<h4 id="unmanagednative-symbols">Unmanaged/Native Symbols<a hidden class="anchor" aria-hidden="true" href="#unmanagednative-symbols">#</a></h4>
 <p>The unmanaged (or native) debug symbols are available through the
 normal mechanisms on Fedora:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dnf debuginfo-install <span style="color:#e6db74">&#39;dotnet*&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dnf debuginfo-install <span style="color:#e6db74">&#39;dotnet*&#39;</span>
 </span></span><span style="display:flex;"><span>enabling fedora-modular-debuginfo repository
 </span></span><span style="display:flex;"><span>enabling updates-modular-debuginfo repository
 </span></span><span style="display:flex;"><span>enabling updates-debuginfo repository
@@ -320,11 +437,11 @@ normal mechanisms on Fedora:</p>
 </span></span></code></pre></div><p>You can also explicitly install the native/unamanged symbols for any
 specific (not just .NET COre) package by the full name-version with
 the <code>dnf debuginfo-install</code> command on Fedora:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dnf debuginfo-install dotnet-runtime-3.1 glibc python3
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ sudo dnf debuginfo-install dotnet-runtime-3.1 glibc python3
 </span></span></code></pre></div><p>Once installed, you can use the native debugger, like <code>gdb</code> or <code>lldb</code>,
 and they will automatically find, load and make use of the
 just-installed unmanaged debug symbols on Fedora.</p>
-<h2 id="summary">Summary</h2>
+<h2 id="summary">Summary<a hidden class="anchor" aria-hidden="true" href="#summary">#</a></h2>
 <p>You should now understand:</p>
 <ul>
 <li>
@@ -344,225 +461,97 @@ just-installed unmanaged debug symbols on Fedora.</p>
 debugging, you should now be able to understand the basics of what
 role the debug symbols play in this.</p>
 
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Categories</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/categories/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-	
-	
-	
-	<div class="tags">
-		<div class="taxosfloating_left">
-			<p>Tags</p>
-		</div>
-		<div class="termsfloating_right">
-			<p>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/debugging/"> debugging </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/dotnet/"> dotnet </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<a href="/tags/fedora/"> fedora </a>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-		</div>
-		<div class="clearit"></div>
-		
-		
-		
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://omairmajid.com/tags/dotnet/">Dotnet</a></li>
+      <li><a href="https://omairmajid.com/tags/fedora/">Fedora</a></li>
+      <li><a href="https://omairmajid.com/tags/debugging/">Debugging</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

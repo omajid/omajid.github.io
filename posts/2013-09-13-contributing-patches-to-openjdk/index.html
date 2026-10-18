@@ -1,112 +1,222 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	
-	<meta name="generator" content="Hugo 0.98.0" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<meta property="og:title" content="Contributing Patches to OpenJDK">
-	
-	
-	<meta name="author" content="Omair Majid"><meta name="description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute …"><meta property="og:title" content="Contributing Patches to OpenJDK" />
-<meta property="og:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
-The OpenJDK Developer’s Guide covers most of this, but some of it is in too much detail and some of it is outdated." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2013-09-13T23:43:03+00:00" />
-<meta property="article:modified_time" content="2013-09-13T23:43:03+00:00" />
+<html lang="en" dir="auto" data-theme="auto">
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Contributing Patches to OpenJDK"/>
-<meta name="twitter:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
-The OpenJDK Developer’s Guide covers most of this, but some of it is in too much detail and some of it is outdated."/>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Contributing Patches to OpenJDK | Omair Majid</title>
+<meta name="keywords" content="">
+<meta name="description" content="Someone asked me earlier today about how to contribute patches to OpenJDK.
+OpenJDK is probably not the easiest upstream to contribute patches to - their
+patch approval system is a little different from most other projects. I have
+tried to summarize the basic steps here. Let me know in comments if anything
+is not clear.
+The OpenJDK Developer&rsquo;s Guide covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.">
+<meta name="author" content="Omair Majid">
+<link rel="canonical" href="https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://omairmajid.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://omairmajid.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://omairmajid.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://omairmajid.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://omairmajid.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/normalize.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/all.css" />
-	<title>Contributing Patches to OpenJDK | Omair Majid</title>
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/">
+  <meta property="og:site_name" content="Omair Majid">
+  <meta property="og:title" content="Contributing Patches to OpenJDK">
+  <meta property="og:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
+The OpenJDK Developer’s Guide covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2013-09-13T23:43:03+00:00">
+    <meta property="article:modified_time" content="2013-09-13T23:43:03+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Contributing Patches to OpenJDK">
+  <meta name="twitter:description" content="Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.
+The OpenJDK Developer’s Guide covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.">
 
 
-</head>
-<body><header>
-	
-	<div id="avatar">
-		<a href="https://omairmajid.com/">
-		  <img src="/profile.png" alt="Omair Majid">
-		</a>
-	</div>
-	
-	<div id="titletext"><h2 id="title"><a href="https://omairmajid.com/">Omair Majid</a></h2></div>
-	<div id="title-description"><p id="subtitle">Announcements, thoughts, code and fun</p><div id="social">
-			<nav>
-				<ul>
-					<li><a href="/mailto:omair.majid@gmail.com"><i title="Email" class="icons fas fa-envelope"></i></a></li>
-					<li><a href="https://github.com/omajid"><i title="GitHub" class="icons fab fa-github"></i></a></li>
-					<li><a href="https://www.reddit.com/user/omair-majid"><i title="Reddit" class="icons fab fa-reddit"></i></a></li>
-					<li><a href="https://stackoverflow.com/story/omajid"><i title="StackOverflow" class="icons fab fa-stack-overflow"></i></a></li>
-					<li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/">Home</a></li>
-				
-				<li><a href="/posts/">Posts</a></li>
-				
-				<li><a href="/projects/">Projects</a></li>
-				
-				<li><a href="/talks/">Talks</a></li>
-				
-				<li><a href="/about/">About</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
-</header>
-<main><div class="post">
-	
-	<div class="post-header">
-	
-		<div class="meta">
-			
-			<div class="date">
-				<span class="day">13</span>
-				<span class="rest">Sep 2013</span>
-			</div>
-			
-		</div>
-		
-		<div class="matter">
-			<h1 class="title">Contributing Patches to OpenJDK</h1>
-			<p class="post-meta">
-				<span class="post-meta">
-  
-
-  
-
-  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://omairmajid.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Contributing Patches to OpenJDK",
+      "item": "https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Contributing Patches to OpenJDK",
+  "name": "Contributing Patches to OpenJDK",
+  "description": "Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.\nThe OpenJDK Developer\u0026rsquo;s Guide covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.\n",
+  "keywords": [
     
-  
-</span>
+  ],
+  "articleBody": "Someone asked me earlier today about how to contribute patches to OpenJDK. OpenJDK is probably not the easiest upstream to contribute patches to - their patch approval system is a little different from most other projects. I have tried to summarize the basic steps here. Let me know in comments if anything is not clear.\nThe OpenJDK Developer’s Guide covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.\nThe overall process for submitting patches to OpenJDK is:\nIdentify what group or project the fix is for Generate a webrev Send it to the right mailing list for review Make changes as requested by upstream and update webrev A sponsor will push your fix for you As you can see, it’s not a very complicated process. Most of the delays in patch acceptance have been when the patch is non-trivial or has unexpected issues (even if those issues are known only Oracle-internal and can only be guessed by those of us outside) or someone sufficiently qualified to review the patch is not available.\nOne thing to note: Oracle requires signing a Contributor License Agreement before they will accept non-trivial patches.\nIdentify the Group or Poject The first thing to do if you want to send a fix upstream is to identify what Group or Project it is for. For this purpose, both groups and projects are more-or-less the same (groups are more general). They consist of a collection of people who care about something. For example, some folks care about the javac compiler, some others cares about the build system and others that care about ports to different architectures. There is a list of these groups and projects available on the OpenJDK web page, on the left side.\nSimply look through them and try to pick what you think is the best project or group for your fix. Some groups and projects are obvious: if you are fixing something in swing, that’s the Swing group. If you want to fix something in the ARMv8 port, that’s the aarch64 project. If you can’t find the best group, you can fall back to Core Libraries if it’s a patch for the standard java library (that is, a fix for a java.* or javax.* class) or you can fall back to Hotspot if it is a fix for hotspot.\nMake a note of the mailing list(s) and repositories used by the group.\nDon’t worry if you can’t find the ideal group, project or repository; someone will point you in the right direction in later on, but it may mean (slightly) more work later.\nGenerate a webrev Since you are trying to submit a patch upstream, I will assume you already have a fix for it. The first thing you need to do is to get the latest OpenJDK code using the most appropriate repository. And then make your fix. Once you have built and tested your fix, you can generate a patch for review. OpenJDK uses a custom tool called webrev to generate easier-to-reivew patches.\nAssuming you are making a fix to hotspot, use it like so:\ncd jdk8/hotspot ksh ../make/scripts/webrev.ksh This program will look for changes in the current repository and generate a bunch of files. You should see a new webrev.zip file and a webrev directory. The webrev directory should contain an index.html file that should look roughly like this existing one\nUpload the webrev directory somewhere publicly where anyone who wants to review the patch can see it. A public dropbox folder works just fine, as done any personal webspace that you may have. Regular contributors to OpenJDK generally use cr.openjdk.java.net.\nSend mail with patch Now you need to send an email describing the patch and what it’s fixing to the right OpenJDK mailing list. remember to subscribe to the mailing list first, though.\nUse a descriptive subject in the email, prefixing it with “RFR” (or Request for Review). Link to the public webrev in the email.\nMake changes and update webrev Hopefully, someone will review the patch quickly (depending on the fix, you may get a response within the hour or it may take a few days).\nThe reviewer may suggest improvements or additional fixes. They may also request additional cleanup or testing as well.\nA Sponsor will push the fix Once upstream is happy with the patch, a sponsor will ask you for a changeset that they can push or perhaps they will generate one for you. The details of producing a changeset are available in the developer’s guide. Since you don’t have push access, a sponsor will push the fix on your behalf to the appropriate repository. It will probably take a few weeks until that change makes it from group repository to integration repository to the master repository (jdk8/jdk8).\nAnd that’s it! So don’t be afraid to propose patches for OpenJDK :)\nComplete details about all this process is available, of course, in the Developer’s Guide.\n",
+  "wordCount" : "848",
+  "inLanguage": "en",
+  "datePublished": "2013-09-13T23:43:03Z",
+  "dateModified": "2013-09-13T23:43:03Z",
+  "author":{
+    "@type": "Person",
+    "name": "Omair Majid"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://omairmajid.com/posts/2013-09-13-contributing-patches-to-openjdk/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Omair Majid",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://omairmajid.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://omairmajid.com/" accesskey="h" title="Omair Majid (Alt + H)">Omair Majid</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://omairmajid.com/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/talks/" title="Talks">
+                    <span>Talks</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://omairmajid.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
 
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Contributing Patches to OpenJDK
+    </h1>
+    <div class="post-meta">
 
-			</p>
-		</div>
-	</div>
-	<div class="markdown">
-		<p>Someone asked me earlier today about how to contribute patches to OpenJDK.
+<span title='2013-09-13 23:43:03 +0000 +0000'>September 13, 2013</span>&nbsp;·&nbsp;<span>Omair Majid</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>Someone asked me earlier today about how to contribute patches to OpenJDK.
 OpenJDK is probably not the easiest upstream to contribute patches to - their
 patch approval system is a little different from most other projects. I have
 tried to summarize the basic steps here. Let me know in comments if anything
 is not clear.</p>
-<p>The OpenJDK <a href="http://openjdk.java.net/guide/" title="The OpenJDK Developer&#39;s Guide" target="_blank">Developer’s Guide</a>
- covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.</p>
+<p>The OpenJDK <a href="http://openjdk.java.net/guide/" title="The OpenJDK Developer's Guide">Developer&rsquo;s Guide</a> covers most of this, but some of it is in too much detail and some of it is outdated. The process I describe here is what I have seen others use and what I have been using myself.</p>
 <p>The overall process for submitting patches to OpenJDK is:</p>
 <ol>
 <li>Identify what <em>group</em> or <em>project</em> the fix is for</li>
@@ -122,7 +232,7 @@ guessed by those of us outside) or someone sufficiently qualified to review
 the patch is not available.</p>
 <p>One thing to note: Oracle requires signing a Contributor License Agreement
 before they will accept non-trivial patches.</p>
-<h2 id="identify-the-group-or-poject">Identify the Group or Poject</h2>
+<h2 id="identify-the-group-or-poject">Identify the Group or Poject<a hidden class="anchor" aria-hidden="true" href="#identify-the-group-or-poject">#</a></h2>
 <p>The first thing to do if you want to send a fix upstream is to identify what
 <em>Group</em> or <em>Project</em> it is for. For this purpose, both groups and projects are
 more-or-less the same (groups are more general). They consist of a collection
@@ -141,7 +251,7 @@ Hotspot if it is a fix for hotspot.</p>
 <p>Don&rsquo;t worry if you can&rsquo;t find the ideal group, project or repository; someone
 will point you in the right direction in later on, but it may mean (slightly)
 more work later.</p>
-<h2 id="generate-a-webrev">Generate a webrev</h2>
+<h2 id="generate-a-webrev">Generate a webrev<a hidden class="anchor" aria-hidden="true" href="#generate-a-webrev">#</a></h2>
 <p>Since you are trying to submit a patch upstream, I will assume you already
 have a fix for it. The first thing you need to do is to get the latest OpenJDK
 code using the most appropriate repository. And then make your fix. Once you
@@ -159,18 +269,18 @@ index.html file that should look roughly like this existing one</p>
 review the patch can see it. A public dropbox folder works just fine, as done
 any personal webspace that you may have. Regular contributors to OpenJDK
 generally use cr.openjdk.java.net.</p>
-<h2 id="send-mail-with-patch">Send mail with patch</h2>
+<h2 id="send-mail-with-patch">Send mail with patch<a hidden class="anchor" aria-hidden="true" href="#send-mail-with-patch">#</a></h2>
 <p>Now you need to send an email describing the patch and what it&rsquo;s fixing to the
 right OpenJDK mailing list. remember to subscribe to the mailing list first,
 though.</p>
 <p>Use a descriptive subject in the email, prefixing it with &ldquo;RFR&rdquo; (or Request
 for Review). Link to the public webrev in the email.</p>
-<h2 id="make-changes-and-update-webrev">Make changes and update webrev</h2>
+<h2 id="make-changes-and-update-webrev">Make changes and update webrev<a hidden class="anchor" aria-hidden="true" href="#make-changes-and-update-webrev">#</a></h2>
 <p>Hopefully, someone will review the patch quickly (depending on the fix, you
 may get a response within the hour or it may take a few days).</p>
 <p>The reviewer may suggest improvements or additional fixes. They may also
 request additional cleanup or testing as well.</p>
-<h2 id="a-sponsor-will-push-the-fix">A Sponsor will push the fix</h2>
+<h2 id="a-sponsor-will-push-the-fix">A Sponsor will push the fix<a hidden class="anchor" aria-hidden="true" href="#a-sponsor-will-push-the-fix">#</a></h2>
 <p>Once upstream is happy with the patch, a sponsor will ask you for a changeset
 that they can push or perhaps they will generate one for you. The details of
 producing a changeset are available in the developer&rsquo;s guide. Since you don&rsquo;t
@@ -182,27 +292,94 @@ repository (<code>jdk8/jdk8</code>).</p>
 <p>Complete details about all this process is available, of course, in the
 Developer&rsquo;s Guide.</p>
 
-	</div>
-	
-	
-	
-	
-	
-		
-	
-		
-		
-	</div></div>
 
-  </main>
-<footer>
-	 © Omair Majid 2011 - 2020 | <a href="/about/">License</a>
- | <a href="https://github.com/omajid/omajid.github.io/tree/blog" target="_blank">Source</a> 
-	
-	
-	
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© Omair Majid 2011 - 2020 | <a href="/about/">License</a> | <a href="https://github.com/omajid/omajid.github.io/tree/blog">Source</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
+
 </html>

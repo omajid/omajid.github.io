@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-	<channel>
-		<title>debugging on Omair Majid</title>
-		<link>https://omairmajid.com/tags/debugging/</link>
-		<description>Recent content in debugging on omairmajid.com</description>
-		<generator>Hugo -- gohugo.io</generator>
-		<language>en</language>
-		<copyright>© Omair Majid 2011 - 2020 | License | Source</copyright>
-		<lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate>
-		
-		<atom:link href="https://omairmajid.com/tags/debugging/index.xml" rel="self" type="application/rss+xml" />
-		
-		<item>
-			<title>.NET Core Symbols on Fedora</title>
-			<link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
-			<pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
-			
-			<guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
-			<description>
-			
-				Have you ever tried to debug a .NET application and seen errors saying debug information or debug symbols are not available?
-What are debug …
-			
-			</description>
-		</item>
-		
-	</channel>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Debugging on Omair Majid</title>
+    <link>https://omairmajid.com/tags/debugging/</link>
+    <description>Recent content in Debugging on Omair Majid</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>Omair Majid 2011 - 2020 | License | Source</copyright>
+    <lastBuildDate>Wed, 05 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://omairmajid.com/tags/debugging/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>.NET Core Symbols on Fedora</title>
+      <link>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</link>
+      <pubDate>Wed, 05 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://omairmajid.com/posts/2020-08-05-dotnet-symbols-in-fedora/</guid>
+      <description>&lt;p&gt;Have you ever tried to debug a .NET application and seen errors saying
+debug information or debug symbols are not available?&lt;/p&gt;
+&lt;p&gt;What are debug symbols? Where are they used? When would you need them?
+How do you get them? This post will try to resolve confusion by
+calling out things you absolutely need to know about them.&lt;/p&gt;
+&lt;h2 id=&#34;what-are-debug-symbols&#34;&gt;What are debug symbols?&lt;/h2&gt;
+&lt;p&gt;Source code contains a lot of information that&amp;rsquo;s not strictly part of
+it&amp;rsquo;s functionality. It contains human readable names, including names
+of types, classes, methods and local variables. It contains lines of
+code in an order that (hopefully!) makes it possible to understand
+what is happening in order.&lt;/p&gt;</description>
+    </item>
+  </channel>
 </rss>
